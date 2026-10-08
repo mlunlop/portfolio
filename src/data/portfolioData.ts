@@ -38,7 +38,7 @@ export const PORTFOLIO_DATA = {
     status: 'Disponible para nuevos retos',
     email: 'mario.luna.lpez@gmail.com',
     linkedin: 'https://linkedin.com/in/m-luna-lpez',
-    github: 'https://github.com/mariolunalpz', // Fallback standard
+    github: 'https://github.com/mlunlop', 
   },
   skills: [
     {

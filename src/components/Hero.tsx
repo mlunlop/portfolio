@@ -24,15 +24,6 @@ export function Hero() {
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6">
         {/* Top Telemetry Header */}
         <div className="flex flex-wrap items-center justify-between gap-3 text-xs font-mono text-zinc-500 mb-8 border-b border-zinc-800/80 pb-3">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse" />
-            <span className="tracking-wider">SYS_ID: MARIO_LUNA // GRANADA [ES] (37.1773° N, 3.5986° W)</span>
-          </div>
-          <div className="flex items-center gap-4 text-[11px]">
-            <span className="text-zinc-400">LPIC-1 #5.0 VERIFIED</span>
-            <span className="hidden sm:inline text-zinc-500">APPLE ATLAS TECH</span>
-            <span className="text-orange-400 font-semibold">// 2026</span>
-          </div>
         </div>
 
         {/* Main 2-Column Hero: Typography & Editorial Portrait */}
@@ -156,15 +147,6 @@ export function Hero() {
                     }}
                   />
 
-                  {/* Watermark label inspired by Swiss poster Ref. 2 & 3 */}
-                  <div className="absolute top-3 left-3 z-10 flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-zinc-950/80 backdrop-blur-md border border-zinc-800 text-[10px] font-mono text-zinc-200">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    <span>INGENIERO IT</span>
-                  </div>
-
-                  <div className="absolute top-3 right-3 z-10 px-2 py-0.5 rounded bg-zinc-950/80 backdrop-blur-md border border-zinc-800 text-[10px] font-mono text-orange-400">
-                    ML.DEV
-                  </div>
 
                   {/* Mario's Portrait */}
                   <img
@@ -189,15 +171,7 @@ export function Hero() {
                 </div>
 
                 {/* Overlapping Floating Stamp (Inspiración Ref. 4) */}
-                <div className="absolute -bottom-4 -left-4 z-30 hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-orange-500 text-zinc-950 font-mono text-xs font-bold shadow-xl shadow-orange-500/30 transform -rotate-3 hover:rotate-0 transition-transform">
-                  <Sparkles className="w-3.5 h-3.5 fill-current" />
-                  <span>DATA & ML PIPELINES</span>
-                </div>
-
-                <div className="absolute -top-3 -right-3 z-30 hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-xl bg-zinc-950 text-zinc-200 border border-zinc-700 font-mono text-[11px] shadow-xl transform rotate-3 hover:rotate-0 transition-transform">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400" />
-                  <span>AVAILABLE 2026</span>
-                </div>
+ 
               </div>
 
             </div>
