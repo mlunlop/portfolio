@@ -3,6 +3,8 @@ import { Copy, Check } from 'lucide-react';
 import { PORTFOLIO_DATA } from '../data/portfolioData';
 import { copyToClipboard } from '../utils/feedback';
 
+import logoImg from '../assets/logo.webp';
+
 export function Navbar() {
   const [copied, setCopied] = useState(false);
 
@@ -20,14 +22,14 @@ export function Navbar() {
         {/* Brand / Logo */}
         <a 
           href="#" 
-          className="flex items-center gap-2 text-zinc-100 hover:text-white transition-colors group"
+          className="flex items-center transition-opacity hover:opacity-80 active:scale-95 shrink-0 py-0.5"
+          aria-label="Mario Luna"
         >
-          <span className="w-8 h-8 rounded-lg bg-zinc-800 border border-zinc-700/80 flex items-center justify-center font-mono font-bold text-xs text-orange-400 group-hover:border-orange-500/50 transition-colors">
-            ML
-          </span>
-          <span className="font-medium tracking-tight hidden sm:inline text-xs text-zinc-300">
-            mario.luna
-          </span>
+          <img 
+            src={logoImg} 
+            alt="Mario Luna" 
+            className="h-3.5 sm:h-4 w-auto object-contain"
+          />
         </a>
 
         {/* Links */}

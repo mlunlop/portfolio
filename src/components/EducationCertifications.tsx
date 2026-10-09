@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { GraduationCap, Award, ExternalLink, Languages, Sparkles, FileText } from 'lucide-react';
+import { GraduationCap, Award, ExternalLink, Languages, FileText } from 'lucide-react';
 import { PORTFOLIO_DATA } from '../data/portfolioData';
 import { PdfViewerModal } from './PdfViewerModal';
 
@@ -52,7 +52,6 @@ export function EducationCertifications() {
               {/* Subtle top indicator for the highest/current degree */}
               {idx === 0 && (
                 <div className="absolute top-0 right-0 px-4 py-1 rounded-bl-xl bg-orange-500/10 border-b border-l border-orange-500/30 text-orange-400 font-mono text-[11px] font-semibold flex items-center gap-1.5">
-                  <Sparkles className="w-3 h-3" />
                   <span>En curso</span>
                 </div>
               )}
