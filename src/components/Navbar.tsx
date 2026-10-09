@@ -39,7 +39,7 @@ export function Navbar() {
             Experiencia
           </a>
           <a href="#certificaciones" className="hover:text-zinc-100 transition-colors">
-            Certificaciones
+            Formación
           </a>
           <a href="#stack" className="hover:text-zinc-100 transition-colors">
             Stack

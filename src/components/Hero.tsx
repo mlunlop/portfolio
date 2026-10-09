@@ -53,8 +53,8 @@ export function Hero() {
               Especialista en el ciclo de vida del dato: diseño de arquitecturas{' '}
               <strong className="text-zinc-100 font-semibold">ETL, limpieza rigurosa, validación estadística y particionamiento</strong>{' '}
               para alimentar modelos de Machine Learning. Con base sólida en desarrollo frontend de producción ({' '}
-              <span className="text-orange-400 font-medium">Babel</span>) y certificación oficial de sistemas ({' '}
-              <span className="text-orange-400 font-medium">LPIC-1 Linux</span>).
+              <span className="text-orange-400 font-medium">Babel</span>) y especialización práctica en{' '}
+              <span className="text-orange-400 font-medium">Sistemas Linux y Nginx</span>.
             </p>
 
             {/* Tactile Stickers/Badges (Inspiración Ref. 4) */}
@@ -65,7 +65,7 @@ export function Hero() {
               </span>
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 font-mono text-xs font-medium transform rotate-1 hover:rotate-0 transition-transform">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-                LPIC-1 LINUX
+                LINUX & NGINX SYS
               </span>
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-zinc-800 border border-zinc-700 text-zinc-200 font-mono text-xs font-medium transform -rotate-1 hover:rotate-0 transition-transform">
                 <Cpu className="w-3.5 h-3.5 text-zinc-400" />

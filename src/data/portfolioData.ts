@@ -25,6 +25,9 @@ export interface CertificationItem {
   name: string;
   issuer: string;
   badge: string;
+  date?: string;
+  url?: string;
+  pdfUrl?: string;
   code?: string;
   highlight: string;
 }
@@ -141,25 +144,40 @@ export const PORTFOLIO_DATA = {
   ] as EducationItem[],
   certifications: [
     {
-      id: 'lpic',
-      name: 'LPIC-1 Versión 5.0 (Linux System Administration)',
-      issuer: 'Linux Professional Institute',
+      id: 'cambridge',
+      name: 'B2 First – Score 162',
+      issuer: 'Cambridge Assessment English',
       badge: 'Certificación Oficial',
-      highlight: 'Dominio de administración del kernel Linux, particionamiento de sistemas de ficheros, permisos POSIX, gestión de procesos y automatización en Bash.',
+      date: 'Ago. 2025',
+      url: 'https://www.linkedin.com/in/m-luna-lpez/overlay/Certifications/785869851/treasury/?profileId=ACoAAEE6NhsBa4oSnx_kflgCWrVN_dCqq0RwEY8',
+      pdfUrl: '/docs/B2%20Certificado%20Mario%20Luna.pdf',
+      highlight: 'Certificación oficial de competencia lingüística (B2 First). Capacidad demostrada para colaborar en equipos internacionales, debatir especificaciones técnicas y redactar documentación de ingeniería en inglés.',
     },
     {
       id: 'apple',
       name: 'Apple Atlas Certified Technician',
       issuer: 'Apple Inc.',
-      badge: 'Certificación Oficial',
-      highlight: 'Validación en diagnosis sistemática de hardware, trazabilidad de fallos electrónicos y estándares de calidad oficiales de servicio.',
+      badge: 'Certificación de Fabricante',
+      date: '2024',
+      highlight: 'Acreditación oficial en diagnóstico sistemático de hardware, análisis de fallos electrónicos y estándares de calidad de servicio durante estancia técnica en SC Multiservice (Brescia, Italia).',
     },
     {
-      id: 'cambridge',
-      name: 'Inglés B2 First (Upper-Intermediate)',
-      issuer: 'Cambridge Assessment English',
-      badge: 'Competencia Lingüística',
-      highlight: 'Capacidad para debatir especificaciones técnicas, colaborar en equipos internacionales y redactar documentación de ingeniería en inglés con fluidez.',
+      id: 'google-mobile',
+      name: 'Desarrollo de Apps Móviles',
+      issuer: 'Google',
+      badge: 'Credencial Verificada',
+      date: 'Sept. 2024',
+      url: 'https://skillshop.exceedlms.com/student/award/EP1kNfmyWhoLJyREHdeR6s7n',
+      highlight: 'Formación especializada en arquitectura móvil, ciclo de vida de aplicaciones, UX móvil y rendimiento, respaldando la experiencia en producción frontend híbrida (Ionic/Capacitor).',
+    },
+    {
+      id: 'nginx-linux',
+      name: 'Servidor Web Nginx sobre Linux (Debian)',
+      issuer: 'OpenWebinars',
+      badge: 'Credencial Técnica',
+      date: 'Feb. 2024',
+      url: 'https://openwebinars.net/cert/573l',
+      highlight: 'Despliegue y hardening de servidores web con Nginx en Debian: configuración de virtual hosts, reverse proxy, balanceo de carga, SSL/TLS y optimización de sockets para producción.',
     },
   ] as CertificationItem[],
 };
