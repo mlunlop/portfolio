@@ -34,7 +34,7 @@ export function Hero() {
             
             {/* Engineering Status Pill */}
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-400 font-mono text-xs font-semibold">
-              <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-ping" />
+              <span className="w-1.5 h-1.5 rounded-full bg-orange-400 " />
               <span>DATA LIFECYCLE & MACHINE LEARNING</span>
             </div>
 

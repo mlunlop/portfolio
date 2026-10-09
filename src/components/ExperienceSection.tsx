@@ -1,5 +1,14 @@
 import { Calendar, MapPin, Globe } from 'lucide-react';
 import { PORTFOLIO_DATA } from '../data/portfolioData';
+import babelLogo from '../assets/babel_icon.webp';
+import artebitLogo from '../assets/artebit_icon.webp';
+import multiserviceLogo from '../assets/sc_multiservice_icon.webp';
+
+const COMPANY_LOGOS: Record<string, { src: string; alt: string }> = {
+  babel: { src: babelLogo, alt: 'Logo de Babel' },
+  artebit: { src: artebitLogo, alt: 'Logo de Centro ArteBit' },
+  multiservice: { src: multiserviceLogo, alt: 'Logo de SC Multiservice' },
+};
 
 export function ExperienceSection() {
   return (
@@ -24,37 +33,54 @@ export function ExperienceSection() {
         {/* Timeline Items */}
         <div className="space-y-8">
           {PORTFOLIO_DATA.experiences.map((exp) => {
+            const logo = COMPANY_LOGOS[exp.id];
+
             return (
               <div
                 key={exp.id}
                 className="group relative rounded-2xl border border-zinc-800 bg-zinc-900/40 hover:bg-zinc-900/80 hover:border-zinc-700/80 transition-all duration-300 p-6 sm:p-8"
               >
                 <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-6">
-                  <div>
-                    <div className="flex flex-wrap items-center gap-2.5 mb-2">
-                      <h3 className="text-lg sm:text-xl font-normal text-zinc-100 font-display tracking-tight">
-                        {exp.role}
-                      </h3>
-                      <span className="px-2.5 py-0.5 rounded-full bg-zinc-800 border border-zinc-700 text-orange-400 font-mono text-xs font-semibold">
-                        {exp.company}
-                      </span>
-                      {exp.id === 'multiservice' && (
-                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-sky-950/60 border border-sky-800/60 text-sky-400 font-mono text-[11px]">
-                          <Globe className="w-3 h-3" />
-                          Erasmus+ Brescia, Italia
-                        </span>
-                      )}
-                    </div>
+                  {/* Left block: Logo + Header info */}
+                  <div className="flex items-start gap-4">
+                    {/* Company Logo Plate (Disabled grayscale -> Vibrant on hover) */}
+                    {logo && (
+                      <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white/90 p-2 flex items-center justify-center shrink-0 border border-zinc-700/50 shadow-sm overflow-hidden transition-all duration-300 group-hover:bg-white group-hover:border-zinc-500 group-hover:shadow-lg">
+                        <img
+                          src={logo.src}
+                          alt={logo.alt}
+                          className="w-full h-full object-contain filter grayscale opacity-45 transition-all duration-300 ease-out group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105"
+                          loading="lazy"
+                        />
+                      </div>
+                    )}
 
-                    <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-zinc-500">
-                      <span className="flex items-center gap-1.5">
-                        <Calendar className="w-3.5 h-3.5 text-zinc-400" />
-                        {exp.period}
-                      </span>
-                      <span className="flex items-center gap-1.5">
-                        <MapPin className="w-3.5 h-3.5 text-zinc-400" />
-                        {exp.location}
-                      </span>
+                    <div>
+                      <div className="flex flex-wrap items-center gap-2.5 mb-2">
+                        <h3 className="text-lg sm:text-xl font-normal text-zinc-100 font-display tracking-tight">
+                          {exp.role}
+                        </h3>
+                        <span className="px-2.5 py-0.5 rounded-full bg-zinc-800 border border-zinc-700 text-orange-400 font-mono text-xs font-semibold">
+                          {exp.company}
+                        </span>
+                        {exp.id === 'multiservice' && (
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-sky-950/60 border border-sky-800/60 text-sky-400 font-mono text-[11px]">
+                            <Globe className="w-3 h-3" />
+                            Erasmus+ Brescia, Italia
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-zinc-500">
+                        <span className="flex items-center gap-1.5">
+                          <Calendar className="w-3.5 h-3.5 text-zinc-400" />
+                          {exp.period}
+                        </span>
+                        <span className="flex items-center gap-1.5">
+                          <MapPin className="w-3.5 h-3.5 text-zinc-400" />
+                          {exp.location}
+                        </span>
+                      </div>
                     </div>
                   </div>
 

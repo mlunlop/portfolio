@@ -25,12 +25,12 @@ export function ContactFooter() {
 
           <div className="relative z-10 max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-400 font-mono text-xs font-semibold mb-6">
-              <span className="w-2 h-2 rounded-full bg-orange-400 animate-ping" />
+              <span className="w-2 h-2 rounded-full bg-orange-400" />
               <span>INICIAR CONTACTO DIRECTO</span>
             </div>
 
             <h2 className="text-2xl sm:text-4xl md:text-5xl font-normal tracking-tight text-zinc-100 font-display uppercase leading-tight mb-4">
-              ¿Hablamos de datos, sistemas o ingeniería?
+              ¿Hablamos?
             </h2>
 
             <p className="text-zinc-400 text-sm sm:text-base font-body leading-relaxed mb-8">

@@ -56,10 +56,6 @@ export function TechStack() {
                     ))}
                   </ul>
                 </div>
-
-                <div className="mt-6 pt-4 border-t border-zinc-800/60 text-[11px] font-mono text-zinc-500">
-                  // PRODUCCIÓN VERIFICADA
-                </div>
               </div>
             );
           })}
