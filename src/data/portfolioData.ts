@@ -38,7 +38,8 @@ export const PORTFOLIO_DATA = {
     status: 'Disponible para nuevos retos',
     email: 'mario.luna.lpez@gmail.com',
     linkedin: 'https://linkedin.com/in/m-luna-lpez',
-    github: 'https://github.com/mlunlop', 
+    github: 'https://github.com/mlunlop',
+    kaggle: 'https://www.kaggle.com/mariolunalopez',
   },
   skills: [
     {
@@ -106,6 +107,14 @@ export const PORTFOLIO_DATA = {
   ] as ExperienceItem[],
   education: [
     {
+      id: 'bachelor',
+      degree: 'Grado Universitario en Informática',
+      institution: 'Universitat Carlemary (Andorra - Online)',
+      period: '2026 – 2029',
+      badge: 'Grado Universitario',
+      details: 'Fundamentos de ingeniería del software, lógica computacional, arquitectura de sistemas, gestión de infraestructuras y desarrollo de software eficiente y sostenible bajo el marco EEES (180 ECTS).'
+    },
+    {
       id: 'master-fp',
       degree: 'Máster de FP en Aprendizaje Automático: Gestión de Datos y Entrenamiento',
       institution: 'I.E.S. Zaidín-Vergeles (Granada)',
@@ -124,7 +133,7 @@ export const PORTFOLIO_DATA = {
     {
       id: 'smr',
       degree: 'C.F.G.M. Sistemas Microinformáticos y Redes (SMR)',
-      institution: 'I.E.S. Almicerán (Granada)',
+      institution: 'I.E.S. Almicerán (Peal de Becerro, Jaén)',
       period: '2022 – 2024',
       badge: 'Grado Medio',
       details: 'Redes locales, configuración de servidores Linux/Windows, seguridad perimetral, virtualización y arquitectura física de sistemas informáticos.',

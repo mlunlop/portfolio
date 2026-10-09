@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Copy, Check, Mail, ArrowUpRight } from 'lucide-react';
 import { PORTFOLIO_DATA } from '../data/portfolioData';
 import { copyToClipboard } from '../utils/feedback';
-import { GithubIcon, LinkedinIcon } from './Icons';
+import { GithubIcon, LinkedinIcon, KaggleIcon } from './Icons';
 
 export function ContactFooter() {
   const [copied, setCopied] = useState(false);
@@ -93,6 +93,15 @@ export function ContactFooter() {
             >
               <GithubIcon className="w-3.5 h-3.5" />
               <span>GitHub</span>
+            </a>
+            <a
+              href={PORTFOLIO_DATA.personal.kaggle}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-zinc-300 transition-colors flex items-center gap-1.5"
+            >
+              <KaggleIcon className="w-3.5 h-3.5 text-cyan-400" />
+              <span>Kaggle</span>
             </a>
             <a
               href={PORTFOLIO_DATA.personal.linkedin}

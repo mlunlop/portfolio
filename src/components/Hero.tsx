@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Copy, Check, ArrowDown, Database, Cpu, ShieldCheck, Layers, Sparkles } from 'lucide-react';
+import { Copy, Check, ArrowDown, Database, Cpu, ShieldCheck, Layers } from 'lucide-react';
 import { PORTFOLIO_DATA } from '../data/portfolioData';
 import { copyToClipboard } from '../utils/feedback';
-import { GithubIcon, LinkedinIcon } from './Icons';
+import { GithubIcon, LinkedinIcon, KaggleIcon } from './Icons';
 import profilePhoto from '../assets/profile.webp';
 
 export function Hero() {
@@ -117,6 +117,17 @@ export function Hero() {
               >
                 <GithubIcon className="w-4 h-4 text-zinc-300" />
                 <span>GitHub</span>
+              </a>
+
+              {/* Kaggle */}
+              <a
+                href={PORTFOLIO_DATA.personal.kaggle}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-4 py-3.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-zinc-700 text-zinc-200 text-sm font-medium transition-colors font-body"
+              >
+                <KaggleIcon className="w-4 h-4 text-cyan-400" />
+                <span>Kaggle</span>
               </a>
             </div>
 
