@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FileText, Mail } from 'lucide-react';
+import { FileText } from 'lucide-react';
 import { PdfViewerModal } from './PdfViewerModal';
 
 import logoImg from '../assets/logo.webp';

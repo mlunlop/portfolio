@@ -61,12 +61,19 @@ export function ContactForm() {
       return;
     }
 
+    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+    if (!accessKey) {
+      setStatus('error');
+      setErrorMessage('Clave de formulario no configurada en las variables de entorno.');
+      return;
+    }
+
     setStatus('loading');
     setErrorMessage('');
 
     try {
       const payload = {
-        access_key: 'f6701e57-a97c-4fa9-b5c6-1963bec8d587',
+        access_key: accessKey,
         name: formData.name,
         email: formData.email,
         subject: `[Portfolio] ${formData.category} - de ${formData.name}`,
