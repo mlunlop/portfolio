@@ -611,10 +611,10 @@ export function ProjectsSection() {
                   <div className="p-4 rounded-xl bg-zinc-900/70 border border-zinc-800 space-y-1.5">
                     <div className="flex items-center gap-2 text-emerald-400 font-mono text-xs">
                       <ShieldCheck className="w-4 h-4" />
-                      <span>PROTECCIÓN ANTI-SPAM</span>
+                      <span>OPTIMIZACIÓN & ACCESIBILIDAD</span>
                     </div>
                     <p className="text-xs text-zinc-400 font-body leading-relaxed">
-                      Integración serverless con Web3Forms mediante variables de entorno, trampa <em>honeypot</em> y filtro heurístico temporal.
+                      Estructura semántica, rendimiento óptimo en carga estática y comunicación directa sin intermediarios.
                     </p>
                   </div>
                 </div>
