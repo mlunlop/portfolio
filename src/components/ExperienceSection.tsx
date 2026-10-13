@@ -19,7 +19,7 @@ export function ExperienceSection() {
           <div>
             <div className="flex items-center gap-2 font-mono text-xs text-orange-400 mb-2">
               <span className="w-1.5 h-1.5 rounded-full bg-orange-400" />
-              <span>TRAYECTORIA PROFESIONAL // PRODUCCIÓN REAL</span>
+              <span>TRAYECTORIA PROFESIONAL</span>
             </div>
             <h2 className="text-3xl sm:text-5xl font-normal tracking-tight text-zinc-100 font-display uppercase">
               Experiencia Laboral
@@ -43,13 +43,13 @@ export function ExperienceSection() {
                 <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-6">
                   {/* Left block: Logo + Header info */}
                   <div className="flex items-start gap-4">
-                    {/* Company Logo Plate (Disabled grayscale -> Vibrant on hover) */}
+                    {/* Company Logo Plate */}
                     {logo && (
-                      <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white/90 p-2 flex items-center justify-center shrink-0 border border-zinc-700/50 shadow-sm overflow-hidden transition-all duration-300 group-hover:bg-white group-hover:border-zinc-500 group-hover:shadow-lg">
+                      <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white p-2 flex items-center justify-center shrink-0 border border-zinc-700/50 shadow-sm overflow-hidden transition-all duration-300 group-hover:border-zinc-500 group-hover:shadow-lg">
                         <img
                           src={logo.src}
                           alt={logo.alt}
-                          className="w-full h-full object-contain filter grayscale opacity-45 transition-all duration-300 ease-out group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105"
+                          className="w-full h-full object-contain transition-all duration-300 ease-out group-hover:scale-105"
                           loading="lazy"
                         />
                       </div>

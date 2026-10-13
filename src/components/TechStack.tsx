@@ -17,7 +17,7 @@ export function TechStack() {
           <div>
             <div className="flex items-center gap-2 font-mono text-xs text-orange-400 mb-2">
               <span className="w-1.5 h-1.5 rounded-full bg-orange-400" />
-              <span>TOOLING & CAPACIDADES // STACK DE PRODUCCIÓN</span>
+              <span>MIS CAPACIDADES</span>
             </div>
             <h2 className="text-3xl sm:text-5xl font-normal tracking-tight text-zinc-100 font-display uppercase">
               Stack Técnico

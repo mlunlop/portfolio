@@ -2,6 +2,17 @@ import { useState } from 'react';
 import { GraduationCap, Award, ExternalLink, Languages, FileText } from 'lucide-react';
 import { PORTFOLIO_DATA } from '../data/portfolioData';
 import { PdfViewerModal } from './PdfViewerModal';
+import cambridgeLogo from '../assets/cambridge-logo.webp';
+import appleLogo from '../assets/apple-logo.webp';
+import googleLogo from '../assets/google-logo.webp';
+import openwebinarsLogo from '../assets/openwebinars-logo.webp';
+
+const CERTIFICATION_LOGOS: Record<string, { src: string; alt: string }> = {
+  cambridge: { src: cambridgeLogo, alt: 'Logo de Cambridge Assessment English' },
+  apple: { src: appleLogo, alt: 'Logo de Apple Inc.' },
+  'google-mobile': { src: googleLogo, alt: 'Logo de Google' },
+  'nginx-linux': { src: openwebinarsLogo, alt: 'Logo de OpenWebinars' },
+};
 
 export function EducationCertifications() {
   const [activePdf, setActivePdf] = useState<{
@@ -31,7 +42,7 @@ export function EducationCertifications() {
           <div>
             <div className="flex items-center gap-2 font-mono text-xs text-orange-400 mb-2">
               <GraduationCap className="w-4 h-4 text-orange-400" />
-              <span>TRAYECTORIA EDUCATIVA & INGENIERÍA // PILAR PRINCIPAL</span>
+              <span>TRAYECTORIA EDUCATIVA</span>
             </div>
             <h2 className="text-3xl sm:text-5xl font-normal tracking-tight text-zinc-100 font-display uppercase">
               Formación Académica
@@ -49,8 +60,8 @@ export function EducationCertifications() {
               key={edu.id}
               className="relative rounded-2xl border border-zinc-800 bg-zinc-900/40 hover:bg-zinc-900/70 hover:border-zinc-700 transition-all duration-300 p-6 sm:p-8 overflow-hidden group"
             >
-              {/* Subtle top indicator for the highest/current degree */}
-              {idx === 0 && (
+              {/* Subtle top indicator for degrees currently in progress */}
+              {(edu.isCurrent ?? idx === 0) && (
                 <div className="absolute top-0 right-0 px-4 py-1 rounded-bl-xl bg-orange-500/10 border-b border-l border-orange-500/30 text-orange-400 font-mono text-[11px] font-semibold flex items-center gap-1.5">
                   <span>En curso</span>
                 </div>
@@ -81,10 +92,23 @@ export function EducationCertifications() {
                 </div>
               </div>
 
-              {/* Details */}
-              <p className="text-sm sm:text-base text-zinc-300 font-body leading-relaxed max-w-4xl pt-2 border-t border-zinc-800/60">
-                {edu.details}
-              </p>
+              {/* Details & Action Link */}
+              <div className="pt-3 border-t border-zinc-800/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <p className="text-sm sm:text-base text-zinc-300 font-body leading-relaxed max-w-3xl">
+                  {edu.details}
+                </p>
+                {edu.url && (
+                  <a
+                    href={edu.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-800/80 hover:bg-zinc-700/80 text-zinc-300 hover:text-orange-400 border border-zinc-700/60 text-xs font-mono transition-all self-start sm:self-end shrink-0"
+                  >
+                    <span>Más información</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                )}
+              </div>
             </div>
           ))}
         </div>
@@ -110,34 +134,51 @@ export function EducationCertifications() {
 
           {/* Grid de Certificaciones de Nivel 1 */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {PORTFOLIO_DATA.certifications.map((cert) => (
-              <div
-                key={cert.id}
-                className="rounded-xl border border-zinc-800/90 bg-zinc-900/30 p-5 hover:bg-zinc-900/60 hover:border-zinc-700 transition-all duration-200 flex flex-col justify-between"
-              >
-                <div>
-                  <div className="flex items-start justify-between gap-2 mb-2">
-                    <span className="px-2 py-0.5 rounded bg-zinc-800/80 text-[10px] font-mono text-orange-400 border border-orange-500/20">
-                      {cert.badge}
-                    </span>
-                    {cert.date && (
-                      <span className="text-[11px] font-mono text-zinc-500">
-                        {cert.date}
+            {PORTFOLIO_DATA.certifications.map((cert) => {
+              const logo = CERTIFICATION_LOGOS[cert.id];
+
+              return (
+                <div
+                  key={cert.id}
+                  className="rounded-xl border border-zinc-800/90 bg-zinc-900/30 p-5 hover:bg-zinc-900/60 hover:border-zinc-700 transition-all duration-200 flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="flex items-start justify-between gap-2 mb-3">
+                      <span className="px-2 py-0.5 rounded bg-zinc-800/80 text-[10px] font-mono text-orange-400 border border-orange-500/20">
+                        {cert.badge}
                       </span>
-                    )}
-                  </div>
+                      {cert.date && (
+                        <span className="text-[11px] font-mono text-zinc-500">
+                          {cert.date}
+                        </span>
+                      )}
+                    </div>
 
-                  <h4 className="text-base font-normal text-zinc-100 font-display mb-0.5">
-                    {cert.name}
-                  </h4>
-                  <div className="text-xs font-mono text-zinc-400 mb-3">
-                    {cert.issuer}
-                  </div>
+                    <div className="flex items-start gap-3.5 mb-3">
+                      {logo && (
+                        <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-lg bg-white p-1.5 flex items-center justify-center shrink-0 border border-zinc-700/50 shadow-sm overflow-hidden">
+                          <img
+                            src={logo.src}
+                            alt={logo.alt}
+                            className="w-full h-full object-contain"
+                            loading="lazy"
+                          />
+                        </div>
+                      )}
+                      <div>
+                        <h4 className="text-base font-normal text-zinc-100 font-display mb-0.5">
+                          {cert.name}
+                        </h4>
+                        <div className="text-xs font-mono text-zinc-400">
+                          {cert.issuer}
+                        </div>
+                      </div>
+                    </div>
 
-                  <p className="text-xs text-zinc-400 font-body leading-relaxed mb-4">
-                    {cert.highlight}
-                  </p>
-                </div>
+                    <p className="text-xs text-zinc-400 font-body leading-relaxed mb-4">
+                      {cert.highlight}
+                    </p>
+                  </div>
 
                 {/* Footer actions: View PDF modal / View credential */}
                 <div className="pt-3 border-t border-zinc-800/60 flex flex-wrap items-center justify-between gap-2">
@@ -180,7 +221,8 @@ export function EducationCertifications() {
                   )}
                 </div>
               </div>
-            ))}
+            );
+          })}
           </div>
 
           {/* Mini Idiomas Bar with Click to View PDF */}

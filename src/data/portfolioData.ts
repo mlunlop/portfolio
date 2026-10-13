@@ -18,6 +18,8 @@ export interface EducationItem {
   period: string;
   badge: string;
   details: string;
+  isCurrent?: boolean;
+  url?: string;
 }
 
 export interface CertificationItem {
@@ -119,6 +121,8 @@ export const PORTFOLIO_DATA = {
       institution: 'Universitat Carlemary (Andorra - Modalidad Online)',
       period: '2026 – 2029',
       badge: 'Grado Universitario',
+      isCurrent: true,
+      url: 'https://www.universitatcarlemany.com/programas/bachelors/bachelor-online-informatica',
       details: 'Fundamentos de ingeniería del software, lógica computacional, arquitectura de sistemas, gestión de infraestructuras y desarrollo de software eficiente y sostenible bajo el marco EEES (180 ECTS).'
     },
     {
@@ -127,6 +131,8 @@ export const PORTFOLIO_DATA = {
       institution: 'I.E.S. Zaidín-Vergeles (Granada)',
       period: '2026 – 2027',
       badge: 'Postgrado Especializado',
+      isCurrent: true,
+      url: 'https://www.juntadeandalucia.es/educacion/portales/web/formacion-profesional-andaluza/cursos-de-especializacion-detalle-titulo?idTitulo=2710&backURL=/educacion/portales/web/formacion-profesional-andaluza/cursos-de-especializacion-catalogo-de-titulos',
       details: 'Enfoque intensivo en preparación de corpus de datos, arquitecturas ETL, validación estadística, fine-tuning y entrenamiento de modelos de Machine Learning.',
     },
     {
@@ -135,6 +141,7 @@ export const PORTFOLIO_DATA = {
       institution: 'I.E.S. Zaidín-Vergeles (Granada)',
       period: '2024 – 2026',
       badge: 'Grado Superior',
+      url: 'https://www.juntadeandalucia.es/educacion/portales/web/formacion-profesional-andaluza/cf-grado-superior-detalle-titulo?idTitulo=2292&backURL=/educacion/portales/web/formacion-profesional-andaluza/grado-superior-catalogo-de-titulos',
       details: 'Arquitectura frontend moderna, desarrollo backend con bases de datos relacionales/NoSQL, diseño de APIs REST y patrones de software en modalidad bilingüe inglés.',
     },
     {
@@ -143,6 +150,7 @@ export const PORTFOLIO_DATA = {
       institution: 'I.E.S. Almicerán (Peal de Becerro, Jaén)',
       period: '2022 – 2024',
       badge: 'Grado Medio',
+      url: 'https://www.juntadeandalucia.es/educacion/portales/web/formacion-profesional-andaluza/cf-grado-medio-detalle-titulo?idTitulo=2275&backURL=/educacion/portales/web/formacion-profesional-andaluza/grado-medio-catalogo-de-titulos',
       details: 'Redes locales, configuración de servidores Linux/Windows, seguridad perimetral, virtualización y arquitectura física de sistemas informáticos.',
     },
   ] as EducationItem[],
