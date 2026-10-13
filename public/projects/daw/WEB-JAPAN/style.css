@@ -1,0 +1,2695 @@
+/* ------------------FONTS------------------------------------------ */
+/* Montserrat */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* ModelRailroad */
+@font-face {
+    font-family: 'ModelRailroad';
+    src: url('assets/fonts/ModelRailroad/ModelRailroad.ttf'),
+        url('assets/fonts/ModelRailroad/ModelRailroad.woff'),
+        url('assets/fonts/ModelRailroad/ModelRailroad.woff2');
+}
+
+/* TrajanaSans */
+@font-face {
+    font-family: 'TrajanaSans';
+    src: url('assets/fonts/TrajanaSans/TrajanaSans.ttf'),
+        url('assets/fonts/TrajanaSans/TrajanaSans.woff'),
+        url('assets/fonts/TrajanaSans/TrajanaSans.woff2'),
+        url('assets/fonts/TrajanaSans/TrajanaSansDemiBold.ttf'),
+        url('assets/fonts/TrajanaSans/TrajanaSansDemiBold.woff'),
+        url('assets/fonts/TrajanaSans/TrajanaSansDemiBold.woff2'),
+        url('assets/fonts/TrajanaSans/TrajanaSansLight.ttf'),
+        url('assets/fonts/TrajanaSans/TrajanaSansLight.woff'),
+        url('assets/fonts/TrajanaSans/TrajanaSansLight.woff2'),
+        url('assets/fonts/TrajanaSans/TrajanaSansBold.ttf'),
+        url('assets/fonts/TrajanaSans/TrajanaSansBold.woff'),
+        url('assets/fonts/TrajanaSans/TrajanaSansBold.woff2');
+}
+
+/* ------------------VARIABLES------------------------------------------ */
+:root {
+    /*JAPANBLUE*/
+    --japanblue--50: #edf1fb;
+    --japanblue--100: #a5bded;
+    --japanblue--200: #5389d6;
+    --japanblue--300base: #365c92;
+    --japanblue--400: #1d3557;
+    --japanblue--500: #061121;
+
+    /*CHERRY*/
+    --cherry--0: #ffdfe5;
+    --cherry--50: #ffd2da;
+    --cherry--100: #ffb7c5;
+    --cherry--200: #ff7597;
+    --cherry--300base: #da005e;
+    --cherry--400: #75002f;
+    --cherry--500: #2c000d;
+
+    /*PRIMARY*/
+    --primary--50: #ffffff;
+    --primary--100: #e2e2e2;
+    --primary--200: #adadad;
+    --primary--300: #747474;
+    --primary--400: #3a3a3a;
+    --primary--500: #000000;
+}
+
+/* ------------------RESET------------------------------------------ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ------------------BODY------------------------------------------ */
+body {
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.5;
+    color: var(--primary--400);
+}
+
+/* ------------------ SECTION HEADER ------------------------------------------ */
+.section-header {
+    max-width: 800px;
+    margin: 0 auto 4rem auto;
+
+    .section-overline {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.9rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--cherry--400);
+        margin-bottom: 0.5rem;
+    }
+
+
+    .headline {
+        margin-bottom: 1rem;
+        line-height: 1.1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .text-blue {
+            font-family: 'TrajanaSans', serif;
+            font-size: 2.5rem;
+            color: var(--japanblue--400);
+            text-transform: capitalize;
+            font-weight: 700;
+        }
+
+        .text-pink {
+            font-family: 'TrajanaSans', serif;
+            font-size: 3rem;
+            color: var(--cherry--300base);
+            font-weight: 800;
+            text-transform: capitalize;
+        }
+
+
+
+    }
+
+}
+
+/* ------------------ SMALL HERO ------------------ */
+.small-hero {
+    position: relative;
+    height: 60vh;
+    min-height: 500px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 6rem;
+    padding-right: 6rem;
+    background-size: cover;
+    background-position: center center;
+    overflow: hidden;
+
+    /* Overlay Oscuro */
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to right, rgba(6, 17, 33, 0.8) 0%, rgba(6, 17, 33, 0.3) 100%);
+        z-index: 1;
+    }
+
+    /* Variantes de Fondo por Página */
+    &.hero-destinations {
+        background-image: url('assets/img/2-DESTINATIONS/hero-bg.jpg');
+    }
+
+    &.hero-routes {
+        background-image: url('assets/img/3-ROUTES/hero-bg.jpg');
+    }
+
+    &.hero-contact {
+        background-image: url('assets/img/4-CONTACT/hero-bg.jpg');
+    }
+
+    /* --- LOGO (Añadido) --- */
+    .brand-logo {
+        position: absolute;
+        top: 3rem;
+        left: 4rem;
+        z-index: 10;
+
+        img {
+            height: 50px;
+            width: auto;
+            display: block;
+        }
+    }
+
+    /* --- NAV (Añadido igual que en el Hero Principal) --- */
+    .floating-nav {
+        position: absolute;
+        top: 3rem;
+        right: 4rem;
+        background-color: rgba(255, 223, 229, 0.85);
+        backdrop-filter: blur(10px);
+        padding: 0.8rem 1rem;
+        border-radius: 50px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        z-index: 10;
+
+        ul {
+            list-style: none;
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+
+            li {
+                a {
+                    text-decoration: none;
+                    font-family: 'Montserrat', sans-serif;
+                    font-weight: 600;
+                    font-size: 0.9rem;
+                    letter-spacing: 1.5px;
+                    text-transform: uppercase;
+                    color: var(--japanblue--300base);
+                    padding: 0.8rem 1.5rem;
+                    border-radius: 30px;
+                    transition: all 0.3s ease;
+
+                    &.active {
+                        background-color: var(--cherry--300base);
+                        color: var(--primary--50);
+                    }
+
+                    &:hover:not(.active) {
+                        background-color: rgba(255, 255, 255, 0.5);
+                        color: var(--japanblue--400);
+                    }
+                }
+            }
+        }
+    }
+
+    /* Contenido del Texto */
+    .small-hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 750px;
+        margin-top: 8rem;
+
+        .small-section-overline {
+            font-family: 'TrajanaSans', serif;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            color: var(--cherry--200);
+            margin-bottom: 0.5rem;
+        }
+
+        .small-main-title {
+            font-family: 'ModelRailroad', sans-serif;
+            font-size: clamp(4rem, 6vw, 7rem);
+            color: var(--primary--50);
+            line-height: 0.9;
+            font-weight: 200;
+            letter-spacing: 5px;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle-wrapper {
+            .separator-white {
+                width: 100px;
+                height: 3px;
+                background-color: var(--cherry--200);
+                border: none;
+                margin-bottom: 1rem;
+            }
+
+            .subtitle-white {
+                font-family: 'TrajanaSans', serif;
+                font-size: 1.5rem;
+                color: var(--japanblue--200);
+                letter-spacing: 2px;
+                text-transform: uppercase;
+            }
+
+            .small-hero-description {
+                font-family: 'Montserrat', sans-serif;
+                font-size: 1.1rem;
+                line-height: 1.6;
+                color: var(--primary--100);
+                font-weight: 400;
+                max-width: 90%;
+            }
+        }
+    }
+}
+
+/* ------------------ FOOTER SECTION ------------------ */
+.site-footer {
+    background-color: var(--japanblue--500);
+    color: var(--primary--50);
+    padding: 5rem 10% 2rem 10%;
+    font-family: 'Montserrat', sans-serif;
+
+    .footer-content {
+        display: grid;
+        grid-template-columns: 1.5fr 0.8fr 0.8fr 1.2fr;
+        gap: 3rem;
+        margin-bottom: 4rem;
+
+        .footer-logo {
+            height: 60px;
+            width: auto;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-desc {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            opacity: 0.8;
+            margin-bottom: 2rem;
+            max-width: 90%;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+
+            a {
+                img {
+                    width: 24px;
+                    height: 24px;
+                    opacity: 0.7;
+                    transition: opacity 0.3s ease;
+                }
+
+                &:hover img {
+                    opacity: 1;
+                }
+            }
+        }
+
+        .footer-heading {
+            font-family: 'TrajanaSans', serif;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+            color: var(--primary--50);
+        }
+
+        .footer-nav {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+
+            li {
+                a {
+                    text-decoration: none;
+                    color: var(--primary--100);
+                    font-size: 0.95rem;
+                    transition: color 0.3s ease;
+
+                    &:hover {
+                        color: var(--cherry--200);
+                    }
+                }
+            }
+        }
+
+        .contact-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+
+            li {
+                display: flex;
+                align-items: flex-start;
+                gap: 1rem;
+                font-size: 0.95rem;
+                color: var(--primary--100);
+
+                .contact-icon {
+                    width: 20px;
+                    height: 20px;
+                    margin-top: 2px;
+                }
+            }
+        }
+    }
+
+    .footer-divider {
+        height: 1px;
+        background-color: rgba(255, 255, 255, 0.1);
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+
+    .footer-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.85rem;
+        opacity: 0.6;
+
+        .official-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+
+            .flag-icon {
+                width: 24px;
+                height: auto;
+                border-radius: 2px;
+            }
+        }
+    }
+}
+
+/* ------------------ HERO SECTION -------------------------------------------- */
+.hero-section {
+    display: grid;
+    grid-template-columns: 45% 55%;
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+
+    .hero-left {
+        background-color: var(--cherry--0);
+        padding: 3rem 4rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        z-index: 2;
+
+        .brand-logo {
+            position: absolute;
+            top: 3rem;
+            left: 4rem;
+            z-index: 10;
+
+            img {
+                height: 50px;
+                width: auto;
+                display: block;
+            }
+        }
+
+        .hero-text-content {
+            position: relative;
+            max-width: 500px;
+            margin-top: 2rem;
+
+            .watermark {
+                position: absolute;
+                top: -20%;
+                left: 10%;
+                font-family: 'Montserrat', serif;
+                font-size: 18rem;
+                color: var(--cherry--100);
+                opacity: 0.6;
+                z-index: -1;
+                pointer-events: none;
+                user-select: none;
+            }
+
+            .main-title {
+                font-family: 'ModelRailroad', sans-serif;
+                font-size: clamp(5rem, 8vw, 9rem);
+                color: var(--cherry--300base);
+                line-height: 0.9;
+                font-weight: 200;
+                letter-spacing: 5px;
+                margin-bottom: 0.5rem;
+                text-transform: uppercase;
+            }
+
+            .subtitle-wrapper {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                margin-bottom: 2rem;
+
+                .separator {
+                    width: 100%;
+                    height: 3px;
+                    background-color: var(--japanblue--300base);
+                    border: none;
+                    margin-bottom: 1rem;
+                }
+
+                .subtitle {
+                    font-family: 'TrajanaSans', serif;
+                    font-size: 1.8rem;
+                    color: var(--japanblue--300base);
+                    letter-spacing: 3px;
+                    text-transform: uppercase;
+                    font-weight: normal;
+                }
+            }
+
+            .hero-description {
+                font-family: 'Montserrat', sans-serif;
+                font-size: 1.1rem;
+                line-height: 1.6;
+                color: var(--primary--400);
+                font-weight: 400;
+                max-width: 90%;
+            }
+        }
+    }
+
+    .vertical-divider-text {
+        position: absolute;
+        left: 45%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: .5rem;
+        font-family: 'Montserrat', serif;
+        font-weight: 600;
+        font-size: 7.5rem;
+        color: var(--cherry--400);
+        pointer-events: none;
+    }
+
+    .hero-right {
+        background-image: url('assets/img/1-HOME/hero-bg.png');
+        background-size: cover;
+        background-position: center center;
+        position: relative;
+
+        .floating-nav {
+            position: absolute;
+            top: 3rem;
+            right: 4rem;
+            background-color: rgba(255, 223, 229, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 0.8rem 1rem;
+            border-radius: 50px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+
+            ul {
+                list-style: none;
+                display: flex;
+                gap: 0.5rem;
+                align-items: center;
+
+                li {
+                    a {
+                        text-decoration: none;
+                        font-family: 'Montserrat', sans-serif;
+                        font-weight: 600;
+                        font-size: 0.9rem;
+                        letter-spacing: 1.5px;
+                        text-transform: uppercase;
+                        color: var(--japanblue--300base);
+                        padding: 0.8rem 1.5rem;
+                        border-radius: 30px;
+                        transition: all 0.3s ease;
+
+                        &.active {
+                            background-color: var(--cherry--300base);
+                            color: var(--primary--50);
+                        }
+
+                        &:hover:not(.active) {
+                            background-color: rgba(255, 255, 255, 0.5);
+                            color: var(--japanblue--400);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+
+/* ------------------ HOME ----------------------------------------------------------------------------------------------- */
+/* ------------------ DISCOVERY SECTION --------------------------------------- */
+.discovery-section {
+    background-color: var(--japanblue--50);
+    padding: 6rem 10%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+
+    .collage-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        position: relative;
+        max-width: 600px;
+
+        .collage-col-left {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            width: 50%;
+
+            .img-top {
+                width: 100%;
+                height: 260px;
+                /* Altura controlada */
+                object-fit: cover;
+                border-radius: 4px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .img-bottom {
+                width: 100%;
+                height: 260px;
+                /* Altura controlada */
+                object-fit: cover;
+                border-radius: 4px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+
+        }
+
+        .collage-col-right {
+            width: 50%;
+            display: flex;
+
+            .img-tall {
+                width: 100%;
+                height: 460px;
+                object-fit: cover;
+                border-radius: 4px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+        }
+
+        .kanji-tile {
+            position: absolute;
+            background-color: white;
+            width: 90px;
+            height: 90px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+
+            .kanji {
+                font-family: 'Noto Serif JP', serif;
+                font-size: 3rem;
+                color: var(--cherry--300base);
+                font-weight: 700;
+            }
+
+
+        }
+
+        .tile-top {
+            top: -25px;
+            left: -25px;
+        }
+
+        .tile-bottom {
+            bottom: -25px;
+            right: 25%;
+            transform: translateX(50%);
+        }
+    }
+
+    .discovery-content {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        .discovery-section-header {
+            max-width: 800px;
+            margin: 2rem 0;
+
+            .section-overline {
+                font-family: 'Montserrat', sans-serif;
+                font-size: 0.9rem;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                color: var(--cherry--400);
+                margin-bottom: 0.5rem;
+            }
+
+            .discovery-headline {
+                margin-bottom: 0.5rem;
+                line-height: 1.1;
+
+                .text-blue {
+                    display: block;
+                    font-family: 'TrajanaSans', sans-serif;
+                    font-size: 2.5rem;
+                    color: var(--japanblue--400);
+                    font-weight: 700;
+                    text-transform: capitalize;
+                }
+
+                .text-pink {
+                    display: block;
+                    font-family: 'TrajanaSans', sans-serif;
+                    font-size: 2.8rem;
+                    color: var(--cherry--300base);
+                    font-weight: 800;
+                    text-transform: capitalize;
+                }
+            }
+        }
+
+        .discovery-desc {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--primary--400);
+            margin-bottom: 2.5rem;
+        }
+
+        .benefits-list {
+            list-style: none;
+            margin-bottom: 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+
+            li {
+                display: flex;
+                align-items: flex-start;
+                gap: 1rem;
+                font-family: 'Montserrat', sans-serif;
+                color: var(--primary--400);
+            }
+
+            .check-icon {
+                font-size: 1.2rem;
+                color: var(--primary--500);
+            }
+
+        }
+
+        .btn-pill {
+            background-color: var(--cherry--300base);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(218, 0, 94, 0.3);
+
+            &:hover {
+                background-color: var(--cherry--200);
+                transform: translateY(-2px);
+            }
+        }
+
+    }
+
+}
+/* ------------------ WELCOME SECTION ----------------------------------------- */
+.welcome-section {
+    background-color: var(--cherry--0);
+    padding: 6rem 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    .welcome-description {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.125rem;
+        line-height: 1.7;
+        color: var(--primary--400);
+        font-weight: 400;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+        width: 100%;
+        max-width: 1200px;
+
+        .stat-card {
+            background-color: var(--primary--50);
+            border-radius: 24px;
+            padding: 2.5rem 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+
+            box-shadow: 0 10px 30px rgba(83, 137, 214, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+            &:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 40px rgba(218, 0, 94, 0.15);
+            }
+
+            .stat-number {
+                font-family: 'ModelRailroad', sans-serif;
+                font-size: 3.5rem;
+                color: var(--cherry--300base);
+                line-height: 1;
+            }
+
+            .stat-label {
+                font-family: 'Montserrat', sans-serif;
+                font-size: 0.9rem;
+                font-weight: 600;
+                color: var(--japanblue--300base);
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+        }
+    }
+
+}
+/* ------------------ HISTORY SECTION ----------------------------------------- */
+.history-section {
+    background-color: var(--primary--50);
+    padding: 6rem 5%;
+    text-align: center;
+
+    .timeline-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 1.5rem;
+        max-width: 1400px;
+        margin: 0 auto;
+
+        .history-card {
+            background-color: var(--japanblue--50);
+            border-radius: 16px;
+            padding: 2rem 1.5rem;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s ease;
+            min-height: 280px;
+
+            &:hover {
+                transform: translateY(-5px);
+            }
+
+            .card-watermark {
+                position: absolute;
+                top: 10%;
+                left: 50%;
+                transform: translateX(-50%);
+                font-family: 'Noto Serif JP', serif;
+                font-size: 5rem;
+                color: var(--cherry--100);
+                opacity: 0.3;
+                pointer-events: none;
+                z-index: 0;
+            }
+
+            .history-year {
+                font-family: 'Montserrat', sans-serif;
+                font-size: 1.5rem;
+                font-weight: 700;
+                color: var(--cherry--300base);
+                margin-bottom: 0.5rem;
+                position: relative;
+                z-index: 1;
+            }
+
+            .history-period {
+                font-family: 'TrajanaSans', serif;
+                font-size: 0.9rem;
+                font-weight: 600;
+                color: var(--japanblue--400);
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                margin-bottom: 1rem;
+                position: relative;
+                z-index: 1;
+            }
+
+            .history-desc {
+                font-family: 'Montserrat', sans-serif;
+                font-size: 0.85rem;
+                line-height: 1.6;
+                color: var(--primary--400);
+                position: relative;
+                z-index: 1;
+            }
+        }
+
+    }
+
+
+}
+/* ------------------ PARALLAX IMAGE ------------------------------------------ */
+.parallax-separator {
+    width: 100%;
+    height: 50vh;
+    background-image: url('assets/img/1-HOME/parallax.jpg');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    position: relative;
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100px;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent);
+    }
+
+}
+/* ------------------ FOOD SECTION -------------------------------------------- */
+.food-section {
+    background-color: var(--cherry--0);
+    padding: 6rem 10%;
+    text-align: center;
+
+    .food-desc {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.1rem;
+        color: var(--primary--400);
+        line-height: 1.6;
+    }
+
+    .food-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+
+        .food-card {
+            position: relative;
+            border-radius: 40px;
+            overflow: hidden;
+            aspect-ratio: 3/4.5;
+            box-shadow: 0 15px 35px rgba(117, 0, 47, 0.15);
+            transition: transform 0.4s ease;
+            cursor: pointer;
+
+            &:hover {
+                transform: translateY(-8px);
+            }
+
+            .food-bg {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.6s ease;
+            }
+
+            &:hover .food-bg {
+                transform: scale(1.08);
+
+            }
+
+            .food-overlay {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 50%;
+                background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 100%);
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                padding: 2.5rem;
+                text-align: left;
+                z-index: 1;
+
+                .food-card-title {
+                    font-family: 'TrajanaSans', serif;
+                    font-size: 1.6rem;
+                    font-weight: 700;
+                    color: var(--cherry--200);
+                    text-transform: capitalize;
+                    margin-bottom: 0.3rem;
+                    letter-spacing: 1px;
+                }
+
+                .food-card-subtitle {
+                    font-family: 'Montserrat', sans-serif;
+                    font-style: italic;
+                    font-size: 1rem;
+                    color: rgba(255, 255, 255, 0.9);
+                    font-weight: 300;
+                }
+
+            }
+        }
+    }
+}
+/* ------------------ ADVENTURE SECTION --------------------------------------- */
+.adventure-section {
+    background-color: var(--japanblue--50);
+    padding: 8rem 4%;
+
+    .adventure-header {
+        text-align: center;
+    }
+
+    .adventure-flex-wrapper {
+        display: flex;
+        gap: 3rem;
+        width: 100%;
+        max-width: 1600px;
+        margin: 0 auto;
+        align-items: stretch;
+
+        .large-card-col {
+            flex: 1.3;
+            display: flex;
+        }
+
+
+
+        .feature-card {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            width: 100%;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: flex-end;
+
+
+            .feature-bg {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                z-index: 0;
+                transition: transform 0.5s ease;
+
+                &:hover {
+                    transform: scale(1.05);
+                }
+
+            }
+
+            .feature-content-overlay {
+                position: relative;
+                z-index: 1;
+                background: rgba(29, 53, 87, 0.9);
+                backdrop-filter: blur(5px);
+                padding: 2rem;
+                width: 100%;
+                color: white;
+
+                .badge-location {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.8rem;
+                    color: var(--cherry--200);
+                    font-family: 'Montserrat', sans-serif;
+                    font-size: 0.9rem;
+                    text-transform: uppercase;
+                    margin-bottom: 1rem;
+                }
+
+                .feature-title {
+                    font-family: 'TrajanaSans', serif;
+                    font-size: 2.2rem;
+                    margin-bottom: 1rem;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                }
+
+                .feature-text {
+                    font-family: 'Montserrat', sans-serif;
+                    font-size: 1.1rem;
+                    line-height: 1.7;
+                    margin-bottom: 2rem;
+                    opacity: 0.9;
+                    max-width: 90%;
+                }
+            }
+        }
+
+        .side-cards-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+
+            .action-card {
+                flex: 1;
+                border-radius: 24px;
+                padding: 3.5rem;
+                display: flex;
+                gap: 2rem;
+                align-items: flex-start;
+                transition: transform 0.3s ease;
+
+                &:hover {
+                    transform: translateY(-5px);
+                }
+
+                .icon-box {
+                    width: 64px;
+                    height: 64px;
+                    border-radius: 16px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-shrink: 0;
+                }
+
+                .icon-pink-bg {
+                    background-color: var(--cherry--0);
+                }
+
+                .icon-white-bg {
+                    background-color: rgba(255, 255, 255, 0.15);
+                }
+
+                .icon-img-small {
+                    width: 20px;
+                    height: auto;
+                }
+
+                .icon-img-medium {
+                    width: 32px;
+                    height: auto;
+                }
+
+                .card-body {
+                    display: flex;
+                    flex-direction: column;
+
+                    .action-title {
+                        font-family: 'TrajanaSans', serif;
+                        font-size: 1.5rem;
+                        text-transform: uppercase;
+                        margin-bottom: 0.8rem;
+                        color: var(--japanblue--400);
+                    }
+
+                    .action-text {
+                        font-family: 'Montserrat', sans-serif;
+                        font-size: 1rem;
+                        line-height: 1.6;
+                        color: var(--primary--400);
+                        margin-bottom: 2rem;
+                    }
+
+                    .link-arrow {
+                        text-decoration: none;
+                        font-family: 'Montserrat', sans-serif;
+                        font-weight: 600;
+                        font-size: 0.95rem;
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 0.5rem;
+                        transition: gap 0.2s ease;
+
+                        &:hover {
+                            gap: 1rem;
+                        }
+                    }
+
+                    .pink-text {
+                        color: var(--cherry--300base);
+                    }
+
+                    .link-white {
+                        color: white;
+                    }
+
+                    .text-white {
+                        color: var(--primary--50);
+                    }
+
+                    .text-white-opacity {
+                        color: rgba(255, 255, 255, 0.8);
+                    }
+                }
+            }
+
+            .card-light {
+                background-color: var(--primary--50);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            }
+
+            .card-dark {
+                background-color: var(--cherry--400);
+                box-shadow: 0 10px 30px rgba(117, 0, 47, 0.2);
+            }
+        }
+    }
+}
+
+
+
+
+
+
+/* ------------------ DESTINATIONS -------------------------------------------------------------------------------------- */
+/* ------------------ DISCOVER DESTINATIONS ---------------------------------- */
+.discover-destinations {
+    background-color: var(--japanblue--50);
+    padding: 6rem 10%;
+
+    .discover-destinations-header {
+        text-align: center;
+    }
+
+    .discover-header {
+        text-align: center;
+        margin-bottom: 4rem;
+
+        .discover-headline {
+            font-family: 'TrajanaSans', serif;
+            font-size: 2.5rem;
+            color: var(--japanblue--400);
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-top: 0.5rem;
+            letter-spacing: 1px;
+        }
+    }
+
+    .bento-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+
+        .bento-card {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            height: 350px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.4s ease;
+            cursor: pointer;
+
+            &.span-2 {
+                grid-column: span 2;
+            }
+
+            &.span-1 {
+                grid-column: span 1;
+            }
+
+            .bento-bg {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.6s ease;
+            }
+
+            .bento-overlay {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 60%;
+                background: linear-gradient(to top, rgba(6, 17, 33, 0.9) 0%, transparent 100%);
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                padding: 2rem;
+                z-index: 1;
+
+                .city-name {
+                    font-family: 'TrajanaSans', serif;
+                    font-size: 1.8rem;
+                    font-weight: 700;
+                    color: var(--primary--50);
+                    text-transform: capitalize;
+                    letter-spacing: 1px;
+                    margin-bottom: 0.5rem;
+                }
+
+                .city-tag {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+
+                    span {
+                        font-family: 'Montserrat', sans-serif;
+                        font-size: 0.9rem;
+                        color: var(--cherry--200);
+                        font-weight: 500;
+                    }
+
+                    .icon-pin {
+                        width: 16px;
+                        height: auto;
+                    }
+                }
+            }
+
+
+            &:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+
+                .bento-bg {
+                    transform: scale(1.05);
+                }
+            }
+        }
+    }
+}
+/* ------------------ TREASURES SECTION -------------------------------------- */
+.treasures-section {
+    padding: 0;
+    background-color: var(--cherry--0);
+
+    .treasures-intro {
+        text-align: center;
+        padding: 5rem 10% 5rem 10%;
+        max-width: 1200px;
+        margin: 0 auto;
+
+        .treasures-description {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--primary--400);
+            margin-top: 1.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+
+    .treasure-card {
+        min-height: auto;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 7rem 0;
+
+        &.card-pink {
+            background-color: var(--cherry--0);
+        }
+
+        &.card-blue {
+            background-color: var(--japanblue--50);
+
+            .treasure-watermark {
+                color: var(--cherry--100);
+                left: 20rem;
+            }
+        }
+
+        &.reverse-layout {
+            .treasure-img-col {
+                order: 2;
+            }
+
+            .treasure-text-col {
+                order: 1;
+            }
+        }
+
+        .card-inner-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            width: 100%;
+            max-width: 1700px;
+            padding: 0 5%;
+            align-items: center;
+
+            .treasure-img-col {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100%;
+
+                .img-offset-wrapper {
+                    position: relative;
+                    z-index: 1;
+                    width: 100%;
+                    max-width: 600px;
+                    height: 80vh;
+                    max-height: 850px;
+                    aspect-ratio: 600 / 850;
+
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        top: 40px;
+                        left: 40px;
+                        width: 100%;
+                        height: 100%;
+                        background-color: var(--japanblue--500);
+                        z-index: -1;
+                    }
+
+                    .treasure-img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        display: block;
+                    }
+                }
+            }
+
+            .treasure-text-col {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+
+                .treasure-watermark {
+                    position: absolute;
+                    top: -5rem;
+                    left: 15rem;
+                    font-family: 'Noto Serif JP', serif;
+                    font-size: 7rem;
+                    color: var(--japanblue--100);
+                    opacity: 0.4;
+                    z-index: 0;
+                    pointer-events: none;
+                    font-weight: 600;
+                    line-height: 1;
+                }
+
+                .treasure-overline {
+                    font-family: 'Montserrat', sans-serif;
+                    font-size: 1.1rem;
+                    color: var(--cherry--300base);
+                    text-transform: uppercase;
+                    letter-spacing: 2px;
+                    font-weight: 700;
+                    margin-bottom: 1rem;
+                    position: relative;
+                    z-index: 1;
+                }
+
+                .treasure-title {
+                    font-family: 'TrajanaSans', serif;
+                    font-size: 5rem;
+                    color: var(--japanblue--400);
+                    text-transform: uppercase;
+                    margin-bottom: 0.5rem;
+                    line-height: 0.9;
+                    position: relative;
+                    z-index: 1;
+                }
+
+                .treasure-subtitle {
+                    font-family: 'Montserrat', sans-serif;
+                    font-size: 1.5rem;
+                    font-weight: 300;
+                    font-style: italic;
+                    color: var(--primary--300);
+                    margin-bottom: 3rem;
+                    position: relative;
+                    z-index: 1;
+                    border-left: 4px solid var(--cherry--300base);
+                    padding-left: 1.5rem;
+                    line-height: 1.2;
+                    display: inline-block;
+                }
+
+                .treasure-body {
+                    font-family: 'Montserrat', sans-serif;
+                    font-size: 1.2rem;
+                    line-height: 1.8;
+                    color: var(--primary--400);
+                    margin-bottom: 4rem;
+                    position: relative;
+                    z-index: 1;
+                    max-width: 90%;
+                }
+
+                .treasure-specs {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 3rem;
+                    margin-bottom: 2.5rem;
+                    border-top: 2px solid rgba(0, 0, 0, 0.1);
+                    padding-top: 2.5rem;
+                    position: relative;
+                    z-index: 1;
+
+                    .spec-item {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 0.5rem;
+                        align-items: flex-start;
+
+                        .spec-label {
+                            font-family: 'Montserrat', sans-serif;
+                            font-size: 0.9rem;
+                            font-weight: 700;
+                            color: var(--primary--300);
+                            text-transform: uppercase;
+                            letter-spacing: 2px;
+                        }
+
+                        .spec-value {
+                            font-family: 'Montserrat', serif;
+                            font-size: 1.4rem;
+                            font-weight: 500;
+                            color: var(--japanblue--300base);
+                            line-height: 1.2;
+                        }
+                    }
+                }
+
+                .card-border-bottom {
+                    width: 100%;
+                    height: 4px;
+                    background-color: var(--cherry--300base);
+                    margin-top: 1rem;
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+/* ------------------ ROUTES -------------------------------------------------------------------------------------------- */
+/* ------------------ ROUTES SECTION ---------------------------------------- */
+.routes-section {
+    background-color: var(--cherry--0);
+    padding: 6rem 5%;
+
+    .routes-header-block {
+        text-align: center;
+        margin-bottom: 4rem;
+
+        .routes-headline {
+            font-family: 'TrajanaSans', serif;
+            font-size: 3rem;
+            color: var(--japanblue--400);
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+        }
+    }
+
+    .routes-container {
+        display: flex;
+        flex-direction: column;
+        gap: 4rem;
+        max-width: 1400px;
+        margin: 0 auto;
+
+        .route-card {
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
+            background-color: var(--primary--50);
+
+            .route-card-top {
+                background-color: var(--japanblue--50);
+                padding: 3rem 4rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                gap: 4rem;
+
+                .route-info {
+                    flex: 1;
+                    max-width: 500px;
+
+                    .route-title-row {
+                        display: flex;
+                        gap: 1.5rem;
+                        align-items: center;
+                        margin-bottom: 1.5rem;
+
+                        .route-icon-box {
+                            width: 60px;
+                            height: 60px;
+                            background-color: var(--cherry--100);
+                            border-radius: 12px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            flex-shrink: 0;
+
+                            img {
+                                width: 32px;
+                                height: auto;
+                            }
+                        }
+
+                        div {
+                            .route-title {
+                                font-family: 'TrajanaSans', serif;
+                                font-size: 1.8rem;
+                                color: var(--japanblue--400);
+                                text-transform: uppercase;
+                                line-height: 1;
+                                margin-bottom: 0.3rem;
+                            }
+
+                            .route-subtitle {
+                                font-family: 'Montserrat', sans-serif;
+                                font-size: 1.1rem;
+                                color: var(--cherry--300base);
+                                font-weight: 500;
+                            }
+                        }
+                    }
+
+                    .route-desc {
+                        font-family: 'Montserrat', sans-serif;
+                        font-size: 1rem;
+                        color: var(--primary--300);
+                        line-height: 1.6;
+                        margin-bottom: 2rem;
+                    }
+
+                    .route-tags {
+                        display: flex;
+                        gap: 1rem;
+
+                        .tag {
+                            padding: 0.5rem 1.2rem;
+                            border-radius: 20px;
+                            font-family: 'Montserrat', sans-serif;
+                            font-size: 0.9rem;
+                            font-weight: 600;
+                            display: flex;
+                            align-items: center;
+                            gap: 0.5rem;
+
+                            .tag-icon {
+                                width: 14px;
+                                height: auto;
+                            }
+
+                            &.tag-blue {
+                                background-color: var(--japanblue--200);
+                                color: var(--primary--50);
+                            }
+
+                            &.tag-green {
+                                background-color: #d1e7dd;
+                                color: #0f5132;
+                            }
+
+                            &.tag-yellow {
+                                background-color: #FEF9C3;
+                                color: #A16207;
+                            }
+
+                            &.tag-red {
+                                background-color: #FFB8C5;
+                                color: #75002B;
+                            }
+                        }
+                    }
+                }
+
+                .route-timeline-wrapper {
+                    flex: 1.5;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-end;
+
+                    .timeline-label {
+                        font-family: 'Montserrat', sans-serif;
+                        font-size: 0.9rem;
+                        text-transform: uppercase;
+                        color: var(--cherry--300base);
+                        border: 1px dotted var(--cherry--200);
+                        padding: 0.4rem 1rem;
+                        border-radius: 4px;
+                        margin-bottom: 2rem;
+                        background-color: rgba(255, 255, 255, 0.5);
+                    }
+
+                    .timeline-steps {
+                        list-style: none;
+                        display: flex;
+                        justify-content: space-between;
+                        width: 100%;
+                        position: relative;
+                        padding-top: 10px;
+
+                        .timeline-line {
+                            position: absolute;
+                            top: 35px;
+                            left: 25px;
+                            right: 25px;
+                            height: 3px;
+                            background-color: var(--cherry--300base);
+                            z-index: 0;
+                        }
+
+                        .step {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            position: relative;
+                            z-index: 1;
+
+                            .step-circle {
+                                width: 50px;
+                                height: 50px;
+                                background-color: var(--primary--50);
+                                border: 3px solid var(--cherry--300base);
+                                border-radius: 50%;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                font-family: 'ModelRailroad', sans-serif;
+                                font-size: 1.5rem;
+                                color: var(--cherry--300base);
+                                margin-bottom: 1rem;
+                                transition: transform 0.3s ease;
+                            }
+
+                            .step-name {
+                                font-family: 'Montserrat', sans-serif;
+                                font-size: 0.85rem;
+                                text-transform: uppercase;
+                                font-weight: 600;
+                                color: var(--japanblue--400);
+                                letter-spacing: 1px;
+                            }
+
+                            &:hover .step-circle {
+                                transform: scale(1.1);
+                                background-color: var(--cherry--300base);
+                                color: var(--primary--50);
+                            }
+                        }
+                    }
+                }
+            }
+
+            .route-card-bottom {
+                background-color: var(--primary--50);
+                display: grid;
+                grid-template-columns: 1.5fr 1fr;
+
+                .moment-text-col {
+                    padding: 3rem 4rem;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+
+                    .moment-header {
+                        display: flex;
+                        align-items: center;
+                        gap: 1rem;
+                        margin-bottom: 1.5rem;
+
+                        .moment-label {
+                            font-family: 'TrajanaSans', serif;
+                            font-size: 1.2rem;
+                            color: var(--japanblue--300base);
+                            text-transform: uppercase;
+                            font-weight: 700;
+                        }
+
+                        .moment-line {
+                            flex-grow: 1;
+                            height: 3px;
+                            background-color: var(--cherry--300base);
+                            max-width: 100px;
+                        }
+                    }
+
+                    .moment-desc {
+                        font-family: 'Montserrat', sans-serif;
+                        font-size: 1.1rem;
+                        line-height: 1.8;
+                        color: var(--primary--300);
+                        max-width: 90%;
+                    }
+                }
+
+                .moment-img-col {
+                    height: 100%;
+                    max-height: 300px;
+
+                    .moment-img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
+}
+/* ------------------ ESSENTIALS SECTION ------------------------------------ */
+.essentials-section {
+    background-color: var(--japanblue--50);
+    padding: 6rem 5%;
+    text-align: center;
+
+    .essentials-header {
+        margin-bottom: 4rem;
+
+        .essentials-headline {
+            font-family: 'TrajanaSans', serif;
+            font-size: 3rem;
+            color: var(--japanblue--400);
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+        }
+    }
+
+    .essentials-card {
+        background-color: var(--primary--50);
+        border: 1px solid var(--japanblue--200);
+        border-radius: 30px;
+        max-width: 1500px;
+        margin: 0 auto;
+        display: flex;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(83, 137, 214, 0.05);
+
+        .essential-item {
+            flex: 1;
+            padding: 4rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+
+            &.item-left {
+                border-right: 1px solid var(--japanblue--200);
+            }
+
+            .essential-icon-box {
+                width: 70px;
+                height: 70px;
+                background-color: var(--cherry--0);
+                border-radius: 16px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 2rem;
+
+                img {
+                    width: 32px;
+                    height: auto;
+                }
+            }
+
+            .essential-overline {
+                font-family: 'Montserrat', sans-serif;
+                font-size: 0.9rem;
+                text-transform: uppercase;
+                letter-spacing: 1.5px;
+                color: var(--cherry--300base);
+                margin-bottom: 0.5rem;
+                font-weight: 600;
+            }
+
+            .essential-title {
+                font-family: 'TrajanaSans', serif;
+                font-size: 1.8rem;
+                color: var(--japanblue--200);
+                text-transform: uppercase;
+                margin-bottom: 1.5rem;
+                line-height: 1.2;
+            }
+
+            .essential-desc {
+                font-family: 'Montserrat', sans-serif;
+                font-size: 1rem;
+                line-height: 1.7;
+                color: var(--primary--300);
+                margin-bottom: 2rem;
+            }
+
+            .essential-divider {
+                width: 100%;
+                height: 1px;
+                background-color: var(--japanblue--100);
+                border: none;
+                margin-bottom: 2rem;
+            }
+
+            .link-arrow {
+                text-decoration: none;
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 600;
+                font-size: 1rem;
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                transition: gap 0.2s ease;
+                color: var(--cherry--300base);
+
+                &:hover {
+                    gap: 1rem;
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+/* ------------------ CONTACT ------------------------------------------------------------------------------------------ */
+/* ------------------ CONTACT & PLANNING SECTION --------------------------- */
+.contact-planning-section {
+    background-color: var(--japanblue--50);
+    padding: 6rem 5%;
+
+    .contact-section-overline {
+        text-align: center;
+    }
+
+    .contact-description {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1rem;
+        line-height: 1.7;
+        color: var(--primary--300);
+        margin-bottom: 4rem;
+        text-align: center;
+    }
+
+    .contact-grid-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        max-width: 1500px;
+        margin: 0 auto;
+
+        .cp-card {
+            background-color: var(--primary--50);
+            border: 1px solid var(--japanblue--200);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+
+            .cp-title {
+                font-family: 'TrajanaSans', serif;
+                font-size: 1.5rem;
+                color: var(--japanblue--300base);
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                margin-bottom: 2rem;
+                font-weight: 600;
+            }
+
+            .cp-form {
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+
+                .form-row {
+                    display: flex;
+                    gap: 1.5rem;
+                    width: 100%;
+                }
+
+                .cp-input {
+                    width: 100%;
+                    padding: 1rem 1.5rem;
+                    background-color: var(--japanblue--50);
+                    border: 1px solid var(--japanblue--100);
+                    border-radius: 8px;
+                    font-family: 'Montserrat', sans-serif;
+                    font-size: 0.95rem;
+                    color: var(--primary--400);
+                    outline: none;
+                    transition: border-color 0.3s ease;
+
+                    &:focus {
+                        border-color: var(--japanblue--300base);
+                    }
+
+                    &::placeholder {
+                        color: var(--japanblue--200);
+                        opacity: 0.8;
+                    }
+                }
+
+                .select-wrapper {
+                    width: 100%;
+                    position: relative;
+
+                    .cp-select {
+                        appearance: none;
+                        cursor: pointer;
+                        color: var(--japanblue--300base);
+                    }
+
+                    .select-arrow {
+                        position: absolute;
+                        right: 1.5rem;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        color: var(--japanblue--300base);
+                        pointer-events: none;
+                    }
+                }
+
+                .cp-textarea {
+                    min-height: 150px;
+                    resize: vertical;
+                }
+
+                .cp-submit-btn {
+                    background-color: var(--cherry--300base);
+                    color: var(--primary--50);
+                    border: none;
+                    padding: 1rem 2rem;
+                    border-radius: 8px;
+                    font-family: 'Montserrat', sans-serif;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                    cursor: pointer;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 0.8rem;
+                    transition: background-color 0.3s ease, transform 0.2s ease;
+                    margin-top: 1rem;
+
+                    &:hover {
+                        background-color: var(--cherry--200);
+                        transform: translateY(-2px);
+                    }
+                }
+            }
+
+            .planning-list {
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+
+                .planning-item {
+                    border: 1px solid var(--japanblue--100);
+                    border-radius: 12px;
+                    overflow: hidden;
+                    transition: all 0.3s ease;
+
+                    &[open] {
+                        border-color: var(--japanblue--200);
+                        background-color: #fff;
+                        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+
+                        .chevron-icon {
+                            transform: rotate(180deg);
+                        }
+                    }
+
+                    .planning-summary {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        padding: 1rem 1.5rem;
+                        cursor: pointer;
+                        list-style: none;
+                        background-color: var(--primary--50);
+
+                        &::-webkit-details-marker {
+                            display: none;
+                        }
+
+                        .planning-info {
+                            display: flex;
+                            align-items: center;
+                            gap: 1rem;
+
+                            .planning-icon-box {
+                                width: 45px;
+                                height: 45px;
+                                background-color: var(--cherry--50);
+                                border-radius: 8px;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                color: var(--cherry--300base);
+                            }
+
+                            .planning-label {
+                                font-family: 'Montserrat', sans-serif;
+                                font-size: 1rem;
+                                color: var(--japanblue--300base);
+                                font-weight: 500;
+                            }
+                        }
+
+                        .chevron-icon {
+                            color: var(--japanblue--300base);
+                            transition: transform 0.3s ease;
+                        }
+                    }
+
+                    .planning-content {
+                        padding: 0 1.5rem 1.5rem 1.5rem;
+                        padding-left: calc(1.5rem + 45px + 1rem);
+                        font-family: 'Montserrat', sans-serif;
+                        font-size: 0.9rem;
+                        color: var(--primary--300);
+                        line-height: 1.6;
+                        border-top: 1px solid transparent;
+                    }
+                }
+            }
+        }
+    }
+}
+/* ------------------ SUPPORT CHANNELS SECTION ---------------------------- */
+.support-section {
+    background-color: var(--japanblue--50);
+    padding: 4rem 5% 4rem 5%;
+    text-align: center;
+
+    .support-header {
+        max-width: 800px;
+        margin: 0 auto 4rem auto;
+
+        .support-title {
+            font-family: 'TrajanaSans', serif;
+            font-size: 2.5rem;
+            color: var(--japanblue--400);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .support-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            color: var(--primary--300);
+        }
+    }
+
+    .support-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+
+        .support-card {
+            background-color: var(--primary--50);
+            border-radius: 24px;
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 10px 30px rgba(83, 137, 214, 0.05);
+            height: 100%;
+
+            &:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 15px 40px rgba(83, 137, 214, 0.15);
+            }
+
+            .support-icon-box {
+                margin-bottom: 1.5rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                .icon-img {
+                    &.icon-blue {
+                        color: var(--japanblue--300base);
+                    }
+
+                    &.icon-red {
+                        color: var(--cherry--300base);
+                    }
+                }
+            }
+
+            .card-title {
+                font-family: 'TrajanaSans', serif;
+                font-size: 1.1rem;
+                color: var(--japanblue--400);
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                margin: .5rem 0;
+                min-height: 2.4rem;
+            }
+
+            .data-highlight {
+                font-family: 'TrajanaSans', sans-serif;
+                font-size: 2.5rem;
+                color: var(--japanblue--500);
+                line-height: 1;
+                margin: .5rem 0;
+
+                &.blue-text {
+                    color: var(--japanblue--300base);
+                }
+
+                &.red-text {
+                    color: var(--cherry--300base);
+                }
+            }
+
+            .card-desc {
+                font-family: 'Montserrat', sans-serif;
+                font-size: 0.95rem;
+                line-height: 1.6;
+                color: var(--primary--300);
+                max-width: 90%;
+            }
+
+            .spacer-block {
+                min-height: 2.8rem;
+                margin-bottom: 1rem;
+                display: flex;
+                align-items: center;
+
+                .support-link {
+                    text-decoration: none;
+                    font-family: 'Montserrat', sans-serif;
+                    font-weight: 700;
+                    font-size: 0.9rem;
+                    color: var(--cherry--300base);
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                    transition: gap 0.3s ease;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 0.5rem;
+
+                    &:hover {
+                        gap: 0.8rem;
+                    }
+                }
+            }
+        }
+    }
+}
+/* ------------------ LOCATION & ACCESS SECTION --------------------------- */
+.location-section {
+    background-color: var(--primary--50);
+    padding: 6rem 5%;
+    border-top: 1px solid var(--japanblue--100);
+
+    .location-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+
+        .location-info-row {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            text-align: left;
+
+            .location-title-block {
+                margin-bottom: 1rem;
+
+                .location-title {
+                    font-family: 'TrajanaSans', serif;
+                    font-size: 2.5rem;
+                    color: var(--japanblue--400);
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                    margin-bottom: 0.5rem;
+                }
+
+                .title-underline {
+                    width: 60px;
+                    height: 3px;
+                    background-color: var(--cherry--300base);
+                }
+            }
+
+            .info-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+                width: 100%;
+
+                .info-item {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.5rem;
+
+                    .info-label {
+                        font-family: 'Montserrat', sans-serif;
+                        font-size: 0.9rem;
+                        color: var(--cherry--300base);
+                        text-transform: uppercase;
+                        font-weight: 700;
+                        letter-spacing: 1px;
+                    }
+
+                    .info-text {
+                        font-family: 'Montserrat', sans-serif;
+                        font-size: 1rem;
+                        line-height: 1.6;
+                        color: var(--primary--400);
+
+                        strong {
+                            color: var(--japanblue--400);
+                        }
+
+                        .note {
+                            font-size: 0.85rem;
+                            color: var(--primary--300);
+                            font-style: italic;
+                        }
+                    }
+                }
+            }
+        }
+
+        .map-full-wrapper {
+            width: 100%;
+            height: 500px;
+            border-radius: 24px;
+            overflow: hidden;
+
+            transition: transform 0.3s ease;
+
+            &:hover {
+                transform: translateY(-5px);
+            }
+        }
+    }
+}
+
+
+
+
+
+/* ------------------ RESPONSIVE / MEDIA QUERIES --------------------------------------------------------------------- */
+
+/* ------------------ TABLET (Max-Width: 1024px) --------------------------- */
+@media (max-width: 1024px) {
+
+    /* --- GLOBAL --- */
+    .section-header .headline .text-blue { font-size: 2rem; }
+    .section-header .headline .text-pink { font-size: 2.5rem; }
+
+    /* --- DISCOVERY SECTION --- */
+    .discovery-section {
+        padding: 4rem 5%;
+        grid-template-columns: 1fr; 
+        gap: 4rem;
+    }
+
+    .discovery-section .collage-wrapper {
+        margin: 0 auto; 
+        width: 100%;
+        max-width: 100%;
+        justify-content: center;
+    }
+
+    /* --- WELCOME SECTION --- */
+    .welcome-section .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* --- HISTORY SECTION --- */
+    .history-section .timeline-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* --- FOOD SECTION --- */
+    .food-section .food-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* --- ADVENTURE SECTION --- */
+    .adventure-section { padding: 4rem 4%; }
+    
+    .adventure-section .adventure-flex-wrapper {
+        flex-direction: column;
+    }
+
+    .adventure-section .adventure-flex-wrapper .large-card-col {
+        height: 500px;
+    }
+
+    /* --- ROUTES SECTION --- */
+    .routes-section .route-card .route-card-top {
+        flex-direction: column;
+        gap: 3rem;
+    }
+    
+    .routes-section .route-card .route-card-top .route-timeline-wrapper {
+        width: 100%;
+        align-items: flex-start;
+    }
+}
+
+/* ------------------ MOBILE (Max-Width: 768px) ---------------------------- */
+@media (max-width: 768px) {
+
+    body { font-size: 15px; }
+    
+    .section-header { margin-bottom: 2.5rem; }
+    
+    .discovery-section, 
+    .welcome-section, 
+    .history-section, 
+    .food-section, 
+    .adventure-section,
+    .discover-destinations,
+    .routes-section,
+    .essentials-section,
+    .contact-planning-section,
+    .location-section {
+        padding: 3rem 5%;
+    }
+
+    /* ------------------ HERO SECTION ------------------ */
+    .hero-section {
+        height: auto;
+        min-height: 100vh;
+        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column-reverse; 
+    }
+
+    .hero-section .hero-left {
+        padding: 3rem 2rem;
+        min-height: 50vh;
+    }
+
+    .hero-section .hero-left .hero-text-content .main-title {
+        font-size: 4.5rem; 
+        letter-spacing: 2px;
+    }
+    
+    .hero-section .hero-left .hero-text-content .subtitle-wrapper .subtitle {
+        font-size: 1.2rem;
+    }
+
+    .hero-section .hero-right {
+        height: 40vh;
+        min-height: 300px;
+    }
+
+    .hero-section .vertical-divider-text {
+        display: none;
+    }
+
+    .hero-section .hero-right .floating-nav,
+    .small-hero .floating-nav {
+        top: auto;
+        bottom: 1rem;
+        right: 50%;
+        transform: translateX(50%);
+        width: 90%;
+        display: flex;
+        justify-content: center;
+        padding: 0.5rem;
+    }
+
+    .hero-section .hero-right .floating-nav ul,
+    .small-hero .floating-nav ul {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .hero-section .hero-right .floating-nav ul li a,
+    .small-hero .floating-nav ul li a {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.75rem;
+    }
+
+    /* ------------------ SMALL HERO ------------------ */
+    .small-hero {
+        height: 50vh;
+        min-height: 400px;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .small-hero .brand-logo { top: 1.5rem; left: 1.5rem; }
+
+    .small-hero .small-hero-content {
+        margin-top: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .small-hero .small-hero-content .small-main-title {
+        font-size: 3.5rem;
+    }
+
+    .small-hero .small-hero-content .subtitle-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* ------------------ DISCOVERY SECTION ------------------ */
+    .discovery-section .collage-wrapper {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .discovery-section .collage-wrapper .collage-col-left,
+    .discovery-section .collage-wrapper .collage-col-right {
+        width: 100%;
+    }
+
+    .discovery-section .collage-wrapper .kanji-tile {
+        width: 60px;
+        height: 60px;
+    }
+
+    .discovery-section .collage-wrapper .kanji-tile .kanji {
+        font-size: 1.8rem;
+    }
+
+    .discovery-section .collage-wrapper .tile-top { top: -15px; left: 0; }
+    .discovery-section .collage-wrapper .tile-bottom { bottom: -15px; right: 0; transform: none; }
+
+    /* ------------------ WELCOME SECTION ------------------ */
+    .welcome-section .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* ------------------ HISTORY SECTION ------------------ */
+    .history-section .timeline-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .parallax-separator {
+        background-attachment: scroll;
+        height: 30vh;
+    }
+
+    /* ------------------ FOOD SECTION ------------------ */
+    .food-section .food-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* ------------------ ADVENTURE SECTION ------------------ */
+    .adventure-section .adventure-flex-wrapper .side-cards-col {
+        flex-direction: column;
+    }
+
+    .adventure-section .adventure-flex-wrapper .side-cards-col .action-card {
+        padding: 2rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+    }
+
+    /* ------------------ DESTINATIONS: BENTO ------------------ */
+    .discover-destinations .bento-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .discover-destinations .bento-grid .bento-card {
+        height: 300px;
+    }
+
+    .discover-destinations .bento-grid .bento-card.span-2,
+    .discover-destinations .bento-grid .bento-card.span-1 {
+        grid-column: span 1;
+    }
+
+    /* ------------------ DESTINATIONS: TREASURES ------------------ */
+    .treasures-section .treasure-card {
+        padding: 4rem 0;
+        min-height: auto; 
+    }
+
+    .treasures-section .treasure-card .card-inner-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        padding: 0 1.5rem;
+    }
+
+    .treasures-section .treasure-card.reverse-layout .treasure-img-col { order: 1; }
+    .treasures-section .treasure-card.reverse-layout .treasure-text-col { order: 2; }
+
+    .treasures-section .treasure-card .treasure-text-col .treasure-watermark {
+        font-size: 4rem;
+        left: 0;
+        top: -2rem;
+    }
+
+    .treasures-section .treasure-card .treasure-text-col .treasure-title {
+        font-size: 3rem;
+    }
+
+    .treasures-section .treasure-card .treasure-img-col .img-offset-wrapper {
+        height: 40vh;
+        max-height: 400px;
+        aspect-ratio: auto;
+    }
+
+    .treasures-section .treasure-card .treasure-text-col .treasure-specs {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    /* ------------------ ROUTES SECTION ------------------ */
+    .routes-section .route-card .route-card-top .route-timeline-wrapper .timeline-steps {
+        overflow-x: auto;
+        padding-bottom: 20px;
+        justify-content: flex-start;
+        gap: 2rem;
+    }
+    
+    .routes-section .route-card .route-card-top .route-timeline-wrapper .timeline-steps .step {
+        min-width: 80px; 
+    }
+
+    .routes-section .route-card .route-card-top .route-timeline-wrapper .timeline-steps .timeline-line {
+        width: 150%; 
+    }
+
+    .routes-section .route-card .route-card-bottom {
+        grid-template-columns: 1fr;
+    }
+
+    .routes-section .route-card .route-card-bottom .moment-text-col {
+        padding: 2rem;
+        order: 2;
+    }
+    
+    .routes-section .route-card .route-card-bottom .moment-img-col {
+        order: 1;
+    }
+
+    .essentials-section .essentials-card {
+        flex-direction: column;
+    }
+
+    .essentials-section .essentials-card .essential-item {
+        padding: 2.5rem;
+    }
+
+    .essentials-section .essentials-card .essential-item.item-left {
+        border-right: none;
+        border-bottom: 1px solid var(--japanblue--200);
+    }
+
+    /* ------------------ CONTACT PAGE ------------------ */
+    .contact-planning-section .contact-grid-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-planning-section .contact-grid-wrapper .cp-card {
+        padding: 2rem;
+    }
+    
+    .contact-planning-section .contact-grid-wrapper .cp-card .cp-form .form-row {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .support-section .support-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .location-section .location-container .location-info-row .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .location-section .location-container .map-full-wrapper {
+        height: 350px;
+    }
+
+    /* ------------------ FOOTER ------------------ */
+    .site-footer {
+        padding: 4rem 5% 2rem 5%;
+    }
+
+    .site-footer .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+    
+    .site-footer .footer-bottom {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+}

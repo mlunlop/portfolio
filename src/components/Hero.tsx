@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Copy, Check, ArrowDown, Database, Cpu, ShieldCheck, Layers, Gamepad2 } from 'lucide-react';
+import { Copy, Check, ArrowDown, Database, Cpu, ShieldCheck, Layers } from 'lucide-react';
 import { PORTFOLIO_DATA } from '../data/portfolioData';
 import { copyToClipboard } from '../utils/feedback';
 import { GithubIcon, LinkedinIcon, KaggleIcon } from './Icons';
@@ -54,8 +54,8 @@ export function Hero() {
               <strong className="text-zinc-100 font-semibold">ETL, limpieza rigurosa, validación estadística y particionamiento</strong>{' '}
               para alimentar modelos de Machine Learning. Con base sólida en desarrollo frontend de producción ({' '}
               <span className="text-orange-400 font-medium">Babel</span>), especialización en{' '}
-              <span className="text-orange-400 font-medium">Sistemas Linux y Nginx</span>, y apasionado por el{' '}
-              <strong className="text-zinc-100 font-semibold">desarrollo de videojuegos indie con Godot</strong>.
+              <span className="text-orange-400 font-medium">Sistemas Linux y Nginx</span>, y aficionado con el{' '}
+              desarrollo de videojuegos indie (Godot).
             </p>
 
             {/* Tactile Stickers/Badges (Inspiración Ref. 4) */}
@@ -67,10 +67,6 @@ export function Hero() {
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 font-mono text-xs font-medium transform rotate-1 hover:rotate-0 transition-transform">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
                 LINUX & NGINX SYS
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-purple-500/10 border border-purple-500/30 text-purple-300 font-mono text-xs font-medium transform -rotate-1 hover:rotate-0 transition-transform">
-                <Gamepad2 className="w-3.5 h-3.5 text-purple-400" />
-                GODOT & INDIE DEV
               </span>
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-zinc-800 border border-zinc-700 text-zinc-200 font-mono text-xs font-medium transform rotate-1 hover:rotate-0 transition-transform">
                 <Cpu className="w-3.5 h-3.5 text-zinc-400" />

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONTACT | VORTEX BMX</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="assets/img/icon.ico">
+    <link rel="stylesheet" href="assets/css/animations.css">
+</head>
+
+<body>
+    <!--NAV-->
+    <header>
+        <div class="logo">
+            <a href="index.html"><img src="assets/img/logo.png"></a>
+        </div>
+
+        <nav class="desktop-nav">
+            <ul>
+                <li><a href="index.html">HOME</a></li><span>/</span>
+                <li><a href="disciplines.html">DISCIPLINES</a></li><span>/</span>
+                <li><a href="events.html">EVENTS</a></li><span>/</span>
+                <li><a class="selected" href="contact.html">CONTACT</a></li>
+            </ul>
+        </nav>
+
+        <div id="nav-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <div id="menu-on" class="menu_mobile">
+        <ul class="menu_mobile_nav">
+            <li class="item"><a href="index.html" data-replace="HOME"><span>HOME</span></a></li>
+            <li class="item"><a href="disciplines.html" data-replace="DISCIPLINES"><span>DISCIPLINES</span></a></li>
+            <li class="item"><a href="events.html" data-replace="EVENTS"><span>EVENTS</span></a></li>
+            <li class="item"><a href="contact.html" data-replace="CONTACT"><span>CONTACT</span></a></li>
+        </ul>
+
+        <div class="menu-bottom-logo">
+            <img src="assets/img/logo.png" alt="Vortex Logo">
+        </div>
+    </div>
+
+
+    <!--CONTENT-->
+    <main>
+        <!--SCROLL-->
+        <div id="scroll-progress" class="scroll-progress-bar"></div>
+        <!--HERO-->
+        <section class="hero contact">
+            <div class="hero-title">
+                <h1>
+                    <span>contact</span>
+                    <span>us</span>
+                </h1>
+            </div>
+        </section>
+
+        <!--CONTACT-FORM-->
+        <section class="contact-form">
+
+            <div class="contact-title">
+
+                <div class="title-row">
+                    <h1>INITIATE <span>CONTACT</span></h1>
+
+                    <div class="contact-line">
+                        <svg width="100%" height="15" viewBox="0 0 800 15" preserveAspectRatio="xMinYMid slice"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <pattern id="patron" x="150" y="0" width="35" height="15" patternUnits="userSpaceOnUse">
+                                    <path d="M14 0H0L22 15H36L14 0Z" fill="#FF4500" stroke="#FF4500" stroke-width="2" />
+                                </pattern>
+                            </defs>
+                            <g>
+                                <polygon points="0,0 150,0 172,15 0,15" fill="#FF4500" />
+
+                                <polygon points="150,0 5000,0 5000,15 172,15" fill="url(#patron)" />
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+
+                <p class="contact-intro-text">
+                    The streets are talking. Whether you have coordinates for a new secret spot, footage that needs to
+                    be seen, or just want to join the ranks—the channel is open. Don't ride alone.
+                </p>
+            </div>
+
+
+            <div class="contact-form-box">
+                <div class="form-header">
+                    <h2>DROP US A LINE</h2>
+                    <span class="form-subtitle">// CONTACT_FORM_READY</span>
+                    <div class="form-divider"></div>
+                </div>
+
+                <form class="main-form">
+                    <div class="form-group inline">
+                        <label for="name">> FULL_NAME:</label>
+                        <input type="text" id="name" placeholder="[ ENTER YOUR NAME ]">
+                    </div>
+                    <div class="form-group inline">
+                        <label for="email">> EMAIL:</label>
+                        <input type="email" id="email" placeholder="[ ENTER YOUR EMAIL ]">
+                    </div>
+
+                    <div class="form-group inline">
+                        <label for="subject">> INQUIRY_SUBJECT:</label>
+                        <div class="select-wrapper">
+                            <select id="subject" name="subject">
+                                <option value="question">> ASK A QUESTION</option>
+                                <option value="content">> PROPOSE CONTENT</option>
+                                <option value="collab">> REQUEST COLLABORATION</option>
+                                <option value="other">> OTHER_INQUIRY</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group vertical">
+                        <label for="message">> MESSAGE_TEXT:</label>
+                        <textarea id="message" rows="5" placeholder="// TYPE YOUR MESSAGE HERE..."></textarea>
+                    </div>
+
+                    <div class="form-footer">
+                        <button type="submit">[ SEND_MESSAGE ]</button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="contact-info-grid">
+
+                <div class="info-item">
+                    <h3>// HQ_LOCATION</h3>
+                    <p>SECTOR 22@ // THE FACTORY<br>BARCELONA, ES 08005</p>
+                </div>
+
+                <div class="info-item">
+                    <h3>// DIRECT_UPLINK</h3>
+                    <p>INFO@BMXVORTEX.COM<br>+34 93 123 45 67</p>
+                </div>
+
+                <div class="info-item">
+                    <h3>// PRESS_ACCESS</h3>
+                    <p>MEDIA@BMXVORTEX.COM</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!--MAP-->
+        <section class="map">
+        </section>
+
+
+    </main>
+
+
+    <!--FOOTER-->
+    <footer>
+
+        <div class="footer-title">
+            <img src="assets/img/ISOLOGO.png" alt="Logo">
+            <h1>BMX VORTEX</h1>
+        </div>
+
+        <div class="footer-container">
+
+            <div class="footer-col">
+                <h3>FOLLOW_US</h3>
+                <div class="social-media">
+                    <img src="assets/img/FOOTER/social-media/insta.svg" alt="Instagram">
+                    <img src="assets/img/FOOTER/social-media/x.svg" alt="X">
+                    <img src="assets/img/FOOTER/social-media/yt.svg" alt="YouTube">
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h3>COORDINATES</h3>
+                <p>SECTOR 07 [INDUSTRIAL DIST]</p>
+                <p>BARCELONA, SP 08000</p>
+            </div>
+
+            <div class="footer-col">
+                <h3>STAY_TUNNED</h3>
+                <div class="newsletter-input">
+                    <input type="text" placeholder="ENTER EMAIL..." />
+                    <button>SEND</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="nav-container">
+            <img src="assets/img/FOOTER/up-nav.svg" class="nav-img" alt="decoracion">
+            <nav class="nav-links">
+                <a href="index.html">HOME</a>
+                <a href="disciplines.html">DISCIPLINES</a>
+                <a href="events.html">EVENTS</a>
+                <a href="contact.html">CONTACT</a>
+            </nav>
+            <img src="assets/img/FOOTER/down-nav.svg" class="nav-img" alt="decoracion">
+        </div>
+
+        <div class="subfooter">
+            <p>© 2025 VORTEX BMX. ALL RIGHTS RESERVED. SYSTEM_STATUS: ● XAGO</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/burguer.js"></script>
+    <script src="assets/js/scroll.js"></script>
+</body>
+
+</html>

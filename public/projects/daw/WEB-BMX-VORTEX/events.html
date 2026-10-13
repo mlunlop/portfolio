@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVENTS | VORTEX BMX</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="assets/img/icon.ico">
+    <link rel="stylesheet" href="assets/css/animations.css">
+</head>
+
+<body>
+    <!--SCROLL-->
+    <div id="scroll-progress" class="scroll-progress-bar"></div>
+    <!--NAV-->
+    <header>
+        <div class="logo">
+            <a href="index.html"><img src="assets/img/logo.png"></a>
+        </div>
+
+        <nav class="desktop-nav">
+            <ul>
+                <li><a href="index.html">HOME</a></li><span>/</span>
+                <li><a href="disciplines.html">DISCIPLINES</a></li><span>/</span>
+                <li><a class="selected" href="events.html">EVENTS</a></li><span>/</span>
+                <li><a href="contact.html">CONTACT</a></li>
+            </ul>
+        </nav>
+
+        <div id="nav-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <div id="menu-on" class="menu_mobile">
+        <ul class="menu_mobile_nav">
+            <li class="item"><a href="index.html" data-replace="HOME"><span>HOME</span></a></li>
+            <li class="item"><a href="disciplines.html" data-replace="DISCIPLINES"><span>DISCIPLINES</span></a></li>
+            <li class="item"><a href="events.html" data-replace="EVENTS"><span>EVENTS</span></a></li>
+            <li class="item"><a href="contact.html" data-replace="CONTACT"><span>CONTACT</span></a></li>
+        </ul>
+
+        <div class="menu-bottom-logo">
+            <img src="assets/img/logo.png" alt="Vortex Logo">
+        </div>
+    </div>
+
+
+    <!--CONTENT-->
+    <main>
+        <!--HERO-->
+        <section class="hero events">
+            <div class="hero-title">
+                <h1>
+                    Eve<span>nts</span>
+                </h1>
+            </div>
+        </section>
+
+        <!--UPCOMING EVENTS-->
+        <section class="upcoming">
+            <div class="upcoming-top">
+                <h1>UPCOMING</h1>
+
+                <div class="upcoming-line">
+                    <svg width="100%" height="15" viewBox="0 0 800 15" preserveAspectRatio="xMinYMid slice"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <pattern id="patron" x="150" y="0" width="35" height="15" patternUnits="userSpaceOnUse">
+                                <path d="M14 0H0L22 15H36L14 0Z" fill="#FF4500" stroke="#FF4500" stroke-width="2" />
+                            </pattern>
+                        </defs>
+                        <g>
+                            <polygon points="0,0 150,0 172,15 0,15" fill="#FF4500" />
+
+                            <polygon points="150,0 5000,0 5000,15 172,15" fill="url(#patron)" />
+                        </g>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="upcoming-bottom">
+                <p>
+                    The global stage is set. From concrete jungles to massive dirt arenas, these are the proving
+                    grounds where reputation is earned and legends are forged in real-time.
+                </p>
+                <h1>EVENTS</h1>
+            </div>
+
+            <div class="upcoming-grid-container">
+
+                <div class="upcoming-card card-1">
+                    <div class="upcoming-card-text">
+                        <span class="date">[ JUNE 28-30, 2025 ]</span>
+                        <h3>X GAMES VENTURA</h3>
+                        <ul>
+                            <li>LOCATION :: CALIFORNIA</li>
+                            <li>TYPE :: INVITATIONAL</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="upcoming-card card-2">
+                    <div class="upcoming-card-text">
+                        <span class="date">[ MAY 08-12, 2025 ]</span>
+                        <h3>FISE WORLD SERIES</h3>
+                        <ul>
+                            <li>LOCATION :: MONTPELLIER</li>
+                            <li>TYPE :: OPEN QUALIFIER</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="upcoming-card card-3">
+                    <div class="upcoming-card-text">
+                        <span class="date">[ NOV 14-18, 2025 ]</span>
+                        <h3>UCI URBAN WORLDS</h3>
+                        <ul>
+                            <li>LOCATION :: ABU DHABI</li>
+                            <li>TYPE :: CHAMPIONSHIP</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!--OLYMPIC HISTORY-->
+        <section class="olympic">
+            <div class="olympic-grid">
+                <div class="olympic-left-col">
+                    <div class="olympic-title">
+                        <h1>
+                            <span>olympic</span>
+                            <span>history</span>
+                        </h1>
+                    </div>
+                    <div class="olympic-rings">
+                        <svg width="342" height="158" viewBox="0 0 342 158" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M54 103.25c27.2 0 49.25-22.05 49.25-49.25S81.2 4.75 54 4.75 4.75 26.8 4.75 54 26.8 103.25 54 103.25Zm117 0c27.2 0 49.25-22.05 49.25-49.25S198.2 4.75 171 4.75 121.75 26.8 121.75 54s22.05 49.25 49.25 49.25Zm117 0c27.2 0 49.25-22.05 49.25-49.25S315.2 4.75 288 4.75 238.75 26.8 238.75 54s22.05 49.25 49.25 49.25Z"
+                                stroke="#fff" stroke-width="11" />
+                            <path
+                                d="M112.5 153.25c27.2 0 49.25-22.05 49.25-49.25S139.7 54.75 112.5 54.75 63.25 76.8 63.25 104s22.05 49.25 49.25 49.25Zm117 0c27.2 0 49.25-22.05 49.25-49.25S256.7 54.75 229.5 54.75 180.25 76.8 180.25 104s22.05 49.25 49.25 49.25Z"
+                                stroke="#ff4500" stroke-width="11" />
+                            <path
+                                d="M93.4 24.45a49.25 49.25 0 0 1 0 59.1m117-59.1a49.25 49.25 0 0 1 0 59.1m-39.4 19.7a49.25 49.25 0 0 1-29.55-9.85M288 103.25a49.25 49.25 0 0 1-29.55-9.85"
+                                stroke="#fff" stroke-width="11" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="olympic-right-col">
+                    <div class="olympic-line">
+                        <svg width="100%" height="15" viewBox="0 0 800 15" preserveAspectRatio="xMinYMid slice"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <pattern id="patron" x="150" y="0" width="35" height="15" patternUnits="userSpaceOnUse">
+                                    <path d="M14 0H0L22 15H36L14 0Z" fill="#FF4500" stroke="#FF4500" stroke-width="2" />
+                                </pattern>
+                            </defs>
+                            <g>
+                                <polygon points="0,0 150,0 172,15 0,15" fill="#FF4500" />
+
+                                <polygon points="150,0 5000,0 5000,15 172,15" fill="url(#patron)" />
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="olympic-text">
+                        From the dirt tracks of California to the
+                        global spotlight. Since its Racing debut in
+                        2008 and Freestyle expansion in 2020, BMX has
+                        cemented its status as one of the most
+                        electrifying events in Olympic history,
+                        crowning a new generation of legends.
+                    </div>
+                </div>
+            </div>
+
+            <div class="olympic-container">
+                <!--BEIJING 2008-->
+                <div class="olympic-card">
+                    <div class="card-header">
+                        <span class="olympic-year">2008</span>
+                        <span class="olympic-location">BEIJING, CHN</span>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="result-block">
+                            <span class="category-badge">RACE</span>
+                            <ul>
+                                <li>M: M. STROMBERGS (LAT)</li>
+                                <li>W: A. CHAUSSON (FRA)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!--LONDON 2012-->
+                <div class="olympic-card">
+                    <div class="card-header">
+                        <span class="olympic-year">2012</span>
+                        <span class="olympic-location">LONDON, GBR</span>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="result-block">
+                            <span class="category-badge">RACE</span>
+                            <ul>
+                                <li>M: M. STROMBERGS (LAT)</li>
+                                <li>W: M. PAJON (COL)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!--BRASIL 2016-->
+                <div class="olympic-card">
+                    <div class="card-header">
+                        <span class="olympic-year">2016</span>
+                        <span class="olympic-location">RIO, BRA</span>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="result-block">
+                            <span class="category-badge">RACE</span>
+                            <ul>
+                                <li>M: C. FIELDS (USA)</li>
+                                <li>W: M. PAJON (COL)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!--TOKYO 2020-->
+                <div class="olympic-card">
+                    <div class="card-header">
+                        <span class="olympic-year">2020</span>
+                        <span class="olympic-location">TOKYO, JPN</span>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="result-block">
+                            <span class="category-badge">RACE</span>
+                            <ul>
+                                <li>M: N. KIMMANN (NED)</li>
+                                <li>W: B. SHRIEVER (GBR)</li>
+                            </ul>
+                        </div>
+
+                        <div class="result-block">
+                            <span class="category-badge">FREESTYLE</span>
+                            <ul>
+                                <li>M: L. MARTIN (AUS)</li>
+                                <li>W: C. WORTHINGTON (GBR)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!--PARIS 2024-->
+                <div class="olympic-card">
+                    <div class="card-header">
+                        <span class="olympic-year">2024</span>
+                        <span class="olympic-location">PARIS, FRA</span>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="result-block">
+                            <span class="category-badge">RACE</span>
+                            <ul>
+                                <li>M: J.DAUDET (ARG)</li>
+                                <li>W: S. SAKAKIBARA (AUS)</li>
+                            </ul>
+                        </div>
+
+                        <div class="result-block">
+                            <span class="category-badge">FREESTYLE</span>
+                            <ul>
+                                <li>M: J. TORRES (ARG)</li>
+                                <li>W: D. YAWEN (CHN)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="olympics-medals">
+                <div class="olympics-medals-title">
+                    <h1>most <span>MEDALS</span></h1>
+
+                    <svg width="100%" height="15" viewBox="0 0 800 15" preserveAspectRatio="xMinYMid slice"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <pattern id="patron" x="150" y="0" width="35" height="15" patternUnits="userSpaceOnUse">
+                                <path d="M14 0H0L22 15H36L14 0Z" fill="#FF4500" stroke="#FF4500" stroke-width="2" />
+                            </pattern>
+                        </defs>
+                        <g>
+                            <polygon points="0,0 150,0 172,15 0,15" fill="#FF4500" />
+
+                            <polygon points="150,0 5000,0 5000,15 172,15" fill="url(#patron)" />
+                        </g>
+                    </svg>
+                </div>
+
+                <div class="olympics-medals-text">
+                    The absolute elite. A tribute to the kings and queens of the track who have etched their names into
+                    history with multiple Olympic victories.
+                </div>
+
+                <div class="olympics-medals-grid">
+
+                    <div class="medal-card medals-1">
+                        <div class="medal-img"></div>
+
+                        <div class="medal-info">
+                            <div class="athlete-name">
+                                <span>MARIANA</span>
+                                PAJÓN
+                            </div>
+                            <div class="athlete-country">COLOMBIA</div>
+
+                            <ul class="medal-count">
+                                <li class="gold">
+                                    <svg class="medal-icon" viewBox="0 0 24 24" width="20" height="20">
+                                        <circle cx="12" cy="12" r="10" fill="currentColor" />
+                                    </svg>
+                                    2 GOLD
+                                </li>
+                                <li class="silver">
+                                    <svg class="medal-icon" viewBox="0 0 24 24" width="20" height="20">
+                                        <circle cx="12" cy="12" r="10" fill="currentColor" />
+                                    </svg>
+                                    1 SILVER
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="medal-card medals-2">
+                        <div class="medal-img"></div>
+
+                        <div class="medal-info">
+                            <div class="athlete-name">
+                                <span>MARIS</span>
+                                STROMBERGS
+                            </div>
+                            <div class="athlete-country">LATVIA</div>
+
+                            <ul class="medal-count">
+                                <li class="gold">
+                                    <svg class="medal-icon" viewBox="0 0 24 24" width="20" height="20">
+                                        <circle cx="12" cy="12" r="10" fill="currentColor" />
+                                    </svg>
+                                    2 GOLD
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="medal-card medals-3">
+                        <div class="medal-img"></div>
+
+                        <div class="medal-info">
+                            <div class="athlete-name">
+                                <span>JOSÉ</span>
+                                TORRES
+                            </div>
+                            <div class="athlete-country">ARGENTINA</div>
+
+                            <ul class="medal-count">
+                                <li class="gold">
+                                    <svg class="medal-icon" viewBox="0 0 24 24" width="20" height="20">
+                                        <circle cx="12" cy="12" r="10" fill="currentColor" />
+                                    </svg>
+                                    1 GOLD <span class="free-badge">(FREE)</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!--ELITE UNIT-->
+        <section class="elite-section">
+            <div class="elite-grid">
+
+                <div class="elite-left-col">
+                    <h1>ELITE <span>UNIT</span></h1>
+                </div>
+
+                <div class="elite-right-col">
+                    <div class="elite-line">
+                        <svg width="100%" height="15" viewBox="0 0 800 15" preserveAspectRatio="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <pattern id="patron-elite" x="0" y="0" width="35" height="15"
+                                    patternUnits="userSpaceOnUse">
+                                    <path d="M14 0H0L22 15H36L14 0Z" fill="#FF4500" />
+                                </pattern>
+                            </defs>
+                            <g>
+                                <polygon points="0,0 100,0 122,15 0,15" fill="#FF4500" />
+                                <rect x="110" y="0" width="100%" height="15" fill="url(#patron-elite)" />
+                            </g>
+                        </svg>
+                    </div>
+
+                    <p class="elite-text">
+                        Meet the architects of the impossible. From the raw concrete of the streets to the high-speed
+                        intensity of the Olympic track, this elite squad represents the absolute pinnacle of human
+                        performance on two wheels.
+                    </p>
+                </div>
+
+            </div>
+            <div class="elite-cards-grid">
+
+                <div class="rider-card">
+                    <div class="rider-photo">
+                        <img src="assets/img/3-EVENTS/garret.png" alt="Garrett Reynolds">
+                    </div>
+
+                    <div class="rider-content">
+                        <div class="tech-header">
+                            <span class="specialty">// SPECIALTY :: STREET</span>
+                            <span class="nickname">TECHNICIAN</span>
+                        </div>
+
+                        <h3>GARRETT<br>REYNOLDS</h3>
+
+                        <ul class="rider-stats">
+                            <li>RANK: WORLD #1</li>
+                            <li>ORIGIN: USA</li>
+                            <li>REC. WIN: SIMPLE SESSION 24</li>
+                        </ul>
+
+                        <div class="rider-socials">
+                            <a href="#">
+                                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                </svg>
+                            </a>
+                            <a href="#">
+                                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M4 4l11.733 16h4.267l-11.733 -16z"></path>
+                                    <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"></path>
+                                </svg>
+                            </a>
+                            <a href="#">
+                                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path
+                                        d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z">
+                                    </path>
+                                    <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="secondary-btn">VIEW FULL PROFILE</div>
+                </div>
+
+                <div class="rider-card">
+                    <div class="rider-photo">
+                        <img src="assets/img/3-EVENTS/kevin.png" alt="Kevin Peraza">
+                    </div>
+                    <div class="rider-content">
+                        <div class="tech-header">
+                            <span class="specialty">// SPECIALTY :: PARK</span>
+                            <span class="nickname">HYBRID</span>
+                        </div>
+                        <h3>KEVIN<br>PERAZA</h3>
+                        <ul class="rider-stats">
+                            <li>RANK: TOP 3</li>
+                            <li>ORIGIN: MEXICO / USA</li>
+                            <li>REC. WIN: X GAMES GOLD</li>
+                        </ul>
+                        <div class="rider-socials">
+                            <a href="#">
+                                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                </svg>
+                            </a>
+                            <a href="#">
+                                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M4 4l11.733 16h4.267l-11.733 -16z"></path>
+                                    <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"></path>
+                                </svg>
+                            </a>
+                            <a href="#">
+                                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path
+                                        d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z">
+                                    </path>
+                                    <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="secondary-btn">VIEW FULL PROFILE</div>
+                </div>
+
+                <div class="rider-card">
+                    <div class="rider-photo">
+                        <img src="assets/img/3-EVENTS/beth.png" alt="Beth Shriever">
+                    </div>
+                    <div class="rider-content">
+                        <div class="tech-header">
+                            <span class="specialty">// SPECIALTY :: RACE</span>
+                            <span class="nickname">VELOCITY</span>
+                        </div>
+                        <h3>BETH<br>SHRIEVER</h3>
+                        <ul class="rider-stats">
+                            <li>RANK: OLYMPIC CHAMP</li>
+                            <li>ORIGIN: UK</li>
+                            <li>REC. WIN: UCI WORLD CUP</li>
+                        </ul>
+                        <div class="rider-socials">
+                            <a href="#">
+                                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                </svg>
+                            </a>
+                            <a href="#">
+                                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M4 4l11.733 16h4.267l-11.733 -16z"></path>
+                                    <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"></path>
+                                </svg>
+                            </a>
+                            <a href="#">
+                                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path
+                                        d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z">
+                                    </path>
+                                    <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="secondary-btn">VIEW FULL PROFILE</div>
+                </div>
+
+                <div class="rider-card">
+                    <div class="rider-photo">
+                        <img src="assets/img/3-EVENTS/brandon.png" alt="Brandon Semenuk">
+                    </div>
+                    <div class="rider-content">
+                        <div class="tech-header">
+                            <span class="specialty">// SPECIALTY :: DIRT</span>
+                            <span class="nickname">LEGEND</span>
+                        </div>
+                        <h3>BRANDON<br>SEMENUK</h3>
+                        <ul class="rider-stats">
+                            <li>RANK: UNDEFEATED</li>
+                            <li>ORIGIN: CANADA</li>
+                            <li>REC. WIN: RAMPAGE</li>
+                        </ul>
+                        <div class="rider-socials">
+                            <a href="#">
+                                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                </svg>
+                            </a>
+                            <a href="#">
+                                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M4 4l11.733 16h4.267l-11.733 -16z"></path>
+                                    <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"></path>
+                                </svg>
+                            </a>
+                            <a href="#">
+                                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path
+                                        d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z">
+                                    </path>
+                                    <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="secondary-btn">VIEW FULL PROFILE</div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <!--FOOTER-->
+    <footer>
+
+        <div class="footer-title">
+            <img src="assets/img/ISOLOGO.png" alt="Logo">
+            <h1>BMX VORTEX</h1>
+        </div>
+
+        <div class="footer-container">
+
+            <div class="footer-col">
+                <h3>FOLLOW_US</h3>
+                <div class="social-media">
+                    <img src="assets/img/FOOTER/social-media/insta.svg" alt="Instagram">
+                    <img src="assets/img/FOOTER/social-media/x.svg" alt="X">
+                    <img src="assets/img/FOOTER/social-media/yt.svg" alt="YouTube">
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h3>COORDINATES</h3>
+                <p>SECTOR 07 [INDUSTRIAL DIST]</p>
+                <p>BARCELONA, SP 08000</p>
+            </div>
+
+            <div class="footer-col">
+                <h3>STAY_TUNNED</h3>
+                <div class="newsletter-input">
+                    <input type="text" placeholder="ENTER EMAIL..." />
+                    <button>SEND</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="nav-container">
+            <img src="assets/img/FOOTER/up-nav.svg" class="nav-img" alt="decoracion">
+            <nav class="nav-links">
+                <a href="index.html">HOME</a>
+                <a href="disciplines.html">DISCIPLINES</a>
+                <a href="events.html">EVENTS</a>
+                <a href="contact.html">CONTACT</a>
+            </nav>
+            <img src="assets/img/FOOTER/down-nav.svg" class="nav-img" alt="decoracion">
+        </div>
+
+        <div class="subfooter">
+            <p>© 2025 VORTEX BMX. ALL RIGHTS RESERVED. SYSTEM_STATUS: ● XAGO</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/burguer.js"></script>
+    <script src="assets/js/scroll.js"></script>
+</body>
+
+</html>

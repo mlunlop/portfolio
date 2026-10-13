@@ -1,0 +1,1768 @@
+@font-face {
+    font-family: 'NessynSentry';
+    src: url('assets/fonts/NessynSentry/NessynSentry.ttf'),
+        url('assets/fonts/NessynSentry/NessynSentry.woff'),
+        url('assets/fonts/NessynSentry/NessynSentry.woff2');
+}
+
+@font-face {
+    font-family: 'BDSans';
+    src: url('assets/fonts/BDSans/BDSans.otf'),
+        url('assets/fonts/BDSans/BDSans.woff'),
+        url('assets/fonts/BDSans/BDSans.woff'),
+        url('assets/fonts/BDSans/BDSans-Bold.otf'),
+        url('assets/fonts/BDSans/BDSans-Bold.woff'),
+        url('assets/fonts/BDSans/BDSans-Bold.woff2');
+}
+
+@font-face {
+    font-family: 'ElmsSans';
+    src: url('assets/fonts/ElmsSans/ElmsSans.ttf'),
+        url('assets/fonts/ElmsSans/ElmsSans.woff'),
+        url('assets/fonts/ElmsSans/ElmsSans.woff2');
+}
+
+
+:root {
+    --color-100: #DFDED4;
+    --color-75: #B0AFA7;
+    --color-50: #80807A;
+    --color-25: #353532;
+    --color-0: #000000;
+
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0 5rem 0 5rem;
+    font-family: "ElmsSans";
+    background-color: var(--color-0);
+    color: var(--color-100);
+    font-size: clamp(1.125rem, 1.5vw + 0.8rem, 2.5rem);
+}
+
+
+.submit-btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    background: transparent;
+    border: 1px solid var(--color-100);
+    color: var(--color-100);
+
+    padding: 1rem 4rem;
+    font-size: clamp(1.25rem, 0.25vw + 1.15rem, 1.5rem);
+    text-transform: uppercase;
+    font-family: 'BDSans';
+
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+
+    transition: all 0.4s ease;
+}
+
+
+.submit-btn.btn-inverted {
+    background-color: var(--color-0); 
+    border: 1px solid var(--color-0); 
+    color: var(--color-100);         
+}
+
+
+#nav-icon,
+.menu_mobile {
+    display: none;
+}
+
+
+
+/*------------- NAV ----------------------------------------------------------*/
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+
+    nav ul {
+        color: var(--color-100);
+        text-decoration: none;
+        list-style-type: none;
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+
+        li a {
+            color: var(--color-100);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-family: BDSans;
+            font-size: clamp(1rem, 0.5vw + 0.8rem, 1.5rem);
+        }
+
+        .selected {
+            text-decoration: underline;
+            font-weight: 600;
+        }
+    }
+
+}
+
+/*------------- HERO ---------------------------------------------------------*/
+.hero {
+    height: 90vh;
+    text-align: center;
+    padding: 2rem 0 0 0;
+    position: relative;
+
+    h1 {
+        font-family: NessynSentry;
+        font-size: clamp(4rem, 9vw + 1rem, 13rem);
+        font-weight: 100;
+    }
+
+    h2 {
+        font-family: NessynSentry;
+        font-size: clamp(2rem, 2vw + 1.5rem, 4rem);
+        font-weight: 100;
+    }
+
+    h3 {
+        font-weight: 0;
+        font-size: clamp(1.25rem, 1vw + 1rem, 2rem);
+        font-weight: 200;
+    }
+
+    /*INDEX HERO BG*/
+    .index-hero-bg {
+        background-image: url(assets/img/1-HOME/home-bg.webp);
+        background-size: cover;
+        background-position: center center;
+        height: 50vh;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+
+    }
+
+    /*TEAM HERO BG*/
+    .team-hero-bg {
+        background-image: url(assets/img/2-TEAM/team-bg.webp);
+        background-size: cover;
+        background-position: bottom center;
+        height: 50vh;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+
+    }
+
+    /*MENU HERO BG*/
+    .menu-hero-bg {
+        background-image: url(assets/img/3-MENU/menu-bg.webp);
+        background-size: cover;
+        background-position: center center;
+        height: 50vh;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+
+    }
+
+    /*CONTACT HERO BG*/
+    .contact-hero-bg {
+        background-image: url(assets/img/4-CONTACT/hero-bg.webp);
+        background-size: cover;
+        background-position: bottom center;
+        height: 50vh;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+
+    }
+}
+
+/*------------- FOOTER -------------------------------------------------------*/
+footer {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    .footer-title {
+        font-family: NessynSentry;
+        font-size: clamp(3rem, 3vw + 2rem, 6rem);
+        line-height: 1;
+    }
+
+    .footer-subtitle {
+        font-family: BDSans;
+        font-size: clamp(1.5rem, 1vw + 1rem, 2.25rem);
+        text-transform: uppercase;
+        line-height: 0.5;
+        margin-bottom: 2rem;
+    }
+
+    .footer-social-media {
+        display: flex;
+        gap: 3rem;
+        justify-content: center;
+
+        img {
+            height: 2rem;
+            cursor: pointer;
+        }
+    }
+
+
+    .footer-nav ul {
+        list-style-type: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6rem;
+
+        li a {
+            text-decoration: none;
+            color: var(--color-100);
+        }
+    }
+
+    .divider {
+        background-color: var(--color-100);
+        width: 90%;
+        height: 1px;
+        margin: 2rem auto;
+        flex-shrink: 0;
+    }
+
+    .footer-container {
+        width: 90%;
+        margin: 0 auto;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+
+        .newsletter {
+            flex: 1;
+
+            p {
+                text-transform: uppercase;
+                text-align: left;
+                margin-bottom: 0.5rem;
+            }
+
+            .newsletter-input {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-bottom: 1px solid var(--color-100);
+                width: 50%;
+                padding-bottom: 0.5rem;
+                margin-top: 1rem;
+
+                input {
+                    width: 100%;
+                    font-size: clamp(1rem, 0.5vw + 0.8rem, 1.2rem);
+                    background-color: transparent;
+                    color: var(--color-100);
+                    font-family: 'ElmsSans', sans-serif;
+                    border: none;
+
+                    &:focus {
+                        outline: none;
+                    }
+
+                    &::placeholder {
+                        color: var(--color-100);
+                        font-family: 'ElmsSans', sans-serif;
+                        font-size: clamp(1rem, 0.5vw + 0.8rem, 1.5rem);
+                        opacity: 0.5;
+                        letter-spacing: 1px;
+                    }
+                }
+
+                img {
+                    height: 1.5rem;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .awards {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 2rem;
+
+        }
+    }
+
+    .sub-footer {
+        margin: 3rem 0 1rem 0;
+        font-size: clamp(1rem, 0.5vw + 0.8rem, 1.5rem);
+        text-transform: uppercase;
+        text-align: left;
+
+        a {
+            color: var(--color-100);
+        }
+
+    }
+}
+
+
+
+
+
+/*------------- 1. HOME PAGE: -----------------------------------------------------------------------------------------------*/
+/*------------- 1.1 STORY -----------------------------------------------------*/
+.story {
+    height: auto;
+    position: relative;
+    padding: 2.5rem 0 0 0;
+
+    .story-header {
+        display: flex;
+        gap: 3rem;
+
+        .story-header-left {
+
+            flex: 1;
+            width: 50%;
+            background-size: cover;
+            background-image: url(assets/img/1-HOME/our-story.png);
+        }
+
+        .story-header-right {
+            flex: 1;
+
+            .story-title {
+                display: flex;
+                flex-direction: column;
+                font-family: 'NessynSentry', serif;
+                font-size: clamp(4rem, 6vw + 2rem, 10rem);
+                line-height: 0.8;
+                color: var(--color-100);
+                text-transform: uppercase;
+                font-weight: 200;
+            }
+
+            .story-title span:nth-child(2) {
+                margin-left: 4rem;
+            }
+        }
+    }
+
+    .quote-container {
+        display: flex;
+        flex-direction: column;
+        width: fit-content;
+        margin: 5rem auto 5rem auto;
+
+        .quote-text {
+            font-family: 'BDSans', sans-serif;
+            font-size: clamp(1.5rem, 1vw + 1rem, 2.5rem);
+            line-height: 1.2;
+            margin: 0;
+            color: var(--color-100);
+            text-align: left;
+        }
+
+        .quote-author {
+            font-size: clamp(1rem, 0.5vw + 0.8rem, 1.5rem);
+            text-transform: uppercase;
+            color: var(--color-100);
+            margin-top: 1rem;
+
+            align-self: flex-end;
+        }
+    }
+
+    .story-text {
+        background-color: var(--color-100);
+        color: var(--color-0);
+        display: flex;
+        padding: 4rem;
+        gap: 10rem;
+
+
+    }
+
+    .story-img {
+        width: 100%;
+        height: 50vh;
+        background-image: url(assets/img/1-HOME/story-footer.webp);
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+
+}
+
+/*------------- 1.2 GALLERY ---------------------------------------------------*/
+.gallery {
+    height: 100vh;
+    padding: 5rem 0 5rem 0;
+
+    .main-container {
+        height: 100%;
+        width: 100%;
+        background-color: var(--color-100);
+        color: var(--color-0);
+
+        display: flex;
+        overflow: hidden;
+
+        .gallery-title {
+            width: 15%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            h2 {
+                font-family: NessynSentry;
+                font-size: clamp(4rem, 9vw + 1rem, 13rem);
+                font-weight: 100;
+                transform: rotate(-90deg);
+            }
+        }
+
+        .gallery-mosaic {
+            width: 85%;
+            display: flex;
+            gap: 0.5rem;
+            padding: 0.5rem;
+
+
+            .col {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+                height: 100%;
+            }
+
+            .img-box {
+                width: 100%;
+                overflow: hidden;
+                position: relative;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    display: block;
+                }
+            }
+
+            .h-50 {
+                height: 50%;
+            }
+
+            .h-60 {
+                height: 60%;
+            }
+
+            .h-40 {
+                height: 40%;
+            }
+
+            .h-100 {
+                height: 100%;
+            }
+        }
+
+    }
+}
+
+
+
+
+/*------------- 2. TEAM PAGE: -----------------------------------------------------------------------------------------------*/
+/*------------- 2.1 TEAM ------------------------------------------------------*/
+.team {
+
+    .team-text {
+        font-weight: 200;
+        padding: 5rem 18rem 5rem 18rem;
+    }
+
+    .team-container {
+        background-color: var(--color-100);
+
+        .main-chefs {
+            display: flex;
+            padding: 3rem;
+            color: var(--color-0);
+
+            .chef-photo {
+                flex: 1;
+                position: relative;
+                overflow: hidden;
+
+                img {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    object-position: center;
+                }
+            }
+
+            .chef-text {
+                flex: 2;
+                padding-left: 2rem;
+
+                .chef-name {
+                    .main-name {
+                        font-family: BDSans;
+                        font-size: clamp(2rem, 1vw + 1.5rem, 3rem);
+                        text-transform: uppercase;
+                    }
+
+                    .chef-title {
+                        font-family: BDSans;
+                        font-size: clamp(1.5rem, 0.5vw + 1.3rem, 2rem);
+                        font-weight: 100;
+                        text-transform: uppercase;
+                        margin-top: 1rem;
+                    }
+                }
+
+                .chef-description {
+                    margin-top: 1rem;
+                }
+
+                .chef-social-media {
+                    margin-top: 1rem;
+
+                    svg {
+                        cursor: pointer;
+                        width: 35px;
+                    }
+                }
+            }
+        }
+
+        .inf-chefs {
+            color: var(--color-0);
+            display: flex;
+            justify-content: space-between;
+            gap: 2rem;
+            padding: 2rem 3rem 5rem 3rem;
+
+            .inf-chef-1,
+            .inf-chef-2,
+            .inf-chef-3 {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .inf-chef-photo {
+                width: 80%;
+                aspect-ratio: 1 / 1;
+                position: relative;
+                overflow: hidden;
+
+                img {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    object-position: center top;
+                }
+            }
+
+            .inf-chef-name {
+                text-align: left;
+
+                .inf-chef-main {
+                    font-family: 'BDSans', sans-serif;
+                    font-size: clamp(1.5rem, 0.7vw + 1.2rem, 2.2rem);
+                    text-transform: uppercase;
+                    line-height: 1.2;
+                    margin-bottom: 0.5rem;
+                    font-weight: 600;
+                }
+
+                .inf-chef-tittle {
+                    font-family: 'BDSans', sans-serif;
+                    font-size: clamp(1rem, 0.5vw + 0.8rem, 1.2rem);
+                    font-weight: 300;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                    opacity: 0.8;
+                }
+            }
+
+            .chef-social-media {
+                display: flex;
+                gap: 1rem;
+                margin-top: auto;
+
+                svg {
+                    cursor: pointer;
+                    width: 35px;
+                }
+            }
+
+        }
+    }
+
+    .team-img {
+        width: 100%;
+        height: 45vh;
+        background-image: url(assets/img/2-TEAM/team-section-footer.png);
+        background-size: cover;
+        background-position: center center;
+    }
+}
+
+/*------------- 2.2 JOIN US ---------------------------------------------------*/
+.join-us {
+    padding: 4.5rem 0 12rem 0;
+    text-align: center;
+    height: auto;
+
+    h1 {
+        font-family: NessynSentry;
+        font-size: clamp(4rem, 4vw + 2rem, 8rem);
+        font-weight: 100;
+    }
+
+    h2 {
+        font-size: clamp(1.5rem, 0.5vw + 1.3rem, 2rem);
+        text-transform: uppercase;
+        font-weight: 300;
+    }
+
+    .join-us-text {
+        display: flex;
+        font-weight: 300;
+        text-align: left;
+        gap: 4rem;
+        margin-top: 3rem;
+
+        .join-us-left {
+            flex: 1;
+        }
+
+        .join-us-right {
+            flex: 1;
+
+            .submit-btn {
+                margin-top: 2rem;
+            }
+        }
+    }
+}
+
+
+
+
+/*------------- 3. MENU PAGE: -----------------------------------------------------------------------------------------------*/
+/*------------- 3.1 TASTING MENU ----------------------------------------------*/
+.tasting-menu {
+    .menus {
+        margin-top: 5rem;
+        display: flex;
+        line-height: 1.6;
+        height: auto;
+
+        h1 {
+            font-family: NessynSentry;
+            font-weight: 100;
+            font-size: clamp(4rem, 3vw + 2.5rem, 7rem);
+            line-height: 0.8;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 2vw + 1.5rem, 4rem);
+            font-family: BDSans;
+            text-transform: uppercase;
+        }
+
+        h3 {
+            font-family: BDSans;
+            font-size: clamp(1.5rem, 1vw + 1.2rem, 2.5rem);
+        }
+
+        .plates {
+            font-size: clamp(1.5rem, 0.75vw + 1.2rem, 2.25rem);
+            font-weight: 200;
+        }
+
+        .price {
+            text-transform: uppercase;
+            line-height: 2;
+        }
+
+        .menu-1 {
+            flex: 1;
+            padding: 3rem 2rem;
+
+            span {
+                display: block;
+            }
+        }
+
+        .menu-2 {
+            flex: 1;
+            background-color: var(--color-100);
+            color: var(--color-0);
+            text-align: right;
+            padding: 3rem 2rem;
+        }
+    }
+
+}
+
+/*------------- 3.2 SIGNATURE DISHES ------------------------------------------*/
+.signature-dish {
+    height: auto;
+    padding: 5rem 0;
+
+    h1 {
+        font-family: NessynSentry;
+        font-size: clamp(4rem, 7vw + 1rem, 11rem);
+        text-align: center;
+        margin: 4rem 0 4rem 0;
+        font-weight: 100;
+    }
+
+    .dish {
+        display: flex;
+        background-color: var(--color-100);
+        margin-bottom: 2rem;
+        align-items: stretch;
+        height: 400px;
+        overflow: hidden;
+
+        .dish-img {
+            flex: 1;
+            position: relative;
+            line-height: 0;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+            }
+        }
+
+        .dish-text {
+            flex: 2;
+            color: var(--color-0);
+            padding: 0 4rem;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            h2 {
+                font-size: clamp(2rem, 2vw + 1.5rem, 4rem);
+                font-family: BDSans;
+                text-transform: uppercase;
+
+            }
+
+            p {
+                font-size: clamp(1.5rem, 1vw + 1rem, 2.5rem);
+                font-family: 'ElmsSans';
+                font-weight: 300;
+            }
+        }
+    }
+}
+
+/*------------- 3.3 WINE LIST -------------------------------------------------*/
+.wine-list {
+    margin-bottom: 6rem;
+
+    .wine-container {
+        display: flex;
+
+        .wine-left {
+            flex: 1;
+            background-color: var(--color-100);
+            color: var(--color-0);
+            padding: 5rem;
+
+            h1 {
+                font-family: NessynSentry;
+                font-size: clamp(4rem, 7vw + 1rem, 11rem);
+                font-weight: 100;
+            }
+
+            p {
+                font-size: clamp(1.5rem, 0.5vw + 1.3rem, 2rem);
+            }
+        }
+
+        .wine-right {
+            flex: 5;
+            display: flex;
+            gap: 4rem;
+            padding: 5rem;
+
+            h2 {
+                font-size: clamp(2rem, 2vw + 1.5rem, 4rem);
+                font-family: BDSans;
+                text-transform: uppercase;
+                margin-bottom: 2rem;
+                margin-top: 4rem;
+
+                &:first-child {
+                    margin-top: 0;
+                }
+            }
+
+            h3 {
+                font-size: clamp(1.5rem, 0.5vw + 1.3rem, 2rem);
+                font-weight: 300;
+                margin-bottom: 0.5rem;
+
+                span {
+                    display: block;
+                }
+            }
+
+            p {
+                font-size: clamp(1.2rem, 0.3vw + 1.1rem, 1.5rem);
+                font-weight: 100;
+                margin-bottom: 1.5rem;
+                line-height: 1.4;
+            }
+
+            .wine-left-col,
+            .wine-right-col {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+            }
+        }
+    }
+}
+
+
+
+
+/*------------- 4. CONTACT PAGE: --------------------------------------------------------------------------------------------*/
+/*------------- 4.1 BOOK A TABLE ----------------------------------------------*/
+.book-table {
+    height: auto;
+
+    h1 {
+        font-family: NessynSentry;
+        font-weight: 100;
+        text-align: center;
+        padding: 4rem;
+        font-size: clamp(3rem, 3vw + 2rem, 6rem);
+    }
+
+    .book-main-container {
+        background-color: var(--color-100);
+        color: var(--color-0);
+
+
+        .book-table-container {
+            display: flex;
+            padding-top: 2rem;
+
+            .main-title {
+                font-size: clamp(2rem, 0.5vw + 1.8rem, 2.5rem);
+                font-weight: 400;
+                margin-bottom: 0.5rem;
+                padding: 1rem;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+                color: var(--color-0);
+                font-family: BDSans;
+            }
+
+            .calendar {
+                width: 100%;
+                max-width: 500px;
+                flex: 1;
+
+                .booking-container {
+                    color: var(--color-0);
+                    display: flex;
+                    border-top: 2px solid var(--color-0);
+                    border-right: 2px solid var(--color-0);
+                    border-bottom: 2px solid var(--color-0);
+                    background-color: var(--color-100);
+                    height: 400px;
+
+                    .hours-col {
+                        width: 25%;
+                        border-right: 2px solid var(--color-0);
+                        padding: 1rem 0.5rem;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        gap: 1rem;
+
+                        .col-header {
+                            font-weight: 400;
+                            font-size: clamp(1rem, 0.2vw + 1rem, 1.2rem);
+                            margin-bottom: 0.5rem;
+                            align-self: flex-start;
+                            padding-left: 5px;
+                            text-align: center;
+                        }
+
+                        .time-slot {
+                            width: 100%;
+                            padding: 4px 0;
+                            text-align: center;
+                            color: white;
+                            font-size: 0.9rem;
+                            font-weight: 300;
+                        }
+
+                        .black {
+                            background-color: var(--color-0);
+                            cursor: pointer;
+                        }
+
+                        .grey {
+                            background-color: var(--color-50);
+                            cursor: not-allowed;
+                        }
+                    }
+
+                    .calendar-col {
+                        width: 75%;
+                        padding: 1rem;
+
+                        table {
+                            width: 100%;
+                            height: 100%;
+                            border-collapse: collapse;
+                            table-layout: fixed;
+
+                            th {
+                                font-weight: 400;
+                                font-size: clamp(1rem, 0.1vw + 1rem, 1.1rem);
+                                color: var(--text-black);
+                                text-align: center;
+                                vertical-align: top;
+                                padding-bottom: 1rem;
+                            }
+
+                            td {
+                                text-align: center;
+                                vertical-align: middle;
+                                font-size: clamp(1rem, 0.1vw + 1rem, 1.1rem);
+                                color: var(--color-50);
+                                font-weight: 300;
+                                cursor: pointer;
+
+                                &.selected {
+                                    color: var(--color-0);
+                                    font-weight: 600;
+                                    transform: scale(1.1);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .details {
+                flex: 2;
+                margin-left: 3rem;
+                color: var(--color-0);
+
+                form {
+                    display: flex;
+                    flex-direction: column;
+                    border-top: 2px solid var(--color-0);
+                    border-left: 2px solid var(--color-0);
+                    border-bottom: 2px solid var(--color-0);
+                    padding: 0 0 0 2rem;
+                    font-size: clamp(1.5rem, 0.5vw + 1.3rem, 2rem);
+                    text-transform: uppercase;
+                    font-weight: 200;
+                    height: 400px;
+
+                    label {
+                        margin-top: 1rem;
+
+                    }
+
+                    input,
+                    select {
+                        width: 70%;
+                        height: 2rem;
+                        background-color: transparent;
+                        color: var(--color-0);
+                        font-family: 'ElmsSans', sans-serif;
+                        font-size: clamp(1rem, 0.25vw + 0.9rem, 1.25rem);
+
+                    }
+                }
+
+
+            }
+        }
+
+        .send-booking {
+            font-size: clamp(1.2rem, 0.3vw + 1.1rem, 1.5rem);
+            font-weight: 200;
+            margin: 1.5rem 0 1.5rem 0;
+            text-align: center;
+            padding-bottom: 3rem;
+            line-height: 1.75;
+
+            a {
+                color: var(--color-100);
+                background-color: var(--color-0);
+                text-decoration: none;
+                text-transform: uppercase;
+                margin-top: 2rem;
+                padding: 0 2rem;
+
+            }
+
+            input[type="checkbox"] {
+                width: 1.5rem;
+                height: 1.5rem;
+                cursor: pointer;
+                accent-color: var(--color-0);
+                margin-right: 1rem;
+            }
+        }
+    }
+}
+
+/*------------- 4.2 CONTACT  --------------------------------------------------*/
+.contact {
+    background-color: var(--color-0);
+    color: var(--color-100);
+    padding: 6rem 0;
+
+    .contact-wrapper {
+        width: 80%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .contact-title {
+            font-family: NessynSentry;
+            font-size: clamp(4rem, 4vw + 2.5rem, 8rem);
+            font-weight: 100;
+            margin-bottom: 2rem;
+            line-height: 1;
+            text-align: center;
+        }
+
+        .contact-intro {
+            font-family: 'ElmsSans', sans-serif;
+            font-size: clamp(1.2rem, 0.3vw + 1.1rem, 1.5rem);
+            text-align: center;
+            font-weight: 300;
+            opacity: 0.8;
+            margin-bottom: 5rem;
+            line-height: 1.5;
+        }
+
+        .form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+
+            .form-row {
+                display: flex;
+                gap: 4rem;
+
+                &.split {
+                    .input-group {
+                        flex: 1;
+                    }
+                }
+
+                &.full {
+                    width: 100%;
+                }
+            }
+
+            .input-group {
+                display: flex;
+                flex-direction: column;
+                position: relative;
+
+                label {
+                    font-family: BDSans;
+                    font-size: clamp(1.5rem, 0.5vw + 1.3rem, 2rem);
+                    text-transform: uppercase;
+                    margin-bottom: 1rem;
+                    letter-spacing: 1px;
+                }
+
+                input,
+                select,
+                textarea {
+                    width: 100%;
+                    background: transparent;
+                    border: none;
+                    border-bottom: 1px solid var(--color-100);
+                    color: var(--color-100);
+                    font-family: 'ElmsSans', sans-serif;
+                    font-size: clamp(1.25rem, 0.25vw + 1.15rem, 1.5rem);
+                    padding: 0.5rem 0;
+                    outline: none;
+                    border-radius: 0;
+
+                    &::placeholder {
+                        color: var(--color-100);
+                        opacity: 0.3;
+                        font-size: 1rem;
+                        text-transform: initial;
+                    }
+
+                }
+
+                .select-wrapper {
+                    position: relative;
+                    width: 100%;
+
+                    svg {
+                        position: absolute;
+                        right: 0;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        color: var(--color-100);
+                        width: 1.5rem;
+                        height: 1.5rem;
+                    }
+                }
+
+                select {
+                    width: 100%;
+                    cursor: pointer;
+                    appearance: none;
+                    background: transparent;
+                    border: none;
+                    border-bottom: 1px solid var(--color-100);
+                    border-radius: 0;
+                    outline: none;
+                    color: var(--color-100);
+                    font-family: 'ElmsSans', sans-serif;
+                    font-size: clamp(1.25rem, 0.25vw + 1.15rem, 1.5rem);
+                    padding: 0.5rem 2rem 0.5rem 0;
+
+                    option {
+                        background-color: var(--color-0);
+                        color: var(--color-100);
+                        font-size: 1.2rem;
+                    }
+                }
+
+                textarea {
+                    resize: none;
+                    min-height: 150px;
+                    overflow: hidden;
+                    min-width: 600px;
+
+                }
+            }
+
+            .form-footer {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: 2rem;
+                width: 100%;
+                flex-wrap: wrap;
+                gap: 1rem;
+
+                .privacy-check {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+
+                    input {
+                        width: auto;
+                        margin: 0;
+                        cursor: pointer;
+                    }
+
+                    label {
+                        font-family: 'ElmsSans', sans-serif;
+                        font-size: 1rem;
+                        text-transform: none;
+                        margin: 0;
+                        cursor: pointer;
+
+                        a {
+                            color: var(--color-100);
+                            text-decoration: underline;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/*------------- 4.3 MAP  ------------------------------------------------------*/
+.map {
+    height: 50vh;
+    margin-bottom: 5rem;
+
+    .map-img {
+        height: 100%;
+        width: 100%;
+        background-image: url(assets/img/4-CONTACT/map.png);
+        background-repeat: no-repeat;
+        background-position: center bottom;
+    }
+}
+
+/*------------- 4.4 VISIT US  -------------------------------------------------*/
+.visit-us {
+    background-color: var(--color-100);
+    color: var(--color-0);
+    padding: 6rem 0;
+    margin-bottom: 5rem;
+
+    .visit-container {
+        width: 80%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        gap: 6rem;
+        align-items: flex-start;
+
+        .visit-col {
+            flex: 1;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .visit-title {
+                font-family: NessynSentry;
+                font-size: clamp(3rem, 4vw + 1rem, 5rem);
+                margin-bottom: 2rem;
+                font-weight: 100;
+                line-height: 1;
+            }
+        }
+
+        .visit-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+
+            li {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+
+                .day {
+                    font-family: 'BDSans';
+                    font-size: clamp(1.25rem, 0.5vw + 1rem, 1.5rem);
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                }
+
+                .time {
+                    font-family: 'ElmsSans';
+                    font-size: clamp(1.125rem, 0.25vw + 1rem, 1.25rem);
+                    opacity: 0.8;
+                    
+                    &.closed {
+                        opacity: 0.5;
+                        font-style: italic;
+                    }
+                }
+            }
+        }
+
+        .visit-divider {
+            width: 1px;
+            background-color: var(--color-0);
+            opacity: 0.2;
+            min-height: 300px;
+        }
+
+        .address {
+            font-style: normal;
+            font-family: 'ElmsSans', sans-serif;
+            font-size: clamp(1.5rem, 0.5vw + 1.2rem, 2rem);
+            line-height: 1.4;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            
+            p { margin: 0; }
+        }
+        
+        .submit-btn {
+            width: auto; 
+            min-width: 200px;
+        }
+    }
+}
+
+
+
+
+
+/*--------------- MEDIA QUERIES -------------------------------------------------------------------------------------------*/
+/*------------- 1200PX SCREEN  --------------------------------------------------*/
+@media (max-width: 1200px) {
+    body {
+        margin: 0 3rem;
+    }
+
+    .team .team-text {
+        padding: 5rem 5rem;
+    }
+
+    .wine-list .wine-container .wine-left,
+    .wine-list .wine-container .wine-right {
+        padding: 3rem;
+    }
+}
+
+/*------------- 992PX SCREEN --------------------------------------------------*/
+@media (max-width: 992px) {
+    header nav ul {
+        gap: 1.5rem;
+    }
+
+    footer .footer-container {
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    footer .footer-container .newsletter .newsletter-input {
+        width: 100%;
+    }
+
+    footer .footer-container .awards {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+
+        img {
+            height: 4rem;
+            width: auto;
+        }
+    }
+
+    .story .story-header {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .story .story-header .story-header-left {
+        width: 100%;
+        height: 50vh;
+    }
+
+    .story .story-text {
+        flex-direction: column;
+        gap: 3rem;
+        padding: 3rem;
+    }
+
+    .gallery .main-container {
+        flex-direction: column;
+    }
+
+    .gallery .main-container .gallery-title {
+        width: 100%;
+        height: 15vh;
+        padding: 1rem;
+    }
+
+    .gallery .main-container .gallery-title h2 {
+        transform: rotate(0deg);
+    }
+
+    .gallery .main-container .gallery-mosaic {
+        width: 100%;
+        height: 85vh;
+    }
+
+    .team .team-container .main-chefs {
+        flex-direction: column;
+    }
+
+    .team .team-container .main-chefs .chef-photo {
+        width: 100%;
+        height: auto;
+        aspect-ratio: auto;
+    }
+
+    .team .team-container .main-chefs .chef-photo img {
+        position: static;
+        width: 100%;
+        height: auto;
+        max-height: 60vh;
+        object-fit: cover;
+    }
+
+    .team .team-container .main-chefs .chef-text {
+        padding-left: 0;
+        margin-top: 2rem;
+    }
+
+    .join-us .join-us-text {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .tasting-menu .menus {
+        flex-direction: column;
+    }
+
+    .tasting-menu .menus .menu-2 {
+        text-align: left;
+    }
+
+    .wine-list .wine-container {
+        flex-direction: column;
+    }
+
+    .wine-list .wine-container .wine-right {
+        gap: 2rem;
+    }
+
+    .book-table .book-main-container .book-table-container {
+        flex-direction: column;
+    }
+
+    .book-table .book-main-container .book-table-container .details {
+        margin-left: 0;
+        margin-top: 3rem;
+    }
+
+    .contact .contact-wrapper .form .form-row {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .visit-us {
+        padding: 4rem 0;
+
+        .visit-container {
+            flex-direction: column;
+            align-items: center;
+            width: 90%;
+            gap: 3rem;
+
+            .visit-col {
+                width: 100%;
+            }
+
+            .visit-divider {
+                width: 50%;      
+                height: 1px;     
+                min-height: 1px;
+                align-self: center;
+                margin: 1rem 0;
+            }
+        }
+    }
+}
+
+/*------------- 768PX SCREEN --------------------------------------------------*/
+@media (max-width: 768px) {
+    .desktop-nav {
+        display: none;
+    }
+
+    header {
+        justify-content: flex-end;
+        position: relative;
+        z-index: 1000;
+
+        #nav-icon {
+            display: block;
+            width: 35px;
+            height: 25px;
+            position: relative;
+            cursor: pointer;
+            margin-right: 1rem;
+            z-index: 1001;
+        }
+    }
+
+    .menu_mobile {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 0;
+        z-index: 999;
+        background-color: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(10px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        transition: height 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+
+        &.open-menu {
+            height: 100vh;
+
+            .menu_mobile_nav {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .menu_footer {
+                opacity: 1;
+            }
+        }
+
+        .menu_mobile_nav {
+            list-style: none;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease 0.3s;
+
+            li a {
+                font-family: 'NessynSentry', serif;
+                font-size: clamp(2.5rem, 5vw, 4rem);
+                color: var(--color-100);
+                text-decoration: none;
+                text-transform: uppercase;
+                font-weight: 100;
+                transition: color 0.3s ease;
+
+                &:hover {
+                    color: var(--color-50);
+                }
+            }
+        }
+
+        .menu_footer {
+            position: absolute;
+            bottom: 2rem;
+            font-family: 'BDSans';
+            color: var(--color-50);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0;
+            transition: opacity 0.5s ease 0.5s;
+        }
+    }
+
+    header {
+        height: auto;
+        padding: 1rem 0;
+    }
+
+    header nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .hero .index-hero-bg,
+    .hero .team-hero-bg,
+    .hero .menu-hero-bg,
+    .hero .contact-hero-bg {
+        height: 40vh;
+    }
+
+    footer .footer-nav ul {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .story .story-header .story-header-right .story-title span:nth-child(2) {
+        margin-left: 0;
+    }
+
+    .team .team-container .inf-chefs {
+        flex-direction: column;
+        padding: 2rem;
+    }
+
+    .team .team-container .inf-chefs .inf-chef-photo {
+        display: none;
+    }
+
+    .signature-dish .dish {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .signature-dish .dish .dish-img {
+        height: 300px;
+    }
+
+    .signature-dish .dish .dish-text {
+        padding: 2rem;
+    }
+
+    .wine-list .wine-container .wine-right {
+        flex-direction: column;
+    }
+
+    .book-table .book-main-container .book-table-container .calendar .booking-container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .book-table .book-main-container .book-table-container .calendar .booking-container .hours-col {
+        width: 100%;
+        flex-direction: row;
+        overflow-x: auto;
+        border-right: none;
+        border-bottom: 2px solid var(--color-0);
+    }
+
+    .book-table .book-main-container .book-table-container .calendar .booking-container .calendar-col {
+        width: 100%;
+    }
+
+    .book-table .book-main-container .book-table-container .details form {
+        height: auto;
+        padding-bottom: 2rem;
+        border-left: none;
+    }
+
+    .contact .contact-wrapper .form .form-row .input-group textarea {
+        min-width: 100%;
+    }
+}
+
+/*------------- 576PX SCREEN --------------------------------------------------*/
+@media (max-width: 576px) {
+    body {
+        margin: 0 1.5rem;
+    }
+
+    footer .footer-social-media {
+        gap: 1.5rem;
+    }
+
+    footer .footer-nav ul {
+        gap: 1rem;
+    }
+
+    .hero .index-hero-bg {
+        height: 60vh;
+    }
+
+    .hero .team-hero-bg {
+        height: 60vh;
+    }
+
+    .hero .menu-hero-bg {
+        height: 60vh;
+    }
+
+    .hero .contact-hero-bg {
+        height: 60vh;
+    }
+
+    footer .footer-subtitle {
+        line-height: 1;
+    }
+
+    .story .story-text {
+        padding: 1.5rem;
+    }
+
+    .story .story-text {
+        gap: 2rem;
+    }
+
+    .gallery {
+        padding: 2rem 0;
+    }
+
+    .team .team-text {
+        padding: 3rem 1rem;
+    }
+
+    .team .team-container .main-chefs {
+        padding: 1.5rem;
+    }
+
+    .wine-list .wine-container .wine-left,
+    .wine-list .wine-container .wine-right {
+        padding: 1.5rem;
+    }
+
+    .book-table h1 {
+        padding: 2rem 0;
+    }
+
+    .contact .contact-wrapper {
+        width: 90%;
+    }
+
+    .contact .contact-wrapper .form {
+        gap: 2rem;
+    }
+
+    .contact .contact-wrapper .form .form-footer .submit-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 1rem;
+    }
+
+    .visit-us {
+        padding: 3rem 0;
+        
+        .visit-container {
+            width: 100%;
+            padding: 0 1rem;
+            
+            .visit-title {
+                margin-bottom: 1.5rem;
+            }
+            
+            .visit-list {
+                gap: 1.5rem;
+            }
+            
+            .address {
+                gap: 0.2rem;
+            }
+        }
+    }
+}

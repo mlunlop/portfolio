@@ -116,7 +116,7 @@ export const PORTFOLIO_DATA = {
     {
       id: 'bachelor',
       degree: 'Grado Universitario en Informática',
-      institution: 'Universitat Carlemary (Andorra - Online)',
+      institution: 'Universitat Carlemary (Andorra - Modalidad Online)',
       period: '2026 – 2029',
       badge: 'Grado Universitario',
       details: 'Fundamentos de ingeniería del software, lógica computacional, arquitectura de sistemas, gestión de infraestructuras y desarrollo de software eficiente y sostenible bajo el marco EEES (180 ECTS).'

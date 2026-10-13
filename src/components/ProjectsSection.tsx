@@ -16,6 +16,9 @@ import {
   ChevronLeft,
   ChevronRight,
   Sparkles,
+  Eye,
+  Calendar,
+  Palette,
 } from 'lucide-react';
 import { GithubIcon } from './Icons';
 
@@ -29,6 +32,68 @@ import towerBg from '../assets/projects/tower_drop_bg.png';
 import towerLogo from '../assets/projects/tower_drop_logo.png';
 import neonBg from '../assets/projects/neon_parry_bg.png';
 import neonLogo from '../assets/projects/neon_parry_logo.png';
+
+// DAW Web Designs Thumbnails & Component
+import thumb2pac from '../assets/projects/daw/2pac-thumb.jpg';
+import thumbBmx from '../assets/projects/daw/bmx-thumb.jpg';
+import thumbGiardino from '../assets/projects/daw/giardino-thumb.jpg';
+import thumbJapan from '../assets/projects/daw/japan-thumb.jpg';
+import { WebPreviewModal, type WebProject } from './WebPreviewModal';
+
+const DAW_WEB_PROJECTS: WebProject[] = [
+  {
+    id: 'web-2pac',
+    title: '2PAC // The Rose That Grew From Concrete',
+    subtitle: 'Diseño UI/UX tributo musical, discografía & merch',
+    description:
+      'Composición visual con estética 90s West Coast. Prototipado y maquetación responsiva con video tours embebidos, galería de collage fotográfico y catálogo de merchandising.',
+    tags: ['UI/UX Vintage', 'HTML5 Semántico', 'CSS Media Queries', 'Video Streaming'],
+    url: '/projects/daw/WEB-2PAC/index.html',
+    thumbnail: thumb2pac,
+    accentColor: 'from-violet-500/20 to-purple-600/10 border-violet-500/30 text-violet-400',
+    category: 'Música & Merch',
+    date: 'Octubre 2025',
+  },
+  {
+    id: 'web-giardino',
+    title: 'Il Giardino Segreto // Haute Cuisine',
+    subtitle: 'Experiencia gastronómica editorial & sistema de reservas',
+    description:
+      'Diseño de interfaces elegante con arquitectura de menús gourmet, perfiles de chefs galardonados, integración de sellos Michelin/Repsol y flujo UI para reserva de mesas.',
+    tags: ['Diseño Editorial', 'CSS Grid & Flexbox', 'Formularios UX', 'Estética Gastronómica'],
+    url: '/projects/daw/WEB-GIARDINO-SEGRETO/index.html',
+    thumbnail: thumbGiardino,
+    accentColor: 'from-emerald-500/20 to-teal-600/10 border-emerald-500/30 text-emerald-400',
+    category: 'Restaurante & Reservas',
+    date: 'Noviembre 2025',
+  },
+  {
+    id: 'web-bmx',
+    title: 'Vortex BMX // Action Sports Culture',
+    subtitle: 'Portal de comunidad extrema con microinteracciones',
+    description:
+      'Identidad visual de alta energía con barra de scroll reactiva en tiempo real, catálogo interactivo de disciplinas (Street, Park, Flatland), eventos y microanimaciones de impacto.',
+    tags: ['Microinteracciones UI', 'Scroll Progress', 'CSS Keyframes', 'Diseño Deportivo'],
+    url: '/projects/daw/WEB-BMX-VORTEX/index.html',
+    thumbnail: thumbBmx,
+    accentColor: 'from-amber-500/20 to-yellow-600/10 border-amber-500/30 text-amber-400',
+    category: 'Deportes Extremos',
+    date: 'Diciembre 2025',
+  },
+  {
+    id: 'web-japan',
+    title: 'Visit Japan // Timeless Harmony',
+    subtitle: 'Portal de turismo experiencial multi-página',
+    description:
+      'Sistema de diseño minimalista con tipografía kanji, selector intuitivo de rutas culturales temáticas, exploración de prefecturas y maquetación fluida adaptada a todos los dispositivos.',
+    tags: ['Arquitectura de Información', 'Sistemas de Diseño UI', 'Multi-página', 'Diseño Responsive'],
+    url: '/projects/daw/WEB-JAPAN/index.html',
+    thumbnail: thumbJapan,
+    accentColor: 'from-rose-500/20 to-red-600/10 border-rose-500/30 text-rose-400',
+    category: 'Turismo & Editorial',
+    date: 'Enero 2026',
+  },
+];
 
 interface VisualMinigame {
   id: string;
@@ -112,9 +177,10 @@ const DAILY_LOOP_STEPS = [
 ];
 
 export function ProjectsSection() {
-  // Accordion state: 'bit-party' open by default
-  const [openProject, setOpenProject] = useState<string | null>('bit-party');
+  // Accordion state: all closed by default
+  const [openProject, setOpenProject] = useState<string | null>(null);
   const [activeSlide, setActiveSlide] = useState<number>(0);
+  const [selectedWebProject, setSelectedWebProject] = useState<WebProject | null>(null);
 
   const toggleProject = (id: string) => {
     setOpenProject((prev) => (prev === id ? null : id));
@@ -555,8 +621,185 @@ export function ProjectsSection() {
               </div>
             )}
           </div>
+
+          {/* =====================================================================
+              ACCORDION ITEM 03: DISEÑO UI/UX EN PÁGINAS ESTÁTICAS (DAW)
+          ===================================================================== */}
+          <div
+            className={`rounded-2xl border transition-all duration-300 overflow-hidden ${
+              openProject === 'daw-designs'
+                ? 'border-zinc-700 bg-zinc-900/50 shadow-2xl shadow-black/60'
+                : 'border-zinc-800/90 bg-zinc-900/25 hover:border-zinc-700/80 hover:bg-zinc-900/40'
+            }`}
+          >
+            {/* Accordion Trigger Header */}
+            <button
+              type="button"
+              onClick={() => toggleProject('daw-designs')}
+              aria-expanded={openProject === 'daw-designs'}
+              className="w-full px-5 py-5 sm:px-7 sm:py-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-left cursor-pointer group"
+            >
+              <div className="flex items-center gap-4">
+                <div className="w-14 h-14 rounded-xl bg-zinc-950 border border-zinc-800 shrink-0 flex items-center justify-center p-2 group-hover:border-rose-500/40 transition-colors">
+                  <Palette className="w-7 h-7 text-rose-400" />
+                </div>
+
+                <div>
+                  <div className="flex flex-wrap items-center gap-2 mb-1">
+                    <span className="font-mono text-[11px] text-rose-400 font-semibold uppercase tracking-wider">
+                      DISEÑO UI/UX // DAW
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-rose-500/10 border border-rose-500/30 text-rose-300 font-mono text-[10px]">
+                      <span className="w-1.5 h-1.5 rounded-full bg-rose-400" />
+                      4 Páginas (Oct 25 – Ene 26)
+                    </span>
+                  </div>
+
+                  <h3 className="text-xl sm:text-2xl font-normal text-zinc-100 font-display uppercase tracking-tight group-hover:text-rose-400 transition-colors truncate">
+                    Diseño UI/UX (DAW)
+                  </h3>
+                  <p className="text-xs sm:text-sm text-zinc-400 font-body line-clamp-1">
+                    Colección cronológica de maquetación, arquitectura de información y prototipado desarrollados en interfaces web.
+                  </p>
+                </div>
+              </div>
+
+              {/* Right Tech Pills & Chevron */}
+              <div className="flex items-center justify-between sm:justify-end gap-3 shrink-0 border-t sm:border-t-0 border-zinc-800/80 pt-3 sm:pt-0">
+                <div className="flex items-center gap-1.5">
+                  <span className="px-2.5 py-1 rounded-md bg-zinc-950 border border-zinc-800 text-zinc-300 font-mono text-[11px]">
+                    Diseño UI/UX
+                  </span>
+                  <span className="hidden md:inline-block px-2.5 py-1 rounded-md bg-zinc-950 border border-zinc-800 text-zinc-300 font-mono text-[11px]">
+                    HTML5 & CSS3
+                  </span>
+                  <span className="hidden lg:inline-block px-2.5 py-1 rounded-md bg-zinc-950 border border-zinc-800 text-zinc-300 font-mono text-[11px]">
+                    Responsive Multi-Device
+                  </span>
+                </div>
+
+                <div
+                  className={`w-9 h-9 rounded-xl border flex items-center justify-center transition-all ${
+                    openProject === 'daw-designs'
+                      ? 'bg-rose-500 border-rose-400 text-zinc-950 rotate-180'
+                      : 'bg-zinc-950 border-zinc-800 text-zinc-400 group-hover:text-zinc-200 group-hover:border-zinc-700'
+                  }`}
+                >
+                  <ChevronDown className="w-4 h-4 stroke-[2.5]" />
+                </div>
+              </div>
+            </button>
+
+            {/* Accordion Expanded Body */}
+            {openProject === 'daw-designs' && (
+              <div className="px-5 pb-7 pt-4 sm:px-7 sm:pb-8 border-t border-zinc-800/80 bg-zinc-950/40 space-y-6 animate-in fade-in duration-200">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-b border-zinc-800/60">
+                  <p className="text-xs sm:text-sm text-zinc-400 font-body">
+                    Proyectos estáticos ordenados por fecha de creación (Oct 2025 → Ene 2026). Pulsa <strong className="text-zinc-200 font-medium">"Ver en Vivo"</strong> para probar la respuesta interactiva y selector de pantallas.
+                  </p>
+                  <span className="text-[11px] font-mono text-zinc-500 shrink-0">
+                    4 entregas cronológicas
+                  </span>
+                </div>
+
+                {/* 2x2 Responsive Grid of Web Projects */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  {DAW_WEB_PROJECTS.map((proj) => (
+                    <div
+                      key={proj.id}
+                      className="group/card flex flex-col rounded-xl bg-zinc-900/60 border border-zinc-800/90 hover:border-zinc-700 overflow-hidden transition-all duration-200 hover:shadow-xl hover:shadow-black/50"
+                    >
+                      {/* Thumbnail Header with Quick Actions */}
+                      <div className="relative aspect-video w-full overflow-hidden bg-zinc-950">
+                        <img
+                          src={proj.thumbnail}
+                          alt={proj.title}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-105"
+                          loading="lazy"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent opacity-80 group-hover/card:opacity-60 transition-opacity" />
+
+                        {/* Top Badges: Category & Date */}
+                        <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2">
+                          <span className="px-2 py-1 rounded-md bg-zinc-950/80 backdrop-blur-md border border-zinc-800 text-[10px] font-mono text-zinc-300">
+                            {proj.category}
+                          </span>
+                          <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-zinc-950/90 backdrop-blur-md border border-orange-500/30 text-[10px] font-mono text-orange-400 font-semibold shadow-sm">
+                            <Calendar className="w-3 h-3 text-orange-400" />
+                            {proj.date}
+                          </span>
+                        </div>
+
+                        {/* Bottom Title Overlay */}
+                        <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between gap-2">
+                          <h4 className="text-base font-normal text-zinc-100 font-display tracking-tight truncate drop-shadow-md">
+                            {proj.title}
+                          </h4>
+                        </div>
+                      </div>
+
+                      {/* Content Card Body */}
+                      <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between gap-4">
+                        <div className="space-y-2">
+                          <div className="flex items-center justify-between gap-2">
+                            <p className="text-[11px] font-mono text-orange-400">
+                              {proj.subtitle}
+                            </p>
+                          </div>
+                          <p className="text-xs text-zinc-400 font-body leading-relaxed line-clamp-2">
+                            {proj.description}
+                          </p>
+
+                          {/* Tech Tags */}
+                          <div className="flex flex-wrap gap-1.5 pt-1">
+                            {proj.tags.map((tag, idx) => (
+                              <span
+                                key={idx}
+                                className="px-2 py-0.5 rounded text-[10px] font-mono bg-zinc-950 border border-zinc-800 text-zinc-400"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Action Buttons */}
+                        <div className="flex items-center gap-2 pt-2 border-t border-zinc-800/70">
+                          <button
+                            type="button"
+                            onClick={() => setSelectedWebProject(proj)}
+                            className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-orange-500 hover:bg-orange-400 text-zinc-950 font-medium text-xs font-mono transition-all duration-150 active:scale-95 cursor-pointer shadow-sm"
+                          >
+                            <Eye className="w-3.5 h-3.5 stroke-[2.5]" />
+                            <span>Ver en Vivo</span>
+                          </button>
+
+                          <a
+                            href={proj.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-2 rounded-lg bg-zinc-800/90 hover:bg-zinc-700 text-zinc-300 hover:text-white border border-zinc-700/80 transition-colors"
+                            title="Abrir en pestaña nueva"
+                          >
+                            <ExternalLink className="w-4 h-4" />
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
+
+      {/* Interactive Web Preview Modal */}
+      <WebPreviewModal
+        isOpen={!!selectedWebProject}
+        onClose={() => setSelectedWebProject(null)}
+        project={selectedWebProject}
+      />
     </section>
   );
 }
