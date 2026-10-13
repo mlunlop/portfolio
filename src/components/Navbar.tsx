@@ -26,14 +26,14 @@ export function Navbar() {
 
           {/* Navigation Links */}
           <div className="hidden md:flex items-center gap-6 text-xs text-zinc-400 font-medium">
-            <a href="#pipeline" className="hover:text-zinc-100 transition-colors">
-              Data Lifecycle
-            </a>
             <a href="#experiencia" className="hover:text-zinc-100 transition-colors">
               Experiencia
             </a>
             <a href="#certificaciones" className="hover:text-zinc-100 transition-colors">
               Formación
+            </a>
+            <a href="#proyectos" className="hover:text-zinc-100 transition-colors">
+              Proyectos
             </a>
             <a href="#stack" className="hover:text-zinc-100 transition-colors">
               Stack

@@ -36,7 +36,7 @@ export const PORTFOLIO_DATA = {
   personal: {
     name: 'Mario Luna López',
     role: 'Software & Data / ML Engineer',
-    headline: 'Especialista en ciclo de vida del dato, pipelines ETL y Machine Learning con base sólida en desarrollo frontend y sistemas Linux.',
+    headline: 'Especialista en ciclo de vida del dato, pipelines ETL y Machine Learning, con base sólida en desarrollo frontend, sistemas Linux y desarrollo de videojuegos indie.',
     location: 'Granada, España',
     status: 'Disponible para nuevos retos',
     email: 'mario.luna.lpez@gmail.com',
@@ -55,7 +55,11 @@ export const PORTFOLIO_DATA = {
     },
     {
       category: 'Sistemas & DevOps',
-      items: ['Linux SysAdmin (LPIC-1)', 'Bash Scripting', 'Docker Containers', 'Git & CI/CD', 'Hardware Diagnostics (Apple Atlas)', 'Voiceflow AI Agents'],
+      items: ['Linux SysAdmin (Debian)', 'Nginx Web Server', 'Bash Scripting', 'Docker Containers', 'Git & CI/CD', 'Apple Atlas Diagnostics'],
+    },
+    {
+      category: 'Indie Game Dev (Godot)',
+      items: ['Godot Engine 4.x', 'GDScript Architecture', 'GLSL Shaders (.gdshader)', '2D Physics & State Machines', 'Mobile Viewport (iOS/Android)', 'Asynchronous Game Loops'],
     },
   ],
   experiences: [

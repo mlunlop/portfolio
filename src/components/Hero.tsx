@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Copy, Check, ArrowDown, Database, Cpu, ShieldCheck, Layers } from 'lucide-react';
+import { Copy, Check, ArrowDown, Database, Cpu, ShieldCheck, Layers, Gamepad2 } from 'lucide-react';
 import { PORTFOLIO_DATA } from '../data/portfolioData';
 import { copyToClipboard } from '../utils/feedback';
 import { GithubIcon, LinkedinIcon, KaggleIcon } from './Icons';
@@ -53,8 +53,9 @@ export function Hero() {
               Especialista en el ciclo de vida del dato: diseño de arquitecturas{' '}
               <strong className="text-zinc-100 font-semibold">ETL, limpieza rigurosa, validación estadística y particionamiento</strong>{' '}
               para alimentar modelos de Machine Learning. Con base sólida en desarrollo frontend de producción ({' '}
-              <span className="text-orange-400 font-medium">Babel</span>) y especialización práctica en{' '}
-              <span className="text-orange-400 font-medium">Sistemas Linux y Nginx</span>.
+              <span className="text-orange-400 font-medium">Babel</span>), especialización en{' '}
+              <span className="text-orange-400 font-medium">Sistemas Linux y Nginx</span>, y apasionado por el{' '}
+              <strong className="text-zinc-100 font-semibold">desarrollo de videojuegos indie con Godot</strong>.
             </p>
 
             {/* Tactile Stickers/Badges (Inspiración Ref. 4) */}
@@ -67,11 +68,15 @@ export function Hero() {
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
                 LINUX & NGINX SYS
               </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-zinc-800 border border-zinc-700 text-zinc-200 font-mono text-xs font-medium transform -rotate-1 hover:rotate-0 transition-transform">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-purple-500/10 border border-purple-500/30 text-purple-300 font-mono text-xs font-medium transform -rotate-1 hover:rotate-0 transition-transform">
+                <Gamepad2 className="w-3.5 h-3.5 text-purple-400" />
+                GODOT & INDIE DEV
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-zinc-800 border border-zinc-700 text-zinc-200 font-mono text-xs font-medium transform rotate-1 hover:rotate-0 transition-transform">
                 <Cpu className="w-3.5 h-3.5 text-zinc-400" />
                 APPLE ATLAS
               </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-sky-500/10 border border-sky-500/30 text-sky-300 font-mono text-xs font-medium transform rotate-2 hover:rotate-0 transition-transform">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-sky-500/10 border border-sky-500/30 text-sky-300 font-mono text-xs font-medium transform -rotate-1 hover:rotate-0 transition-transform">
                 <Layers className="w-3.5 h-3.5 text-sky-400" />
                 REACT & TS
               </span>
@@ -193,10 +198,10 @@ export function Hero() {
         {/* Scroll anchor */}
         <div className="flex justify-center pt-4">
           <a
-            href="#pipeline"
+            href="#experiencia"
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900/60 border border-zinc-800/80 text-xs font-mono text-zinc-400 hover:text-zinc-200 hover:border-zinc-700 transition-colors"
           >
-            <span>Explorar Pipeline de Datos</span>
+            <span>Explorar Trayectoria</span>
             <ArrowDown className="w-3.5 h-3.5 text-orange-400 animate-bounce" />
           </a>
         </div>

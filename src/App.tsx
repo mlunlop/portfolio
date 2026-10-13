@@ -1,6 +1,6 @@
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
-import { DataPipelineWidget } from './components/DataPipelineWidget';
+import { ProjectsSection } from './components/ProjectsSection';
 import { ExperienceSection } from './components/ExperienceSection';
 import { EducationCertifications } from './components/EducationCertifications';
 import { TechStack } from './components/TechStack';
@@ -15,9 +15,9 @@ export function App() {
       {/* Main Single Page Content */}
       <main className="flex-1">
         <Hero />
-        <DataPipelineWidget />
         <ExperienceSection />
         <EducationCertifications />
+        <ProjectsSection />
         <TechStack />
       </main>
 
