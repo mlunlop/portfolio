@@ -211,7 +211,7 @@ export function ProjectsSection() {
             </h2>
           </div>
           <p className="text-sm text-zinc-400 max-w-md font-body">
-            Haz clic en cada proyecto para desplegar su arquitectura técnica, capturas y detalles de implementación.
+            Selección de desarrollos personales y experimentales, con foco en arquitectura, decisiones de diseño y código fuente.
           </p>
         </div>
 

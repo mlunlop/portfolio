@@ -1,11 +1,10 @@
-import { Database, Layout, TerminalSquare, Gamepad2 } from 'lucide-react';
+import { Database, Layout, TerminalSquare } from 'lucide-react';
 import { PORTFOLIO_DATA } from '../data/portfolioData';
 
 export function TechStack() {
   const getIcon = (category: string) => {
     if (category.includes('Data')) return Database;
     if (category.includes('Frontend')) return Layout;
-    if (category.includes('Game') || category.includes('Godot')) return Gamepad2;
     return TerminalSquare;
   };
 
@@ -24,12 +23,12 @@ export function TechStack() {
             </h2>
           </div>
           <p className="text-sm text-zinc-400 max-w-md font-body">
-            Sin barras de porcentaje arbitrarias. Herramientas, motores y entornos que utilizo en desarrollo profesional y proyectos propios.
+            Tecnologías, herramientas y entornos de trabajo con los que desarrollo proyectos y resuelvo problemas habitualmente.
           </p>
         </div>
 
         {/* Stack Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {PORTFOLIO_DATA.skills.map((category, idx) => {
             const Icon = getIcon(category.category);
             return (

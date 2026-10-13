@@ -49,7 +49,7 @@ export function EducationCertifications() {
             </h2>
           </div>
           <p className="text-sm text-zinc-400 max-w-md font-body">
-            Progresión continua y rigurosa: desde sistemas y desarrollo web bilingüe hasta la especialización en Machine Learning y el grado en informática.
+            Estudios oficiales en desarrollo de software, sistemas y especialización en ciencia de datos e inteligencia artificial.
           </p>
         </div>
 
@@ -128,7 +128,7 @@ export function EducationCertifications() {
               </div>
             </div>
             <p className="text-xs text-zinc-400 font-body max-w-xs">
-              Certificaciones oficiales de fabricante, idiomas y credenciales prácticas verificadas.
+              Acreditaciones técnicas emitidas por entidades reconocidas y certificación lingüística oficial.
             </p>
           </div>
 

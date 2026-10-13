@@ -34,8 +34,8 @@ export function Hero() {
             
             {/* Engineering Status Pill */}
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-400 font-mono text-xs font-semibold">
-              <span className="w-1.5 h-1.5 rounded-full bg-orange-400 " />
-              <span>DATA LIFECYCLE & MACHINE LEARNING</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-pulse" />
+              <span>FORMÁNDOME COMO SOFTWARE & ML ENGINEER</span>
             </div>
 
             {/* Massive Heading with Special Gothic Expanded One */}
@@ -44,18 +44,16 @@ export function Hero() {
                 Mario Luna
               </h1>
               <p className="text-xl sm:text-2xl md:text-3xl font-display uppercase text-zinc-400 tracking-tight">
-                Software & ML Engineer
+                Junior Software & ML Engineer
               </p>
             </div>
 
             {/* Bio with Inter body font */}
             <p className="text-base sm:text-lg text-zinc-300 font-body leading-relaxed max-w-xl font-normal">
-              Especialista en el ciclo de vida del dato: diseño de arquitecturas{' '}
-              <strong className="text-zinc-100 font-semibold">ETL, limpieza rigurosa, validación estadística y particionamiento</strong>{' '}
-              para alimentar modelos de Machine Learning. Con base sólida en desarrollo frontend de producción ({' '}
-              <span className="text-orange-400 font-medium">Babel</span>), especialización en{' '}
-              <span className="text-orange-400 font-medium">Sistemas Linux y Nginx</span>, y aficionado con el{' '}
-              desarrollo de videojuegos indie (Godot).
+              Desarrollador con base sólida en frontend y sistemas, actualmente{' '}
+              <strong className="text-zinc-100 font-semibold">
+                orientando mi perfil hacia la ingeniería de datos y Machine Learning
+              </strong>. Me interesa especialmente el trabajo con pipelines, preparación y análisis de datos, y en mi tiempo libre desarrollo pequeños videojuegos en Godot.
             </p>
 
             {/* Tactile Stickers/Badges (Inspiración Ref. 4) */}

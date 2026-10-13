@@ -37,10 +37,10 @@ export interface CertificationItem {
 export const PORTFOLIO_DATA = {
   personal: {
     name: 'Mario Luna López',
-    role: 'Software & Data / ML Engineer',
-    headline: 'Especialista en ciclo de vida del dato, pipelines ETL y Machine Learning, con base sólida en desarrollo frontend, sistemas Linux y desarrollo de videojuegos indie.',
+    role: 'Junior Software & ML Engineer',
+    headline: 'Desarrollador con base en frontend y sistemas, orientando mi perfil hacia ingeniería de datos y ML. Aficionado al desarrollo indie con Godot.',
     location: 'Granada, España',
-    status: 'Disponible para nuevos retos',
+    status: 'Formándome como Software & ML Engineer',
     email: 'mario.luna.lpez@gmail.com',
     linkedin: 'https://linkedin.com/in/m-luna-lpez',
     github: 'https://github.com/mlunlop',
@@ -58,10 +58,6 @@ export const PORTFOLIO_DATA = {
     {
       category: 'Sistemas & DevOps',
       items: ['Linux SysAdmin (Debian)', 'Nginx Web Server', 'Bash Scripting', 'Docker Containers', 'Git & CI/CD', 'Apple Atlas Diagnostics'],
-    },
-    {
-      category: 'Indie Game Dev (Godot)',
-      items: ['Godot Engine 4.x', 'GDScript Architecture', 'GLSL Shaders (.gdshader)', '2D Physics & State Machines', 'Mobile Viewport (iOS/Android)', 'Asynchronous Game Loops'],
     },
   ],
   experiences: [

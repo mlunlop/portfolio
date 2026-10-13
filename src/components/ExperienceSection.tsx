@@ -26,7 +26,7 @@ export function ExperienceSection() {
             </h2>
           </div>
           <p className="text-sm text-zinc-400 max-w-md font-body">
-            De la resolución de incidencias críticas en aplicaciones móviles al despliegue de chatbots y diagnóstico electrónico de hardware.
+            Roles y proyectos previos en soporte de software en producción, desarrollo web y diagnóstico técnico.
           </p>
         </div>
 
