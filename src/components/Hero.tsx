@@ -1,15 +1,20 @@
 import { useState } from 'react';
 import { Copy, Check, ArrowDown, Database, Cpu, ShieldCheck, Layers } from 'lucide-react';
-import { PORTFOLIO_DATA } from '../data/portfolioData';
+import { getPortfolioData } from '../data/portfolioData';
+import { useLanguage } from '../context/useLanguage';
+import { TRANSLATIONS } from '../data/translations';
 import { copyToClipboard } from '../utils/feedback';
 import { GithubIcon, LinkedinIcon, KaggleIcon } from './Icons';
 import profilePhoto from '../assets/profile.webp';
 
 export function Hero() {
   const [copied, setCopied] = useState(false);
+  const { language } = useLanguage();
+  const data = getPortfolioData(language);
+  const t = TRANSLATIONS[language].hero;
 
   const handleCopy = async () => {
-    const success = await copyToClipboard(PORTFOLIO_DATA.personal.email);
+    const success = await copyToClipboard(data.personal.email);
     if (success) {
       setCopied(true);
       setTimeout(() => setCopied(false), 2500);
@@ -35,44 +40,45 @@ export function Hero() {
             {/* Engineering Status Pill */}
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-400 font-mono text-xs font-semibold">
               <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-pulse" />
-              <span>FORMÁNDOME COMO SOFTWARE & ML ENGINEER</span>
+              <span>{t.status}</span>
             </div>
 
             {/* Massive Heading with Special Gothic Expanded One */}
             <div className="space-y-1">
               <h1 className="text-4xl sm:text-6xl md:text-7xl font-normal tracking-tight text-zinc-100 font-display uppercase leading-[0.9] select-none">
-                Mario Luna
+                {data.personal.name}
               </h1>
               <p className="text-xl sm:text-2xl md:text-3xl font-display uppercase text-zinc-400 tracking-tight">
-                Junior Software & ML Engineer
+                {t.role}
               </p>
             </div>
 
             {/* Bio with Inter body font */}
             <p className="text-base sm:text-lg text-zinc-300 font-body leading-relaxed max-w-xl font-normal">
-              Desarrollador con base sólida en frontend y sistemas, actualmente{' '}
+              {t.bioPart1}{' '}
               <strong className="text-zinc-100 font-semibold">
-                orientando mi perfil hacia la ingeniería de datos y Machine Learning
-              </strong>. Me interesa especialmente el trabajo con pipelines, preparación y análisis de datos, y en mi tiempo libre desarrollo pequeños videojuegos en Godot.
+                {t.bioHighlight}
+              </strong>
+              {t.bioPart2}
             </p>
 
-            {/* Tactile Stickers/Badges (Inspiración Ref. 4) */}
+            {/* Tactile Stickers/Badges */}
             <div className="flex flex-wrap gap-2 pt-2">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-amber-500/10 border border-amber-500/30 text-amber-300 font-mono text-xs font-medium transform -rotate-1 hover:rotate-0 transition-transform">
                 <Database className="w-3.5 h-3.5 text-amber-400" />
-                ETL & PARQUET
+                {t.stickers.etl}
               </span>
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 font-mono text-xs font-medium transform rotate-1 hover:rotate-0 transition-transform">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-                LINUX & NGINX SYS
+                {t.stickers.linux}
               </span>
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-zinc-800 border border-zinc-700 text-zinc-200 font-mono text-xs font-medium transform rotate-1 hover:rotate-0 transition-transform">
                 <Cpu className="w-3.5 h-3.5 text-zinc-400" />
-                APPLE ATLAS
+                {t.stickers.apple}
               </span>
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-sky-500/10 border border-sky-500/30 text-sky-300 font-mono text-xs font-medium transform -rotate-1 hover:rotate-0 transition-transform">
                 <Layers className="w-3.5 h-3.5 text-sky-400" />
-                REACT & TS
+                {t.stickers.react}
               </span>
             </div>
 
@@ -86,47 +92,47 @@ export function Hero() {
                 {copied ? (
                   <>
                     <Check className="w-4 h-4 text-zinc-950 stroke-[2.5]" />
-                    <span>¡Email copiado al portapapeles!</span>
+                    <span>{t.copiedEmail}</span>
                   </>
                 ) : (
                   <>
                     <Copy className="w-4 h-4 text-zinc-950 stroke-[2.5] group-hover:rotate-6 transition-transform" />
-                    <span>Copiar email</span>
+                    <span>{t.copyEmail}</span>
                   </>
                 )}
               </button>
 
               {/* LinkedIn */}
               <a
-                href={PORTFOLIO_DATA.personal.linkedin}
+                href={data.personal.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-4 py-3.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-zinc-700 text-zinc-200 text-sm font-medium transition-colors font-body"
               >
                 <LinkedinIcon className="w-4 h-4 text-sky-400" />
-                <span>LinkedIn</span>
+                <span>{t.social.linkedin}</span>
               </a>
 
               {/* GitHub */}
               <a
-                href={PORTFOLIO_DATA.personal.github}
+                href={data.personal.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-4 py-3.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-zinc-700 text-zinc-200 text-sm font-medium transition-colors font-body"
               >
                 <GithubIcon className="w-4 h-4 text-zinc-300" />
-                <span>GitHub</span>
+                <span>{t.social.github}</span>
               </a>
 
               {/* Kaggle */}
               <a
-                href={PORTFOLIO_DATA.personal.kaggle}
+                href={data.personal.kaggle}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-4 py-3.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-zinc-700 text-zinc-200 text-sm font-medium transition-colors font-body"
               >
                 <KaggleIcon className="w-4 h-4 text-cyan-400" />
-                <span>Kaggle</span>
+                <span>{t.social.kaggle}</span>
               </a>
             </div>
 
@@ -157,11 +163,10 @@ export function Hero() {
                     }}
                   />
 
-
                   {/* Mario's Portrait */}
                   <img
                     src={profilePhoto}
-                    alt="Mario Luna López"
+                    alt={data.personal.name}
                     className="relative z-0 w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
                     loading="eager"
                   />
@@ -172,16 +177,13 @@ export function Hero() {
                   {/* Bottom caption plate */}
                   <div className="absolute bottom-3 inset-x-3 z-20 flex items-center justify-between px-3 py-2 rounded-xl bg-zinc-950/90 backdrop-blur-md border border-zinc-800/90 text-xs">
                     <span className="font-display text-[11px] uppercase tracking-wider text-zinc-200">
-                      Mario Luna López
+                      {data.personal.name}
                     </span>
                     <span className="font-mono text-[10px] text-zinc-400">
-                      Granada, ES
+                      {language === 'es' ? 'Granada, ES' : 'Granada, Spain'}
                     </span>
                   </div>
                 </div>
-
-                {/* Overlapping Floating Stamp (Inspiración Ref. 4) */}
- 
               </div>
 
             </div>
@@ -195,7 +197,7 @@ export function Hero() {
             href="#experiencia"
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900/60 border border-zinc-800/80 text-xs font-mono text-zinc-400 hover:text-zinc-200 hover:border-zinc-700 transition-colors"
           >
-            <span>Explorar Trayectoria</span>
+            <span>{language === 'es' ? 'Explorar Trayectoria' : 'Explore Career'}</span>
             <ArrowDown className="w-3.5 h-3.5 text-orange-400 animate-bounce" />
           </a>
         </div>

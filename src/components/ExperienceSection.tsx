@@ -1,16 +1,22 @@
 import { Calendar, MapPin, Globe } from 'lucide-react';
-import { PORTFOLIO_DATA } from '../data/portfolioData';
+import { getPortfolioData } from '../data/portfolioData';
+import { useLanguage } from '../context/useLanguage';
+import { TRANSLATIONS } from '../data/translations';
 import babelLogo from '../assets/babel_icon.webp';
 import artebitLogo from '../assets/artebit_icon.webp';
 import multiserviceLogo from '../assets/sc_multiservice_icon.webp';
 
-const COMPANY_LOGOS: Record<string, { src: string; alt: string }> = {
-  babel: { src: babelLogo, alt: 'Logo de Babel' },
-  artebit: { src: artebitLogo, alt: 'Logo de Centro ArteBit' },
-  multiservice: { src: multiserviceLogo, alt: 'Logo de SC Multiservice' },
+const COMPANY_LOGOS: Record<string, { src: string }> = {
+  babel: { src: babelLogo },
+  artebit: { src: artebitLogo },
+  multiservice: { src: multiserviceLogo },
 };
 
 export function ExperienceSection() {
+  const { language } = useLanguage();
+  const data = getPortfolioData(language);
+  const t = TRANSLATIONS[language].experience;
+
   return (
     <section id="experiencia" className="py-20 border-t border-zinc-800/80 bg-zinc-950/50">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
@@ -19,20 +25,20 @@ export function ExperienceSection() {
           <div>
             <div className="flex items-center gap-2 font-mono text-xs text-orange-400 mb-2">
               <span className="w-1.5 h-1.5 rounded-full bg-orange-400" />
-              <span>TRAYECTORIA PROFESIONAL</span>
+              <span>{t.badge}</span>
             </div>
             <h2 className="text-3xl sm:text-5xl font-normal tracking-tight text-zinc-100 font-display uppercase">
-              Experiencia Laboral
+              {t.title}
             </h2>
           </div>
           <p className="text-sm text-zinc-400 max-w-md font-body">
-            Roles y proyectos previos en soporte de software en producción, desarrollo web y diagnóstico técnico.
+            {t.subtitle}
           </p>
         </div>
 
         {/* Timeline Items */}
         <div className="space-y-8">
-          {PORTFOLIO_DATA.experiences.map((exp) => {
+          {data.experiences.map((exp) => {
             const logo = COMPANY_LOGOS[exp.id];
 
             return (
@@ -48,7 +54,7 @@ export function ExperienceSection() {
                       <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white p-2 flex items-center justify-center shrink-0 border border-zinc-700/50 shadow-sm overflow-hidden transition-all duration-300 group-hover:border-zinc-500 group-hover:shadow-lg">
                         <img
                           src={logo.src}
-                          alt={logo.alt}
+                          alt={`${exp.company} Logo`}
                           className="w-full h-full object-contain transition-all duration-300 ease-out group-hover:scale-105"
                           loading="lazy"
                         />
@@ -66,7 +72,7 @@ export function ExperienceSection() {
                         {exp.id === 'multiservice' && (
                           <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-sky-950/60 border border-sky-800/60 text-sky-400 font-mono text-[11px]">
                             <Globe className="w-3 h-3" />
-                            Erasmus+ Brescia, Italia
+                            {language === 'es' ? 'Erasmus+ Brescia, Italia' : 'Erasmus+ Brescia, Italy'}
                           </span>
                         )}
                       </div>
@@ -107,13 +113,15 @@ export function ExperienceSection() {
 
                 {/* Tech chips */}
                 <div className="flex flex-wrap items-center gap-2 pt-4 border-t border-zinc-800/70">
-                  <span className="text-xs font-mono text-zinc-500 mr-2">Tecnologías:</span>
-                  {exp.technologies.map((t, i) => (
+                  <span className="text-xs font-mono text-zinc-500 mr-2">
+                    {language === 'es' ? 'Tecnologías:' : 'Technologies:'}
+                  </span>
+                  {exp.technologies.map((tech, i) => (
                     <span
                       key={i}
                       className="px-2 py-0.5 rounded bg-zinc-950 border border-zinc-800 text-zinc-300 font-mono text-xs"
                     >
-                      {t}
+                      {tech}
                     </span>
                   ))}
                 </div>

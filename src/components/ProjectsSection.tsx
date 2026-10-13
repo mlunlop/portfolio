@@ -20,6 +20,8 @@ import {
   Calendar,
   Palette,
 } from 'lucide-react';
+import { useLanguage } from '../context/useLanguage';
+import { TRANSLATIONS } from '../data/translations';
 import { GithubIcon } from './Icons';
 
 // Real visual assets from Bit-Party (Godot 4.7)
@@ -40,143 +42,70 @@ import thumbGiardino from '../assets/projects/daw/giardino-thumb.jpg';
 import thumbJapan from '../assets/projects/daw/japan-thumb.jpg';
 import { WebPreviewModal, type WebProject } from './WebPreviewModal';
 
-const DAW_WEB_PROJECTS: WebProject[] = [
+const MINIGAME_ASSETS: Record<string, { bg: string; logo: string; shader: string }> = {
+  powder_panic: { bg: powderBg, logo: powderLogo, shader: 'cartoon_explosion & prop_shadow.gdshader' },
+  aztec_wrath: { bg: aztecBg, logo: aztecLogo, shader: 'State Machine & Lane Spawner' },
+  tower_drop: { bg: towerBg, logo: towerLogo, shader: 'RigidBody2D & pixel_rotate.gdshader' },
+  neon_parry: { bg: neonBg, logo: neonLogo, shader: 'sword_slash & crt.gdshader' },
+};
+
+const DAW_STATIC_CONFIG: Record<
+  string,
   {
-    id: 'web-2pac',
-    title: '2PAC // The Rose That Grew From Concrete',
-    subtitle: 'Diseño UI/UX tributo musical, discografía & merch',
-    description:
-      'Composición visual con estética 90s West Coast. Prototipado y maquetación responsiva con video tours embebidos, galería de collage fotográfico y catálogo de merchandising.',
-    tags: ['UI/UX Vintage', 'HTML5 Semántico', 'CSS Media Queries', 'Video Streaming'],
-    url: '/projects/daw/WEB-2PAC/index.html',
+    thumbnail: string;
+    accentColor: string;
+    url: string;
+    tags: { es: string[]; en: string[] };
+  }
+> = {
+  'web-2pac': {
     thumbnail: thumb2pac,
     accentColor: 'from-violet-500/20 to-purple-600/10 border-violet-500/30 text-violet-400',
-    category: 'Música & Merch',
-    date: 'Octubre 2025',
+    url: '/projects/daw/WEB-2PAC/index.html',
+    tags: {
+      es: ['UI/UX Vintage', 'HTML5 Semántico', 'CSS Media Queries', 'Video Streaming'],
+      en: ['Vintage UI/UX', 'Semantic HTML5', 'CSS Media Queries', 'Video Streaming'],
+    },
   },
-  {
-    id: 'web-giardino',
-    title: 'Il Giardino Segreto // Haute Cuisine',
-    subtitle: 'Experiencia gastronómica editorial & sistema de reservas',
-    description:
-      'Diseño de interfaces elegante con arquitectura de menús gourmet, perfiles de chefs galardonados, integración de sellos Michelin/Repsol y flujo UI para reserva de mesas.',
-    tags: ['Diseño Editorial', 'CSS Grid & Flexbox', 'Formularios UX', 'Estética Gastronómica'],
-    url: '/projects/daw/WEB-GIARDINO-SEGRETO/index.html',
+  'web-giardino': {
     thumbnail: thumbGiardino,
     accentColor: 'from-emerald-500/20 to-teal-600/10 border-emerald-500/30 text-emerald-400',
-    category: 'Restaurante & Reservas',
-    date: 'Noviembre 2025',
+    url: '/projects/daw/WEB-GIARDINO-SEGRETO/index.html',
+    tags: {
+      es: ['Diseño Editorial', 'CSS Grid & Flexbox', 'Formularios UX', 'Estética Gastronómica'],
+      en: ['Editorial Layout', 'CSS Grid & Flexbox', 'UX Forms', 'Dining Aesthetics'],
+    },
   },
-  {
-    id: 'web-bmx',
-    title: 'Vortex BMX // Action Sports Culture',
-    subtitle: 'Portal de comunidad extrema con microinteracciones',
-    description:
-      'Identidad visual de alta energía con barra de scroll reactiva en tiempo real, catálogo interactivo de disciplinas (Street, Park, Flatland), eventos y microanimaciones de impacto.',
-    tags: ['Microinteracciones UI', 'Scroll Progress', 'CSS Keyframes', 'Diseño Deportivo'],
-    url: '/projects/daw/WEB-BMX-VORTEX/index.html',
+  'web-bmx': {
     thumbnail: thumbBmx,
     accentColor: 'from-amber-500/20 to-yellow-600/10 border-amber-500/30 text-amber-400',
-    category: 'Deportes Extremos',
-    date: 'Diciembre 2025',
+    url: '/projects/daw/WEB-BMX-VORTEX/index.html',
+    tags: {
+      es: ['Microinteracciones UI', 'Scroll Progress', 'CSS Keyframes', 'Diseño Deportivo'],
+      en: ['UI Micro-interactions', 'Scroll Progress', 'CSS Keyframes', 'Action Sports'],
+    },
   },
-  {
-    id: 'web-japan',
-    title: 'Visit Japan // Timeless Harmony',
-    subtitle: 'Portal de turismo experiencial multi-página',
-    description:
-      'Sistema de diseño minimalista con tipografía kanji, selector intuitivo de rutas culturales temáticas, exploración de prefecturas y maquetación fluida adaptada a todos los dispositivos.',
-    tags: ['Arquitectura de Información', 'Sistemas de Diseño UI', 'Multi-página', 'Diseño Responsive'],
-    url: '/projects/daw/WEB-JAPAN/index.html',
+  'web-japan': {
     thumbnail: thumbJapan,
     accentColor: 'from-rose-500/20 to-red-600/10 border-rose-500/30 text-rose-400',
-    category: 'Turismo & Editorial',
-    date: 'Enero 2026',
+    url: '/projects/daw/WEB-JAPAN/index.html',
+    tags: {
+      es: ['Arquitectura de Información', 'Sistemas de Diseño UI', 'Multi-página', 'Diseño Responsive'],
+      en: ['Information Architecture', 'UI Design Systems', 'Multi-page Layout', 'Responsive Design'],
+    },
   },
-];
+};
 
-interface VisualMinigame {
-  id: string;
-  title: string;
-  genre: string;
-  bg: string;
-  logo: string;
-  mechanic: string;
-  shader: string;
-  scoreLabel: string;
-}
-
-const VISUAL_MINIGAMES: VisualMinigame[] = [
-  {
-    id: 'powder_panic',
-    title: 'Powder Panic',
-    genre: 'Pirate Galleon Shootout',
-    bg: powderBg,
-    logo: powderLogo,
-    mechanic: 'Dispara a los bucaneros emergentes y cofres dorados para encadenar combos sin tocar los barriles de pólvora.',
-    shader: 'cartoon_explosion & prop_shadow.gdshader',
-    scoreLabel: 'COMBO x4 // +350 PTS',
-  },
-  {
-    id: 'aztec_wrath',
-    title: 'Aztec Wrath',
-    genre: '16-Bit 4-Lane Temple Defense',
-    bg: aztecBg,
-    logo: aztecLogo,
-    mechanic: 'Defiende el altar con el tirachinas ceremonial, sobrecarga el Orbe Solar y arriesga en el borde x4.',
-    shader: 'State Machine & Lane Spawner',
-    scoreLabel: 'ALTAR x4 // +820 PTS',
-  },
-  {
-    id: 'tower_drop',
-    title: 'Tower Drop',
-    genre: 'Physics Skyscraper Builder',
-    bg: towerBg,
-    logo: towerLogo,
-    mechanic: 'Alinea la grúa y apila bloques modulares con físicas en tiempo real manteniendo el equilibrio del rascacielos.',
-    shader: 'RigidBody2D & pixel_rotate.gdshader',
-    scoreLabel: 'ALTURA: 42M // PERFECT',
-  },
-  {
-    id: 'neon_parry',
-    title: 'Neon Parry',
-    genre: 'Directional Timing Trial',
-    bg: neonBg,
-    logo: neonLogo,
-    mechanic: 'Desvía proyectiles en 3 direcciones con timing milimétrico dentro del anillo de parry.',
-    shader: 'sword_slash & crt.gdshader',
-    scoreLabel: 'PARRY STREAK: 18',
-  },
-];
-
-const DAILY_LOOP_STEPS = [
-  {
-    phase: '01',
-    title: 'Fase de Tablero',
-    icon: Dices,
-    accent: 'text-amber-400 border-amber-500/30 bg-amber-500/10',
-    description:
-      'Cada jugador entra cuando puede a lo largo del día, tira el dado y cae en casillas de monedas, eventos, trampas o compra de estrella.',
-  },
-  {
-    phase: '02',
-    title: 'Fase de Minijuego',
-    icon: Gamepad2,
-    accent: 'text-purple-400 border-purple-500/30 bg-purple-500/10',
-    description:
-      'Tras mover en el tablero, el jugador disputa el minijuego de la ronda en solitario para registrar su puntuación.',
-  },
-  {
-    phase: '03',
-    title: 'Cierre de Ronda (24h)',
-    icon: Trophy,
-    accent: 'text-emerald-400 border-emerald-500/30 bg-emerald-500/10',
-    description:
-      'Cuando todos juegan (o tras 24h máximas con turno automático de CPU), se reparten monedas según el ranking y arranca la siguiente ronda.',
-  },
+const DAILY_LOOP_ICONS = [
+  { icon: Dices, accent: 'text-amber-400 border-amber-500/30 bg-amber-500/10' },
+  { icon: Gamepad2, accent: 'text-purple-400 border-purple-500/30 bg-purple-500/10' },
+  { icon: Trophy, accent: 'text-emerald-400 border-emerald-500/30 bg-emerald-500/10' },
 ];
 
 export function ProjectsSection() {
+  const { language } = useLanguage();
+  const t = TRANSLATIONS[language].projects;
+
   // Accordion state: all closed by default
   const [openProject, setOpenProject] = useState<string | null>(null);
   const [activeSlide, setActiveSlide] = useState<number>(0);
@@ -186,15 +115,36 @@ export function ProjectsSection() {
     setOpenProject((prev) => (prev === id ? null : id));
   };
 
-  const currentMinigame = VISUAL_MINIGAMES[activeSlide];
+  const minigames = t.bitParty.minigames.map((m) => ({
+    ...m,
+    ...MINIGAME_ASSETS[m.id],
+  }));
+
+  const currentMinigame = minigames[activeSlide] || minigames[0];
 
   const nextSlide = () => {
-    setActiveSlide((prev) => (prev + 1) % VISUAL_MINIGAMES.length);
+    setActiveSlide((prev) => (prev + 1) % minigames.length);
   };
 
   const prevSlide = () => {
-    setActiveSlide((prev) => (prev - 1 + VISUAL_MINIGAMES.length) % VISUAL_MINIGAMES.length);
+    setActiveSlide((prev) => (prev - 1 + minigames.length) % minigames.length);
   };
+
+  const dawProjects: WebProject[] = t.dawDesigns.projects.map((proj) => {
+    const config = DAW_STATIC_CONFIG[proj.id];
+    return {
+      id: proj.id,
+      title: proj.title,
+      subtitle: proj.subtitle,
+      description: proj.description,
+      category: proj.category,
+      date: proj.date,
+      tags: config.tags[language],
+      url: config.url,
+      thumbnail: config.thumbnail,
+      accentColor: config.accentColor,
+    };
+  });
 
   return (
     <section id="proyectos" className="py-20 border-t border-zinc-800/80 bg-zinc-950/40">
@@ -204,14 +154,14 @@ export function ProjectsSection() {
           <div>
             <div className="flex items-center gap-2 font-mono text-xs text-orange-400 mb-2">
               <span className="w-1.5 h-1.5 rounded-full bg-orange-400" />
-              <span>MIS PROYECTOS PERSONALES</span>
+              <span>{t.badge}</span>
             </div>
             <h2 className="text-3xl sm:text-5xl font-normal tracking-tight text-zinc-100 font-display uppercase">
-              Proyectos Destacados
+              {t.title}
             </h2>
           </div>
           <p className="text-sm text-zinc-400 max-w-md font-body">
-            Selección de desarrollos personales y experimentales, con foco en arquitectura, decisiones de diseño y código fuente.
+            {t.subtitle}
           </p>
         </div>
 
@@ -235,7 +185,7 @@ export function ProjectsSection() {
               className="w-full px-5 py-5 sm:px-7 sm:py-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-left cursor-pointer group"
             >
               <div className="flex items-center gap-4">
-                {/* Number & Pixel Art Character Icon */}
+                {/* Pixel Art Character Icon */}
                 <div className="relative w-14 h-14 rounded-xl bg-zinc-950 border border-zinc-800 overflow-hidden shrink-0 flex items-center justify-center p-1.5 group-hover:border-purple-500/40 transition-colors">
                   <img
                     src={bitPartyIcon}
@@ -248,23 +198,23 @@ export function ProjectsSection() {
                 <div>
                   <div className="flex flex-wrap items-center gap-2 mb-1">
                     <span className="font-mono text-[11px] text-purple-400 font-semibold uppercase tracking-wider">
-                      INDIE GAME DEV
+                      {t.bitParty.category}
                     </span>
                     <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 font-mono text-[10px]">
                       <span className="w-1.5 h-1.5 rounded-full bg-amber-400 " />
-                      En Desarrollo (iOS & Android)
+                      {t.bitParty.status}
                     </span>
                     <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-zinc-800 border border-zinc-700 text-zinc-400 font-mono text-[10px]">
                       <Lock className="w-2.5 h-2.5" />
-                      Repo Privado
+                      {t.bitParty.repo}
                     </span>
                   </div>
 
                   <h3 className="text-xl sm:text-2xl font-normal text-zinc-100 font-display uppercase tracking-tight group-hover:text-orange-400 transition-colors">
-                    Bit-Party
+                    {t.bitParty.title}
                   </h3>
                   <p className="text-xs sm:text-sm text-zinc-400 font-body line-clamp-1">
-                    Juego móvil vertical de tablero y 13 minijuegos en pixel art estilo Mario Party (1 turno asíncrono al día).
+                    {t.bitParty.subtitle}
                   </p>
                 </div>
               </div>
@@ -301,7 +251,7 @@ export function ProjectsSection() {
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-4 items-center">
                   {/* Left Column (5 cols): Interactive Mobile Viewport Capture Showcase */}
                   <div className="lg:col-span-5 flex flex-col items-center">
-                    {/* Smartphone Vertical Frame (720x1280 proportion) */}
+                    {/* Smartphone Vertical Frame */}
                     <div className="relative w-full max-w-[270px] aspect-[9/16] rounded-[28px] p-2.5 bg-zinc-900 border-2 border-zinc-700/90 shadow-2xl shadow-black">
                       {/* Top Speaker Notch */}
                       <div className="absolute top-4 left-1/2 -translate-x-1/2 z-30 w-16 h-1.5 rounded-full bg-zinc-950/90 border border-zinc-800" />
@@ -316,7 +266,7 @@ export function ProjectsSection() {
                           style={{ imageRendering: 'pixelated' }}
                         />
 
-                        {/* CRT Scanline Subtle Overlay */}
+                        {/* CRT Scanline Overlay */}
                         <div
                           className="absolute inset-0 pointer-events-none opacity-25 z-10"
                           style={{
@@ -331,7 +281,7 @@ export function ProjectsSection() {
                         {/* Top In-Game HUD Bar */}
                         <div className="relative z-20 pt-6 px-3.5 flex items-center justify-between text-[10px] font-mono">
                           <span className="px-2 py-0.5 rounded bg-zinc-950/80 border border-zinc-700/80 text-amber-300">
-                            RONDA DIARIA
+                            {language === 'es' ? 'RONDA DIARIA' : 'DAILY ROUND'}
                           </span>
                           <span className="px-2 py-0.5 rounded bg-zinc-950/80 border border-zinc-700/80 text-zinc-300">
                             720×1280
@@ -350,23 +300,19 @@ export function ProjectsSection() {
 
                         {/* Bottom In-Game Overlay Info */}
                         <div className="relative z-20 p-3.5 space-y-2">
-
-
                           <div className="p-2.5 rounded-xl bg-zinc-950/90 backdrop-blur-md border border-zinc-800/90">
-                            <div className="flex items-center justify-between text-[10px] font-mono text-purple-400 mb-0.5">
-                            </div>
                             <p className="text-[11px] text-zinc-300 font-body leading-snug">
                               {currentMinigame.mechanic}
                             </p>
                           </div>
                         </div>
 
-                        {/* Prev / Next Controls on Screen Edges */}
+                        {/* Prev / Next Controls */}
                         <button
                           type="button"
                           onClick={prevSlide}
                           className="absolute left-2 top-1/2 -translate-y-1/2 z-30 w-7 h-7 rounded-full bg-zinc-950/80 hover:bg-zinc-900 border border-zinc-700 text-zinc-200 flex items-center justify-center cursor-pointer transition-colors"
-                          aria-label="Minijuego anterior"
+                          aria-label={language === 'es' ? 'Minijuego anterior' : 'Previous minigame'}
                         >
                           <ChevronLeft className="w-4 h-4" />
                         </button>
@@ -374,7 +320,7 @@ export function ProjectsSection() {
                           type="button"
                           onClick={nextSlide}
                           className="absolute right-2 top-1/2 -translate-y-1/2 z-30 w-7 h-7 rounded-full bg-zinc-950/80 hover:bg-zinc-900 border border-zinc-700 text-zinc-200 flex items-center justify-center cursor-pointer transition-colors"
-                          aria-label="Siguiente minijuego"
+                          aria-label={language === 'es' ? 'Siguiente minijuego' : 'Next minigame'}
                         >
                           <ChevronRight className="w-4 h-4" />
                         </button>
@@ -383,7 +329,7 @@ export function ProjectsSection() {
 
                     {/* Thumbnail Selector Bar below phone */}
                     <div className="flex items-center gap-2 mt-4">
-                      {VISUAL_MINIGAMES.map((game, idx) => (
+                      {minigames.map((game, idx) => (
                         <button
                           key={game.id}
                           type="button"
@@ -405,7 +351,9 @@ export function ProjectsSection() {
                       ))}
                     </div>
                     <span className="text-[11px] font-mono text-zinc-500 mt-2">
-                      Arte y logos in-game reales (Selecciona para cambiar escena)
+                      {language === 'es'
+                        ? 'Arte y logos in-game reales (Selecciona para cambiar escena)'
+                        : 'In-game assets & logos (Select to switch scene)'}
                     </span>
                   </div>
 
@@ -415,10 +363,14 @@ export function ProjectsSection() {
                     <div className="space-y-2">
                       <div className="inline-flex items-center gap-2 text-xs font-mono text-orange-400">
                         <Smartphone className="w-3.5 h-3.5" />
-                        <span>CONCEPTO & ARQUITECTURA DE JUEGO // LANZAMIENTO iOS & ANDROID</span>
+                        <span>
+                          {language === 'es'
+                            ? 'CONCEPTO & ARQUITECTURA DE JUEGO // LANZAMIENTO iOS & ANDROID'
+                            : 'GAME CONCEPT & ARCHITECTURE // iOS & ANDROID LAUNCH'}
+                        </span>
                       </div>
                       <p className="text-sm sm:text-base text-zinc-300 font-body leading-relaxed">
-                        Juego móvil vertical de tablero y minijuegos en pixel art estilo <strong className="text-zinc-100">Mario Party</strong>, diseñado para jugarse de forma <strong className="text-zinc-100">asíncrona entre amigos con 1 turno al día</strong>. El objetivo es conseguir la mayor cantidad de estrellas comprándolas en el tablero con las monedas ganadas.
+                        {t.bitParty.overview}
                       </p>
                     </div>
 
@@ -427,30 +379,42 @@ export function ProjectsSection() {
                       <div className="p-3.5 rounded-xl bg-zinc-900/80 border border-zinc-800">
                         <div className="flex items-center gap-1.5 text-orange-400 font-mono text-xs mb-1">
                           <Users className="w-3.5 h-3.5" />
-                          <span>SALAS PRIVADAS</span>
+                          <span>{language === 'es' ? 'SALAS PRIVADAS' : 'PRIVATE ROOMS'}</span>
                         </div>
                         <p className="text-xs text-zinc-300 font-body">
-                          Partidas de hasta <strong>5 jugadores</strong> mediante código de invitación.
+                          {language === 'es' ? (
+                            <>Partidas de hasta <strong>5 jugadores</strong> mediante código de invitación.</>
+                          ) : (
+                            <>Matches for up to <strong>5 players</strong> via private room code.</>
+                          )}
                         </p>
                       </div>
 
                       <div className="p-3.5 rounded-xl bg-zinc-900/80 border border-zinc-800">
                         <div className="flex items-center gap-1.5 text-purple-400 font-mono text-xs mb-1">
                           <Bot className="w-3.5 h-3.5" />
-                          <span>SOPORTE BOTS</span>
+                          <span>{language === 'es' ? 'SOPORTE BOTS' : 'BOT SUPPORT'}</span>
                         </div>
                         <p className="text-xs text-zinc-300 font-body">
-                          Relleno de huecos libres con <strong>CPUs</strong> y turno automático a las 24h.
+                          {language === 'es' ? (
+                            <>Relleno de huecos libres con <strong>CPUs</strong> y turno automático a las 24h.</>
+                          ) : (
+                            <>Free slots filled with <strong>CPUs</strong> and auto-turns at 24h.</>
+                          )}
                         </p>
                       </div>
 
                       <div className="p-3.5 rounded-xl bg-zinc-900/80 border border-zinc-800">
                         <div className="flex items-center gap-1.5 text-amber-400 font-mono text-xs mb-1">
                           <Star className="w-3.5 h-3.5" />
-                          <span>13 MINIJUEGOS</span>
+                          <span>{language === 'es' ? '13 MINIJUEGOS' : '13 MINIGAMES'}</span>
                         </div>
                         <p className="text-xs text-zinc-300 font-body">
-                          Catálogo arcade propio con físicas 2D, shaders CRT y control táctil.
+                          {language === 'es' ? (
+                            <>Catálogo arcade propio con físicas 2D, shaders CRT y control táctil.</>
+                          ) : (
+                            <>Proprietary arcade catalog with 2D physics, CRT shaders, and touch feel.</>
+                          )}
                         </p>
                       </div>
                     </div>
@@ -459,26 +423,27 @@ export function ProjectsSection() {
                     <div className="space-y-2.5">
                       <h4 className="text-xs font-mono uppercase tracking-wider text-zinc-400 flex items-center gap-2">
                         <Sparkles className="w-3.5 h-3.5 text-orange-400" />
-                        <span>Bucle de Ronda Diaria:</span>
+                        <span>{language === 'es' ? 'Bucle de Ronda Diaria:' : 'Daily Round Loop:'}</span>
                       </h4>
 
                       <div className="space-y-2.5">
-                        {DAILY_LOOP_STEPS.map((step) => {
-                          const Icon = step.icon;
+                        {t.bitParty.dailyLoopSteps.map((step, idx) => {
+                          const iconConfig = DAILY_LOOP_ICONS[idx] || DAILY_LOOP_ICONS[0];
+                          const Icon = iconConfig.icon;
                           return (
                             <div
                               key={step.phase}
                               className="p-3.5 rounded-xl bg-zinc-900/60 border border-zinc-800/90 flex items-start gap-3.5"
                             >
                               <div
-                                className={`w-8 h-8 rounded-lg border flex items-center justify-center shrink-0 mt-0.5 ${step.accent}`}
+                                className={`w-8 h-8 rounded-lg border flex items-center justify-center shrink-0 mt-0.5 ${iconConfig.accent}`}
                               >
                                 <Icon className="w-4 h-4" />
                               </div>
                               <div>
                                 <div className="flex items-center gap-2">
                                   <span className="font-mono text-[10px] text-zinc-500">
-                                    FASE {step.phase}
+                                    {language === 'es' ? `FASE ${step.phase}` : `PHASE ${step.phase}`}
                                   </span>
                                   <h5 className="text-xs sm:text-sm font-normal text-zinc-100 font-display uppercase">
                                     {step.title}
@@ -524,19 +489,19 @@ export function ProjectsSection() {
                 <div>
                   <div className="flex flex-wrap items-center gap-2 mb-1">
                     <span className="font-mono text-[11px] text-orange-400 font-semibold uppercase tracking-wider">
-                      DESARROLLO WEB
+                      {t.portfolioProject.category}
                     </span>
                     <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 font-mono text-[10px]">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                      En Producción
+                      {t.portfolioProject.status}
                     </span>
                   </div>
 
                   <h3 className="text-xl sm:text-2xl font-normal text-zinc-100 font-display uppercase tracking-tight group-hover:text-orange-400 transition-colors">
-                    Portfolio Personal
+                    {t.portfolioProject.title}
                   </h3>
                   <p className="text-xs sm:text-sm text-zinc-400 font-body line-clamp-1">
-                    SPA de alto rendimiento con visor documental PDF a medida, diseño industrial y protección anti-spam.
+                    {t.portfolioProject.subtitle}
                   </p>
                 </div>
               </div>
@@ -572,7 +537,7 @@ export function ProjectsSection() {
               <div className="px-5 pb-7 pt-4 sm:px-7 sm:pb-8 border-t border-zinc-800/80 bg-zinc-950/40 space-y-6 animate-in fade-in duration-200">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                   <p className="text-sm sm:text-base text-zinc-300 font-body leading-relaxed max-w-2xl">
-                    Desarrollo integral de esta aplicación web concebida bajo una estética de <strong className="text-zinc-100">blueprint técnico</strong>. Construida sin plantillas prefabricadas priorizando velocidad de carga, tipado estricto y experiencia de usuario.
+                    {t.portfolioProject.description}
                   </p>
 
                   <a
@@ -582,7 +547,7 @@ export function ProjectsSection() {
                     className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-zinc-100 text-xs font-mono transition-colors shrink-0 self-start"
                   >
                     <GithubIcon className="w-4 h-4" />
-                    <span>Ver Repositorio en GitHub</span>
+                    <span>{t.portfolioProject.viewRepo}</span>
                     <ExternalLink className="w-3.5 h-3.5 text-zinc-400" />
                   </a>
                 </div>
@@ -591,30 +556,30 @@ export function ProjectsSection() {
                   <div className="p-4 rounded-xl bg-zinc-900/70 border border-zinc-800 space-y-1.5">
                     <div className="flex items-center gap-2 text-sky-400 font-mono text-xs">
                       <Layers className="w-4 h-4" />
-                      <span>ARQUITECTURA UI</span>
+                      <span>{t.portfolioProject.card1Title}</span>
                     </div>
                     <p className="text-xs text-zinc-400 font-body leading-relaxed">
-                      React 19 + TypeScript estricto + Tailwind CSS v4 con tokens tipográficos propios y retícula técnica CAD.
+                      {t.portfolioProject.card1Desc}
                     </p>
                   </div>
 
                   <div className="p-4 rounded-xl bg-zinc-900/70 border border-zinc-800 space-y-1.5">
                     <div className="flex items-center gap-2 text-orange-400 font-mono text-xs">
                       <FileText className="w-4 h-4" />
-                      <span>VISOR DOCUMENTAL PDF</span>
+                      <span>{t.portfolioProject.card2Title}</span>
                     </div>
                     <p className="text-xs text-zinc-400 font-body leading-relaxed">
-                      Modal reutilizable con ocultación de barras nativas del navegador y descarga directa para CV y títulos oficiales.
+                      {t.portfolioProject.card2Desc}
                     </p>
                   </div>
 
                   <div className="p-4 rounded-xl bg-zinc-900/70 border border-zinc-800 space-y-1.5">
                     <div className="flex items-center gap-2 text-emerald-400 font-mono text-xs">
                       <ShieldCheck className="w-4 h-4" />
-                      <span>OPTIMIZACIÓN & ACCESIBILIDAD</span>
+                      <span>{t.portfolioProject.card3Title}</span>
                     </div>
                     <p className="text-xs text-zinc-400 font-body leading-relaxed">
-                      Estructura semántica, rendimiento óptimo en carga estática y comunicación directa sin intermediarios.
+                      {t.portfolioProject.card3Desc}
                     </p>
                   </div>
                 </div>
@@ -647,19 +612,19 @@ export function ProjectsSection() {
                 <div>
                   <div className="flex flex-wrap items-center gap-2 mb-1">
                     <span className="font-mono text-[11px] text-rose-400 font-semibold uppercase tracking-wider">
-                      DISEÑO UI/UX // DAW
+                      {t.dawDesigns.category}
                     </span>
                     <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-rose-500/10 border border-rose-500/30 text-rose-300 font-mono text-[10px]">
                       <span className="w-1.5 h-1.5 rounded-full bg-rose-400" />
-                      4 Páginas (Oct 25 – Ene 26)
+                      {t.dawDesigns.status}
                     </span>
                   </div>
 
                   <h3 className="text-xl sm:text-2xl font-normal text-zinc-100 font-display uppercase tracking-tight group-hover:text-rose-400 transition-colors truncate">
-                    Diseño UI/UX (DAW)
+                    {t.dawDesigns.title}
                   </h3>
                   <p className="text-xs sm:text-sm text-zinc-400 font-body line-clamp-1">
-                    Colección cronológica de maquetación, arquitectura de información y prototipado desarrollados en interfaces web.
+                    {t.dawDesigns.subtitle}
                   </p>
                 </div>
               </div>
@@ -674,7 +639,7 @@ export function ProjectsSection() {
                     HTML5 & CSS3
                   </span>
                   <span className="hidden lg:inline-block px-2.5 py-1 rounded-md bg-zinc-950 border border-zinc-800 text-zinc-300 font-mono text-[11px]">
-                    Responsive Multi-Device
+                    Responsive
                   </span>
                 </div>
 
@@ -695,16 +660,16 @@ export function ProjectsSection() {
               <div className="px-5 pb-7 pt-4 sm:px-7 sm:pb-8 border-t border-zinc-800/80 bg-zinc-950/40 space-y-6 animate-in fade-in duration-200">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-b border-zinc-800/60">
                   <p className="text-xs sm:text-sm text-zinc-400 font-body">
-                    Proyectos estáticos ordenados por fecha de creación (Oct 2025 → Ene 2026). Pulsa <strong className="text-zinc-200 font-medium">"Ver en Vivo"</strong> para probar la respuesta interactiva y selector de pantallas.
+                    {t.dawDesigns.intro} <strong className="text-zinc-200 font-medium">{t.dawDesigns.introHighlight}</strong> {t.dawDesigns.introEnd}
                   </p>
                   <span className="text-[11px] font-mono text-zinc-500 shrink-0">
-                    4 entregas cronológicas
+                    {t.dawDesigns.counter}
                   </span>
                 </div>
 
                 {/* 2x2 Responsive Grid of Web Projects */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  {DAW_WEB_PROJECTS.map((proj) => (
+                  {dawProjects.map((proj) => (
                     <div
                       key={proj.id}
                       className="group/card flex flex-col rounded-xl bg-zinc-900/60 border border-zinc-800/90 hover:border-zinc-700 overflow-hidden transition-all duration-200 hover:shadow-xl hover:shadow-black/50"
@@ -771,7 +736,7 @@ export function ProjectsSection() {
                             className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-orange-500 hover:bg-orange-400 text-zinc-950 font-medium text-xs font-mono transition-all duration-150 active:scale-95 cursor-pointer shadow-sm"
                           >
                             <Eye className="w-3.5 h-3.5 stroke-[2.5]" />
-                            <span>Ver en Vivo</span>
+                            <span>{t.dawDesigns.liveBtn}</span>
                           </button>
 
                           <a
@@ -779,7 +744,7 @@ export function ProjectsSection() {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="p-2 rounded-lg bg-zinc-800/90 hover:bg-zinc-700 text-zinc-300 hover:text-white border border-zinc-700/80 transition-colors"
-                            title="Abrir en pestaña nueva"
+                            title={language === 'es' ? 'Abrir en pestaña nueva' : 'Open in new tab'}
                           >
                             <ExternalLink className="w-4 h-4" />
                           </a>

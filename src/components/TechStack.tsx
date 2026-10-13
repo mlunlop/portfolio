@@ -1,7 +1,13 @@
 import { Database, Layout, TerminalSquare } from 'lucide-react';
-import { PORTFOLIO_DATA } from '../data/portfolioData';
+import { getPortfolioData } from '../data/portfolioData';
+import { useLanguage } from '../context/useLanguage';
+import { TRANSLATIONS } from '../data/translations';
 
 export function TechStack() {
+  const { language } = useLanguage();
+  const data = getPortfolioData(language);
+  const t = TRANSLATIONS[language].techStack;
+
   const getIcon = (category: string) => {
     if (category.includes('Data')) return Database;
     if (category.includes('Frontend')) return Layout;
@@ -16,20 +22,20 @@ export function TechStack() {
           <div>
             <div className="flex items-center gap-2 font-mono text-xs text-orange-400 mb-2">
               <span className="w-1.5 h-1.5 rounded-full bg-orange-400" />
-              <span>MIS CAPACIDADES</span>
+              <span>{t.badge}</span>
             </div>
             <h2 className="text-3xl sm:text-5xl font-normal tracking-tight text-zinc-100 font-display uppercase">
-              Stack Técnico
+              {t.title}
             </h2>
           </div>
           <p className="text-sm text-zinc-400 max-w-md font-body">
-            Tecnologías, herramientas y entornos de trabajo con los que desarrollo proyectos y resuelvo problemas habitualmente.
+            {t.subtitle}
           </p>
         </div>
 
         {/* Stack Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {PORTFOLIO_DATA.skills.map((category, idx) => {
+          {data.skills.map((category, idx) => {
             const Icon = getIcon(category.category);
             return (
               <div

@@ -10,6 +10,8 @@ import {
   Globe,
   Maximize2,
 } from 'lucide-react';
+import { useLanguage } from '../context/useLanguage';
+import { TRANSLATIONS } from '../data/translations';
 
 export interface WebProject {
   id: string;
@@ -37,6 +39,9 @@ export function WebPreviewModal({
   onClose,
   project,
 }: WebPreviewModalProps) {
+  const { language } = useLanguage();
+  const t = TRANSLATIONS[language].modals.web;
+
   const [device, setDevice] = useState<DeviceMode>('desktop');
   const [isLoading, setIsLoading] = useState(true);
   const [key, setKey] = useState(0);
@@ -129,7 +134,7 @@ export function WebPreviewModal({
             <button
               type="button"
               onClick={() => setDevice('desktop')}
-              title="Vista Escritorio (100%)"
+              title={t.desktopView}
               className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-mono transition-all ${
                 device === 'desktop'
                   ? 'bg-orange-500 text-zinc-950 font-semibold shadow-sm'
@@ -142,7 +147,7 @@ export function WebPreviewModal({
             <button
               type="button"
               onClick={() => setDevice('tablet')}
-              title="Vista Tablet (768px)"
+              title={t.tabletView}
               className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-mono transition-all ${
                 device === 'tablet'
                   ? 'bg-orange-500 text-zinc-950 font-semibold shadow-sm'
@@ -155,7 +160,7 @@ export function WebPreviewModal({
             <button
               type="button"
               onClick={() => setDevice('mobile')}
-              title="Vista Móvil (375px)"
+              title={t.mobileView}
               className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-mono transition-all ${
                 device === 'mobile'
                   ? 'bg-orange-500 text-zinc-950 font-semibold shadow-sm'
@@ -163,7 +168,7 @@ export function WebPreviewModal({
               }`}
             >
               <Smartphone className="w-3.5 h-3.5" />
-              <span className="hidden md:inline">Móvil</span>
+              <span className="hidden md:inline">{language === 'es' ? 'Móvil' : 'Mobile'}</span>
             </button>
           </div>
 
@@ -173,7 +178,7 @@ export function WebPreviewModal({
               type="button"
               onClick={handleReload}
               className="p-1.5 rounded-lg text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors"
-              title="Recargar frame"
+              title={t.reload}
             >
               <RotateCw className="w-4 h-4" />
             </button>
@@ -181,18 +186,18 @@ export function WebPreviewModal({
               href={project.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-200 hover:text-white font-mono text-xs border border-zinc-700 transition-all cursor-pointer"
-              title="Abrir en pestaña nueva a pantalla completa"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-200 hover:white font-mono text-xs border border-zinc-700 transition-all cursor-pointer"
+              title={t.openTab}
             >
               <Maximize2 className="w-3.5 h-3.5 hidden sm:inline" />
-              <span>Abrir fuera</span>
+              <span>{language === 'es' ? 'Abrir fuera' : 'Open external'}</span>
               <ExternalLink className="w-3 h-3 text-zinc-400" />
             </a>
             <button
               type="button"
               onClick={onClose}
               className="p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors"
-              title="Cerrar modal (Esc)"
+              title={t.close}
             >
               <X className="w-5 h-5" />
             </button>
@@ -207,10 +212,7 @@ export function WebPreviewModal({
               <Loader2 className="w-8 h-8 text-orange-500 animate-spin" />
               <div className="text-center">
                 <p className="text-sm font-medium text-zinc-200 font-display">
-                  Cargando {project.title}...
-                </p>
-                <p className="text-xs text-zinc-500 font-mono mt-0.5">
-                  Descargando recursos multimedia estáticos
+                  {t.loading}
                 </p>
               </div>
             </div>
