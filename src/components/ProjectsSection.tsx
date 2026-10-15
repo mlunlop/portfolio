@@ -8,7 +8,7 @@ import {
   Trophy,
   ExternalLink,
   Layers,
-  ShieldCheck,
+  Globe,
   FileText,
   Users,
   Bot,
@@ -558,6 +558,9 @@ export function ProjectsSection() {
                   <span className="hidden lg:inline-block px-2.5 py-1 rounded-md bg-zinc-950 border border-zinc-800 text-zinc-300 font-mono text-[11px]">
                     Tailwind v4
                   </span>
+                  <span className="hidden lg:inline-block px-2.5 py-1 rounded-md bg-zinc-950 border border-zinc-800 text-zinc-300 font-mono text-[11px]">
+                    Netlify
+                  </span>
                 </div>
 
                 <div
@@ -637,7 +640,7 @@ export function ProjectsSection() {
 
                       <div className="p-4 rounded-xl bg-zinc-900/70 border border-zinc-800 space-y-1.5">
                         <div className="flex items-center gap-2 text-emerald-400 font-mono text-xs">
-                          <ShieldCheck className="w-4 h-4" />
+                          <Globe className="w-4 h-4" />
                           <span>{t.portfolioProject.card3Title}</span>
                         </div>
                         <p className="text-xs text-zinc-400 font-body leading-relaxed">
