@@ -169,6 +169,8 @@ export function Hero() {
                     alt={data.personal.name}
                     className="relative z-0 w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
                     loading="eager"
+                    fetchPriority="high"
+                    decoding="async"
                   />
 
                   {/* Bottom gradient shadow for seamless integration */}

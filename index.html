@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es" class="scroll-smooth">
+<html lang="es" class="scroll-smooth" style="background-color: #09090b; color: #f4f4f5;">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -9,8 +9,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Special+Gothic+Expanded+One&display=swap" rel="stylesheet">
   </head>
-  <body class="bg-zinc-950 text-zinc-100 selection:bg-orange-500 selection:text-white">
-    <div id="root"></div>
+  <body class="bg-zinc-950 text-zinc-100 selection:bg-orange-500 selection:text-white" style="background-color: #09090b;">
+    <div id="root">
+      <!-- Instant minimalist fallback before JS bundle hydrates -->
+      <div style="position: fixed; inset: 0; background-color: #09090b; display: flex; align-items: center; justify-content: center; z-index: 9999;">
+        <div style="width: 20px; height: 20px; border: 2px solid #27272a; border-top-color: #f97316; border-radius: 50%; animation: spin 0.6s linear infinite;"></div>
+      </div>
+      <style>
+        @keyframes spin { to { transform: rotate(360deg); } }
+      </style>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
