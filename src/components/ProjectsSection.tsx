@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   Gamepad2,
   Lock,
@@ -23,6 +24,7 @@ import {
 import { useLanguage } from '../context/useLanguage';
 import { TRANSLATIONS } from '../data/translations';
 import { GithubIcon } from './Icons';
+import { easeOutExpo, easeInOutCubic, defaultViewport, fadeUp } from '../utils/motion';
 
 // Real visual assets from Bit-Party (Godot 4.7)
 import bitPartyIcon from '../assets/projects/icon.png';
@@ -150,7 +152,13 @@ export function ProjectsSection() {
     <section id="proyectos" className="py-20 border-t border-zinc-800/80 bg-zinc-950/40">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          variants={fadeUp}
+          className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12"
+        >
           <div>
             <div className="flex items-center gap-2 font-mono text-xs text-orange-400 mb-2">
               <span className="w-1.5 h-1.5 rounded-full bg-orange-400" />
@@ -163,7 +171,7 @@ export function ProjectsSection() {
           <p className="text-sm text-zinc-400 max-w-md font-body">
             {t.subtitle}
           </p>
-        </div>
+        </motion.div>
 
         {/* Accordion Container */}
         <div className="space-y-4">
@@ -246,222 +254,254 @@ export function ProjectsSection() {
             </button>
 
             {/* Accordion Expanded Body */}
-            {openProject === 'bit-party' && (
-              <div className="px-5 pb-7 pt-2 sm:px-7 sm:pb-8 border-t border-zinc-800/80 bg-zinc-950/40 animate-in fade-in duration-200">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-4 items-center">
-                  {/* Left Column (5 cols): Interactive Mobile Viewport Capture Showcase */}
-                  <div className="lg:col-span-5 flex flex-col items-center">
-                    {/* Smartphone Vertical Frame */}
-                    <div className="relative w-full max-w-[270px] aspect-[9/16] rounded-[28px] p-2.5 bg-zinc-900 border-2 border-zinc-700/90 shadow-2xl shadow-black">
-                      {/* Top Speaker Notch */}
-                      <div className="absolute top-4 left-1/2 -translate-x-1/2 z-30 w-16 h-1.5 rounded-full bg-zinc-950/90 border border-zinc-800" />
+            <AnimatePresence initial={false}>
+              {openProject === 'bit-party' && (
+                <motion.div
+                  key="bit-party-content"
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{
+                    height: 'auto',
+                    opacity: 1,
+                    transition: {
+                      height: { duration: 0.35, ease: easeOutExpo },
+                      opacity: { duration: 0.25, delay: 0.05 },
+                    },
+                  }}
+                  exit={{
+                    height: 0,
+                    opacity: 0,
+                    transition: {
+                      height: { duration: 0.25, ease: easeInOutCubic },
+                      opacity: { duration: 0.15 },
+                    },
+                  }}
+                  className="overflow-hidden"
+                >
+                  <div className="px-5 pb-7 pt-2 sm:px-7 sm:pb-8 border-t border-zinc-800/80 bg-zinc-950/40">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-4 items-center">
+                      {/* Left Column (5 cols): Interactive Mobile Viewport Capture Showcase */}
+                      <div className="lg:col-span-5 flex flex-col items-center">
+                        {/* Smartphone Vertical Frame */}
+                        <div className="relative w-full max-w-[270px] aspect-[9/16] rounded-[28px] p-2.5 bg-zinc-900 border-2 border-zinc-700/90 shadow-2xl shadow-black">
+                          {/* Top Speaker Notch */}
+                          <div className="absolute top-4 left-1/2 -translate-x-1/2 z-30 w-16 h-1.5 rounded-full bg-zinc-950/90 border border-zinc-800" />
 
-                      {/* Inner Screen Viewport */}
-                      <div className="relative w-full h-full rounded-[20px] overflow-hidden bg-zinc-950 flex flex-col justify-between">
-                        {/* Pixel Art Minigame Background */}
-                        <img
-                          src={currentMinigame.bg}
-                          alt={currentMinigame.title}
-                          className="absolute inset-0 w-full h-full object-cover transition-all duration-500"
-                          style={{ imageRendering: 'pixelated' }}
-                        />
+                          {/* Inner Screen Viewport */}
+                          <div className="relative w-full h-full rounded-[20px] overflow-hidden bg-zinc-950 flex flex-col justify-between">
+                            {/* Pixel Art Minigame Background */}
+                            <motion.img
+                              key={`bg-${currentMinigame.id}`}
+                              src={currentMinigame.bg}
+                              alt={currentMinigame.title}
+                              initial={{ opacity: 0.4 }}
+                              animate={{ opacity: 1 }}
+                              transition={{ duration: 0.3 }}
+                              className="absolute inset-0 w-full h-full object-cover"
+                              style={{ imageRendering: 'pixelated' }}
+                            />
 
-                        {/* CRT Scanline Overlay */}
-                        <div
-                          className="absolute inset-0 pointer-events-none opacity-25 z-10"
-                          style={{
-                            backgroundImage:
-                              'repeating-linear-gradient(0deg, rgba(0,0,0,0.45) 0px, rgba(0,0,0,0.45) 1px, transparent 1px, transparent 3px)',
-                          }}
-                        />
+                            {/* CRT Scanline Overlay */}
+                            <div
+                              className="absolute inset-0 pointer-events-none opacity-25 z-10"
+                              style={{
+                                backgroundImage:
+                                  'repeating-linear-gradient(0deg, rgba(0,0,0,0.45) 0px, rgba(0,0,0,0.45) 1px, transparent 1px, transparent 3px)',
+                              }}
+                            />
 
-                        {/* Gradient Vignette for HUD legibility */}
-                        <div className="absolute inset-0 bg-gradient-to-b from-zinc-950/75 via-transparent to-zinc-950/95 z-10 pointer-events-none" />
+                            {/* Gradient Vignette for HUD legibility */}
+                            <div className="absolute inset-0 bg-gradient-to-b from-zinc-950/75 via-transparent to-zinc-950/95 z-10 pointer-events-none" />
 
-                        {/* Top In-Game HUD Bar */}
-                        <div className="relative z-20 pt-6 px-3.5 flex items-center justify-between text-[10px] font-mono">
-                          <span className="px-2 py-0.5 rounded bg-zinc-950/80 border border-zinc-700/80 text-amber-300">
-                            {language === 'es' ? 'RONDA DIARIA' : 'DAILY ROUND'}
-                          </span>
-                          <span className="px-2 py-0.5 rounded bg-zinc-950/80 border border-zinc-700/80 text-zinc-300">
-                            720×1280
-                          </span>
+                            {/* Top In-Game HUD Bar */}
+                            <div className="relative z-20 pt-6 px-3.5 flex items-center justify-between text-[10px] font-mono">
+                              <span className="px-2 py-0.5 rounded bg-zinc-950/80 border border-zinc-700/80 text-amber-300">
+                                {language === 'es' ? 'RONDA DIARIA' : 'DAILY ROUND'}
+                              </span>
+                              <span className="px-2 py-0.5 rounded bg-zinc-950/80 border border-zinc-700/80 text-zinc-300">
+                                720×1280
+                              </span>
+                            </div>
+
+                            {/* Center Pixel-Art Minigame Logo */}
+                            <div className="relative z-20 px-5 flex flex-col items-center justify-center my-auto">
+                              <motion.img
+                                key={`logo-${currentMinigame.id}`}
+                                src={currentMinigame.logo}
+                                alt={`${currentMinigame.title} Logo`}
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 0.25 }}
+                                className="w-44 h-auto object-contain drop-shadow-[0_8px_16px_rgba(0,0,0,0.85)] transition-transform duration-300 hover:scale-105"
+                                style={{ imageRendering: 'pixelated' }}
+                              />
+                            </div>
+
+                            {/* Bottom In-Game Overlay Info */}
+                            <div className="relative z-20 p-3.5 space-y-2">
+                              <div className="p-2.5 rounded-xl bg-zinc-950/90 backdrop-blur-md border border-zinc-800/90">
+                                <p className="text-[11px] text-zinc-300 font-body leading-snug">
+                                  {currentMinigame.mechanic}
+                                </p>
+                              </div>
+                            </div>
+
+                            {/* Prev / Next Controls */}
+                            <button
+                              type="button"
+                              onClick={prevSlide}
+                              className="absolute left-2 top-1/2 -translate-y-1/2 z-30 w-7 h-7 rounded-full bg-zinc-950/80 hover:bg-zinc-900 border border-zinc-700 text-zinc-200 flex items-center justify-center cursor-pointer transition-colors"
+                              aria-label={language === 'es' ? 'Minijuego anterior' : 'Previous minigame'}
+                            >
+                              <ChevronLeft className="w-4 h-4" />
+                            </button>
+                            <button
+                              type="button"
+                              onClick={nextSlide}
+                              className="absolute right-2 top-1/2 -translate-y-1/2 z-30 w-7 h-7 rounded-full bg-zinc-950/80 hover:bg-zinc-900 border border-zinc-700 text-zinc-200 flex items-center justify-center cursor-pointer transition-colors"
+                              aria-label={language === 'es' ? 'Siguiente minijuego' : 'Next minigame'}
+                            >
+                              <ChevronRight className="w-4 h-4" />
+                            </button>
+                          </div>
                         </div>
 
-                        {/* Center Pixel-Art Minigame Logo */}
-                        <div className="relative z-20 px-5 flex flex-col items-center justify-center my-auto">
-                          <img
-                            src={currentMinigame.logo}
-                            alt={`${currentMinigame.title} Logo`}
-                            className="w-44 h-auto object-contain drop-shadow-[0_8px_16px_rgba(0,0,0,0.85)] transition-transform duration-300 hover:scale-105"
-                            style={{ imageRendering: 'pixelated' }}
-                          />
+                        {/* Thumbnail Selector Bar below phone */}
+                        <div className="flex items-center gap-2 mt-4">
+                          {minigames.map((game, idx) => (
+                            <button
+                              key={game.id}
+                              type="button"
+                              onClick={() => setActiveSlide(idx)}
+                              className={`p-1.5 rounded-xl border transition-all cursor-pointer ${
+                                activeSlide === idx
+                                  ? 'bg-zinc-800 border-orange-500 scale-105 shadow-md'
+                                  : 'bg-zinc-950 border-zinc-800 opacity-55 hover:opacity-90'
+                              }`}
+                              title={game.title}
+                            >
+                              <img
+                                src={game.logo}
+                                alt={game.title}
+                                className="w-12 h-7 object-contain"
+                                style={{ imageRendering: 'pixelated' }}
+                              />
+                            </button>
+                          ))}
+                        </div>
+                        <span className="text-[11px] font-mono text-zinc-500 mt-2">
+                          {language === 'es'
+                            ? 'Arte y logos in-game reales (Selecciona para cambiar escena)'
+                            : 'In-game assets & logos (Select to switch scene)'}
+                        </span>
+                      </div>
+
+                      {/* Right Column (7 cols): Concept, Daily Loop & Godot Architecture */}
+                      <div className="lg:col-span-7 space-y-6">
+                        {/* Concept Header */}
+                        <div className="space-y-2">
+                          <div className="inline-flex items-center gap-2 text-xs font-mono text-orange-400">
+                            <Smartphone className="w-3.5 h-3.5" />
+                            <span>
+                              {language === 'es'
+                                ? 'CONCEPTO & ARQUITECTURA DE JUEGO // LANZAMIENTO iOS & ANDROID'
+                                : 'GAME CONCEPT & ARCHITECTURE // iOS & ANDROID LAUNCH'}
+                            </span>
+                          </div>
+                          <p className="text-sm sm:text-base text-zinc-300 font-body leading-relaxed">
+                            {t.bitParty.overview}
+                          </p>
                         </div>
 
-                        {/* Bottom In-Game Overlay Info */}
-                        <div className="relative z-20 p-3.5 space-y-2">
-                          <div className="p-2.5 rounded-xl bg-zinc-950/90 backdrop-blur-md border border-zinc-800/90">
-                            <p className="text-[11px] text-zinc-300 font-body leading-snug">
-                              {currentMinigame.mechanic}
+                        {/* 3 Multiplayer Pillars */}
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                          <div className="p-3.5 rounded-xl bg-zinc-900/80 border border-zinc-800">
+                            <div className="flex items-center gap-1.5 text-orange-400 font-mono text-xs mb-1">
+                              <Users className="w-3.5 h-3.5" />
+                              <span>{language === 'es' ? 'SALAS PRIVADAS' : 'PRIVATE ROOMS'}</span>
+                            </div>
+                            <p className="text-xs text-zinc-300 font-body">
+                              {language === 'es' ? (
+                                <>Partidas de hasta <strong>5 jugadores</strong> mediante código de invitación.</>
+                              ) : (
+                                <>Matches for up to <strong>5 players</strong> via private room code.</>
+                              )}
+                            </p>
+                          </div>
+
+                          <div className="p-3.5 rounded-xl bg-zinc-900/80 border border-zinc-800">
+                            <div className="flex items-center gap-1.5 text-purple-400 font-mono text-xs mb-1">
+                              <Bot className="w-3.5 h-3.5" />
+                              <span>{language === 'es' ? 'SOPORTE BOTS' : 'BOT SUPPORT'}</span>
+                            </div>
+                            <p className="text-xs text-zinc-300 font-body">
+                              {language === 'es' ? (
+                                <>Relleno de huecos libres con <strong>CPUs</strong> y turno automático a las 24h.</>
+                              ) : (
+                                <>Free slots filled with <strong>CPUs</strong> and auto-turns at 24h.</>
+                              )}
+                            </p>
+                          </div>
+
+                          <div className="p-3.5 rounded-xl bg-zinc-900/80 border border-zinc-800">
+                            <div className="flex items-center gap-1.5 text-amber-400 font-mono text-xs mb-1">
+                              <Star className="w-3.5 h-3.5" />
+                              <span>{language === 'es' ? '13 MINIJUEGOS' : '13 MINIGAMES'}</span>
+                            </div>
+                            <p className="text-xs text-zinc-300 font-body">
+                              {language === 'es' ? (
+                                <>Catálogo arcade propio con físicas 2D, shaders CRT y control táctil.</>
+                              ) : (
+                                <>Proprietary arcade catalog with 2D physics, CRT shaders, and touch feel.</>
+                              )}
                             </p>
                           </div>
                         </div>
 
-                        {/* Prev / Next Controls */}
-                        <button
-                          type="button"
-                          onClick={prevSlide}
-                          className="absolute left-2 top-1/2 -translate-y-1/2 z-30 w-7 h-7 rounded-full bg-zinc-950/80 hover:bg-zinc-900 border border-zinc-700 text-zinc-200 flex items-center justify-center cursor-pointer transition-colors"
-                          aria-label={language === 'es' ? 'Minijuego anterior' : 'Previous minigame'}
-                        >
-                          <ChevronLeft className="w-4 h-4" />
-                        </button>
-                        <button
-                          type="button"
-                          onClick={nextSlide}
-                          className="absolute right-2 top-1/2 -translate-y-1/2 z-30 w-7 h-7 rounded-full bg-zinc-950/80 hover:bg-zinc-900 border border-zinc-700 text-zinc-200 flex items-center justify-center cursor-pointer transition-colors"
-                          aria-label={language === 'es' ? 'Siguiente minijuego' : 'Next minigame'}
-                        >
-                          <ChevronRight className="w-4 h-4" />
-                        </button>
-                      </div>
-                    </div>
+                        {/* Daily Round Loop (3 Phases) */}
+                        <div className="space-y-2.5">
+                          <h4 className="text-xs font-mono uppercase tracking-wider text-zinc-400 flex items-center gap-2">
+                            <Sparkles className="w-3.5 h-3.5 text-orange-400" />
+                            <span>{language === 'es' ? 'Bucle de Ronda Diaria:' : 'Daily Round Loop:'}</span>
+                          </h4>
 
-                    {/* Thumbnail Selector Bar below phone */}
-                    <div className="flex items-center gap-2 mt-4">
-                      {minigames.map((game, idx) => (
-                        <button
-                          key={game.id}
-                          type="button"
-                          onClick={() => setActiveSlide(idx)}
-                          className={`p-1.5 rounded-xl border transition-all cursor-pointer ${
-                            activeSlide === idx
-                              ? 'bg-zinc-800 border-orange-500 scale-105 shadow-md'
-                              : 'bg-zinc-950 border-zinc-800 opacity-55 hover:opacity-90'
-                          }`}
-                          title={game.title}
-                        >
-                          <img
-                            src={game.logo}
-                            alt={game.title}
-                            className="w-12 h-7 object-contain"
-                            style={{ imageRendering: 'pixelated' }}
-                          />
-                        </button>
-                      ))}
-                    </div>
-                    <span className="text-[11px] font-mono text-zinc-500 mt-2">
-                      {language === 'es'
-                        ? 'Arte y logos in-game reales (Selecciona para cambiar escena)'
-                        : 'In-game assets & logos (Select to switch scene)'}
-                    </span>
-                  </div>
-
-                  {/* Right Column (7 cols): Concept, Daily Loop & Godot Architecture */}
-                  <div className="lg:col-span-7 space-y-6">
-                    {/* Concept Header */}
-                    <div className="space-y-2">
-                      <div className="inline-flex items-center gap-2 text-xs font-mono text-orange-400">
-                        <Smartphone className="w-3.5 h-3.5" />
-                        <span>
-                          {language === 'es'
-                            ? 'CONCEPTO & ARQUITECTURA DE JUEGO // LANZAMIENTO iOS & ANDROID'
-                            : 'GAME CONCEPT & ARCHITECTURE // iOS & ANDROID LAUNCH'}
-                        </span>
-                      </div>
-                      <p className="text-sm sm:text-base text-zinc-300 font-body leading-relaxed">
-                        {t.bitParty.overview}
-                      </p>
-                    </div>
-
-                    {/* 3 Multiplayer Pillars */}
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                      <div className="p-3.5 rounded-xl bg-zinc-900/80 border border-zinc-800">
-                        <div className="flex items-center gap-1.5 text-orange-400 font-mono text-xs mb-1">
-                          <Users className="w-3.5 h-3.5" />
-                          <span>{language === 'es' ? 'SALAS PRIVADAS' : 'PRIVATE ROOMS'}</span>
-                        </div>
-                        <p className="text-xs text-zinc-300 font-body">
-                          {language === 'es' ? (
-                            <>Partidas de hasta <strong>5 jugadores</strong> mediante código de invitación.</>
-                          ) : (
-                            <>Matches for up to <strong>5 players</strong> via private room code.</>
-                          )}
-                        </p>
-                      </div>
-
-                      <div className="p-3.5 rounded-xl bg-zinc-900/80 border border-zinc-800">
-                        <div className="flex items-center gap-1.5 text-purple-400 font-mono text-xs mb-1">
-                          <Bot className="w-3.5 h-3.5" />
-                          <span>{language === 'es' ? 'SOPORTE BOTS' : 'BOT SUPPORT'}</span>
-                        </div>
-                        <p className="text-xs text-zinc-300 font-body">
-                          {language === 'es' ? (
-                            <>Relleno de huecos libres con <strong>CPUs</strong> y turno automático a las 24h.</>
-                          ) : (
-                            <>Free slots filled with <strong>CPUs</strong> and auto-turns at 24h.</>
-                          )}
-                        </p>
-                      </div>
-
-                      <div className="p-3.5 rounded-xl bg-zinc-900/80 border border-zinc-800">
-                        <div className="flex items-center gap-1.5 text-amber-400 font-mono text-xs mb-1">
-                          <Star className="w-3.5 h-3.5" />
-                          <span>{language === 'es' ? '13 MINIJUEGOS' : '13 MINIGAMES'}</span>
-                        </div>
-                        <p className="text-xs text-zinc-300 font-body">
-                          {language === 'es' ? (
-                            <>Catálogo arcade propio con físicas 2D, shaders CRT y control táctil.</>
-                          ) : (
-                            <>Proprietary arcade catalog with 2D physics, CRT shaders, and touch feel.</>
-                          )}
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Daily Round Loop (3 Phases) */}
-                    <div className="space-y-2.5">
-                      <h4 className="text-xs font-mono uppercase tracking-wider text-zinc-400 flex items-center gap-2">
-                        <Sparkles className="w-3.5 h-3.5 text-orange-400" />
-                        <span>{language === 'es' ? 'Bucle de Ronda Diaria:' : 'Daily Round Loop:'}</span>
-                      </h4>
-
-                      <div className="space-y-2.5">
-                        {t.bitParty.dailyLoopSteps.map((step, idx) => {
-                          const iconConfig = DAILY_LOOP_ICONS[idx] || DAILY_LOOP_ICONS[0];
-                          const Icon = iconConfig.icon;
-                          return (
-                            <div
-                              key={step.phase}
-                              className="p-3.5 rounded-xl bg-zinc-900/60 border border-zinc-800/90 flex items-start gap-3.5"
-                            >
-                              <div
-                                className={`w-8 h-8 rounded-lg border flex items-center justify-center shrink-0 mt-0.5 ${iconConfig.accent}`}
-                              >
-                                <Icon className="w-4 h-4" />
-                              </div>
-                              <div>
-                                <div className="flex items-center gap-2">
-                                  <span className="font-mono text-[10px] text-zinc-500">
-                                    {language === 'es' ? `FASE ${step.phase}` : `PHASE ${step.phase}`}
-                                  </span>
-                                  <h5 className="text-xs sm:text-sm font-normal text-zinc-100 font-display uppercase">
-                                    {step.title}
-                                  </h5>
+                          <div className="space-y-2.5">
+                            {t.bitParty.dailyLoopSteps.map((step, idx) => {
+                              const iconConfig = DAILY_LOOP_ICONS[idx] || DAILY_LOOP_ICONS[0];
+                              const Icon = iconConfig.icon;
+                              return (
+                                <div
+                                  key={step.phase}
+                                  className="p-3.5 rounded-xl bg-zinc-900/60 border border-zinc-800/90 flex items-start gap-3.5"
+                                >
+                                  <div
+                                    className={`w-8 h-8 rounded-lg border flex items-center justify-center shrink-0 mt-0.5 ${iconConfig.accent}`}
+                                  >
+                                    <Icon className="w-4 h-4" />
+                                  </div>
+                                  <div>
+                                    <div className="flex items-center gap-2">
+                                      <span className="font-mono text-[10px] text-zinc-500">
+                                        {language === 'es' ? `FASE ${step.phase}` : `PHASE ${step.phase}`}
+                                      </span>
+                                      <h5 className="text-xs sm:text-sm font-normal text-zinc-100 font-display uppercase">
+                                        {step.title}
+                                      </h5>
+                                    </div>
+                                    <p className="text-xs text-zinc-400 font-body leading-relaxed mt-0.5">
+                                      {step.description}
+                                    </p>
+                                  </div>
                                 </div>
-                                <p className="text-xs text-zinc-400 font-body leading-relaxed mt-0.5">
-                                  {step.description}
-                                </p>
-                              </div>
-                            </div>
-                          );
-                        })}
+                              );
+                            })}
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            )}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           {/* =====================================================================
@@ -533,58 +573,82 @@ export function ProjectsSection() {
             </button>
 
             {/* Accordion Expanded Body */}
-            {openProject === 'portfolio' && (
-              <div className="px-5 pb-7 pt-4 sm:px-7 sm:pb-8 border-t border-zinc-800/80 bg-zinc-950/40 space-y-6 animate-in fade-in duration-200">
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                  <p className="text-sm sm:text-base text-zinc-300 font-body leading-relaxed max-w-2xl">
-                    {t.portfolioProject.description}
-                  </p>
+            <AnimatePresence initial={false}>
+              {openProject === 'portfolio' && (
+                <motion.div
+                  key="portfolio-content"
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{
+                    height: 'auto',
+                    opacity: 1,
+                    transition: {
+                      height: { duration: 0.35, ease: easeOutExpo },
+                      opacity: { duration: 0.25, delay: 0.05 },
+                    },
+                  }}
+                  exit={{
+                    height: 0,
+                    opacity: 0,
+                    transition: {
+                      height: { duration: 0.25, ease: easeInOutCubic },
+                      opacity: { duration: 0.15 },
+                    },
+                  }}
+                  className="overflow-hidden"
+                >
+                  <div className="px-5 pb-7 pt-4 sm:px-7 sm:pb-8 border-t border-zinc-800/80 bg-zinc-950/40 space-y-6">
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                      <p className="text-sm sm:text-base text-zinc-300 font-body leading-relaxed max-w-2xl">
+                        {t.portfolioProject.description}
+                      </p>
 
-                  <a
-                    href="https://github.com/mlunlop/portfolio"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-zinc-100 text-xs font-mono transition-colors shrink-0 self-start"
-                  >
-                    <GithubIcon className="w-4 h-4" />
-                    <span>{t.portfolioProject.viewRepo}</span>
-                    <ExternalLink className="w-3.5 h-3.5 text-zinc-400" />
-                  </a>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="p-4 rounded-xl bg-zinc-900/70 border border-zinc-800 space-y-1.5">
-                    <div className="flex items-center gap-2 text-sky-400 font-mono text-xs">
-                      <Layers className="w-4 h-4" />
-                      <span>{t.portfolioProject.card1Title}</span>
+                      <a
+                        href="https://github.com/mlunlop/portfolio"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-zinc-100 text-xs font-mono transition-colors shrink-0 self-start"
+                      >
+                        <GithubIcon className="w-4 h-4" />
+                        <span>{t.portfolioProject.viewRepo}</span>
+                        <ExternalLink className="w-3.5 h-3.5 text-zinc-400" />
+                      </a>
                     </div>
-                    <p className="text-xs text-zinc-400 font-body leading-relaxed">
-                      {t.portfolioProject.card1Desc}
-                    </p>
-                  </div>
 
-                  <div className="p-4 rounded-xl bg-zinc-900/70 border border-zinc-800 space-y-1.5">
-                    <div className="flex items-center gap-2 text-orange-400 font-mono text-xs">
-                      <FileText className="w-4 h-4" />
-                      <span>{t.portfolioProject.card2Title}</span>
-                    </div>
-                    <p className="text-xs text-zinc-400 font-body leading-relaxed">
-                      {t.portfolioProject.card2Desc}
-                    </p>
-                  </div>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <div className="p-4 rounded-xl bg-zinc-900/70 border border-zinc-800 space-y-1.5">
+                        <div className="flex items-center gap-2 text-sky-400 font-mono text-xs">
+                          <Layers className="w-4 h-4" />
+                          <span>{t.portfolioProject.card1Title}</span>
+                        </div>
+                        <p className="text-xs text-zinc-400 font-body leading-relaxed">
+                          {t.portfolioProject.card1Desc}
+                        </p>
+                      </div>
 
-                  <div className="p-4 rounded-xl bg-zinc-900/70 border border-zinc-800 space-y-1.5">
-                    <div className="flex items-center gap-2 text-emerald-400 font-mono text-xs">
-                      <ShieldCheck className="w-4 h-4" />
-                      <span>{t.portfolioProject.card3Title}</span>
+                      <div className="p-4 rounded-xl bg-zinc-900/70 border border-zinc-800 space-y-1.5">
+                        <div className="flex items-center gap-2 text-orange-400 font-mono text-xs">
+                          <FileText className="w-4 h-4" />
+                          <span>{t.portfolioProject.card2Title}</span>
+                        </div>
+                        <p className="text-xs text-zinc-400 font-body leading-relaxed">
+                          {t.portfolioProject.card2Desc}
+                        </p>
+                      </div>
+
+                      <div className="p-4 rounded-xl bg-zinc-900/70 border border-zinc-800 space-y-1.5">
+                        <div className="flex items-center gap-2 text-emerald-400 font-mono text-xs">
+                          <ShieldCheck className="w-4 h-4" />
+                          <span>{t.portfolioProject.card3Title}</span>
+                        </div>
+                        <p className="text-xs text-zinc-400 font-body leading-relaxed">
+                          {t.portfolioProject.card3Desc}
+                        </p>
+                      </div>
                     </div>
-                    <p className="text-xs text-zinc-400 font-body leading-relaxed">
-                      {t.portfolioProject.card3Desc}
-                    </p>
                   </div>
-                </div>
-              </div>
-            )}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           {/* =====================================================================
@@ -656,105 +720,131 @@ export function ProjectsSection() {
             </button>
 
             {/* Accordion Expanded Body */}
-            {openProject === 'daw-designs' && (
-              <div className="px-5 pb-7 pt-4 sm:px-7 sm:pb-8 border-t border-zinc-800/80 bg-zinc-950/40 space-y-6 animate-in fade-in duration-200">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-b border-zinc-800/60">
-                  <p className="text-xs sm:text-sm text-zinc-400 font-body">
-                    {t.dawDesigns.intro} <strong className="text-zinc-200 font-medium">{t.dawDesigns.introHighlight}</strong> {t.dawDesigns.introEnd}
-                  </p>
-                  <span className="text-[11px] font-mono text-zinc-500 shrink-0">
-                    {t.dawDesigns.counter}
-                  </span>
-                </div>
-
-                {/* 2x2 Responsive Grid of Web Projects */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  {dawProjects.map((proj) => (
-                    <div
-                      key={proj.id}
-                      className="group/card flex flex-col rounded-xl bg-zinc-900/60 border border-zinc-800/90 hover:border-zinc-700 overflow-hidden transition-all duration-200 hover:shadow-xl hover:shadow-black/50"
-                    >
-                      {/* Thumbnail Header with Quick Actions */}
-                      <div className="relative aspect-video w-full overflow-hidden bg-zinc-950">
-                        <img
-                          src={proj.thumbnail}
-                          alt={proj.title}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-105"
-                          loading="lazy"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent opacity-80 group-hover/card:opacity-60 transition-opacity" />
-
-                        {/* Top Badges: Category & Date */}
-                        <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2">
-                          <span className="px-2 py-1 rounded-md bg-zinc-950/80 backdrop-blur-md border border-zinc-800 text-[10px] font-mono text-zinc-300">
-                            {proj.category}
-                          </span>
-                          <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-zinc-950/90 backdrop-blur-md border border-orange-500/30 text-[10px] font-mono text-orange-400 font-semibold shadow-sm">
-                            <Calendar className="w-3 h-3 text-orange-400" />
-                            {proj.date}
-                          </span>
-                        </div>
-
-                        {/* Bottom Title Overlay */}
-                        <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between gap-2">
-                          <h4 className="text-base font-normal text-zinc-100 font-display tracking-tight truncate drop-shadow-md">
-                            {proj.title}
-                          </h4>
-                        </div>
-                      </div>
-
-                      {/* Content Card Body */}
-                      <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between gap-4">
-                        <div className="space-y-2">
-                          <div className="flex items-center justify-between gap-2">
-                            <p className="text-[11px] font-mono text-orange-400">
-                              {proj.subtitle}
-                            </p>
-                          </div>
-                          <p className="text-xs text-zinc-400 font-body leading-relaxed line-clamp-2">
-                            {proj.description}
-                          </p>
-
-                          {/* Tech Tags */}
-                          <div className="flex flex-wrap gap-1.5 pt-1">
-                            {proj.tags.map((tag, idx) => (
-                              <span
-                                key={idx}
-                                className="px-2 py-0.5 rounded text-[10px] font-mono bg-zinc-950 border border-zinc-800 text-zinc-400"
-                              >
-                                {tag}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-
-                        {/* Action Buttons */}
-                        <div className="flex items-center gap-2 pt-2 border-t border-zinc-800/70">
-                          <button
-                            type="button"
-                            onClick={() => setSelectedWebProject(proj)}
-                            className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-orange-500 hover:bg-orange-400 text-zinc-950 font-medium text-xs font-mono transition-all duration-150 active:scale-95 cursor-pointer shadow-sm"
-                          >
-                            <Eye className="w-3.5 h-3.5 stroke-[2.5]" />
-                            <span>{t.dawDesigns.liveBtn}</span>
-                          </button>
-
-                          <a
-                            href={proj.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-2 rounded-lg bg-zinc-800/90 hover:bg-zinc-700 text-zinc-300 hover:text-white border border-zinc-700/80 transition-colors"
-                            title={language === 'es' ? 'Abrir en pestaña nueva' : 'Open in new tab'}
-                          >
-                            <ExternalLink className="w-4 h-4" />
-                          </a>
-                        </div>
-                      </div>
+            <AnimatePresence initial={false}>
+              {openProject === 'daw-designs' && (
+                <motion.div
+                  key="daw-designs-content"
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{
+                    height: 'auto',
+                    opacity: 1,
+                    transition: {
+                      height: { duration: 0.35, ease: easeOutExpo },
+                      opacity: { duration: 0.25, delay: 0.05 },
+                    },
+                  }}
+                  exit={{
+                    height: 0,
+                    opacity: 0,
+                    transition: {
+                      height: { duration: 0.25, ease: easeInOutCubic },
+                      opacity: { duration: 0.15 },
+                    },
+                  }}
+                  className="overflow-hidden"
+                >
+                  <div className="px-5 pb-7 pt-4 sm:px-7 sm:pb-8 border-t border-zinc-800/80 bg-zinc-950/40 space-y-6">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-b border-zinc-800/60">
+                      <p className="text-xs sm:text-sm text-zinc-400 font-body">
+                        {t.dawDesigns.intro} <strong className="text-zinc-200 font-medium">{t.dawDesigns.introHighlight}</strong> {t.dawDesigns.introEnd}
+                      </p>
+                      <span className="text-[11px] font-mono text-zinc-500 shrink-0">
+                        {t.dawDesigns.counter}
+                      </span>
                     </div>
-                  ))}
-                </div>
-              </div>
-            )}
+
+                    {/* 2x2 Responsive Grid of Web Projects */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                      {dawProjects.map((proj) => (
+                        <motion.div
+                          key={proj.id}
+                          whileHover={{ y: -3 }}
+                          transition={{ duration: 0.2, ease: 'easeOut' }}
+                          className="group/card flex flex-col rounded-xl bg-zinc-900/60 border border-zinc-800/90 hover:border-zinc-700 overflow-hidden shadow-sm hover:shadow-xl hover:shadow-black/50"
+                        >
+                          {/* Thumbnail Header with Quick Actions */}
+                          <div className="relative aspect-video w-full overflow-hidden bg-zinc-950">
+                            <img
+                              src={proj.thumbnail}
+                              alt={proj.title}
+                              className="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-105"
+                              loading="lazy"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent opacity-80 group-hover/card:opacity-60 transition-opacity" />
+
+                            {/* Top Badges: Category & Date */}
+                            <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2">
+                              <span className="px-2 py-1 rounded-md bg-zinc-950/80 backdrop-blur-md border border-zinc-800 text-[10px] font-mono text-zinc-300">
+                                {proj.category}
+                              </span>
+                              <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-zinc-950/90 backdrop-blur-md border border-orange-500/30 text-[10px] font-mono text-orange-400 font-semibold shadow-sm">
+                                <Calendar className="w-3 h-3 text-orange-400" />
+                                {proj.date}
+                              </span>
+                            </div>
+
+                            {/* Bottom Title Overlay */}
+                            <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between gap-2">
+                              <h4 className="text-base font-normal text-zinc-100 font-display tracking-tight truncate drop-shadow-md">
+                                {proj.title}
+                              </h4>
+                            </div>
+                          </div>
+
+                          {/* Content Card Body */}
+                          <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between gap-4">
+                            <div className="space-y-2">
+                              <div className="flex items-center justify-between gap-2">
+                                <p className="text-[11px] font-mono text-orange-400">
+                                  {proj.subtitle}
+                                </p>
+                              </div>
+                              <p className="text-xs text-zinc-400 font-body leading-relaxed line-clamp-2">
+                                {proj.description}
+                              </p>
+
+                              {/* Tech Tags */}
+                              <div className="flex flex-wrap gap-1.5 pt-1">
+                                {proj.tags.map((tag, idx) => (
+                                  <span
+                                    key={idx}
+                                    className="px-2 py-0.5 rounded text-[10px] font-mono bg-zinc-950 border border-zinc-800 text-zinc-400"
+                                  >
+                                    {tag}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+
+                            {/* Action Buttons */}
+                            <div className="flex items-center gap-2 pt-2 border-t border-zinc-800/70">
+                              <button
+                                type="button"
+                                onClick={() => setSelectedWebProject(proj)}
+                                className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-orange-500 hover:bg-orange-400 text-zinc-950 font-medium text-xs font-mono transition-all duration-150 active:scale-95 cursor-pointer shadow-sm"
+                              >
+                                <Eye className="w-3.5 h-3.5 stroke-[2.5]" />
+                                <span>{t.dawDesigns.liveBtn}</span>
+                              </button>
+
+                              <a
+                                href={proj.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="p-2 rounded-lg bg-zinc-800/90 hover:bg-zinc-700 text-zinc-300 hover:text-white border border-zinc-700/80 transition-colors"
+                                title={language === 'es' ? 'Abrir en pestaña nueva' : 'Open in new tab'}
+                              >
+                                <ExternalLink className="w-4 h-4" />
+                              </a>
+                            </div>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
       </div>

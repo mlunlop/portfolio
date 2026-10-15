@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { GraduationCap, Award, ExternalLink, Languages, FileText } from 'lucide-react';
 import { getPortfolioData } from '../data/portfolioData';
 import { useLanguage } from '../context/useLanguage';
 import { TRANSLATIONS } from '../data/translations';
+import { defaultViewport, fadeUp, easeOutExpo } from '../utils/motion';
 import { PdfViewerModal } from './PdfViewerModal';
 import cambridgeLogo from '../assets/cambridge-logo.webp';
 import appleLogo from '../assets/apple-logo.webp';
@@ -44,7 +46,13 @@ export function EducationCertifications() {
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         
         {/* Section Header: Focused on Academic Formation */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-14">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          variants={fadeUp}
+          className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-14"
+        >
           <div>
             <div className="flex items-center gap-2 font-mono text-xs text-orange-400 mb-2">
               <GraduationCap className="w-4 h-4 text-orange-400" />
@@ -57,14 +65,19 @@ export function EducationCertifications() {
           <p className="text-sm text-zinc-400 max-w-md font-body">
             {t.subtitle}
           </p>
-        </div>
+        </motion.div>
 
         {/* 1. FORMACIÓN ACADÉMICA (FULL WIDTH) */}
         <div className="space-y-6 mb-20">
           {data.education.map((edu, idx) => (
-            <div
+            <motion.div
               key={edu.id}
-              className="relative rounded-2xl border border-zinc-800 bg-zinc-900/40 hover:bg-zinc-900/70 hover:border-zinc-700 transition-all duration-300 p-6 sm:p-8 overflow-hidden group"
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={defaultViewport}
+              transition={{ duration: 0.45, delay: idx * 0.08, ease: easeOutExpo }}
+              whileHover={{ y: -2 }}
+              className="relative rounded-2xl border border-zinc-800 bg-zinc-900/40 hover:bg-zinc-900/70 hover:border-zinc-700 transition-colors duration-300 p-6 sm:p-8 overflow-hidden group"
             >
               {/* Subtle top indicator for degrees currently in progress */}
               {(edu.isCurrent ?? idx === 0) && (
@@ -115,13 +128,19 @@ export function EducationCertifications() {
                   </a>
                 )}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
         {/* 2. CERTIFICACIONES & CREDENCIALES */}
         <div className="pt-12 border-t border-zinc-800/80">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-8">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={defaultViewport}
+            variants={fadeUp}
+            className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-8"
+          >
             <div className="flex items-center gap-2.5">
               <Award className="w-5 h-5 text-orange-400" />
               <div>
@@ -136,17 +155,22 @@ export function EducationCertifications() {
             <p className="text-xs text-zinc-400 font-body max-w-xs">
               {t.certSubtitle}
             </p>
-          </div>
+          </motion.div>
 
           {/* Grid de Certificaciones de Nivel 1 */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {data.certifications.map((cert) => {
+            {data.certifications.map((cert, idx) => {
               const logo = CERTIFICATION_LOGOS[cert.id];
 
               return (
-                <div
+                <motion.div
                   key={cert.id}
-                  className="rounded-xl border border-zinc-800/90 bg-zinc-900/30 p-5 hover:bg-zinc-900/60 hover:border-zinc-700 transition-all duration-200 flex flex-col justify-between"
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={defaultViewport}
+                  transition={{ duration: 0.4, delay: idx * 0.06, ease: easeOutExpo }}
+                  whileHover={{ y: -2 }}
+                  className="rounded-xl border border-zinc-800/90 bg-zinc-900/30 p-5 hover:bg-zinc-900/60 hover:border-zinc-700 transition-colors duration-200 flex flex-col justify-between"
                 >
                   <div>
                     <div className="flex items-start justify-between gap-2 mb-3">
@@ -226,13 +250,19 @@ export function EducationCertifications() {
                       </span>
                     )}
                   </div>
-                </div>
+                </motion.div>
               );
             })}
           </div>
 
           {/* Mini Idiomas Bar with Click to View PDF */}
-          <div className="mt-4 p-4 rounded-xl border border-zinc-800/60 bg-zinc-950 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-mono">
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={defaultViewport}
+            transition={{ duration: 0.4, delay: 0.15 }}
+            className="mt-4 p-4 rounded-xl border border-zinc-800/60 bg-zinc-950 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-mono"
+          >
             <div className="flex items-center gap-2 text-zinc-400">
               <Languages className="w-4 h-4 text-orange-400" />
               <span>{language === 'es' ? 'COMPETENCIA LINGÜÍSTICA:' : 'LANGUAGE PROFICIENCY:'}</span>
@@ -255,7 +285,7 @@ export function EducationCertifications() {
                 </button>
               </span>
             </div>
-          </div>
+          </motion.div>
         </div>
 
       </div>

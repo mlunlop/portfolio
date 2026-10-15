@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { Copy, Check, ArrowDown, Database, Cpu, ShieldCheck, Layers } from 'lucide-react';
 import { getPortfolioData } from '../data/portfolioData';
 import { useLanguage } from '../context/useLanguage';
 import { TRANSLATIONS } from '../data/translations';
 import { copyToClipboard } from '../utils/feedback';
 import { GithubIcon, LinkedinIcon, KaggleIcon } from './Icons';
+import { staggerContainer, fadeUp, scaleReveal, tactileButton } from '../utils/motion';
 import profilePhoto from '../assets/profile.webp';
 
 export function Hero() {
@@ -22,48 +24,53 @@ export function Hero() {
   };
 
   return (
-    <section className="relative pt-28 pb-20 md:pt-36 md:pb-28 overflow-hidden bg-tech-grid">
+    <section className="relative pt-20 pb-16 md:pt-24 md:pb-24 overflow-hidden bg-tech-grid">
       {/* Blueprint radial gradient lighting */}
       <div className="absolute inset-0 bg-radial from-transparent via-zinc-950/75 to-zinc-950 pointer-events-none" />
 
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6">
-        {/* Top Telemetry Header */}
-        <div className="flex flex-wrap items-center justify-between gap-3 text-xs font-mono text-zinc-500 mb-8 border-b border-zinc-800/80 pb-3">
-        </div>
-
         {/* Main 2-Column Hero: Typography & Editorial Portrait */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center mb-12">
           
           {/* Left Column: Massive Editorial Typography & Narrative (7 cols) */}
-          <div className="lg:col-span-7 space-y-6">
-            
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            animate="visible"
+            className="lg:col-span-7 space-y-6"
+          >
             {/* Engineering Status Pill */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-400 font-mono text-xs font-semibold">
-              <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-pulse" />
-              <span>{t.status}</span>
-            </div>
+            <motion.div variants={fadeUp} className="inline-flex">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-400 font-mono text-xs font-semibold">
+                <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-pulse" />
+                <span>{t.status}</span>
+              </div>
+            </motion.div>
 
             {/* Massive Heading with Special Gothic Expanded One */}
-            <div className="space-y-1">
+            <motion.div variants={fadeUp} className="space-y-1">
               <h1 className="text-4xl sm:text-6xl md:text-7xl font-normal tracking-tight text-zinc-100 font-display uppercase leading-[0.9] select-none">
                 {data.personal.name}
               </h1>
               <p className="text-xl sm:text-2xl md:text-3xl font-display uppercase text-zinc-400 tracking-tight">
                 {t.role}
               </p>
-            </div>
+            </motion.div>
 
             {/* Bio with Inter body font */}
-            <p className="text-base sm:text-lg text-zinc-300 font-body leading-relaxed max-w-xl font-normal">
+            <motion.p
+              variants={fadeUp}
+              className="text-base sm:text-lg text-zinc-300 font-body leading-relaxed max-w-xl font-normal"
+            >
               {t.bioPart1}{' '}
               <strong className="text-zinc-100 font-semibold">
                 {t.bioHighlight}
               </strong>
               {t.bioPart2}
-            </p>
+            </motion.p>
 
             {/* Tactile Stickers/Badges */}
-            <div className="flex flex-wrap gap-2 pt-2">
+            <motion.div variants={fadeUp} className="flex flex-wrap gap-2 pt-2">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-amber-500/10 border border-amber-500/30 text-amber-300 font-mono text-xs font-medium transform -rotate-1 hover:rotate-0 transition-transform">
                 <Database className="w-3.5 h-3.5 text-amber-400" />
                 {t.stickers.etl}
@@ -80,14 +87,15 @@ export function Hero() {
                 <Layers className="w-3.5 h-3.5 text-sky-400" />
                 {t.stickers.react}
               </span>
-            </div>
+            </motion.div>
 
             {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-3 pt-3">
+            <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-3 pt-3">
               {/* Copy Email CTA */}
-              <button
+              <motion.button
                 onClick={handleCopy}
-                className="group relative flex items-center gap-2.5 px-5 py-3.5 rounded-xl bg-orange-500 hover:bg-orange-400 text-zinc-950 font-semibold text-sm transition-all duration-200 shadow-xl shadow-orange-500/20 active:scale-95 cursor-pointer font-body"
+                {...tactileButton}
+                className="group relative flex items-center gap-2.5 px-5 py-3.5 rounded-xl bg-orange-500 hover:bg-orange-400 text-zinc-950 font-semibold text-sm transition-colors duration-200 shadow-xl shadow-orange-500/20 cursor-pointer font-body"
               >
                 {copied ? (
                   <>
@@ -100,46 +108,60 @@ export function Hero() {
                     <span>{t.copyEmail}</span>
                   </>
                 )}
-              </button>
+              </motion.button>
 
               {/* LinkedIn */}
-              <a
+              <motion.a
                 href={data.personal.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
+                whileHover={{ y: -1.5 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ duration: 0.15 }}
                 className="flex items-center gap-2 px-4 py-3.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-zinc-700 text-zinc-200 text-sm font-medium transition-colors font-body"
               >
                 <LinkedinIcon className="w-4 h-4 text-sky-400" />
                 <span>{t.social.linkedin}</span>
-              </a>
+              </motion.a>
 
               {/* GitHub */}
-              <a
+              <motion.a
                 href={data.personal.github}
                 target="_blank"
                 rel="noopener noreferrer"
+                whileHover={{ y: -1.5 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ duration: 0.15 }}
                 className="flex items-center gap-2 px-4 py-3.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-zinc-700 text-zinc-200 text-sm font-medium transition-colors font-body"
               >
                 <GithubIcon className="w-4 h-4 text-zinc-300" />
                 <span>{t.social.github}</span>
-              </a>
+              </motion.a>
 
               {/* Kaggle */}
-              <a
+              <motion.a
                 href={data.personal.kaggle}
                 target="_blank"
                 rel="noopener noreferrer"
+                whileHover={{ y: -1.5 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ duration: 0.15 }}
                 className="flex items-center gap-2 px-4 py-3.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-zinc-700 text-zinc-200 text-sm font-medium transition-colors font-body"
               >
                 <KaggleIcon className="w-4 h-4 text-cyan-400" />
                 <span>{t.social.kaggle}</span>
-              </a>
-            </div>
+              </motion.a>
+            </motion.div>
 
-          </div>
+          </motion.div>
 
           {/* Right Column: High-Craft Editorial Portrait Frame (5 cols) */}
-          <div className="lg:col-span-5 flex justify-center lg:justify-end">
+          <motion.div
+            variants={scaleReveal}
+            initial="hidden"
+            animate="visible"
+            className="lg:col-span-5 flex justify-center lg:justify-end"
+          >
             <div className="relative w-full max-w-sm sm:max-w-md">
               
               {/* Outer architectural frame with hairline border */}
@@ -189,20 +211,25 @@ export function Hero() {
               </div>
 
             </div>
-          </div>
+          </motion.div>
 
         </div>
 
         {/* Scroll anchor */}
-        <div className="flex justify-center pt-4">
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.45, duration: 0.5 }}
+          className="flex justify-center pt-4"
+        >
           <a
             href="#experiencia"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900/60 border border-zinc-800/80 text-xs font-mono text-zinc-400 hover:text-zinc-200 hover:border-zinc-700 transition-colors"
+            className="group inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900/60 border border-zinc-800/80 text-xs font-mono text-zinc-400 hover:text-zinc-200 hover:border-zinc-700 transition-colors"
           >
             <span>{language === 'es' ? 'Explorar Trayectoria' : 'Explore Career'}</span>
-            <ArrowDown className="w-3.5 h-3.5 text-orange-400 animate-bounce" />
+            <ArrowDown className="w-3.5 h-3.5 text-orange-400 group-hover:translate-y-0.5 transition-transform" />
           </a>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

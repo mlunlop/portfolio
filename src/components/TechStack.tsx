@@ -1,7 +1,9 @@
+import { motion } from 'framer-motion';
 import { Database, Layout, TerminalSquare } from 'lucide-react';
 import { getPortfolioData } from '../data/portfolioData';
 import { useLanguage } from '../context/useLanguage';
 import { TRANSLATIONS } from '../data/translations';
+import { defaultViewport, fadeUp, easeOutExpo } from '../utils/motion';
 
 export function TechStack() {
   const { language } = useLanguage();
@@ -18,7 +20,13 @@ export function TechStack() {
     <section id="stack" className="py-20 border-t border-zinc-800/80 bg-zinc-950/60">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-16">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          variants={fadeUp}
+          className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-16"
+        >
           <div>
             <div className="flex items-center gap-2 font-mono text-xs text-orange-400 mb-2">
               <span className="w-1.5 h-1.5 rounded-full bg-orange-400" />
@@ -31,16 +39,21 @@ export function TechStack() {
           <p className="text-sm text-zinc-400 max-w-md font-body">
             {t.subtitle}
           </p>
-        </div>
+        </motion.div>
 
         {/* Stack Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {data.skills.map((category, idx) => {
             const Icon = getIcon(category.category);
             return (
-              <div
+              <motion.div
                 key={idx}
-                className="rounded-2xl border border-zinc-800 bg-zinc-900/40 p-6 flex flex-col justify-between hover:border-zinc-700 transition-colors"
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={defaultViewport}
+                transition={{ duration: 0.45, delay: idx * 0.08, ease: easeOutExpo }}
+                whileHover={{ y: -3 }}
+                className="rounded-2xl border border-zinc-800 bg-zinc-900/40 p-6 flex flex-col justify-between hover:border-zinc-700 transition-colors duration-200"
               >
                 <div>
                   <div className="w-10 h-10 rounded-xl bg-zinc-800/90 border border-zinc-700 flex items-center justify-center text-orange-400 mb-5">
@@ -54,7 +67,7 @@ export function TechStack() {
                     {category.items.map((skill, sIdx) => (
                       <li
                         key={sIdx}
-                        className="flex items-center gap-2 text-xs font-mono text-zinc-300 py-1.5 px-2.5 rounded-lg bg-zinc-950/60 border border-zinc-800/60"
+                        className="flex items-center gap-2 text-xs font-mono text-zinc-300 py-1.5 px-2.5 rounded-lg bg-zinc-950/60 border border-zinc-800/60 hover:border-zinc-700 hover:text-zinc-100 transition-colors"
                       >
                         <span className="w-1.5 h-1.5 rounded-full bg-orange-500/80" />
                         <span>{skill}</span>
@@ -62,7 +75,7 @@ export function TechStack() {
                     ))}
                   </ul>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>

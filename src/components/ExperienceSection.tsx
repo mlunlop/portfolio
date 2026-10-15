@@ -1,7 +1,9 @@
+import { motion } from 'framer-motion';
 import { Calendar, MapPin, Globe } from 'lucide-react';
 import { getPortfolioData } from '../data/portfolioData';
 import { useLanguage } from '../context/useLanguage';
 import { TRANSLATIONS } from '../data/translations';
+import { easeOutExpo, defaultViewport, fadeUp } from '../utils/motion';
 import babelLogo from '../assets/babel_icon.webp';
 import artebitLogo from '../assets/artebit_icon.webp';
 import multiserviceLogo from '../assets/sc_multiservice_icon.webp';
@@ -21,7 +23,13 @@ export function ExperienceSection() {
     <section id="experiencia" className="py-20 border-t border-zinc-800/80 bg-zinc-950/50">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-16">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={defaultViewport}
+          variants={fadeUp}
+          className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-16"
+        >
           <div>
             <div className="flex items-center gap-2 font-mono text-xs text-orange-400 mb-2">
               <span className="w-1.5 h-1.5 rounded-full bg-orange-400" />
@@ -34,17 +42,22 @@ export function ExperienceSection() {
           <p className="text-sm text-zinc-400 max-w-md font-body">
             {t.subtitle}
           </p>
-        </div>
+        </motion.div>
 
         {/* Timeline Items */}
         <div className="space-y-8">
-          {data.experiences.map((exp) => {
+          {data.experiences.map((exp, idx) => {
             const logo = COMPANY_LOGOS[exp.id];
 
             return (
-              <div
+              <motion.div
                 key={exp.id}
-                className="group relative rounded-2xl border border-zinc-800 bg-zinc-900/40 hover:bg-zinc-900/80 hover:border-zinc-700/80 transition-all duration-300 p-6 sm:p-8"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px 0px' }}
+                transition={{ duration: 0.45, delay: idx * 0.08, ease: easeOutExpo }}
+                whileHover={{ y: -2 }}
+                className="group relative rounded-2xl border border-zinc-800 bg-zinc-900/40 hover:bg-zinc-900/80 hover:border-zinc-700/80 transition-colors duration-300 p-6 sm:p-8"
               >
                 <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-6">
                   {/* Left block: Logo + Header info */}
@@ -90,10 +103,15 @@ export function ExperienceSection() {
                     </div>
                   </div>
 
-                  {/* Badge */}
-                  <span className="self-start px-3 py-1 rounded-md bg-zinc-800/80 text-zinc-300 font-mono text-xs border border-zinc-700/60">
-                    {exp.badge}
-                  </span>
+                  {/* Badge & Index */}
+                  <div className="flex items-center gap-2 self-start">
+                    <span className="px-3 py-1 rounded-md bg-zinc-800/80 text-zinc-300 font-mono text-xs border border-zinc-700/60">
+                      {exp.badge}
+                    </span>
+                    <span className="font-mono text-[11px] text-zinc-600 select-none">
+                      0{idx + 1}
+                    </span>
+                  </div>
                 </div>
 
                 {/* Description */}
@@ -119,13 +137,13 @@ export function ExperienceSection() {
                   {exp.technologies.map((tech, i) => (
                     <span
                       key={i}
-                      className="px-2 py-0.5 rounded bg-zinc-950 border border-zinc-800 text-zinc-300 font-mono text-xs"
+                      className="px-2 py-0.5 rounded bg-zinc-950 border border-zinc-800 text-zinc-300 font-mono text-xs hover:border-zinc-700 transition-colors"
                     >
                       {tech}
                     </span>
                   ))}
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>

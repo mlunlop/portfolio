@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { Copy, Check, Mail, Clock, MapPin, ArrowUpRight } from 'lucide-react';
 import { getPortfolioData } from '../data/portfolioData';
 import { useLanguage } from '../context/useLanguage';
 import { TRANSLATIONS } from '../data/translations';
 import { copyToClipboard } from '../utils/feedback';
 import { GithubIcon, LinkedinIcon, KaggleIcon } from './Icons';
+import { defaultViewport, easeOutExpo } from '../utils/motion';
 
 const CURRENT_YEAR = new Date().getFullYear();
 
@@ -27,7 +29,13 @@ export function ContactFooter() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         
         {/* Main 2-Column Contact Block */}
-        <div className="rounded-3xl border border-zinc-800 bg-gradient-to-b from-zinc-900/90 to-zinc-950 p-6 sm:p-10 lg:p-12 mb-16 relative overflow-hidden">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={defaultViewport}
+          transition={{ duration: 0.5, ease: easeOutExpo }}
+          className="rounded-3xl border border-zinc-800 bg-gradient-to-b from-zinc-900/90 to-zinc-950 p-6 sm:p-10 lg:p-12 mb-16 relative overflow-hidden"
+        >
           {/* Subtle Background Pattern */}
           <div className="absolute inset-0 bg-tech-dots opacity-25 pointer-events-none" />
 
@@ -55,38 +63,47 @@ export function ContactFooter() {
                   {t.socialHeading}
                 </span>
                 <div className="flex flex-wrap gap-2.5">
-                  <a
+                  <motion.a
                     href={data.personal.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
+                    whileHover={{ y: -1.5 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ duration: 0.15 }}
                     className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-950 hover:bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-zinc-300 text-xs font-mono transition-colors"
                   >
                     <LinkedinIcon className="w-4 h-4 text-sky-400" />
                     <span>LinkedIn</span>
                     <ArrowUpRight className="w-3.5 h-3.5 text-zinc-600" />
-                  </a>
+                  </motion.a>
 
-                  <a
+                  <motion.a
                     href={data.personal.github}
                     target="_blank"
                     rel="noopener noreferrer"
+                    whileHover={{ y: -1.5 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ duration: 0.15 }}
                     className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-950 hover:bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-zinc-300 text-xs font-mono transition-colors"
                   >
                     <GithubIcon className="w-4 h-4 text-zinc-300" />
                     <span>GitHub</span>
                     <ArrowUpRight className="w-3.5 h-3.5 text-zinc-600" />
-                  </a>
+                  </motion.a>
 
-                  <a
+                  <motion.a
                     href={data.personal.kaggle}
                     target="_blank"
                     rel="noopener noreferrer"
+                    whileHover={{ y: -1.5 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ duration: 0.15 }}
                     className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-950 hover:bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-zinc-300 text-xs font-mono transition-colors"
                   >
                     <KaggleIcon className="w-4 h-4 text-cyan-400" />
                     <span>Kaggle</span>
                     <ArrowUpRight className="w-3.5 h-3.5 text-zinc-600" />
-                  </a>
+                  </motion.a>
                 </div>
               </div>
 
@@ -117,16 +134,19 @@ export function ContactFooter() {
                   </p>
 
                   {/* Primary mail button */}
-                  <a
+                  <motion.a
                     href={`mailto:${data.personal.email}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full flex items-center justify-center gap-2.5 px-6 py-4 rounded-xl bg-orange-500 hover:bg-orange-400 text-zinc-950 font-semibold text-sm transition-all duration-200 shadow-xl shadow-orange-500/20 active:scale-98 cursor-pointer font-body group"
+                    whileHover={{ scale: 1.015 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ duration: 0.15 }}
+                    className="w-full flex items-center justify-center gap-2.5 px-6 py-4 rounded-xl bg-orange-500 hover:bg-orange-400 text-zinc-950 font-semibold text-sm transition-colors duration-200 shadow-xl shadow-orange-500/20 cursor-pointer font-body group"
                   >
                     <Mail className="w-4 h-4 text-zinc-950 stroke-[2.5]" />
                     <span>{t.sendEmailBtn}</span>
                     <ArrowUpRight className="w-4 h-4 text-zinc-950 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                  </a>
+                  </motion.a>
                 </div>
               </div>
 
@@ -136,8 +156,9 @@ export function ContactFooter() {
                   {data.personal.email}
                 </span>
 
-                <button
+                <motion.button
                   onClick={handleCopy}
+                  whileTap={{ scale: 0.96 }}
                   className="inline-flex items-center gap-1.5 text-zinc-400 hover:text-zinc-200 font-mono transition-colors cursor-pointer py-1"
                   title={t.copyAddress}
                 >
@@ -152,12 +173,12 @@ export function ContactFooter() {
                       <span>{t.copyAddress}</span>
                     </>
                   )}
-                </button>
+                </motion.button>
               </div>
             </div>
 
           </div>
-        </div>
+        </motion.div>
 
         {/* Bottom Metadata Bar */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-zinc-900 text-xs font-mono text-zinc-500">
