@@ -3,10 +3,11 @@ import { Calendar, MapPin, Globe } from 'lucide-react';
 import { getPortfolioData } from '../data/portfolioData';
 import { useLanguage } from '../context/useLanguage';
 import { TRANSLATIONS } from '../data/translations';
-import { easeOutExpo, defaultViewport, fadeUp } from '../utils/motion';
+import { defaultViewport, fadeUp } from '../utils/motion';
 import babelLogo from '../assets/babel_icon.webp';
 import artebitLogo from '../assets/artebit_icon.webp';
 import multiserviceLogo from '../assets/sc_multiservice_icon.webp';
+import ScrollStack, { ScrollStackItem } from './ScrollStack';
 
 const COMPANY_LOGOS: Record<string, { src: string }> = {
   babel: { src: babelLogo },
@@ -20,7 +21,7 @@ export function ExperienceSection() {
   const t = TRANSLATIONS[language].experience;
 
   return (
-    <section id="experiencia" className="py-20 border-t border-zinc-800/80 bg-zinc-950/50">
+    <section id="experiencia" className="py-24 md:py-36 border-t border-zinc-800/80 bg-zinc-950/50">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <motion.div
@@ -32,7 +33,6 @@ export function ExperienceSection() {
         >
           <div>
             <div className="flex items-center gap-2 font-mono text-xs text-orange-400 mb-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-orange-400" />
               <span>{t.badge}</span>
             </div>
             <h2 className="text-3xl sm:text-5xl font-normal tracking-tight text-zinc-100 font-display uppercase">
@@ -44,20 +44,27 @@ export function ExperienceSection() {
           </p>
         </motion.div>
 
-        {/* Timeline Items */}
-        <div className="space-y-8">
+        {/* Apple-style ScrollStack Timeline */}
+        <ScrollStack
+          useWindowScroll={true}
+          itemDistance={48}
+          itemStackDistance={24}
+          stackPosition="110px"
+          itemScale={0.03}
+          baseScale={0.92}
+          dimAmount={0.14}
+          tiltAmount={1.2}
+          holdDistance={90}
+          smoothScroll={false}
+          className="w-full"
+        >
           {data.experiences.map((exp, idx) => {
             const logo = COMPANY_LOGOS[exp.id];
 
             return (
-              <motion.div
+              <ScrollStackItem
                 key={exp.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-40px 0px' }}
-                transition={{ duration: 0.45, delay: idx * 0.08, ease: easeOutExpo }}
-                whileHover={{ y: -2 }}
-                className="group relative rounded-2xl border border-zinc-800 bg-zinc-900/40 hover:bg-zinc-900/80 hover:border-zinc-700/80 transition-colors duration-300 p-6 sm:p-8"
+                itemClassName="rounded-3xl border border-zinc-800/90 bg-zinc-900/95 backdrop-blur-xl hover:border-zinc-700/80 transition-colors duration-300 p-6 sm:p-8 shadow-2xl shadow-black/70"
               >
                 <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-6">
                   {/* Left block: Logo + Header info */}
@@ -108,7 +115,7 @@ export function ExperienceSection() {
                     <span className="px-3 py-1 rounded-md bg-zinc-800/80 text-zinc-300 font-mono text-xs border border-zinc-700/60">
                       {exp.badge}
                     </span>
-                    <span className="font-mono text-[11px] text-zinc-600 select-none">
+                    <span className="font-mono text-[11px] text-zinc-500 select-none">
                       0{idx + 1}
                     </span>
                   </div>
@@ -143,10 +150,10 @@ export function ExperienceSection() {
                     </span>
                   ))}
                 </div>
-              </motion.div>
+              </ScrollStackItem>
             );
           })}
-        </div>
+        </ScrollStack>
       </div>
     </section>
   );

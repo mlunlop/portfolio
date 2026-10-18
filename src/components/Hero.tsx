@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Copy, Check, ArrowDown, Database, Cpu, ShieldCheck, Layers } from 'lucide-react';
+import { Copy, Check, ArrowDown } from 'lucide-react';
 import { getPortfolioData } from '../data/portfolioData';
 import { useLanguage } from '../context/useLanguage';
 import { TRANSLATIONS } from '../data/translations';
@@ -8,8 +8,11 @@ import { copyToClipboard } from '../utils/feedback';
 import { GithubIcon, LinkedinIcon, KaggleIcon } from './Icons';
 import { staggerContainer, fadeUp, scaleReveal, tactileButton } from '../utils/motion';
 import profilePhoto from '../assets/profile.webp';
+import FoldText from './FoldText';
+import GradientWaves from './GradientWaves';
+import ProfileCard from './ProfileCard';
 
-export function Hero() {
+export function Hero({ isLoaded = false }: { isLoaded?: boolean }) {
   const [copied, setCopied] = useState(false);
   const { language } = useLanguage();
   const data = getPortfolioData(language);
@@ -24,11 +27,52 @@ export function Hero() {
   };
 
   return (
-    <section className="relative pt-20 pb-16 md:pt-24 md:pb-24 overflow-hidden bg-tech-grid">
-      {/* Blueprint radial gradient lighting */}
-      <div className="absolute inset-0 bg-radial from-transparent via-zinc-950/75 to-zinc-950 pointer-events-none" />
+    <section id="hero" className="relative pt-24 pb-20 md:pt-36 md:pb-32 overflow-hidden bg-zinc-950">
+      {/* Apple-style Interactive Fluid Gradient Waves Background */}
+      <div className="absolute inset-0 overflow-hidden">
+        <GradientWaves
+          horizonColor="#321306"
+          waveColor="#d96b27"
+          crestColor="#ffe2cc"
+          speed={0.24}
+          amplitude={2.2}
+          relief={0.85}
+          lightAngle={120}
+          mouseInteraction
+          swellOnClick
+          lightMode={false}
+          waveScale={0.55}
+          waveRatio={0.9}
+          swell={35}
+          turbulence={18}
+          tilt={62}
+          zoom={1}
+          height={5.2}
+          fogDepth={18}
+          sheen={0.3}
+          brightness={0.95}
+          opacity={0.8}
+          grain={0.06}
+          quality="high"
+          intro
+          parallaxStrength={0.4}
+          mouseStrength={0.5}
+          paused={false}
+          className="w-full h-full"
+        />
 
-      <div className="relative max-w-6xl mx-auto px-4 sm:px-6">
+        {/* Apple-style atmospheric gradients for contrast, text readability & seamless transitions */}
+        {/* Soft dark vignette on the left to ensure the typography remains razor-sharp and legible */}
+        <div className="absolute inset-0 bg-gradient-to-r from-zinc-950/80 via-zinc-950/30 to-transparent pointer-events-none" />
+
+        {/* Top subtle fade from header */}
+        <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-zinc-950/70 to-transparent pointer-events-none" />
+
+        {/* Bottom seamless blend into the next section */}
+        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-zinc-950 via-zinc-950/60 to-transparent pointer-events-none" />
+      </div>
+
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
         {/* Main 2-Column Hero: Typography & Editorial Portrait */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center mb-12">
           
@@ -39,18 +83,32 @@ export function Hero() {
             animate="visible"
             className="lg:col-span-7 space-y-6"
           >
-            {/* Engineering Status Pill */}
-            <motion.div variants={fadeUp} className="inline-flex">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-400 font-mono text-xs font-semibold">
-                <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-pulse" />
-                <span>{t.status}</span>
-              </div>
-            </motion.div>
 
-            {/* Massive Heading with Special Gothic Expanded One */}
-            <motion.div variants={fadeUp} className="space-y-1">
-              <h1 className="text-4xl sm:text-6xl md:text-7xl font-normal tracking-tight text-zinc-100 font-display uppercase leading-[0.9] select-none">
-                {data.personal.name}
+            {/* Massive Heading with FoldText (Paper Unfolding) */}
+            <motion.div variants={fadeUp} className="space-y-3 sm:space-y-4">
+              <h1 className="text-4xl sm:text-6xl md:text-7xl font-normal tracking-[0.015em] text-zinc-100 font-display uppercase leading-[1.14] select-none [word-spacing:0.08em]">
+                <FoldText
+                  key={isLoaded ? 'loaded' : 'preloading'}
+                  text={data.personal.name}
+                  splitBy="word"
+                  hinge="top"
+                  foldStyle="paper"
+                  trigger="mount"
+                  triggerWhen={isLoaded}
+                  delay={140}
+                  duration={0.9}
+                  stagger={0.08}
+                  foldAngle={85}
+                  creaseShading={0.32}
+                  hoverRefold={true}
+                  refoldRadius={150}
+                  refoldAngle={16}
+                  fontWeight={400}
+                  letterSpacing="0.015em"
+                  wordSpacing="0.08em"
+                  lineHeight={1.14}
+                  className="font-display uppercase text-zinc-100 font-normal leading-[1.14] tracking-[0.015em] [word-spacing:0.08em]"
+                />
               </h1>
               <p className="text-xl sm:text-2xl md:text-3xl font-display uppercase text-zinc-400 tracking-tight">
                 {t.role}
@@ -69,25 +127,7 @@ export function Hero() {
               {t.bioPart2}
             </motion.p>
 
-            {/* Tactile Stickers/Badges */}
-            <motion.div variants={fadeUp} className="flex flex-wrap gap-2 pt-2">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-amber-500/10 border border-amber-500/30 text-amber-300 font-mono text-xs font-medium transform -rotate-1 hover:rotate-0 transition-transform">
-                <Database className="w-3.5 h-3.5 text-amber-400" />
-                {t.stickers.etl}
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 font-mono text-xs font-medium transform rotate-1 hover:rotate-0 transition-transform">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-                {t.stickers.linux}
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-zinc-800 border border-zinc-700 text-zinc-200 font-mono text-xs font-medium transform rotate-1 hover:rotate-0 transition-transform">
-                <Cpu className="w-3.5 h-3.5 text-zinc-400" />
-                {t.stickers.apple}
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-sky-500/10 border border-sky-500/30 text-sky-300 font-mono text-xs font-medium transform -rotate-1 hover:rotate-0 transition-transform">
-                <Layers className="w-3.5 h-3.5 text-sky-400" />
-                {t.stickers.react}
-              </span>
-            </motion.div>
+
 
             {/* Action Buttons */}
             <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-3 pt-3">
@@ -118,7 +158,7 @@ export function Hero() {
                 whileHover={{ y: -1.5 }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ duration: 0.15 }}
-                className="flex items-center gap-2 px-4 py-3.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-zinc-700 text-zinc-200 text-sm font-medium transition-colors font-body"
+                className="flex items-center gap-2 px-4 py-3.5 rounded-xl bg-zinc-900/80 hover:bg-zinc-800/90 border border-zinc-800 hover:border-zinc-700 text-zinc-200 text-sm font-medium backdrop-blur-md transition-colors font-body shadow-lg shadow-black/20"
               >
                 <LinkedinIcon className="w-4 h-4 text-sky-400" />
                 <span>{t.social.linkedin}</span>
@@ -132,7 +172,7 @@ export function Hero() {
                 whileHover={{ y: -1.5 }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ duration: 0.15 }}
-                className="flex items-center gap-2 px-4 py-3.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-zinc-700 text-zinc-200 text-sm font-medium transition-colors font-body"
+                className="flex items-center gap-2 px-4 py-3.5 rounded-xl bg-zinc-900/80 hover:bg-zinc-800/90 border border-zinc-800 hover:border-zinc-700 text-zinc-200 text-sm font-medium backdrop-blur-md transition-colors font-body shadow-lg shadow-black/20"
               >
                 <GithubIcon className="w-4 h-4 text-zinc-300" />
                 <span>{t.social.github}</span>
@@ -146,7 +186,7 @@ export function Hero() {
                 whileHover={{ y: -1.5 }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ duration: 0.15 }}
-                className="flex items-center gap-2 px-4 py-3.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-zinc-700 text-zinc-200 text-sm font-medium transition-colors font-body"
+                className="flex items-center gap-2 px-4 py-3.5 rounded-xl bg-zinc-900/80 hover:bg-zinc-800/90 border border-zinc-800 hover:border-zinc-700 text-zinc-200 text-sm font-medium backdrop-blur-md transition-colors font-body shadow-lg shadow-black/20"
               >
                 <KaggleIcon className="w-4 h-4 text-cyan-400" />
                 <span>{t.social.kaggle}</span>
@@ -155,61 +195,29 @@ export function Hero() {
 
           </motion.div>
 
-          {/* Right Column: High-Craft Editorial Portrait Frame (5 cols) */}
+          {/* Right Column: ProfileCard (Tactile Apple HIG aesthetic) */}
           <motion.div
             variants={scaleReveal}
             initial="hidden"
             animate="visible"
             className="lg:col-span-5 flex justify-center lg:justify-end"
           >
-            <div className="relative w-full max-w-sm sm:max-w-md">
-              
-              {/* Outer architectural frame with hairline border */}
-              <div className="relative p-3 rounded-3xl bg-zinc-900/90 border border-zinc-800 shadow-2xl shadow-black/80 backdrop-blur-sm group">
-                
-                {/* Corner Crosshair CAD markers */}
-                <span className="absolute top-2 left-2 text-[10px] font-mono text-zinc-600 select-none">+</span>
-                <span className="absolute top-2 right-2 text-[10px] font-mono text-zinc-600 select-none">+</span>
-                <span className="absolute bottom-2 left-2 text-[10px] font-mono text-zinc-600 select-none">+</span>
-                <span className="absolute bottom-2 right-2 text-[10px] font-mono text-zinc-600 select-none">+</span>
-
-                {/* Inner Canvas for Photo: Light plate for seamless blending with photo's background */}
-                <div className="relative overflow-hidden rounded-2xl bg-zinc-100 border border-zinc-200/80 aspect-[3/4] flex items-end justify-center">
-                  
-                  {/* Subtle technical background grid inside the photo plate */}
-                  <div 
-                    className="absolute inset-0 opacity-15 pointer-events-none"
-                    style={{
-                      backgroundImage: 'radial-gradient(#18181b 1px, transparent 1px)',
-                      backgroundSize: '16px 16px',
-                    }}
-                  />
-
-                  {/* Mario's Portrait */}
-                  <img
-                    src={profilePhoto}
-                    alt={data.personal.name}
-                    className="relative z-0 w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
-                    loading="eager"
-                    fetchPriority="high"
-                    decoding="async"
-                  />
-
-                  {/* Bottom gradient shadow for seamless integration */}
-                  <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-zinc-950/80 via-zinc-950/20 to-transparent pointer-events-none z-10" />
-
-                  {/* Bottom caption plate */}
-                  <div className="absolute bottom-3 inset-x-3 z-20 flex items-center justify-between px-3 py-2 rounded-xl bg-zinc-950/90 backdrop-blur-md border border-zinc-800/90 text-xs">
-                    <span className="font-display text-[11px] uppercase tracking-wider text-zinc-200">
-                      {data.personal.name}
-                    </span>
-                    <span className="font-mono text-[10px] text-zinc-400">
-                      {language === 'es' ? 'Granada, ES' : 'Granada, Spain'}
-                    </span>
-                  </div>
-                </div>
-              </div>
-
+            <div className="relative w-full max-w-sm sm:max-w-md flex justify-center">
+              <ProfileCard
+                avatarUrl={profilePhoto}
+                name={data.personal.name}
+                title={t.role}
+                showUserInfo={false}
+                theme="dark"
+                radius={24}
+                holo={0.08}
+                glare={0.25}
+                tiltStrength={4}
+                parallax={5}
+                backdropOpacity={0.3}
+                enableTilt={true}
+                className="w-full max-w-[340px]"
+              />
             </div>
           </motion.div>
 
@@ -224,9 +232,8 @@ export function Hero() {
         >
           <a
             href="#experiencia"
-            className="group inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900/60 border border-zinc-800/80 text-xs font-mono text-zinc-400 hover:text-zinc-200 hover:border-zinc-700 transition-colors"
+            className="group inline-flex items-center gap-2 px-3 py-2 rounded-full bg-zinc-900/70 hover:bg-zinc-800/80 border border-zinc-800/80 hover:border-zinc-700 text-xs font-mono text-zinc-400 hover:text-zinc-200 backdrop-blur-md transition-colors shadow-lg shadow-black/20"
           >
-            <span>{language === 'es' ? 'Explorar Trayectoria' : 'Explore Career'}</span>
             <ArrowDown className="w-3.5 h-3.5 text-orange-400 group-hover:translate-y-0.5 transition-transform" />
           </a>
         </motion.div>

@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { GraduationCap, Award, ExternalLink, Languages, FileText } from 'lucide-react';
+import { ExternalLink, Languages, FileText } from 'lucide-react';
 import { getPortfolioData } from '../data/portfolioData';
 import { useLanguage } from '../context/useLanguage';
 import { TRANSLATIONS } from '../data/translations';
 import { defaultViewport, fadeUp, easeOutExpo } from '../utils/motion';
 import { PdfViewerModal } from './PdfViewerModal';
+import ScrollStack, { ScrollStackItem } from './ScrollStack';
 import cambridgeLogo from '../assets/cambridge-logo.webp';
 import appleLogo from '../assets/apple-logo.webp';
 import googleLogo from '../assets/google-logo.webp';
@@ -42,7 +43,7 @@ export function EducationCertifications() {
   };
 
   return (
-    <section id="certificaciones" className="py-20 border-t border-zinc-800/80 bg-zinc-950">
+    <section id="certificaciones" className="py-24 md:py-36 border-t border-zinc-800/80 bg-zinc-950">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         
         {/* Section Header: Focused on Academic Formation */}
@@ -54,8 +55,7 @@ export function EducationCertifications() {
           className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-14"
         >
           <div>
-            <div className="flex items-center gap-2 font-mono text-xs text-orange-400 mb-2">
-              <GraduationCap className="w-4 h-4 text-orange-400" />
+            <div className="font-mono text-xs text-orange-400 mb-2">
               <span>{t.badge}</span>
             </div>
             <h2 className="text-3xl sm:text-5xl font-normal tracking-tight text-zinc-100 font-display uppercase">
@@ -67,17 +67,24 @@ export function EducationCertifications() {
           </p>
         </motion.div>
 
-        {/* 1. FORMACIÓN ACADÉMICA (FULL WIDTH) */}
-        <div className="space-y-6 mb-20">
+        {/* 1. FORMACIÓN ACADÉMICA (FULL WIDTH SCROLLSTACK) */}
+        <ScrollStack
+          useWindowScroll={true}
+          itemDistance={48}
+          itemStackDistance={24}
+          stackPosition="110px"
+          itemScale={0.03}
+          baseScale={0.92}
+          dimAmount={0.14}
+          tiltAmount={1.2}
+          holdDistance={90}
+          smoothScroll={false}
+          className="w-full mb-20"
+        >
           {data.education.map((edu, idx) => (
-            <motion.div
+            <ScrollStackItem
               key={edu.id}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={defaultViewport}
-              transition={{ duration: 0.45, delay: idx * 0.08, ease: easeOutExpo }}
-              whileHover={{ y: -2 }}
-              className="relative rounded-2xl border border-zinc-800 bg-zinc-900/40 hover:bg-zinc-900/70 hover:border-zinc-700 transition-colors duration-300 p-6 sm:p-8 overflow-hidden group"
+              itemClassName="rounded-3xl border border-zinc-800/90 bg-zinc-900/95 backdrop-blur-xl hover:border-zinc-700/80 transition-colors duration-300 p-6 sm:p-8 shadow-2xl shadow-black/70 relative overflow-hidden"
             >
               {/* Subtle top indicator for degrees currently in progress */}
               {(edu.isCurrent ?? idx === 0) && (
@@ -128,9 +135,9 @@ export function EducationCertifications() {
                   </a>
                 )}
               </div>
-            </motion.div>
+            </ScrollStackItem>
           ))}
-        </div>
+        </ScrollStack>
 
         {/* 2. CERTIFICACIONES & CREDENCIALES */}
         <div className="pt-12 border-t border-zinc-800/80">
@@ -141,16 +148,10 @@ export function EducationCertifications() {
             variants={fadeUp}
             className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-8"
           >
-            <div className="flex items-center gap-2.5">
-              <Award className="w-5 h-5 text-orange-400" />
-              <div>
-                <h3 className="text-xl sm:text-2xl font-normal text-zinc-100 font-display uppercase tracking-tight">
-                  {t.certTitle}
-                </h3>
-                <span className="text-xs font-mono text-zinc-500">
-                  {language === 'es' ? '[AGREGADO TÉCNICO // ACREDITACIONES CLAVE]' : '[TECHNICAL SUMMARY // KEY ACCREDITATIONS]'}
-                </span>
-              </div>
+            <div>
+              <h3 className="text-xl sm:text-2xl font-normal text-zinc-100 font-display uppercase tracking-tight">
+                {t.certTitle}
+              </h3>
             </div>
             <p className="text-xs text-zinc-400 font-body max-w-xs">
               {t.certSubtitle}

@@ -25,7 +25,7 @@ export function ContactFooter() {
   };
 
   return (
-    <footer id="contacto" className="border-t border-zinc-800 bg-zinc-950 pt-20 pb-12">
+    <footer id="contacto" className="border-t border-zinc-800 bg-zinc-950 pt-28 pb-16 md:pt-36 md:pb-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         
         {/* Main 2-Column Contact Block */}
@@ -44,7 +44,6 @@ export function ContactFooter() {
             {/* Left Column: Direct details & Context (6 cols) */}
             <div className="lg:col-span-6 space-y-6">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-400 font-mono text-xs font-semibold">
-                <span className="w-2 h-2 rounded-full bg-orange-400" />
                 <span>{t.badge}</span>
               </div>
 

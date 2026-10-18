@@ -73,12 +73,12 @@ export const PORTFOLIO_DATA_ES: PortfolioData = {
   },
   skills: [
     {
-      category: 'Data Engineering & ML',
-      items: ['ETL Pipelines', 'Data Cleaning & Validation', 'Dataset Partitioning', 'Feature Engineering', 'PyTorch / Scikit-learn', 'Pandas & NumPy'],
+      category: 'Data & Machine Learning',
+      items: ['Python', 'Machine Learning (En progreso)', 'Pandas & NumPy', 'Data Cleaning & Validation', 'Dataset Partitioning'],
     },
     {
       category: 'Frontend & UI Architecture',
-      items: ['React 19 & TypeScript', 'Tailwind CSS v4', 'Angular & Ionic / Capacitor', 'Framer Motion', 'State Management', 'Responsive Design'],
+      items: ['React 19 & TypeScript', 'JavaScript', 'HTML5 / CSS3', 'Java', 'Tailwind CSS v4', 'Angular & Ionic / Capacitor', 'Laravel', 'Responsive Design'],
     },
     {
       category: 'Sistemas & DevOps',
@@ -229,12 +229,12 @@ export const PORTFOLIO_DATA_EN: PortfolioData = {
   },
   skills: [
     {
-      category: 'Data Engineering & ML',
-      items: ['ETL Pipelines', 'Data Cleaning & Validation', 'Dataset Partitioning', 'Feature Engineering', 'PyTorch / Scikit-learn', 'Pandas & NumPy'],
+      category: 'Data & Machine Learning',
+      items: ['Python', 'Machine Learning (In progress)', 'Pandas & NumPy', 'Data Cleaning & Validation', 'Dataset Partitioning'],
     },
     {
       category: 'Frontend & UI Architecture',
-      items: ['React 19 & TypeScript', 'Tailwind CSS v4', 'Angular & Ionic / Capacitor', 'Framer Motion', 'State Management', 'Responsive Design'],
+      items: ['React 19 & TypeScript', 'JavaScript', 'HTML5 / CSS3', 'Java', 'Tailwind CSS v4', 'Angular & Ionic / Capacitor', 'Laravel', 'Responsive Design'],
     },
     {
       category: 'Systems & DevOps',
