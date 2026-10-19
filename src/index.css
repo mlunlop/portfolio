@@ -35,12 +35,14 @@ body {
   overflow-x: clip;
 }
 
-/* Hide default cursor completely everywhere only when iPad custom cursor is active */
-html.custom-cursor-active,
-html.custom-cursor-active *,
-html.custom-cursor-active *::before,
-html.custom-cursor-active *::after {
-  cursor: none !important;
+/* Hide default cursor completely everywhere only when iPad custom cursor is active on tablet/desktop */
+@media (min-width: 768px) {
+  html.custom-cursor-active,
+  html.custom-cursor-active *,
+  html.custom-cursor-active *::before,
+  html.custom-cursor-active *::after {
+    cursor: none !important;
+  }
 }
 
 .font-display {

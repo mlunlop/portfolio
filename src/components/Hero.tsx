@@ -206,7 +206,7 @@ export function Hero({ isLoaded = false }: { isLoaded?: boolean }) {
               <ProfileCard
                 avatarUrl={profilePhoto}
                 name={data.personal.name}
-                title={t.role}
+                title={t.location}
                 showUserInfo={false}
                 theme="dark"
                 radius={24}

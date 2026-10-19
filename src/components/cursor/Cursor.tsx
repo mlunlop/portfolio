@@ -46,6 +46,12 @@ export function Cursor() {
   const [hasMoved, setHasMoved] = useState(false);
   const [isHoveringWindow, setIsHoveringWindow] = useState(true);
 
+  // Check if viewport is a mobile phone (< 768px)
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return window.innerWidth < 768;
+  });
+
   // Track active target state locally to avoid context lag for physics
   const activeTargetRef = useRef<{
     element: HTMLElement;
@@ -53,6 +59,31 @@ export function Cursor() {
     lastRect: DOMRect;
     transform: { x: number; y: number };
   } | null>(null);
+
+  useEffect(() => {
+    const mql = window.matchMedia("(max-width: 767px)");
+    const handleResize = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      if (mobile) {
+        document.documentElement.classList.remove("custom-cursor-active");
+        if (activeTargetRef.current) {
+          activeTargetRef.current.element.style.transform = "";
+          activeTargetRef.current.element.style.transition = "";
+          activeTargetRef.current = null;
+        }
+      }
+    };
+
+    mql.addEventListener("change", handleResize);
+    window.addEventListener("resize", handleResize, { passive: true });
+    handleResize();
+
+    return () => {
+      mql.removeEventListener("change", handleResize);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   // Mouse position
   const mouseX = useMotionValue(-100);
@@ -77,12 +108,38 @@ export function Cursor() {
 
   // Main Event Loop
   useEffect(() => {
+    if (isMobile) {
+      document.documentElement.classList.remove("custom-cursor-active");
+      if (activeTargetRef.current) {
+        activeTargetRef.current.element.style.transform = "";
+        activeTargetRef.current.element.style.transition = "";
+        activeTargetRef.current = null;
+      }
+      return;
+    }
+
     let mousePos = { x: -100, y: -100 };
     let rafId: number;
     let initialized = false;
+    let isTouchActive = false;
+    let touchEndTimer: number;
+
+    const handleTouchStart = () => {
+      isTouchActive = true;
+    };
+
+    const handleTouchEnd = () => {
+      clearTimeout(touchEndTimer);
+      touchEndTimer = window.setTimeout(() => {
+        isTouchActive = false;
+      }, 500);
+    };
 
     const handlePointerMove = (e: PointerEvent | MouseEvent) => {
-      // Discard touch events (let native mobile touch work cleanly)
+      // Discard touch events completely (let native mobile touch work cleanly)
+      if (isTouchActive) {
+        return;
+      }
       if ("pointerType" in e && e.pointerType === "touch") {
         return;
       }
@@ -268,6 +325,8 @@ export function Cursor() {
       // Keep last known mousePos, physics update loop will handle hit testing
     };
 
+    window.addEventListener("touchstart", handleTouchStart, { passive: true });
+    window.addEventListener("touchend", handleTouchEnd, { passive: true });
     window.addEventListener("pointermove", handlePointerMove, { passive: true });
     window.addEventListener("mousemove", handlePointerMove, { passive: true });
     window.addEventListener("scroll", handleScroll, { capture: true, passive: true });
@@ -279,6 +338,9 @@ export function Cursor() {
     rafId = requestAnimationFrame(updateLoop);
 
     return () => {
+      clearTimeout(touchEndTimer);
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchend", handleTouchEnd);
       window.removeEventListener("pointermove", handlePointerMove);
       window.removeEventListener("mousemove", handlePointerMove);
       window.removeEventListener("scroll", handleScroll);
@@ -287,9 +349,14 @@ export function Cursor() {
       document.documentElement.removeEventListener("mouseleave", handleWindowLeave);
       document.documentElement.removeEventListener("mouseenter", handleWindowEnter);
       document.documentElement.classList.remove("custom-cursor-active");
+      if (activeTargetRef.current) {
+        activeTargetRef.current.element.style.transform = "";
+        activeTargetRef.current.element.style.transition = "";
+        activeTargetRef.current = null;
+      }
       cancelAnimationFrame(rafId);
     };
-  }, [mouseX, mouseY, targetX, targetY, cursorX, cursorY, lightingX, lightingY, setConfig, updateCursor]);
+  }, [isMobile, mouseX, mouseY, targetX, targetY, cursorX, cursorY, lightingX, lightingY, setConfig, updateCursor]);
 
   // Derived state for rendering
   const isBlock = config.type === "block" && config.activeElement;
@@ -344,6 +411,10 @@ export function Cursor() {
     }
     scaleMotion.set(clickScale);
   }, [isMouseDown, isBlock, config.rect, scaleMotion]);
+
+  if (isMobile) {
+    return null;
+  }
 
   const isVisible = hasMoved && isHoveringWindow;
 

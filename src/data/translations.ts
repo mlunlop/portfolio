@@ -13,7 +13,8 @@ export const TRANSLATIONS = {
     },
     hero: {
       status: 'FORMÁNDOME COMO SOFTWARE & ML ENGINEER',
-      role: 'Junior Software & ML Engineer',
+      role: 'Junior Software',
+      location: 'Granada, España',
       bioPart1: 'Desarrollador con base sólida en frontend y sistemas, actualmente',
       bioHighlight: 'orientando mi perfil hacia la ingeniería de datos y Machine Learning',
       bioPart2: '. Me interesa especialmente el trabajo con pipelines, preparación y análisis de datos, y en mi tiempo libre desarrollo pequeños videojuegos en Godot.',
@@ -237,7 +238,8 @@ export const TRANSLATIONS = {
     },
     hero: {
       status: 'TRAINING AS SOFTWARE & ML ENGINEER',
-      role: 'Junior Software & ML Engineer',
+      role: 'Junior Software',
+      location: 'Granada, Spain',
       bioPart1: 'Developer with a solid background in frontend and systems, currently',
       bioHighlight: 'steering my profile toward data engineering and Machine Learning',
       bioPart2: '. Passionate about pipelines, data processing and analysis, and building indie games with Godot in my spare time.',
