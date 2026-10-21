@@ -84,7 +84,7 @@ export function EducationCertifications() {
           {data.education.map((edu, idx) => (
             <ScrollStackItem
               key={edu.id}
-              itemClassName="rounded-3xl border border-zinc-800/90 bg-zinc-900/95 backdrop-blur-xl hover:border-zinc-700/80 transition-colors duration-300 p-6 sm:p-8 shadow-2xl shadow-black/70 relative overflow-hidden"
+              itemClassName="rounded-2xl sm:rounded-3xl border border-zinc-800/90 bg-zinc-900/95 backdrop-blur-xl hover:border-zinc-700/80 transition-colors duration-300 p-4 sm:p-7 md:p-8 shadow-2xl shadow-black/70 relative overflow-hidden"
             >
               {/* Subtle top indicator for degrees currently in progress */}
               {(edu.isCurrent ?? idx === 0) && (

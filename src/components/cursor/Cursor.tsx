@@ -123,6 +123,11 @@ export function Cursor() {
     let initialized = false;
     let isTouchActive = false;
     let touchEndTimer: number;
+    let mouseMovedSinceLastCheck = true;
+    let cachedTargetEl: HTMLElement | null = null;
+    let cachedTargetType: CursorType = "default";
+    let cachedTargetMagnetic = true;
+    let cachedTargetStickiness = false;
 
     const handleTouchStart = () => {
       isTouchActive = true;
@@ -148,6 +153,7 @@ export function Cursor() {
       mousePos.y = e.clientY;
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
+      mouseMovedSinceLastCheck = true;
 
       if (!initialized) {
         initialized = true;
@@ -157,6 +163,9 @@ export function Cursor() {
         cursorX.jump(e.clientX);
         cursorY.jump(e.clientY);
         document.documentElement.classList.add("custom-cursor-active");
+      } else if (!activeTargetRef.current) {
+        targetX.set(e.clientX);
+        targetY.set(e.clientY);
       }
     };
 
@@ -172,12 +181,14 @@ export function Cursor() {
     const handleMouseUp = () => setIsMouseDown(false);
 
     const updateLoop = () => {
-      let targetEl: HTMLElement | null = null;
-      let targetType: CursorType = "default";
-      let targetMagnetic = true;
-      let targetStickiness = false;
+      if (cachedTargetEl && !document.contains(cachedTargetEl)) {
+        cachedTargetEl = null;
+        cachedTargetType = "default";
+        mouseMovedSinceLastCheck = true;
+      }
 
-      if (mousePos.x >= 0 && mousePos.y >= 0) {
+      if (mouseMovedSinceLastCheck && mousePos.x >= 0 && mousePos.y >= 0) {
+        mouseMovedSinceLastCheck = false;
         const el = document.elementFromPoint(mousePos.x, mousePos.y);
         // Look for explicit data-cursor-target, buttons, links, or skill items
         const hit = el?.closest(
@@ -191,23 +202,34 @@ export function Cursor() {
           const hasExplicitTarget = hit.hasAttribute("data-cursor-target");
 
           if (hasExplicitTarget || isReasonableSize) {
-            targetEl = hit;
+            cachedTargetEl = hit;
             const explicitType = hit.getAttribute("data-cursor-type") as CursorType;
             if (explicitType) {
-              targetType = explicitType;
+              cachedTargetType = explicitType;
             } else if (hit.tagName === "INPUT" && hit.getAttribute("type") === "text") {
-              targetType = "text";
+              cachedTargetType = "text";
             } else {
-              targetType = "block";
+              cachedTargetType = "block";
             }
 
             const magAttr = hit.getAttribute("data-cursor-magnetic");
-            targetMagnetic = magAttr !== "false";
+            cachedTargetMagnetic = magAttr !== "false";
             const stickAttr = hit.getAttribute("data-cursor-stickiness");
-            targetStickiness = stickAttr === "true";
+            cachedTargetStickiness = stickAttr === "true";
+          } else {
+            cachedTargetEl = null;
+            cachedTargetType = "default";
           }
+        } else {
+          cachedTargetEl = null;
+          cachedTargetType = "default";
         }
       }
+
+      const targetEl = cachedTargetEl;
+      const targetType = cachedTargetType;
+      const targetMagnetic = cachedTargetMagnetic;
+      const targetStickiness = cachedTargetStickiness;
 
       // Handle Target Change
       const currentActive = activeTargetRef.current;
@@ -322,7 +344,7 @@ export function Cursor() {
     };
 
     const handleScroll = () => {
-      // Keep last known mousePos, physics update loop will handle hit testing
+      mouseMovedSinceLastCheck = true;
     };
 
     window.addEventListener("touchstart", handleTouchStart, { passive: true });
@@ -459,7 +481,7 @@ export function Cursor() {
         width: cursorConfig.animation.sizeShape,
         height: cursorConfig.animation.sizeShape,
         borderRadius: cursorConfig.animation.sizeShape,
-        backgroundColor: { duration: 0.15, ease: "easeInOut" },
+        backgroundColor: { duration: 0.12, ease: "easeOut" },
       }}
     >
       <AnimatePresence>

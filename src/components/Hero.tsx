@@ -52,8 +52,9 @@ export function Hero({ isLoaded = false }: { isLoaded?: boolean }) {
           sheen={0.3}
           brightness={0.95}
           opacity={0.8}
-          grain={0.06}
-          quality="high"
+          grain={0.05}
+          quality="medium"
+          dpr={1.15}
           intro
           parallaxStrength={0.4}
           mouseStrength={0.5}
@@ -86,7 +87,7 @@ export function Hero({ isLoaded = false }: { isLoaded?: boolean }) {
 
             {/* Massive Heading with FoldText (Paper Unfolding) */}
             <motion.div variants={fadeUp} className="space-y-3 sm:space-y-4">
-              <h1 className="text-4xl sm:text-6xl md:text-7xl font-normal tracking-[0.015em] text-zinc-100 font-display uppercase leading-[1.14] select-none [word-spacing:0.08em]">
+              <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-normal tracking-[0.015em] text-zinc-100 font-display uppercase leading-[1.14] select-none [word-spacing:0.08em]">
                 <FoldText
                   key={isLoaded ? 'loaded' : 'preloading'}
                   text={data.personal.name}

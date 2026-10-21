@@ -214,7 +214,8 @@ const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
 const smootherstep = (t: number) => t * t * t * (t * (t * 6 - 15) + 10);
 
 const fadeMask = (size: number, vertical: boolean) => {
-  const span = clamp(size, 0, 0.5) * 100;
+  // If size >= 1, it's passed as pixels (e.g., 80px) -> convert to a subtle percentage (e.g. 8%)
+  const span = size >= 1 ? clamp(size / 10, 2, 14) : clamp(size, 0, 0.25) * 100;
   if (span <= 0) return undefined;
   const stops: string[] = [];
   for (let i = 0; i <= 12; i++) {

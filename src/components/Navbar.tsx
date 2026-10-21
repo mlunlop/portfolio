@@ -5,7 +5,6 @@ import { PdfViewerModal } from './PdfViewerModal';
 import { useLanguage } from '../context/useLanguage';
 import { TRANSLATIONS } from '../data/translations';
 import { easeOutExpo } from '../utils/motion';
-import GlassSurface from './GlassSurface';
 import { PillNav, type PillNavItem } from './PillNav';
 
 import logoImg from '../assets/logo.webp';
@@ -100,20 +99,8 @@ export function Navbar() {
         transition={{ duration: 0.45, ease: easeOutExpo }}
         className="fixed top-3 sm:top-5 inset-x-0 z-50 flex flex-col items-center px-4 pointer-events-none"
       >
-        <GlassSurface
-          borderRadius={9999}
-          blur={10}
-          displace={0.5}
-          distortionScale={-180}
-          redOffset={0}
-          greenOffset={10}
-          blueOffset={20}
-          backgroundOpacity={0.64}
-          brightness={50}
-          opacity={0.93}
-          saturation={1}
-          className="pointer-events-auto max-w-4xl w-full border border-white/10 shadow-2xl shadow-black/60"
-          contentClassName="relative z-[1] w-full flex items-center justify-between gap-2.5 sm:gap-6 px-3 sm:px-5 py-1.5 sm:py-2"
+        <div
+          className="pointer-events-auto max-w-4xl w-full rounded-full bg-zinc-900/80 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/60 px-3 sm:px-5 py-1.5 sm:py-2"
         >
           <nav className="flex items-center justify-between w-full text-sm">
             {/* Brand / Logo */}
@@ -206,7 +193,7 @@ export function Navbar() {
               </motion.button>
             </div>
           </nav>
-        </GlassSurface>
+        </div>
 
         {/* Mobile Dropdown Menu with Active Section Effect */}
         <AnimatePresence>

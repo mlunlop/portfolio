@@ -64,7 +64,7 @@ export function ExperienceSection() {
             return (
               <ScrollStackItem
                 key={exp.id}
-                itemClassName="rounded-3xl border border-zinc-800/90 bg-zinc-900/95 backdrop-blur-xl hover:border-zinc-700/80 transition-colors duration-300 p-6 sm:p-8 shadow-2xl shadow-black/70"
+                itemClassName="rounded-2xl sm:rounded-3xl border border-zinc-800/90 bg-zinc-900/95 backdrop-blur-xl hover:border-zinc-700/80 transition-colors duration-300 p-4 sm:p-7 md:p-8 shadow-2xl shadow-black/70"
               >
                 <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-6">
                   {/* Left block: Logo + Header info */}

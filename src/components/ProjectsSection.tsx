@@ -15,22 +15,22 @@ import { easeOutExpo, layoutSpring, defaultViewport, fadeUp } from '../utils/mot
 
 // Real visual assets from Bit-Party (Godot 4.7)
 import bitPartyIcon from '../assets/projects/icon.png';
-import powderBg from '../assets/projects/powder_panic_bg.png';
-import powderLogo from '../assets/projects/powder_panic_logo.png';
-import aztecBg from '../assets/projects/aztec_wrath_bg.png';
-import aztecLogo from '../assets/projects/aztec_wrath_logo.png';
-import towerBg from '../assets/projects/tower_drop_bg.png';
-import towerLogo from '../assets/projects/tower_drop_logo.png';
-import neonBg from '../assets/projects/neon_parry_bg.png';
-import neonLogo from '../assets/projects/neon_parry_logo.png';
+import powderBg from '../assets/projects/powder_panic_bg.webp';
+import powderLogo from '../assets/projects/powder_panic_logo.webp';
+import aztecBg from '../assets/projects/aztec_wrath_bg.webp';
+import aztecLogo from '../assets/projects/aztec_wrath_logo.webp';
+import towerBg from '../assets/projects/tower_drop_bg.webp';
+import towerLogo from '../assets/projects/tower_drop_logo.webp';
+import neonBg from '../assets/projects/neon_parry_bg.webp';
+import neonLogo from '../assets/projects/neon_parry_logo.webp';
 
 // DAW Web Designs Thumbnails & Component
-import thumb2pac from '../assets/projects/daw/2pac-thumb.jpg';
-import thumbBmx from '../assets/projects/daw/bmx-thumb.jpg';
-import thumbGiardino from '../assets/projects/daw/giardino-thumb.jpg';
-import thumbJapan from '../assets/projects/daw/japan-thumb.jpg';
+import thumb2pac from '../assets/projects/daw/2pac-thumb.webp';
+import thumbBmx from '../assets/projects/daw/bmx-thumb.webp';
+import thumbGiardino from '../assets/projects/daw/giardino-thumb.webp';
+import thumbJapan from '../assets/projects/daw/japan-thumb.webp';
 import dawThumb from '../assets/projects/daw/daw-thumb.webp';
-import portfolioThumb from '../assets/projects/portfolio-thumb.png';
+import portfolioThumb from '../assets/projects/portfolio-thumb.webp';
 import { WebPreviewModal, type WebProject } from './WebPreviewModal';
 
 const MINIGAME_ASSETS: Record<string, { bg: string; logo: string; shader: string }> = {
@@ -50,7 +50,7 @@ const DAW_STATIC_CONFIG: Record<
 > = {
   'web-2pac': {
     thumbnail: thumb2pac,
-    url: '/projects/daw/WEB-2PAC/index.html',
+    url: 'https://mlunlop-iezv.github.io/WEB-2PAC/',
     tags: {
       es: ['UI/UX Vintage', 'HTML5 Semántico', 'CSS Media Queries', 'Video Streaming'],
       en: ['Vintage UI/UX', 'Semantic HTML5', 'CSS Media Queries', 'Video Streaming'],
@@ -58,7 +58,7 @@ const DAW_STATIC_CONFIG: Record<
   },
   'web-giardino': {
     thumbnail: thumbGiardino,
-    url: '/projects/daw/WEB-GIARDINO-SEGRETO/index.html',
+    url: 'https://mlunlop-iezv.github.io/WEB-GIARDINO-SEGRETO/',
     tags: {
       es: ['Diseño Editorial', 'CSS Grid & Flexbox', 'Formularios UX', 'Estética Gastronómica'],
       en: ['Editorial Layout', 'CSS Grid & Flexbox', 'UX Forms', 'Dining Aesthetics'],
@@ -66,7 +66,7 @@ const DAW_STATIC_CONFIG: Record<
   },
   'web-bmx': {
     thumbnail: thumbBmx,
-    url: '/projects/daw/WEB-BMX-VORTEX/index.html',
+    url: 'https://mlunlop-iezv.github.io/WEB-BMX-VORTEX/',
     tags: {
       es: ['Microinteracciones UI', 'Scroll Progress', 'CSS Keyframes', 'Diseño Deportivo'],
       en: ['UI Micro-interactions', 'Scroll Progress', 'CSS Keyframes', 'Action Sports'],
@@ -74,7 +74,7 @@ const DAW_STATIC_CONFIG: Record<
   },
   'web-japan': {
     thumbnail: thumbJapan,
-    url: '/projects/daw/WEB-JAPAN/index.html',
+    url: 'https://mlunlop-iezv.github.io/WEB-JAPAN/',
     tags: {
       es: ['Arquitectura de Información', 'Sistemas de Diseño UI', 'Multi-página', 'Diseño Responsive'],
       en: ['Information Architecture', 'UI Design Systems', 'Multi-page Layout', 'Responsive Design'],

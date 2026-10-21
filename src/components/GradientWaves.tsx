@@ -59,7 +59,7 @@ const SWELL_GAIN = 2.8;
 const SWELL_WIDTH = 8;
 const INTRO_SECONDS = 2.6;
 const CAMERA_HEIGHT = 30;
-const QUALITY: Record<string, number> = { low: 56, medium: 84, high: 120 };
+const QUALITY: Record<string, number> = { low: 36, medium: 54, high: 72 };
 
 const VERTEX = `#version 300 es
 in vec2 aPosition;
@@ -467,7 +467,9 @@ export default function GradientWaves({
 
     const fit = () => {
       const s = settingsRef.current;
-      const ratio = Math.min(window.devicePixelRatio || 1, s.dpr);
+      const isMobileScreen = typeof window !== 'undefined' && window.innerWidth < 768;
+      const maxCap = isMobileScreen ? 1 : 1.25;
+      const ratio = Math.min(window.devicePixelRatio || 1, s.dpr, maxCap);
       const width = Math.max(1, Math.round(state.cssWidth * ratio));
       const height = Math.max(1, Math.round(state.cssHeight * ratio));
       if (width === state.width && height === state.height) return;

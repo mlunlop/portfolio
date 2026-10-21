@@ -7,13 +7,13 @@ export const cursorConfig = {
   // Block cursor padding
   block: {
     // Normal state padding (percentage of smaller dimension)
-    paddingPercent: 0.10, // 10%
+    paddingPercent: 0.08,
     // Minimum padding in pixels
-    paddingMin: 10,
+    paddingMin: 8,
     // Clicked state padding (percentage of smaller dimension)
-    paddingClickedPercent: 0.07, // 7%
+    paddingClickedPercent: 0.05,
     // Minimum clicked padding in pixels
-    paddingClickedMin: 7,
+    paddingClickedMin: 5,
     // Default border radius if not detected
     defaultRadius: "12px",
   },
@@ -21,60 +21,60 @@ export const cursorConfig = {
   // Text cursor
   text: {
     // Width of the text cursor bar
-    width: 4,
+    width: 3,
     // Default height if line height not detected
-    defaultHeight: 24,
+    defaultHeight: 22,
     // Border radius
     radius: "2px",
   },
 
   // Default cursor (dot)
   default: {
-    // Size of the default cursor
-    size: 20,
+    // Size of the default cursor (nimble and agile)
+    size: 16,
     // Border radius (50% makes it circular)
     radius: "50%",
   },
 
-  // Magnetic effect
+  // Magnetic effect (subtle tactile snap without dragging friction)
   magnetic: {
     // Strength of the magnetic pull (0-1)
-    strength: 0.2,
+    strength: 0.08,
     // Lighting effect multiplier
-    lightingMultiplier: 4,
+    lightingMultiplier: 3.0,
     // Maximum distance the element can move as a % of its size
-    limitMultiplier: 0.1,
+    limitMultiplier: 0.04,
   },
 
   // Animation settings
   animation: {
-    // Spring configuration for cursor position
+    // Ultra-responsive, high-sensitivity spring physics (near zero latency)
     position: {
-      damping: 25,
-      stiffness: 300,
-      mass: 0.5,
+      damping: 46,
+      stiffness: 1400,
+      mass: 0.08,
     },
     // Spring configuration for lighting effect
     lighting: {
-      damping: 20,
-      stiffness: 200,
+      damping: 26,
+      stiffness: 400,
     },
-    // Spring configuration for size/shape changes
+    // Spring configuration for size/shape changes (snappy morphing)
     sizeShape: {
       type: "spring" as const,
-      stiffness: 400,
-      damping: 28,
-      mass: 0.5,
+      stiffness: 850,
+      damping: 38,
+      mass: 0.12,
     },
     clickScale: {
-      stiffness: 400,
-      damping: 30,
+      stiffness: 650,
+      damping: 32,
     },
     // Strict/Instant tracking spring
     sticky: {
-      damping: 40,
-      stiffness: 1000,
-      mass: 0.1,
+      damping: 44,
+      stiffness: 1800,
+      mass: 0.05,
     },
   },
 

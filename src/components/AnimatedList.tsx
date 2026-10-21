@@ -479,8 +479,8 @@ const AnimatedList = ({
                 data-cursor-target=""
                 data-cursor-magnetic="true"
                 style={entry.color ? ({ '--item-color': entry.color } as CSSProperties) : undefined}
-                onPointerEnter={selectOnHover ? () => hover(index) : undefined}
-                onPointerLeave={selectOnHover ? leave : undefined}
+                onPointerEnter={selectOnHover ? (e) => { if (e.pointerType !== 'touch') hover(index); } : undefined}
+                onPointerLeave={selectOnHover ? (e) => { if (e.pointerType !== 'touch') leave(); } : undefined}
                 onClick={() => choose(item, index)}
               >
                 {renderItem ? (

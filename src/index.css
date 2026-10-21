@@ -5,19 +5,9 @@
 
 @custom-variant dark (&:is(.dark *));
 
-@font-face {
-  font-family: 'SF Pro';
-  src: url('./assets/fonts/SF-Pro.woff2') format('woff2'),
-       url('./assets/fonts/SF-Pro.woff') format('woff'),
-       url('./assets/fonts/SF-Pro.ttf') format('truetype');
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
-
 @theme {
   --font-display: 'Special Gothic Expanded One', system-ui, sans-serif;
-  --font-sans: 'SF Pro', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro', 'Inter', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
 
@@ -29,7 +19,7 @@ html {
 body {
   background-color: #09090b;
   color: #f4f4f5;
-  font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro', 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: clip;

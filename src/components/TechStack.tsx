@@ -24,7 +24,7 @@ import {
   siGnubash,
   siHtml5,
   siJavascript,
-} from 'simple-icons';
+} from '../data/simpleIcons';
 import { JavaIcon } from './Icons';
 import { getPortfolioData } from '../data/portfolioData';
 import { useLanguage } from '../context/useLanguage';
@@ -315,7 +315,7 @@ export function TechStack() {
   ];
 
   return (
-    <section id="stack" className="py-24 md:py-32 border-t border-zinc-800/80 bg-zinc-950/70">
+    <section id="stack" className="py-16 sm:py-24 md:py-32 border-t border-zinc-800/80 bg-zinc-950/70">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <motion.div
@@ -323,7 +323,7 @@ export function TechStack() {
           whileInView="visible"
           viewport={defaultViewport}
           variants={fadeUp}
-          className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12"
+          className="flex flex-col md:flex-row md:items-end justify-between gap-3 sm:gap-4 mb-8 sm:mb-12"
         >
           <div>
             <div className="flex items-center gap-2 font-mono text-xs text-orange-400 mb-2">
@@ -344,22 +344,22 @@ export function TechStack() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={defaultViewport}
           transition={{ duration: 0.5, ease: easeOutExpo }}
-          className="mb-14 p-2 rounded-2xl bg-zinc-900/30 border border-zinc-800/60 backdrop-blur-sm"
+          className="mb-8 sm:mb-14 p-1.5 sm:p-2 rounded-2xl bg-zinc-900/30 border border-zinc-800/60 backdrop-blur-sm"
         >
           <LogoLoop
             logos={stackLogos}
-            speed={26}
-            gap={16}
+            speed={24}
+            gap={12}
             pauseOnHover={true}
             scaleOnHover={true}
             fadeOut={true}
-            fadeOutWidth={80}
-            className="py-2"
+            fadeOutWidth={40}
+            className="py-1.5 sm:py-2"
           />
         </motion.div>
 
         {/* Categorized Tech Stack Columns using AnimatedList (Matching Capture Style) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 items-start">
           {data.skills.map((category, idx) => {
             const Icon = getIcon(category.category);
             const items = getCategoryItems(category.category, language);
@@ -371,12 +371,12 @@ export function TechStack() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={defaultViewport}
                 transition={{ duration: 0.45, delay: idx * 0.08, ease: easeOutExpo }}
-                className="flex flex-col rounded-3xl border border-zinc-800/90 bg-zinc-900/60 p-4 sm:p-5 backdrop-blur-xl shadow-2xl shadow-black/60 hover:border-zinc-700/80 transition-all duration-300"
+                className="flex flex-col rounded-2xl sm:rounded-3xl border border-zinc-800/90 bg-zinc-900/60 p-3.5 sm:p-5 backdrop-blur-xl shadow-xl shadow-black/60 hover:border-zinc-700/80 transition-all duration-300"
               >
                 {/* Column Header */}
-                <div className="flex items-center justify-between gap-3 mb-4 px-1 pt-1 pb-2 border-b border-zinc-800/70">
-                  <div className="flex items-center gap-3 min-w-0">
-                    <div className="w-9 h-9 rounded-xl bg-zinc-800/90 border border-zinc-700/80 flex items-center justify-center text-zinc-300 shadow-sm shrink-0">
+                <div className="flex items-center justify-between gap-2 sm:gap-3 mb-3 sm:mb-4 px-1 pt-1 pb-2 border-b border-zinc-800/70">
+                  <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-zinc-800/90 border border-zinc-700/80 flex items-center justify-center text-zinc-300 shadow-sm shrink-0">
                       <Icon className="w-4 h-4" />
                     </div>
                     <div className="min-w-0">
@@ -385,7 +385,7 @@ export function TechStack() {
                       </h3>
                     </div>
                   </div>
-                  <span className="px-2.5 py-0.5 rounded-full bg-zinc-800/80 border border-zinc-700/60 text-zinc-400 font-mono text-[11px] shrink-0">
+                  <span className="px-2 sm:px-2.5 py-0.5 rounded-full bg-zinc-800/80 border border-zinc-700/60 text-zinc-400 font-mono text-[10px] sm:text-[11px] shrink-0">
                     {items.length} {language === 'es' ? 'skills' : 'tools'}
                   </span>
                 </div>
@@ -394,8 +394,8 @@ export function TechStack() {
                 <AnimatedList
                   items={items}
                   theme="dark"
-                  radius={14}
-                  gap={8}
+                  radius={12}
+                  gap={7}
                   maxHeight="none"
                   showGradients={false}
                   fadeSize={0}

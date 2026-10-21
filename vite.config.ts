@@ -9,8 +9,10 @@ export default defineConfig({
     tailwindcss(),
   ],
   resolve: {
-    alias: {
-      '@': path.resolve(import.meta.dirname, './src'),
-    },
+    alias: [
+      { find: '@', replacement: path.resolve(import.meta.dirname, './src') },
+      { find: /^lucide-react$/, replacement: path.resolve(import.meta.dirname, './src/components/icons/lucide.ts') },
+      { find: /^simple-icons$/, replacement: path.resolve(import.meta.dirname, './src/data/simpleIcons.ts') },
+    ],
   },
 })
