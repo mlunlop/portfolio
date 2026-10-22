@@ -35,7 +35,7 @@
     0 -12px 32px -16px rgba(0, 0, 0, 0.5),
     0 24px 48px -24px rgba(0, 0, 0, 0.7);
   transform-origin: 50% 0;
-  will-change: transform, filter;
+  will-change: transform;
   transition: box-shadow 0.25s ease;
 }
 

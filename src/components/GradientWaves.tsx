@@ -618,6 +618,7 @@ export default function GradientWaves({
     };
 
     const onMove = (event: PointerEvent) => {
+      if (!state.visible) return;
       const point = local(event);
       const was = state.inside;
       state.inside = point.inside;
@@ -626,11 +627,13 @@ export default function GradientWaves({
     };
 
     const onLeave = () => {
+      if (!state.visible) return;
       state.inside = false;
       wake();
     };
 
     const onDown = (event: PointerEvent) => {
+      if (!state.visible) return;
       const s = settingsRef.current;
       if (!s.swellOnClick || event.button !== 0 || prefersReduced()) return;
       if (
@@ -649,6 +652,10 @@ export default function GradientWaves({
 
     const visibility = new IntersectionObserver(entries => {
       state.visible = entries.some(entry => entry.isIntersecting);
+      if (!state.visible && state.raf) {
+        cancelAnimationFrame(state.raf);
+        state.raf = 0;
+      }
       wake();
     });
     visibility.observe(container);

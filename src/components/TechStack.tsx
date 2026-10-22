@@ -344,7 +344,7 @@ export function TechStack() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={defaultViewport}
           transition={{ duration: 0.5, ease: easeOutExpo }}
-          className="mb-8 sm:mb-14 p-1.5 sm:p-2 rounded-2xl bg-zinc-900/30 border border-zinc-800/60 backdrop-blur-sm"
+          className="mb-8 sm:mb-14 p-1.5 sm:p-2 rounded-2xl bg-zinc-900/60 border border-zinc-800/60"
         >
           <LogoLoop
             logos={stackLogos}
@@ -371,7 +371,7 @@ export function TechStack() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={defaultViewport}
                 transition={{ duration: 0.45, delay: idx * 0.08, ease: easeOutExpo }}
-                className="flex flex-col rounded-2xl sm:rounded-3xl border border-zinc-800/90 bg-zinc-900/60 p-3.5 sm:p-5 backdrop-blur-xl shadow-xl shadow-black/60 hover:border-zinc-700/80 transition-all duration-300"
+                className="flex flex-col rounded-2xl sm:rounded-3xl border border-zinc-800/90 bg-zinc-900/90 p-3.5 sm:p-5 shadow-xl shadow-black/60 hover:border-zinc-700/80 transition-all duration-300"
               >
                 {/* Column Header */}
                 <div className="flex items-center justify-between gap-2 sm:gap-3 mb-3 sm:mb-4 px-1 pt-1 pb-2 border-b border-zinc-800/70">

@@ -12,6 +12,7 @@ import logoImg from '../assets/logo.webp';
 const SECTION_IDS = ['experiencia', 'certificaciones', 'proyectos', 'stack'];
 
 export function Navbar() {
+  const [isHeaderEntered, setIsHeaderEntered] = useState(false);
   const [isCvOpen, setIsCvOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string>('');
@@ -19,14 +20,17 @@ export function Navbar() {
   const t = TRANSLATIONS[language].nav;
   const tModal = TRANSLATIONS[language].modals.pdf;
 
-  // Scroll spy to detect active section dynamically
+  // Scroll spy to detect active section dynamically (RAF throttled)
   useEffect(() => {
-    const handleScroll = () => {
+    let ticking = false;
+
+    const updateActiveSection = () => {
+      ticking = false;
       const scrollY = window.scrollY;
 
       // Close to the top (Hero)
       if (scrollY < 160) {
-        setActiveSection('');
+        setActiveSection(prev => (prev !== '' ? '' : prev));
         return;
       }
 
@@ -43,7 +47,14 @@ export function Navbar() {
         }
       }
 
-      setActiveSection(current);
+      setActiveSection(prev => (prev !== current ? current : prev));
+    };
+
+    const handleScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(updateActiveSection);
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -97,6 +108,8 @@ export function Navbar() {
         initial={{ y: -16, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.45, ease: easeOutExpo }}
+        onAnimationComplete={() => setIsHeaderEntered(true)}
+        style={isHeaderEntered ? { transform: 'none' } : undefined}
         className="fixed top-3 sm:top-5 inset-x-0 z-50 flex flex-col items-center px-4 pointer-events-none"
       >
         <div
@@ -170,7 +183,7 @@ export function Navbar() {
                 onClick={handleContactClick}
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-zinc-100 text-zinc-950 hover:bg-white transition-colors font-semibold text-xs shadow-sm cursor-pointer"
+                className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-zinc-100 text-zinc-950 hover:bg-white transition-colors font-medium text-xs shadow-sm cursor-pointer"
                 title={t.contactTitle}
               >
                 <span>{t.contact}</span>

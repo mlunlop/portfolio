@@ -201,7 +201,7 @@
 
 .profile-card__name {
   margin: 0;
-  font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, 'Inter', sans-serif !important;
+  font-family: inherit;
   font-size: 19px;
   font-weight: 600;
   line-height: 1.25;

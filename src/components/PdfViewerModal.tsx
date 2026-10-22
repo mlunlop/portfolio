@@ -1,7 +1,8 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { X, Download, ExternalLink, FileText } from 'lucide-react';
 import { useLanguage } from '../context/useLanguage';
 import { TRANSLATIONS } from '../data/translations';
+import { PdfSkeleton } from './skeletons/PdfSkeleton';
 
 export interface PdfViewerModalProps {
   isOpen: boolean;
@@ -23,9 +24,17 @@ export function PdfViewerModal({
   const { language } = useLanguage();
   const t = TRANSLATIONS[language].modals.pdf;
   const displaySubtitle = subtitle || t.defaultSubtitle;
+  const [isLoading, setIsLoading] = useState(true);
 
-  // Close on Escape key press
+  // Close on Escape key press and reset loading state on open
   useEffect(() => {
+    if (isOpen) {
+      setIsLoading(true);
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         onClose();
@@ -33,17 +42,14 @@ export function PdfViewerModal({
     };
 
     if (isOpen) {
-      document.body.style.overflow = 'hidden';
       window.addEventListener('keydown', handleKeyDown);
-    } else {
-      document.body.style.overflow = '';
     }
 
     return () => {
       document.body.style.overflow = '';
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [isOpen, onClose]);
+  }, [isOpen, pdfUrl, onClose]);
 
   if (!isOpen) return null;
 
@@ -110,11 +116,21 @@ export function PdfViewerModal({
           </div>
         </div>
 
-        {/* PDF Frame Viewer */}
+        {/* PDF Frame Viewer with Skeleton Loader */}
         <div className="relative flex-1 bg-zinc-900 w-full h-full overflow-hidden">
+          {/* Document Skeleton Loader Overlay */}
+          <div
+            className={`absolute inset-0 z-20 transition-opacity duration-500 ease-out ${
+              isLoading ? 'opacity-100' : 'opacity-0 pointer-events-none'
+            }`}
+          >
+            <PdfSkeleton title={title} language={language} />
+          </div>
+
           <iframe
             src={`${pdfUrl}#toolbar=0&navpanes=0`}
             title={title}
+            onLoad={() => setIsLoading(false)}
             className="w-full h-full border-0"
           />
 

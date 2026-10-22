@@ -375,7 +375,18 @@ const FoldText = ({
       }
     };
 
+    let inView = true;
+    const visibilityObserver = new IntersectionObserver(([entry]) => {
+      inView = Boolean(entry?.isIntersecting);
+      if (!inView && relaxing) {
+        gsap.ticker.remove(relax);
+        relaxing = false;
+      }
+    });
+    visibilityObserver.observe(root);
+
     const aim = () => {
+      if (!inView) return;
       const box = root.getBoundingClientRect();
       const near =
         pointer &&
@@ -407,6 +418,7 @@ const FoldText = ({
     };
 
     const handleMove = (event: PointerEvent) => {
+      if (!inView) return;
       pointer = { x: event.clientX, y: event.clientY };
       aim();
     };
@@ -417,7 +429,7 @@ const FoldText = ({
     };
 
     const handleScroll = () => {
-      if (pointer) aim();
+      if (pointer && inView) aim();
     };
 
     if (refold) {
@@ -428,6 +440,7 @@ const FoldText = ({
 
     return () => {
       if (playTimeout) clearTimeout(playTimeout);
+      visibilityObserver.disconnect();
       root.removeEventListener('mouseenter', handleEnter);
       window.removeEventListener('pointermove', handleMove);
       window.removeEventListener('scroll', handleScroll, { capture: true });

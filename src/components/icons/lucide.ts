@@ -32,3 +32,4 @@ export { default as RotateCcw } from 'lucide-react/dist/esm/icons/rotate-ccw.mjs
 export { default as RotateCw } from 'lucide-react/dist/esm/icons/rotate-cw.mjs';
 export { default as Loader2 } from 'lucide-react/dist/esm/icons/loader-2.mjs';
 export { default as Maximize2 } from 'lucide-react/dist/esm/icons/maximize-2.mjs';
+export { default as Lock } from 'lucide-react/dist/esm/icons/lock.mjs';

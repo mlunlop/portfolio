@@ -154,44 +154,63 @@ const ScrollStack = ({
       return true;
     };
 
-    const update = () => {
-      frame = 0;
+    let cachedHeights: number[] = [];
+    let isVisible = false;
+
+    const measure = () => {
       const settings = settingsRef.current;
       const slots = Array.from(inner.children).filter(child => (child as HTMLElement).hasAttribute('data-stack-slot')) as HTMLElement[];
       if (!settings || !slots.length) return;
 
       const viewHeight = windowed ? window.innerHeight : root.clientHeight;
-      const viewTop = windowed ? 0 : root.getBoundingClientRect().top + root.clientTop;
       const stackTop = resolveOffset(settings.stackPosition, viewHeight);
       const offset = settings.itemStackDistance;
-      const heights = slots.map(slot => slot.offsetHeight);
-      const tops = slots.map(slot => slot.getBoundingClientRect().top);
+      cachedHeights = slots.map(slot => slot.offsetHeight);
       const lastPin = stackTop + (slots.length - 1) * offset;
       const padTop = windowed ? 0 : stackTop;
       const endHeight =
-        settings.holdDistance + (windowed ? 0 : Math.max(0, viewHeight - lastPin - heights[heights.length - 1]));
+        settings.holdDistance + (windowed ? 0 : Math.max(0, viewHeight - lastPin - (cachedHeights[cachedHeights.length - 1] || 0)));
 
-      let moved = write('padTop', padTop, value => {
+      write('padTop', padTop, value => {
         inner.style.paddingTop = `${value}px`;
       });
-      moved =
-        write('endHeight', endHeight, value => {
-          end.style.height = `${value}px`;
-        }) || moved;
+      write('endHeight', endHeight, value => {
+        end.style.height = `${value}px`;
+      });
 
+      const viewTop = windowed ? 0 : root.getBoundingClientRect().top + root.clientTop;
       let flow = inner.getBoundingClientRect().top - viewTop + readScroll() + padTop;
-      points = heights.map((height, i) => {
+      points = cachedHeights.map((height, i) => {
         const point = flow - stackTop - i * offset;
         flow += height + settings.itemDistance;
         return point;
       });
-      reach = Math.max(40, (heights[0] + settings.itemDistance - offset) / 2);
+      reach = Math.max(40, ((cachedHeights[0] || 0) + settings.itemDistance - offset) / 2);
+    };
+
+    const update = () => {
+      frame = 0;
+      if (!isVisible) return;
+      const settings = settingsRef.current;
+      const slots = Array.from(inner.children).filter(child => (child as HTMLElement).hasAttribute('data-stack-slot')) as HTMLElement[];
+      if (!settings || !slots.length) return;
+
+      if (!cachedHeights.length || cachedHeights.length !== slots.length) {
+        measure();
+      }
+
+      const viewHeight = windowed ? window.innerHeight : root.clientHeight;
+      const viewTop = windowed ? 0 : root.getBoundingClientRect().top + root.clientTop;
+      const stackTop = resolveOffset(settings.stackPosition, viewHeight);
+      const offset = settings.itemStackDistance;
+      const heights = cachedHeights;
+      const tops = slots.map(slot => slot.getBoundingClientRect().top);
 
       const depths = slots.map(() => 0);
       let lastCover = 0;
       for (let j = 1; j < slots.length; j++) {
         const pinBefore = viewTop + stackTop + (j - 1) * offset;
-        const start = pinBefore + heights[j - 1];
+        const start = pinBefore + (heights[j - 1] || 0);
         const span = Math.max(1, start - pinBefore - offset);
         const cover = Math.min(1, Math.max(0, (start - tops[j]) / span));
         for (let i = 0; i < j; i++) depths[i] += cover;
@@ -216,12 +235,16 @@ const ScrollStack = ({
         write(`transform${i}`, transform, value => {
           card.style.transform = value;
         });
-        write(`filter${i}`, blur > 0.01 ? `blur(${blur.toFixed(2)}px)` : '', value => {
-          card.style.filter = value;
-        });
-        write(`dim${i}`, dim.toFixed(3), value => {
-          card.style.setProperty('--scroll-stack-dim', value);
-        });
+        if (settings.blurAmount > 0) {
+          write(`filter${i}`, blur > 0.01 ? `blur(${blur.toFixed(2)}px)` : '', value => {
+            card.style.filter = value;
+          });
+        }
+        if (settings.dimAmount > 0) {
+          write(`dim${i}`, dim.toFixed(3), value => {
+            card.style.setProperty('--scroll-stack-dim', value);
+          });
+        }
       });
 
       const done = slots.length > 1 && lastCover >= 0.999;
@@ -229,12 +252,10 @@ const ScrollStack = ({
         complete = done;
         if (done) settings.onStackComplete?.();
       }
-
-      if (moved) schedule();
     };
 
     const schedule = () => {
-      if (!frame) frame = requestAnimationFrame(update);
+      if (!frame && isVisible) frame = requestAnimationFrame(update);
     };
 
     const step = (now: number) => {
@@ -282,13 +303,15 @@ const ScrollStack = ({
     };
 
     const settleSoon = () => {
+      if (!settingsRef.current?.snap) return;
       window.clearTimeout(rest);
       rest = window.setTimeout(settle, 140);
     };
 
     const onScroll = () => {
+      if (!isVisible) return;
       schedule();
-      if (!gliding) settleSoon();
+      if (!gliding && settingsRef.current?.snap) settleSoon();
     };
 
     const onWheel = (event: WheelEvent) => {
@@ -315,16 +338,39 @@ const ScrollStack = ({
       settleSoon();
     };
 
-    const observer = new ResizeObserver(schedule);
+    const handleResize = () => {
+      measure();
+      schedule();
+    };
+
+    const observer = new ResizeObserver(handleResize);
     observer.observe(root);
     observer.observe(inner);
+
+    const visibilityObserver = new IntersectionObserver(
+      entries => {
+        const entry = entries[0];
+        isVisible = Boolean(entry?.isIntersecting);
+        if (isVisible) {
+          schedule();
+        }
+      },
+      { rootMargin: '300px 0px' }
+    );
+    visibilityObserver.observe(root);
+
     target.addEventListener('scroll', onScroll, { passive: true });
-    target.addEventListener('wheel', onWheel as EventListener, { passive: false });
-    target.addEventListener('pointerdown', onPress, { passive: true });
-    window.addEventListener('pointerup', onRelease, { passive: true });
-    window.addEventListener('pointercancel', onRelease, { passive: true });
-    window.addEventListener('resize', schedule);
+    if (settingsRef.current?.smoothScroll) {
+      target.addEventListener('wheel', onWheel as EventListener, { passive: false });
+    }
+    if (settingsRef.current?.snap) {
+      target.addEventListener('pointerdown', onPress, { passive: true });
+      window.addEventListener('pointerup', onRelease, { passive: true });
+      window.addEventListener('pointercancel', onRelease, { passive: true });
+    }
+    window.addEventListener('resize', handleResize);
     scheduleRef.current = schedule;
+    measure();
     update();
 
     return () => {
@@ -332,12 +378,17 @@ const ScrollStack = ({
       cancelAnimationFrame(glide);
       window.clearTimeout(rest);
       observer.disconnect();
+      visibilityObserver.disconnect();
       target.removeEventListener('scroll', onScroll);
-      target.removeEventListener('wheel', onWheel as EventListener);
-      target.removeEventListener('pointerdown', onPress);
-      window.removeEventListener('pointerup', onRelease);
-      window.removeEventListener('pointercancel', onRelease);
-      window.removeEventListener('resize', schedule);
+      if (settingsRef.current?.smoothScroll) {
+        target.removeEventListener('wheel', onWheel as EventListener);
+      }
+      if (settingsRef.current?.snap) {
+        target.removeEventListener('pointerdown', onPress);
+        window.removeEventListener('pointerup', onRelease);
+        window.removeEventListener('pointercancel', onRelease);
+      }
+      window.removeEventListener('resize', handleResize);
       scheduleRef.current = null;
     };
   }, [useWindowScroll]);

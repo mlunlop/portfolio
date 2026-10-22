@@ -159,7 +159,7 @@ export function Hero({ isLoaded = false }: { isLoaded?: boolean }) {
                 whileHover={{ y: -1.5 }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ duration: 0.15 }}
-                className="flex items-center gap-2 px-4 py-3.5 rounded-xl bg-zinc-900/80 hover:bg-zinc-800/90 border border-zinc-800 hover:border-zinc-700 text-zinc-200 text-sm font-medium backdrop-blur-md transition-colors font-body shadow-lg shadow-black/20"
+                className="flex items-center gap-2 px-4 py-3.5 rounded-xl bg-zinc-900 hover:bg-zinc-800/90 border border-zinc-800 hover:border-zinc-700 text-zinc-200 text-sm font-medium transition-colors font-body shadow-lg shadow-black/20"
               >
                 <LinkedinIcon className="w-4 h-4 text-sky-400" />
                 <span>{t.social.linkedin}</span>
@@ -173,7 +173,7 @@ export function Hero({ isLoaded = false }: { isLoaded?: boolean }) {
                 whileHover={{ y: -1.5 }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ duration: 0.15 }}
-                className="flex items-center gap-2 px-4 py-3.5 rounded-xl bg-zinc-900/80 hover:bg-zinc-800/90 border border-zinc-800 hover:border-zinc-700 text-zinc-200 text-sm font-medium backdrop-blur-md transition-colors font-body shadow-lg shadow-black/20"
+                className="flex items-center gap-2 px-4 py-3.5 rounded-xl bg-zinc-900 hover:bg-zinc-800/90 border border-zinc-800 hover:border-zinc-700 text-zinc-200 text-sm font-medium transition-colors font-body shadow-lg shadow-black/20"
               >
                 <GithubIcon className="w-4 h-4 text-zinc-300" />
                 <span>{t.social.github}</span>
@@ -187,7 +187,7 @@ export function Hero({ isLoaded = false }: { isLoaded?: boolean }) {
                 whileHover={{ y: -1.5 }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ duration: 0.15 }}
-                className="flex items-center gap-2 px-4 py-3.5 rounded-xl bg-zinc-900/80 hover:bg-zinc-800/90 border border-zinc-800 hover:border-zinc-700 text-zinc-200 text-sm font-medium backdrop-blur-md transition-colors font-body shadow-lg shadow-black/20"
+                className="flex items-center gap-2 px-4 py-3.5 rounded-xl bg-zinc-900 hover:bg-zinc-800/90 border border-zinc-800 hover:border-zinc-700 text-zinc-200 text-sm font-medium transition-colors font-body shadow-lg shadow-black/20"
               >
                 <KaggleIcon className="w-4 h-4 text-cyan-400" />
                 <span>{t.social.kaggle}</span>
@@ -233,7 +233,7 @@ export function Hero({ isLoaded = false }: { isLoaded?: boolean }) {
         >
           <a
             href="#experiencia"
-            className="group inline-flex items-center gap-2 px-3 py-2 rounded-full bg-zinc-900/70 hover:bg-zinc-800/80 border border-zinc-800/80 hover:border-zinc-700 text-xs font-mono text-zinc-400 hover:text-zinc-200 backdrop-blur-md transition-colors shadow-lg shadow-black/20"
+            className="group inline-flex items-center gap-2 px-3 py-2 rounded-full bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-zinc-700 text-xs font-mono text-zinc-400 hover:text-zinc-200 transition-colors shadow-lg shadow-black/20"
           >
             <ArrowDown className="w-3.5 h-3.5 text-orange-400 group-hover:translate-y-0.5 transition-transform" />
           </a>

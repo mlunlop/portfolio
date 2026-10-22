@@ -13,7 +13,7 @@ export const TRANSLATIONS = {
     },
     hero: {
       status: 'FORMÁNDOME COMO SOFTWARE & ML ENGINEER',
-      role: 'Junior Software',
+      role: 'Software & Data',
       location: 'Granada, España',
       bioPart1: 'Desarrollador con base sólida en frontend y sistemas, actualmente',
       bioHighlight: 'orientando mi perfil hacia la ingeniería de datos y Machine Learning',
@@ -238,7 +238,7 @@ export const TRANSLATIONS = {
     },
     hero: {
       status: 'TRAINING AS SOFTWARE & ML ENGINEER',
-      role: 'Junior Software',
+      role: 'Software & Data',
       location: 'Granada, Spain',
       bioPart1: 'Developer with a solid background in frontend and systems, currently',
       bioHighlight: 'steering my profile toward data engineering and Machine Learning',

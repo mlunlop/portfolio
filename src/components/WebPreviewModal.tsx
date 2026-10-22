@@ -6,12 +6,12 @@ import {
   Tablet,
   Smartphone,
   RotateCw,
-  Loader2,
   Globe,
   Maximize2,
 } from 'lucide-react';
 import { useLanguage } from '../context/useLanguage';
 import { TRANSLATIONS } from '../data/translations';
+import { WebsiteSkeleton } from './skeletons/WebsiteSkeleton';
 
 export interface WebProject {
   id: string;
@@ -206,22 +206,25 @@ export function WebPreviewModal({
 
         {/* Viewport Frame Container */}
         <div className="relative flex-1 bg-zinc-950 flex items-center justify-center overflow-auto p-0 sm:p-2">
-          {/* Loading Indicator */}
-          {isLoading && (
-            <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-zinc-950/90 backdrop-blur-sm gap-3">
-              <Loader2 className="w-8 h-8 text-orange-500 animate-spin" />
-              <div className="text-center">
-                <p className="text-sm font-medium text-zinc-200 font-display">
-                  {t.loading}
-                </p>
-              </div>
-            </div>
-          )}
-
           {/* Device Mockup Wrapper */}
           <div
-            className={`transition-all duration-300 relative bg-white flex flex-col ${getDeviceStyle()}`}
+            className={`transition-all duration-300 relative bg-white flex flex-col overflow-hidden ${getDeviceStyle()}`}
           >
+            {/* Elegant Website Skeleton Loader */}
+            <div
+              className={`absolute inset-0 z-20 transition-opacity duration-500 ease-out ${
+                isLoading ? 'opacity-100' : 'opacity-0 pointer-events-none'
+              }`}
+            >
+              <WebsiteSkeleton
+                projectTitle={project.title}
+                projectUrl={project.url}
+                thumbnailUrl={project.thumbnail}
+                device={device}
+                language={language}
+              />
+            </div>
+
             <iframe
               key={key}
               src={project.url}

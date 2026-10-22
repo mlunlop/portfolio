@@ -219,7 +219,7 @@ export function ProjectsSection() {
                         style={{ imageRendering: 'pixelated' }}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/30 to-transparent group-hover:opacity-40 transition-opacity duration-500 pointer-events-none" />
-                      <div className="relative z-10 w-16 h-16 rounded-2xl bg-zinc-950/80 backdrop-blur-md border border-white/10 p-2.5 shadow-2xl flex items-center justify-center group-hover:border-white/25 transition-colors">
+                      <div className="relative z-10 w-16 h-16 rounded-2xl bg-zinc-950/90 border border-white/10 p-2.5 shadow-2xl flex items-center justify-center group-hover:border-white/25 transition-colors">
                         <img
                           src={bitPartyIcon}
                           alt="Bit-Party Icon"
@@ -257,14 +257,14 @@ export function ProjectsSection() {
                   {/* Top Badge: Category & Status */}
                   <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2 pointer-events-none">
                     {card.badge ? (
-                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-orange-500/10 border border-orange-500/30 font-mono text-[10px] text-orange-400 font-medium backdrop-blur-md">
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-orange-500/20 bg-zinc-950/80 border border-orange-500/40 font-mono text-[10px] text-orange-400 font-medium">
                         {card.badge}
                       </span>
                     ) : (
                       <span />
                     )}
                     {isExpanded && (
-                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/10 border border-white/20 font-mono text-[10px] text-zinc-200 font-medium backdrop-blur-md">
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/15 bg-zinc-950/80 border border-white/25 font-mono text-[10px] text-zinc-200 font-medium">
                         {language === 'es' ? 'Desplegado' : 'Expanded'}
                       </span>
                     )}
@@ -358,7 +358,7 @@ export function ProjectsSection() {
                 }}
                 className="mt-10 overflow-hidden"
               >
-                <div className="relative rounded-[32px] border border-white/[0.12] bg-zinc-900/70 backdrop-blur-2xl p-6 sm:p-8 md:p-10 shadow-2xl shadow-black/80">
+                <div className="relative rounded-[32px] border border-white/[0.12] bg-zinc-900/95 p-6 sm:p-8 md:p-10 shadow-2xl shadow-black/80">
                   
                   {/* Stage Top Control Bar */}
                   <div className="flex items-center justify-between gap-4 pb-6 mb-8 border-b border-white/[0.08]">
@@ -468,7 +468,7 @@ export function ProjectsSection() {
 
                             {/* Bottom Mechanic Pill */}
                             <div className="relative z-10 p-3">
-                              <div className="p-3 rounded-xl bg-zinc-950/90 backdrop-blur-md border border-white/[0.1]">
+                              <div className="p-3 rounded-xl bg-zinc-950 border border-white/[0.1]">
                                 <p className="text-[11px] text-zinc-300 font-body leading-snug">
                                   {currentMinigame.mechanic}
                                 </p>
@@ -570,20 +570,21 @@ export function ProjectsSection() {
                             className="group/item rounded-2xl bg-zinc-950/70 border border-white/[0.08] hover:border-white/20 transition-all duration-300 overflow-hidden flex flex-col justify-between"
                           >
                             {/* 16:9 Thumbnail Header */}
-                            <div className="relative aspect-video w-full overflow-hidden bg-zinc-950">
+                            <div className="relative aspect-video w-full overflow-hidden bg-zinc-900">
+                              <div className="absolute inset-0 bg-zinc-800/60 animate-pulse pointer-events-none" />
                               <img
                                 src={proj.thumbnail}
                                 alt={proj.title}
-                                className="w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-500"
+                                className="relative z-10 w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-500"
                                 loading="lazy"
                               />
                               <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/30 to-transparent" />
                               
                               <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2">
-                                <span className="px-2.5 py-1 rounded-md bg-zinc-950/80 backdrop-blur-md border border-white/10 text-[10px] font-mono text-zinc-300">
+                                <span className="px-2.5 py-1 rounded-md bg-zinc-950/90 border border-white/10 text-[10px] font-mono text-zinc-300">
                                   {proj.category}
                                 </span>
-                                <span className="px-2.5 py-1 rounded-md bg-zinc-950/80 backdrop-blur-md border border-white/10 text-[10px] font-mono text-zinc-400">
+                                <span className="px-2.5 py-1 rounded-md bg-zinc-950/90 border border-white/10 text-[10px] font-mono text-zinc-400">
                                   {proj.date}
                                 </span>
                               </div>

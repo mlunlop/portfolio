@@ -343,14 +343,30 @@ export function Cursor() {
       rafId = requestAnimationFrame(updateLoop);
     };
 
+    let scrollTimer = 0;
     const handleScroll = () => {
-      mouseMovedSinceLastCheck = true;
+      if (activeTargetRef.current) {
+        activeTargetRef.current.element.style.transition = "transform 0.2s ease-out";
+        activeTargetRef.current.element.style.transform = "translate3d(0,0,0)";
+        activeTargetRef.current = null;
+        cachedTargetEl = null;
+        cachedTargetType = "default";
+        setConfig({
+          type: "default",
+          rect: null,
+          activeElement: null,
+          stickiness: false,
+        });
+      }
+      clearTimeout(scrollTimer);
+      scrollTimer = window.setTimeout(() => {
+        mouseMovedSinceLastCheck = true;
+      }, 80);
     };
 
     window.addEventListener("touchstart", handleTouchStart, { passive: true });
     window.addEventListener("touchend", handleTouchEnd, { passive: true });
     window.addEventListener("pointermove", handlePointerMove, { passive: true });
-    window.addEventListener("mousemove", handlePointerMove, { passive: true });
     window.addEventListener("scroll", handleScroll, { capture: true, passive: true });
     window.addEventListener("mousedown", handleMouseDown);
     window.addEventListener("mouseup", handleMouseUp);
@@ -361,10 +377,10 @@ export function Cursor() {
 
     return () => {
       clearTimeout(touchEndTimer);
+      clearTimeout(scrollTimer);
       window.removeEventListener("touchstart", handleTouchStart);
       window.removeEventListener("touchend", handleTouchEnd);
       window.removeEventListener("pointermove", handlePointerMove);
-      window.removeEventListener("mousemove", handlePointerMove);
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mouseup", handleMouseUp);
