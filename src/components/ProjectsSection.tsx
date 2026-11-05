@@ -2,7 +2,6 @@ import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ChevronDown,
-  ChevronUp,
   ExternalLink,
   Eye,
   X,
@@ -134,7 +133,7 @@ export function ProjectsSection() {
   const cards = [
     {
       id: 'bit-party' as ProjectId,
-      eyebrow: language === 'es' ? 'JUEGO MÓVIL • GODOT 4.7' : 'MOBILE GAME • GODOT 4.7',
+      eyebrow: language === 'es' ? 'Juego móvil · Godot 4.7' : 'Mobile game · Godot 4.7',
       title: t.bitParty.title,
       subtitle: t.bitParty.subtitle,
       tagline: language === 'es' ? '13 Minijuegos • Turno 24h • Shaders CRT' : '13 Minigames • 24h Turn • CRT Shaders',
@@ -144,7 +143,7 @@ export function ProjectsSection() {
     },
     {
       id: 'howfarhome' as ProjectId,
-      eyebrow: language === 'es' ? 'WEB APP • DATOS GEOESPACIALES' : 'WEB APP • GEOSPATIAL DATA',
+      eyebrow: language === 'es' ? 'Web app · Datos geoespaciales' : 'Web app · Geospatial data',
       title: t.howFarHome.title,
       subtitle: t.howFarHome.subtitle,
       tagline: language === 'es' ? 'OSM • OCR de Mapillary • GitHub Actions' : 'OSM • Mapillary OCR • GitHub Actions',
@@ -154,7 +153,7 @@ export function ProjectsSection() {
     },
     {
       id: 'daw-designs' as ProjectId,
-      eyebrow: language === 'es' ? 'DISEÑO WEB • UI/UX' : 'WEB DESIGN • UI/UX',
+      eyebrow: language === 'es' ? 'Diseño web · UI/UX' : 'Web design · UI/UX',
       title: t.dawDesigns.title,
       subtitle: t.dawDesigns.subtitle,
       tagline: language === 'es' ? '4 Entregas • Maquetación Editorial • Grid & Flex' : '4 Deliveries • Editorial Layout • Grid & Flex',
@@ -164,7 +163,7 @@ export function ProjectsSection() {
     },
     {
       id: 'portfolio' as ProjectId,
-      eyebrow: language === 'es' ? 'ARQUITECTURA FRONTEND' : 'FRONTEND ARCHITECTURE',
+      eyebrow: language === 'es' ? 'Arquitectura frontend' : 'Frontend architecture',
       title: t.portfolioProject.title,
       subtitle: t.portfolioProject.subtitle,
       tagline: language === 'es' ? 'React 19 • TypeScript • Tailwind v4 • 60 FPS' : 'React 19 • TypeScript • Tailwind v4 • 60 FPS',
@@ -200,40 +199,45 @@ export function ProjectsSection() {
         </motion.div>
 
         {/* =====================================================================
-            3 EQUAL-SIZE PROJECT CARDS (APPLE MONOCHROME / SPACE BLACK GRID)
+            PROJECT CARDS (APPLE PRODUCT TILES)
         ===================================================================== */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 items-stretch">
           {cards.map((card) => {
             const isExpanded = expandedProject === card.id;
 
             return (
               <motion.article
                 key={card.id}
+                role="button"
+                tabIndex={0}
+                aria-expanded={isExpanded}
                 whileHover={{ y: -4 }}
                 transition={{ duration: 0.25, ease: easeOutExpo }}
                 onClick={() => toggleProject(card.id)}
-                className={`group relative rounded-3xl border transition-all duration-300 flex flex-col justify-between overflow-hidden cursor-pointer select-none ${
-                  isExpanded
-                    ? 'bg-zinc-900/90 border-white/30 shadow-2xl shadow-orange-500/10 ring-1 ring-white/20'
-                    : 'bg-zinc-900/40 border-white/[0.08] hover:border-white/20 hover:bg-zinc-900/60 shadow-lg shadow-black/40'
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    toggleProject(card.id);
+                  }
+                }}
+                className={`group surface-card relative flex flex-col overflow-hidden cursor-pointer select-none focus-visible:outline-2 focus-visible:outline-orange-400 ${
+                  isExpanded ? 'outline-1 outline-white/30' : ''
                 }`}
               >
-                {/* Card Visual Hero Preview */}
-                <div className="relative aspect-[16/10] w-full overflow-hidden bg-zinc-950 border-b border-white/[0.06]">
-                  {/* Game Preview */}
+                {/* Visual */}
+                <div className="relative aspect-[16/10] w-full overflow-hidden bg-zinc-950">
                   {card.previewType === 'game' && (
-                    <div className="relative w-full h-full flex items-center justify-center p-4 overflow-hidden bg-zinc-950">
+                    <div className="relative w-full h-full flex items-center justify-center">
                       <img
                         src={powderBg}
-                        alt="Bit-Party Preview"
-                        className="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:opacity-95 group-hover:scale-105 transition-all duration-500 ease-out"
+                        alt=""
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                         style={{ imageRendering: 'pixelated' }}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/30 to-transparent group-hover:opacity-40 transition-opacity duration-500 pointer-events-none" />
-                      <div className="relative z-10 w-16 h-16 rounded-2xl bg-zinc-950/90 border border-white/10 p-2.5 shadow-2xl flex items-center justify-center group-hover:border-white/25 transition-colors">
+                      <div className="glass-dark relative z-10 w-16 h-16 rounded-[20px] p-2.5 flex items-center justify-center">
                         <img
                           src={bitPartyIcon}
-                          alt="Bit-Party Icon"
+                          alt="Bit-Party"
                           className="w-full h-full object-contain"
                           style={{ imageRendering: 'pixelated' }}
                         />
@@ -241,110 +245,68 @@ export function ProjectsSection() {
                     </div>
                   )}
 
-                  {/* HowFarHome? Logo Preview */}
                   {card.previewType === 'howfarhome' && (
-                    <div className="relative w-full h-full flex items-center justify-center overflow-hidden bg-[#1a1718]">
+                    <div className="relative w-full h-full flex items-center justify-center bg-[#1a1718]">
                       <img
                         src={howFarHomeLogo}
-                        alt="HowFarHome? Logo"
-                        className="w-full h-auto object-contain opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500 ease-out"
+                        alt="HowFarHome?"
+                        className="w-full h-auto object-contain transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent group-hover:opacity-40 transition-opacity duration-500 pointer-events-none" />
                     </div>
                   )}
 
-                  {/* Web Lab Preview */}
                   {card.previewType === 'web' && (
-                    <div className="relative w-full h-full overflow-hidden bg-zinc-950">
-                      <img
-                        src={dawThumb}
-                        alt="Colección de Diseño Web DAW"
-                        className="w-full h-full object-cover object-center opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500 ease-out"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent group-hover:opacity-30 transition-opacity duration-500 pointer-events-none" />
-                    </div>
+                    <img
+                      src={dawThumb}
+                      alt={language === 'es' ? 'Colección de diseño web DAW' : 'DAW web design collection'}
+                      className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                    />
                   )}
 
-                  {/* Portfolio Hero Capture Preview */}
                   {card.previewType === 'portfolio' && (
-                    <div className="relative w-full h-full overflow-hidden bg-zinc-950">
-                      <img
-                        src={portfolioThumb}
-                        alt="Portfolio Interface"
-                        className="w-full h-full object-cover object-top opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500 ease-out"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent group-hover:opacity-30 transition-opacity duration-500 pointer-events-none" />
-                    </div>
+                    <img
+                      src={portfolioThumb}
+                      alt={language === 'es' ? 'Interfaz del portfolio' : 'Portfolio interface'}
+                      className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                    />
                   )}
 
-                  {/* Top Badge: Category & Status */}
-                  <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2 pointer-events-none">
-                    {card.badge ? (
-                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-orange-500/20 bg-zinc-950/80 border border-orange-500/40 font-mono text-[10px] text-orange-400 font-medium">
-                        {card.badge}
-                      </span>
-                    ) : (
-                      <span />
-                    )}
-                    {isExpanded && (
-                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/15 bg-zinc-950/80 border border-white/25 font-mono text-[10px] text-zinc-200 font-medium">
-                        {language === 'es' ? 'Desplegado' : 'Expanded'}
-                      </span>
-                    )}
-                  </div>
+                  {/* Status badge — glass over imagery */}
+                  {card.badge && (
+                    <span className="glass-dark absolute top-3 left-3 z-20 inline-flex items-center gap-1.5 h-7 px-2.5 rounded-full text-[12px] font-medium text-label pointer-events-none">
+                      <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-orange-400" />
+                      {card.badge}
+                    </span>
+                  )}
                 </div>
 
-                {/* Card Editorial Info */}
-                <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between gap-5">
-                  <div className="space-y-2">
-                    <span className="font-mono text-[11px] uppercase tracking-wider text-zinc-400">
-                      {card.eyebrow}
-                    </span>
-                    <h3 className="text-xl font-normal text-white font-display tracking-tight group-hover:text-orange-400 transition-colors">
-                      {card.title}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-zinc-400 font-body leading-relaxed line-clamp-2">
-                      {card.subtitle}
-                    </p>
-                  </div>
+                {/* Info */}
+                <div className="p-5 sm:p-6 flex-1 flex flex-col">
+                  <p className="text-[12px] font-medium text-label-tertiary">{card.eyebrow}</p>
+                  <h3 className="mt-1.5 font-sans text-[19px] font-semibold leading-snug tracking-[-0.02em] text-label">
+                    {card.title}
+                  </h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-label-secondary line-clamp-2">
+                    {card.subtitle}
+                  </p>
+                  <p className="mt-4 text-[12px] text-label-tertiary">{card.tags.join(' · ')}</p>
 
-                  {/* Card Bottom: Tags & Expand Action */}
-                  <div className="space-y-4 pt-2">
-                    {/* Tech Pills */}
-                    <div className="flex flex-wrap gap-1.5">
-                      {card.tags.map((tag, idx) => (
-                        <span
-                          key={idx}
-                          className="px-2 py-0.5 rounded-md bg-white/[0.04] border border-white/[0.06] text-zinc-400 font-mono text-[10px]"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    {/* Apple Pill Trigger Button */}
-                    <div
-                      className={`w-full py-2.5 px-4 rounded-xl flex items-center justify-between text-xs font-mono transition-all duration-200 ${
-                        isExpanded
-                          ? 'bg-white text-zinc-950 font-semibold shadow-lg'
-                          : 'bg-white/[0.05] hover:bg-white/[0.1] text-zinc-300 border border-white/[0.08]'
+                  <div className="mt-auto pt-5">
+                    <span
+                      className={`inline-flex items-center gap-1 text-sm font-medium transition-colors ${
+                        isExpanded ? 'text-orange-400' : 'text-label group-hover:text-orange-400'
                       }`}
                     >
-                      <span>
-                        {isExpanded
-                          ? language === 'es'
-                            ? 'Plegar detalles'
-                            : 'Collapse'
-                          : language === 'es'
-                            ? 'Desplegar proyecto'
-                            : 'Expand details'}
-                      </span>
-                      {isExpanded ? (
-                        <ChevronUp className="w-4 h-4 stroke-[2.5]" />
-                      ) : (
-                        <ChevronDown className="w-4 h-4 stroke-[2.5] group-hover:translate-y-0.5 transition-transform" />
-                      )}
-                    </div>
+                      {isExpanded
+                        ? language === 'es' ? 'Ocultar detalles' : 'Hide details'
+                        : language === 'es' ? 'Ver proyecto' : 'View project'}
+                      <ChevronDown
+                        aria-hidden="true"
+                        className={`w-4 h-4 transition-transform duration-300 ${
+                          isExpanded ? 'rotate-180' : 'group-hover:translate-y-0.5'
+                        }`}
+                      />
+                    </span>
                   </div>
                 </div>
               </motion.article>
