@@ -167,7 +167,7 @@ export const TRANSLATIONS = {
         introHighlight: '"Ver en Vivo"',
         introEnd: 'para probar la respuesta interactiva y selector de pantallas.',
         counter: '4 entregas cronológicas',
-        liveBtn: 'Ver en Vivo',
+        liveBtn: 'Ver en vivo',
         codeBtn: 'Código',
         projects: [
           {
@@ -412,7 +412,7 @@ export const TRANSLATIONS = {
         introHighlight: '"Live Preview"',
         introEnd: 'to inspect interactive responsiveness and device simulation.',
         counter: '4 chronological projects',
-        liveBtn: 'Live Preview',
+        liveBtn: 'Live preview',
         codeBtn: 'Code',
         projects: [
           {

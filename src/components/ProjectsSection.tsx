@@ -483,12 +483,12 @@ export function ProjectsSection() {
                             { value: '13', label: language === 'es' ? 'Minijuegos' : 'Minigames', note: language === 'es' ? 'Físicas 2D, shaders CRT y control táctil' : '2D physics, CRT shaders & touch controls' },
                             { value: '4.7', label: 'Godot Engine', note: language === 'es' ? 'GDScript con Viewports aislados' : 'GDScript with isolated viewports' },
                           ].map((stat) => (
-                            <div key={stat.label} className="rounded-2xl bg-white/[0.04] p-4 sm:p-5">
+                            <div key={stat.label} className="rounded-2xl bg-white/[0.04] p-3.5 sm:p-5">
                               <p className="font-sans text-[28px] sm:text-[40px] font-semibold leading-none tracking-[-0.04em] text-label">
                                 {stat.value}
                               </p>
-                              <p className="mt-2.5 text-[13px] font-medium text-label">{stat.label}</p>
-                              <p className="mt-1 text-[12px] leading-snug text-label-tertiary">{stat.note}</p>
+                              <p className="mt-2.5 text-[13px] font-medium leading-snug text-label">{stat.label}</p>
+                              <p className="mt-1 hidden sm:block text-[12px] leading-snug text-label-tertiary">{stat.note}</p>
                             </div>
                           ))}
                         </div>
@@ -596,97 +596,70 @@ export function ProjectsSection() {
                   ------------------------------------------------------------- */}
                   {expandedProject === 'daw-designs' && (
                     <div className="space-y-8">
-                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-b border-white/[0.06]">
-                        <p className="text-sm text-zinc-300 font-body max-w-2xl">
+                      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+                        <p className="text-base sm:text-[17px] leading-relaxed text-label-secondary max-w-2xl">
                           {t.dawDesigns.intro}{' '}
-                          <strong className="text-white font-medium">{t.dawDesigns.introHighlight}</strong>{' '}
+                          <strong className="font-semibold text-label">{t.dawDesigns.introHighlight}</strong>{' '}
                           {t.dawDesigns.introEnd}
                         </p>
-                        <span className="text-xs font-mono text-zinc-400 shrink-0">
+                        <span className="text-[13px] text-label-tertiary shrink-0">
                           {t.dawDesigns.counter}
                         </span>
                       </div>
 
-                      {/* 4 Clean Cinematic Cards Grid */}
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                         {dawProjects.map((proj) => (
-                          <div
+                          <article
                             key={proj.id}
-                            className="group/item rounded-2xl bg-zinc-950/70 border border-white/[0.08] hover:border-white/20 transition-all duration-300 overflow-hidden flex flex-col justify-between"
+                            className="group/item rounded-[24px] bg-white/[0.04] overflow-hidden flex flex-col"
                           >
-                            {/* 16:9 Thumbnail Header */}
+                            {/* 16:9 thumbnail */}
                             <div className="relative aspect-video w-full overflow-hidden bg-zinc-900">
                               <div className="absolute inset-0 bg-zinc-800/60 animate-pulse pointer-events-none" />
                               <img
                                 src={proj.thumbnail}
                                 alt={proj.title}
-                                className="relative z-10 w-full h-full object-cover group-hover/item:scale-105 transition-transform duration-500"
+                                className="relative z-10 w-full h-full object-cover transition-transform duration-700 ease-out group-hover/item:scale-[1.03]"
                                 loading="lazy"
                               />
-                              <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/30 to-transparent" />
-                              
-                              <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2">
-                                <span className="px-2.5 py-1 rounded-md bg-zinc-950/90 border border-white/10 text-[10px] font-mono text-zinc-300">
-                                  {proj.category}
-                                </span>
-                                <span className="px-2.5 py-1 rounded-md bg-zinc-950/90 border border-white/10 text-[10px] font-mono text-zinc-400">
-                                  {proj.date}
-                                </span>
-                              </div>
-
-                              <div className="absolute bottom-3 left-3 right-3">
-                                <h4 className="text-base font-normal text-white font-display tracking-tight drop-shadow-md">
-                                  {proj.title}
-                                </h4>
-                              </div>
                             </div>
 
-                            {/* Card Body */}
-                            <div className="p-5 flex-1 flex flex-col justify-between gap-4">
-                              <div className="space-y-2">
-                                <p className="text-xs text-orange-400 font-mono">
-                                  {proj.subtitle}
-                                </p>
-                                <p className="text-xs text-zinc-400 font-body leading-relaxed line-clamp-2">
-                                  {proj.description}
-                                </p>
+                            {/* Body */}
+                            <div className="p-5 sm:p-6 flex-1 flex flex-col">
+                              <p className="text-[12px] font-medium text-label-tertiary">
+                                {proj.category} · {proj.date}
+                              </p>
+                              <h4 className="mt-1.5 font-sans text-[17px] font-semibold tracking-[-0.016em] text-label">
+                                {proj.title}
+                              </h4>
+                              <p className="mt-1.5 text-sm leading-relaxed text-label-secondary line-clamp-2">
+                                {proj.description}
+                              </p>
+                              <p className="mt-3 text-[12px] text-label-tertiary">{proj.tags.join(' · ')}</p>
 
-                                {/* Tags */}
-                                <div className="flex flex-wrap gap-1.5 pt-1">
-                                  {proj.tags.map((tag, idx) => (
-                                    <span
-                                      key={idx}
-                                      className="px-2 py-0.5 rounded text-[10px] font-mono bg-white/[0.04] border border-white/[0.06] text-zinc-400"
-                                    >
-                                      {tag}
-                                    </span>
-                                  ))}
-                                </div>
-                              </div>
-
-                              {/* Action Buttons */}
-                              <div className="flex items-center gap-2 pt-3 border-t border-white/[0.06]">
+                              <div className="mt-auto pt-5 flex items-center gap-2">
                                 <button
                                   type="button"
                                   onClick={() => setSelectedWebProject(proj)}
-                                  className="flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-white hover:bg-zinc-200 text-zinc-950 font-medium text-xs font-mono transition-all duration-150 active:scale-95 cursor-pointer shadow-sm"
+                                  className="btn-primary h-9 px-4 text-[13px] cursor-pointer"
                                 >
-                                  <Eye className="w-3.5 h-3.5 stroke-[2.5]" />
-                                  <span>{t.dawDesigns.liveBtn}</span>
+                                  <Eye className="w-3.5 h-3.5" aria-hidden="true" />
+                                  {t.dawDesigns.liveBtn}
                                 </button>
 
                                 <a
                                   href={proj.url}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="p-2 rounded-xl bg-white/[0.06] hover:bg-white/[0.12] text-zinc-300 hover:text-white border border-white/[0.08] transition-colors"
+                                  className="glass glass-pill h-9 w-9 px-0"
                                   title={language === 'es' ? 'Abrir en pestaña nueva' : 'Open in new tab'}
+                                  aria-label={language === 'es' ? `Abrir ${proj.title} en pestaña nueva` : `Open ${proj.title} in new tab`}
                                 >
-                                  <ExternalLink className="w-4 h-4" />
+                                  <ExternalLink className="w-4 h-4" aria-hidden="true" />
                                 </a>
                               </div>
                             </div>
-                          </div>
+                          </article>
                         ))}
                       </div>
                     </div>
