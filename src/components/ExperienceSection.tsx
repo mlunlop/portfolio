@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import { Calendar, MapPin, Globe } from 'lucide-react';
 import { getPortfolioData } from '../data/portfolioData';
 import { useLanguage } from '../context/useLanguage';
 import { TRANSLATIONS } from '../data/translations';
@@ -58,98 +57,68 @@ export function ExperienceSection() {
           smoothScroll={false}
           className="w-full"
         >
-          {data.experiences.map((exp, idx) => {
+          {data.experiences.map((exp) => {
             const logo = COMPANY_LOGOS[exp.id];
 
             return (
-              <ScrollStackItem
-                key={exp.id}
-                itemClassName="rounded-2xl sm:rounded-3xl border border-zinc-800/90 bg-zinc-900 hover:border-zinc-700/80 transition-colors duration-300 p-4 sm:p-7 md:p-8 shadow-2xl shadow-black/70"
-              >
-                <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-6">
-                  {/* Left block: Logo + Header info */}
-                  <div className="flex items-start gap-4">
-                    {/* Company Logo Plate */}
+              <ScrollStackItem key={exp.id} itemClassName="p-6 sm:p-9 md:p-10">
+                <article className="relative">
+                  {/* Header: logo · role · company — period */}
+                  <header className="flex items-start gap-4 sm:gap-5">
                     {logo && (
-                      <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white p-2 flex items-center justify-center shrink-0 border border-zinc-700/50 shadow-sm overflow-hidden transition-all duration-300 group-hover:border-zinc-500 group-hover:shadow-lg">
+                      <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-[14px] sm:rounded-2xl bg-white p-2 flex items-center justify-center shrink-0 overflow-hidden shadow-[0_0_0_0.5px_rgba(255,255,255,0.12)]">
                         <img
                           src={logo.src}
-                          alt={`${exp.company} Logo`}
-                          className="w-full h-full object-contain transition-all duration-300 ease-out group-hover:scale-105"
+                          alt={`${exp.company} logo`}
+                          className="w-full h-full object-contain"
                           loading="lazy"
                         />
                       </div>
                     )}
 
-                    <div>
-                      <div className="flex flex-wrap items-center gap-2.5 mb-2">
-                        <h3 className="text-lg sm:text-xl font-normal text-zinc-100 font-display tracking-tight">
+                    <div className="min-w-0 flex-1 pt-0.5">
+                      <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-x-6 gap-y-1">
+                        <h3 className="font-sans text-[19px] sm:text-[22px] font-semibold leading-snug tracking-[-0.022em] text-label">
                           {exp.role}
                         </h3>
-                        <span className="px-2.5 py-0.5 rounded-full bg-zinc-800 border border-zinc-700 text-orange-400 font-mono text-xs font-semibold">
-                          {exp.company}
-                        </span>
-                        {exp.id === 'multiservice' && (
-                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-sky-950/60 border border-sky-800/60 text-sky-400 font-mono text-[11px]">
-                            <Globe className="w-3 h-3" />
-                            {language === 'es' ? 'Erasmus+ Brescia, Italia' : 'Erasmus+ Brescia, Italy'}
-                          </span>
-                        )}
-                      </div>
-
-                      <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-zinc-500">
-                        <span className="flex items-center gap-1.5">
-                          <Calendar className="w-3.5 h-3.5 text-zinc-400" />
+                        <span className="text-[13px] sm:text-sm text-label-tertiary tabular-nums whitespace-nowrap shrink-0">
                           {exp.period}
                         </span>
-                        <span className="flex items-center gap-1.5">
-                          <MapPin className="w-3.5 h-3.5 text-zinc-400" />
-                          {exp.location}
-                        </span>
                       </div>
+                      <p className="mt-1 text-[15px] text-label-secondary">
+                        <span className="font-medium text-orange-400">{exp.company}</span>
+                        <span className="text-label-tertiary"> · </span>
+                        {exp.location}
+                      </p>
                     </div>
-                  </div>
+                  </header>
 
-                  {/* Badge & Index */}
-                  <div className="flex items-center gap-2 self-start">
-                    <span className="px-3 py-1 rounded-md bg-zinc-800/80 text-zinc-300 font-mono text-xs border border-zinc-700/60">
+                  {/* Summary */}
+                  <p className="mt-6 sm:mt-8 max-w-3xl text-base sm:text-[17px] leading-relaxed tracking-[-0.01em] text-label">
+                    {exp.description}
+                  </p>
+
+                  {/* Highlights */}
+                  <ul className="mt-5 max-w-3xl space-y-3">
+                    {exp.highlights.map((h, i) => (
+                      <li key={i} className="flex gap-3 text-[15px] leading-relaxed text-label-secondary">
+                        <span aria-hidden="true" className="mt-[0.68em] h-1 w-1 shrink-0 rounded-full bg-label-tertiary" />
+                        <span>{h}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* Footer: technologies + area */}
+                  <footer className="mt-7 sm:mt-8 pt-5 border-t border-hairline flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-x-8 gap-y-1.5">
+                    <p className="text-[13px] leading-relaxed text-label-tertiary">
+                      <span className="sr-only">{language === 'es' ? 'Tecnologías: ' : 'Technologies: '}</span>
+                      {exp.technologies.join('  ·  ')}
+                    </p>
+                    <span className="text-[13px] text-label-secondary whitespace-nowrap shrink-0">
                       {exp.badge}
                     </span>
-                    <span className="font-mono text-[11px] text-zinc-500 select-none">
-                      0{idx + 1}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Description */}
-                <p className="text-sm sm:text-base text-zinc-300 mb-6 font-normal">
-                  {exp.description}
-                </p>
-
-                {/* Bullets */}
-                <ul className="space-y-2.5 mb-6 text-sm text-zinc-400">
-                  {exp.highlights.map((h, i) => (
-                    <li key={i} className="flex items-start gap-2.5">
-                      <span className="text-orange-400 mt-1 select-none">▪</span>
-                      <span>{h}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                {/* Tech chips */}
-                <div className="flex flex-wrap items-center gap-2 pt-4 border-t border-zinc-800/70">
-                  <span className="text-xs font-mono text-zinc-500 mr-2">
-                    {language === 'es' ? 'Tecnologías:' : 'Technologies:'}
-                  </span>
-                  {exp.technologies.map((tech, i) => (
-                    <span
-                      key={i}
-                      className="px-2 py-0.5 rounded bg-zinc-950 border border-zinc-800 text-zinc-300 font-mono text-xs hover:border-zinc-700 transition-colors"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
+                  </footer>
+                </article>
               </ScrollStackItem>
             );
           })}
