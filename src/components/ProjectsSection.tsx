@@ -31,6 +31,7 @@ import thumbGiardino from '../assets/projects/daw/giardino-thumb.webp';
 import thumbJapan from '../assets/projects/daw/japan-thumb.webp';
 import dawThumb from '../assets/projects/daw/daw-thumb.webp';
 import portfolioThumb from '../assets/projects/portfolio-thumb.webp';
+import howFarHomeLogo from '../assets/projects/howfarhome_logo.png';
 import { WebPreviewModal, type WebProject } from './WebPreviewModal';
 
 const MINIGAME_ASSETS: Record<string, { bg: string; logo: string; shader: string }> = {
@@ -82,7 +83,7 @@ const DAW_STATIC_CONFIG: Record<
   },
 };
 
-type ProjectId = 'bit-party' | 'daw-designs' | 'portfolio';
+type ProjectId = 'bit-party' | 'howfarhome' | 'daw-designs' | 'portfolio';
 
 export function ProjectsSection() {
   const { language } = useLanguage();
@@ -142,6 +143,16 @@ export function ProjectsSection() {
       previewType: 'game' as const,
     },
     {
+      id: 'howfarhome' as ProjectId,
+      eyebrow: language === 'es' ? 'WEB APP • DATOS GEOESPACIALES' : 'WEB APP • GEOSPATIAL DATA',
+      title: t.howFarHome.title,
+      subtitle: t.howFarHome.subtitle,
+      tagline: language === 'es' ? 'OSM • OCR de Mapillary • GitHub Actions' : 'OSM • Mapillary OCR • GitHub Actions',
+      tags: ['React + Vite', 'Python', 'RapidOCR'],
+      badge: null,
+      previewType: 'howfarhome' as const,
+    },
+    {
       id: 'daw-designs' as ProjectId,
       eyebrow: language === 'es' ? 'DISEÑO WEB • UI/UX' : 'WEB DESIGN • UI/UX',
       title: t.dawDesigns.title,
@@ -191,7 +202,7 @@ export function ProjectsSection() {
         {/* =====================================================================
             3 EQUAL-SIZE PROJECT CARDS (APPLE MONOCHROME / SPACE BLACK GRID)
         ===================================================================== */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
           {cards.map((card) => {
             const isExpanded = expandedProject === card.id;
 
@@ -227,6 +238,18 @@ export function ProjectsSection() {
                           style={{ imageRendering: 'pixelated' }}
                         />
                       </div>
+                    </div>
+                  )}
+
+                  {/* HowFarHome? Logo Preview */}
+                  {card.previewType === 'howfarhome' && (
+                    <div className="relative w-full h-full flex items-center justify-center overflow-hidden bg-[#1a1718]">
+                      <img
+                        src={howFarHomeLogo}
+                        alt="HowFarHome? Logo"
+                        className="w-full h-auto object-contain opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500 ease-out"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent group-hover:opacity-40 transition-opacity duration-500 pointer-events-none" />
                     </div>
                   )}
 
@@ -365,6 +388,7 @@ export function ProjectsSection() {
                     <div>
                       <h4 className="text-base sm:text-lg font-normal text-white font-display tracking-tight uppercase">
                         {expandedProject === 'bit-party' && (language === 'es' ? 'Bit-Party — Videojuego Móvil & Arquitectura' : 'Bit-Party — Mobile Game & Architecture')}
+                        {expandedProject === 'howfarhome' && t.howFarHome.stageTitle}
                         {expandedProject === 'daw-designs' && (language === 'es' ? 'Colección de Diseño Web — Interfaces Interactivas' : 'Web Design Collection — Interactive Interfaces')}
                         {expandedProject === 'portfolio' && (language === 'es' ? 'Portfolio Personal — Arquitectura Frontend' : 'Personal Portfolio — Frontend Architecture')}
                       </h4>
@@ -541,6 +565,89 @@ export function ProjectsSection() {
                               </div>
                             ))}
                           </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* -------------------------------------------------------------
+                      STAGE: HOWFARHOME?
+                  ------------------------------------------------------------- */}
+                  {expandedProject === 'howfarhome' && (
+                    <div className="space-y-8">
+                      <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 pb-6 border-b border-white/[0.06]">
+                        <div className="space-y-3 max-w-2xl">
+                          <span className="font-mono text-xs uppercase tracking-widest text-orange-400">
+                            {language === 'es' ? 'DATOS & GEOCODIFICACIÓN' : 'DATA & GEOCODING'}
+                          </span>
+                          <h4 className="text-2xl sm:text-3xl font-normal text-white font-display tracking-tight uppercase">
+                            {t.howFarHome.headline}
+                          </h4>
+                          <p className="text-sm sm:text-base text-zinc-300 font-body leading-relaxed">
+                            {t.howFarHome.description}
+                          </p>
+                        </div>
+
+                        <div className="flex flex-col gap-2 shrink-0 self-start">
+                          <a
+                            href="https://howfarhome.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-between gap-2.5 px-4 py-2.5 rounded-xl bg-white text-zinc-950 font-semibold hover:bg-zinc-200 text-xs font-mono transition-colors shadow-sm"
+                          >
+                            <ExternalLink className="w-4 h-4" />
+                            <span>{t.howFarHome.liveBtn}</span>
+                            <ArrowRight className="w-3.5 h-3.5" />
+                          </a>
+                          <a
+                            href="https://github.com/mlunlop/HowFarHome"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-between gap-2.5 px-4 py-2.5 rounded-xl bg-white/[0.06] hover:bg-white/[0.12] text-zinc-300 hover:text-white border border-white/[0.08] text-xs font-mono transition-colors"
+                          >
+                            <GithubIcon className="w-4 h-4" />
+                            <span>{t.howFarHome.viewRepo}</span>
+                            <ArrowRight className="w-3.5 h-3.5" />
+                          </a>
+                        </div>
+                      </div>
+
+                      {/* Big Stats Row */}
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        {t.howFarHome.stats.map((stat) => (
+                          <div
+                            key={stat.label}
+                            className="p-4 rounded-2xl bg-white/[0.03] border border-white/[0.08] space-y-1"
+                          >
+                            <span className="text-2xl sm:text-3xl font-light text-white font-display tracking-tight">
+                              {stat.value}
+                            </span>
+                            <p className="text-xs font-mono text-zinc-400 uppercase tracking-wider">{stat.label}</p>
+                            <p className="text-[11px] text-zinc-400 font-body leading-snug">{stat.note}</p>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Pipeline Steps */}
+                      <div className="space-y-3">
+                        <span className="text-xs font-mono uppercase tracking-widest text-zinc-400 block">
+                          {t.howFarHome.pipelineLabel}
+                        </span>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                          {t.howFarHome.pipeline.map((item) => (
+                            <div
+                              key={item.step}
+                              className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] space-y-1.5"
+                            >
+                              <span className="font-mono text-[10px] text-orange-400">{item.step}</span>
+                              <h5 className="text-xs font-normal text-white font-display uppercase tracking-tight">
+                                {item.title}
+                              </h5>
+                              <p className="text-[11px] text-zinc-400 font-body leading-relaxed">
+                                {item.description}
+                              </p>
+                            </div>
+                          ))}
                         </div>
                       </div>
                     </div>

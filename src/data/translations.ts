@@ -138,6 +138,26 @@ export const TRANSLATIONS = {
         card3Title: 'DESPLIEGUE & RENDIMIENTO',
         card3Desc: 'Alojada y desplegada en Netlify con CI/CD automático desde GitHub y tiempos de carga instantáneos.',
       },
+      howFarHome: {
+        title: 'HowFarHome?',
+        subtitle: '¿Hasta dónde llega el nombre de tu pueblo? Encuentra el cartel de carretera más lejano de España que lo menciona.',
+        stageTitle: 'HowFarHome? — Carteles de España con OSM + OCR',
+        headline: 'Una base de datos de carteles que no existía',
+        description: 'Buscas tu municipio y la web encuentra el cartel de carretera más lejano que lo nombra: a cuántos kilómetros está, la ruta en coche y cómo se ve en Street View. Como no existe ningún registro público de lo que pone cada cartel, lo construí combinando OpenStreetMap con los carteles de toda España leídos con OCR sobre las fotos de Mapillary, en un escaneo repartido entre decenas de máquinas con GitHub Actions.',
+        viewRepo: 'Ver Repositorio en GitHub',
+        liveBtn: 'Visitar howfarhome.com',
+        stats: [
+          { value: '39.596', label: 'Carteles leídos', note: 'OCR con RapidOCR sobre fotos de Mapillary' },
+          { value: '52.069', label: 'Recuadros', note: 'España escaneada en 100 trozos con GitHub Actions' },
+          { value: '74 %', label: 'Cobertura', note: 'Municipios con cartel fiable (600 al azar)' },
+        ],
+        pipelineLabel: 'Pipeline de datos:',
+        pipeline: [
+          { step: '01', title: 'OpenStreetMap', description: 'pyosmium recorre el .pbf de España: destinos, carreteras «de X a Y» y 66.664 núcleos de población.' },
+          { step: '02', title: 'Mapillary + OCR', description: 'Elige la foto donde el cartel sale más grande, lo recorta y lo lee con RapidOCR en CPU. Limpieza con los pueblos de OSM.' },
+          { step: '03', title: 'Índice estático', description: 'JSON repartido por letras: la web solo descarga lo que necesita. Votos y correcciones de usuarios en Supabase.' },
+        ],
+      },
       dawDesigns: {
         category: 'DISEÑO UI/UX // DAW',
         status: '4 Páginas (Oct 25 – Ene 26)',
@@ -362,6 +382,26 @@ export const TRANSLATIONS = {
         card2Desc: 'Integrated modal to view and directly download resume and official certificates.',
         card3Title: 'DEPLOYMENT & PERFORMANCE',
         card3Desc: 'Hosted and deployed on Netlify with automated CI/CD from GitHub and instantaneous load times.',
+      },
+      howFarHome: {
+        title: 'HowFarHome?',
+        subtitle: 'How far does your town\'s name reach? Finds the most distant road sign in Spain that mentions it.',
+        stageTitle: 'HowFarHome? — Spain\'s Road Signs with OSM + OCR',
+        headline: 'A road-sign database that didn\'t exist',
+        description: 'Search your town and the site finds the farthest road sign that names it: how many kilometres away it is, the driving route and what it looks like on Street View. Since there is no public record of what every sign says, I built one by combining OpenStreetMap with road signs across all of Spain read via OCR from Mapillary photos, in a scan distributed across dozens of machines with GitHub Actions.',
+        viewRepo: 'View GitHub Repository',
+        liveBtn: 'Visit howfarhome.com',
+        stats: [
+          { value: '39,596', label: 'Signs read', note: 'RapidOCR over Mapillary street photos' },
+          { value: '52,069', label: 'Tiles', note: 'Spain scanned in 100 shards on GitHub Actions' },
+          { value: '74%', label: 'Coverage', note: 'Towns with a reliable sign (600 sampled)' },
+        ],
+        pipelineLabel: 'Data pipeline:',
+        pipeline: [
+          { step: '01', title: 'OpenStreetMap', description: 'pyosmium walks Spain\'s .pbf: destinations, "X to Y" roads and 66,664 settlements.' },
+          { step: '02', title: 'Mapillary + OCR', description: 'Picks the photo where the sign is largest, crops it and reads it with RapidOCR on CPU. Cleaned against OSM towns.' },
+          { step: '03', title: 'Static index', description: 'JSON sharded by letter: the site only downloads what it needs. User votes and fixes stored in Supabase.' },
+        ],
       },
       dawDesigns: {
         category: 'UI/UX DESIGN // DAW',
