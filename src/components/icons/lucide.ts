@@ -17,6 +17,7 @@ export { default as Download } from 'lucide-react/dist/esm/icons/download.mjs';
 export { default as ChevronDown } from 'lucide-react/dist/esm/icons/chevron-down.mjs';
 export { default as ChevronUp } from 'lucide-react/dist/esm/icons/chevron-up.mjs';
 export { default as ChevronRight } from 'lucide-react/dist/esm/icons/chevron-right.mjs';
+export { default as ChevronLeft } from 'lucide-react/dist/esm/icons/chevron-left.mjs';
 export { default as Eye } from 'lucide-react/dist/esm/icons/eye.mjs';
 export { default as ArrowRight } from 'lucide-react/dist/esm/icons/arrow-right.mjs';
 export { default as Database } from 'lucide-react/dist/esm/icons/database.mjs';
