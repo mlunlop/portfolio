@@ -30,6 +30,7 @@ import thumbJapan from '../assets/projects/daw/japan-thumb.webp';
 import dawThumb from '../assets/projects/daw/daw-thumb.webp';
 import portfolioThumb from '../assets/projects/portfolio-thumb.webp';
 import howFarHomeLogo from '../assets/projects/howfarhome_logo.png';
+import fotoluxThumb from '../assets/projects/fotolux-thumb.webp';
 import { WebPreviewModal, type WebProject } from './WebPreviewModal';
 
 const MINIGAME_ASSETS: Record<string, { bg: string; logo: string; shader: string }> = {
@@ -81,7 +82,7 @@ const DAW_STATIC_CONFIG: Record<
   },
 };
 
-type ProjectId = 'bit-party' | 'howfarhome' | 'daw-designs' | 'portfolio';
+type ProjectId = 'fotolux' | 'bit-party' | 'howfarhome' | 'daw-designs' | 'portfolio';
 
 export function ProjectsSection() {
   const { language } = useLanguage();
@@ -130,6 +131,16 @@ export function ProjectsSection() {
 
   // Project cards data for the 3 equal-size cards overview
   const cards = [
+    {
+      id: 'fotolux' as ProjectId,
+      eyebrow: language === 'es' ? 'Web para cliente · Next.js' : 'Client website · Next.js',
+      title: t.fotolux.title,
+      subtitle: t.fotolux.subtitle,
+      tagline: '',
+      tags: ['Next.js 16', 'TypeScript', 'Tailwind v4'],
+      badge: language === 'es' ? 'Cliente real' : 'Real client',
+      previewType: 'image' as const,
+    },
     {
       id: 'bit-party' as ProjectId,
       eyebrow: language === 'es' ? 'Juego móvil · Godot 4.7' : 'Mobile game · Godot 4.7',
@@ -254,6 +265,14 @@ export function ProjectsSection() {
                     </div>
                   )}
 
+                  {card.previewType === 'image' && (
+                    <img
+                      src={fotoluxThumb}
+                      alt={language === 'es' ? 'Portada de la web de Fotolux' : 'Fotolux website hero'}
+                      className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                    />
+                  )}
+
                   {card.previewType === 'web' && (
                     <img
                       src={dawThumb}
@@ -348,6 +367,7 @@ export function ProjectsSection() {
                   <div className="flex items-center justify-between gap-4 pb-6 mb-8 border-b border-hairline">
                     <h4 className="font-sans text-[17px] sm:text-lg font-semibold leading-snug tracking-[-0.016em] text-label">
                       {expandedProject === 'bit-party' && (language === 'es' ? 'Bit-Party — Videojuego móvil y arquitectura' : 'Bit-Party — Mobile game & architecture')}
+                      {expandedProject === 'fotolux' && t.fotolux.stageTitle}
                       {expandedProject === 'howfarhome' && t.howFarHome.stageTitle}
                       {expandedProject === 'daw-designs' && (language === 'es' ? 'Colección de diseño web — Interfaces interactivas' : 'Web design collection — Interactive interfaces')}
                       {expandedProject === 'portfolio' && (language === 'es' ? 'Portfolio personal — Arquitectura frontend' : 'Personal portfolio — Frontend architecture')}
@@ -511,6 +531,64 @@ export function ProjectsSection() {
                               </div>
                             ))}
                           </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* -------------------------------------------------------------
+                      STAGE: FOTOLUX (CLIENT WORK)
+                  ------------------------------------------------------------- */}
+                  {expandedProject === 'fotolux' && (
+                    <div className="space-y-8">
+                      <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
+                        <div className="space-y-3 max-w-2xl">
+                          <p className="text-[13px] font-semibold text-orange-400">
+                            {language === 'es' ? 'Proyecto para cliente' : 'Client project'}
+                          </p>
+                          <h4 className="font-sans text-[28px] sm:text-[34px] font-semibold leading-[1.1] tracking-[-0.03em] text-label">
+                            {t.fotolux.headline}
+                          </h4>
+                          <p className="text-base sm:text-[17px] leading-relaxed text-label-secondary">
+                            {t.fotolux.description}
+                          </p>
+                        </div>
+
+                        <div className="flex flex-wrap md:flex-col gap-2 shrink-0 self-start">
+                          <a
+                            href="https://fotoluxfotomatones.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn-primary"
+                          >
+                            <ExternalLink className="w-4 h-4" aria-hidden="true" />
+                            {t.fotolux.liveBtn}
+                          </a>
+                          <a
+                            href="https://github.com/mlunlop/fotolux-web"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="glass glass-pill h-10 px-[18px] text-sm"
+                          >
+                            <GithubIcon className="w-4 h-4" />
+                            {t.fotolux.viewRepo}
+                          </a>
+                        </div>
+                      </div>
+
+                      <div className="space-y-3">
+                        <p className="text-[13px] font-medium text-label-secondary">{t.fotolux.featuresLabel}</p>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                          {t.fotolux.features.map((feature) => (
+                            <div key={feature.title} className="rounded-2xl bg-white/[0.04] p-5">
+                              <h5 className="font-sans text-[15px] font-semibold tracking-[-0.01em] text-label">
+                                {feature.title}
+                              </h5>
+                              <p className="mt-1.5 text-[13px] leading-relaxed text-label-secondary">
+                                {feature.description}
+                              </p>
+                            </div>
+                          ))}
                         </div>
                       </div>
                     </div>
