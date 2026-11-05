@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect, useRef, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useInView, useReducedMotion } from 'framer-motion';
 import {
   ChevronDown,
   ChevronLeft,
@@ -105,6 +105,10 @@ export function ProjectsSection() {
 
   // Desktop carousel state
   const isDesktop = useMediaQuery('(min-width: 1024px)');
+  const sectionRef = useRef<HTMLElement | null>(null);
+  // Mount the carousel (and fetch its chunk + images) only when the section is near.
+  const nearView = useInView(sectionRef, { once: true, margin: '600px 0px' });
+  const reduceMotion = useReducedMotion();
   const carouselRef = useRef<CircularCarouselApi | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [shownIndex, setShownIndex] = useState(0);
@@ -622,7 +626,7 @@ export function ProjectsSection() {
   );
 
   return (
-    <section id="proyectos" className="py-24 md:py-36 border-t border-white/[0.06] bg-zinc-950">
+    <section ref={sectionRef} id="proyectos" className="py-24 md:py-36 border-t border-white/[0.06] bg-zinc-950">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
 
         {/* Apple-style Section Header */}
@@ -652,6 +656,7 @@ export function ProjectsSection() {
           ===================================================================== */
           <div>
             <div className="h-[420px]">
+            {nearView && (
             <Suspense fallback={null}>
               <CircularCarousel
                 items={carouselItems}
@@ -661,6 +666,7 @@ export function ProjectsSection() {
                 tilt={-10}
                 intro="none"
                 autoplay="off"
+                momentum={0.3}
                 parallax={0}
                 stretch={0}
                 cardWidth={400}
@@ -672,6 +678,7 @@ export function ProjectsSection() {
                 onChange={setActiveIndex}
               />
             </Suspense>
+            )}
             </div>
 
             {/* Caption + controls */}
@@ -739,7 +746,7 @@ export function ProjectsSection() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -6 }}
-                transition={{ duration: 0.28, ease: easeOutExpo }}
+                transition={{ duration: reduceMotion ? 0 : 0.28, ease: easeOutExpo }}
                 className="surface-card mt-10 rounded-[32px] p-8 xl:p-10"
               >
                 {renderStageBody(shownCard.id)}
@@ -781,6 +788,8 @@ export function ProjectsSection() {
                         <div className="relative w-full h-full flex items-center justify-center">
                           <img
                             src={powderBg}
+                            loading="lazy"
+                            decoding="async"
                             alt=""
                             className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                             style={{ imageRendering: 'pixelated' }}
@@ -788,6 +797,8 @@ export function ProjectsSection() {
                           <div className="glass-dark relative z-10 w-16 h-16 rounded-[20px] p-2.5 flex items-center justify-center">
                             <img
                               src={bitPartyIcon}
+                              loading="lazy"
+                              decoding="async"
                               alt="Bit-Party"
                               className="w-full h-full object-contain"
                               style={{ imageRendering: 'pixelated' }}
@@ -800,6 +811,8 @@ export function ProjectsSection() {
                         <div className="relative w-full h-full flex items-center justify-center bg-[#1a1718]">
                           <img
                             src={howFarHomeLogo}
+                            loading="lazy"
+                            decoding="async"
                             alt="HowFarHome?"
                             className="w-full h-auto object-contain transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                           />
@@ -809,6 +822,8 @@ export function ProjectsSection() {
                       {card.previewType === 'image' && (
                         <img
                           src={fotoluxThumb}
+                          loading="lazy"
+                          decoding="async"
                           alt={language === 'es' ? 'Portada de la web de Fotolux' : 'Fotolux website hero'}
                           className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                         />
@@ -817,6 +832,8 @@ export function ProjectsSection() {
                       {card.previewType === 'web' && (
                         <img
                           src={dawThumb}
+                          loading="lazy"
+                          decoding="async"
                           alt={language === 'es' ? 'Colección de diseño web DAW' : 'DAW web design collection'}
                           className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                         />
@@ -825,6 +842,8 @@ export function ProjectsSection() {
                       {card.previewType === 'portfolio' && (
                         <img
                           src={portfolioThumb}
+                          loading="lazy"
+                          decoding="async"
                           alt={language === 'es' ? 'Interfaz del portfolio' : 'Portfolio interface'}
                           className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                         />
