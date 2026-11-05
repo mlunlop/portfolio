@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Languages, FileText, ChevronRight } from 'lucide-react';
+import { ArrowUpRight, Languages, FileText, ChevronRight } from 'lucide-react';
 import { getPortfolioData } from '../data/portfolioData';
 import { useLanguage } from '../context/useLanguage';
 import { TRANSLATIONS } from '../data/translations';
@@ -154,64 +154,52 @@ export function EducationCertifications() {
             </p>
           </motion.div>
 
-          {/* Grid de Certificaciones de Nivel 1 */}
+          {/* Certifications grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {data.certifications.map((cert, idx) => {
               const logo = CERTIFICATION_LOGOS[cert.id];
 
               return (
-                <motion.div
+                <motion.article
                   key={cert.id}
                   initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={defaultViewport}
-                  transition={{ duration: 0.4, delay: idx * 0.06, ease: easeOutExpo }}
-                  whileHover={{ y: -2 }}
-                  className="rounded-xl border border-zinc-800/90 bg-zinc-900/30 p-5 hover:bg-zinc-900/60 hover:border-zinc-700 transition-colors duration-200 flex flex-col justify-between"
+                  transition={{ duration: 0.5, delay: idx * 0.06, ease: easeOutExpo }}
+                  className="surface-card p-6 sm:p-7 flex flex-col"
                 >
-                  <div>
-                    <div className="flex items-start justify-between gap-2 mb-3">
-                      <span className="px-2 py-0.5 rounded bg-zinc-800/80 text-[10px] font-mono text-orange-400 border border-orange-500/20">
-                        {cert.badge}
-                      </span>
-                      {cert.date && (
-                        <span className="text-[11px] font-mono text-zinc-500">
-                          {cert.date}
-                        </span>
-                      )}
-                    </div>
-
-                    <div className="flex items-start gap-3.5 mb-3">
-                      {logo && (
-                        <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-lg bg-white p-1.5 flex items-center justify-center shrink-0 border border-zinc-700/50 shadow-sm overflow-hidden">
-                          <img
-                            src={logo.src}
-                            alt={`${cert.issuer} Logo`}
-                            className="w-full h-full object-contain"
-                            loading="lazy"
-                          />
-                        </div>
-                      )}
-                      <div>
-                        <h4 className="text-base font-normal text-zinc-100 font-display mb-0.5">
-                          {cert.name}
-                        </h4>
-                        <div className="text-xs font-mono text-zinc-400">
-                          {cert.issuer}
-                        </div>
+                  <div className="flex items-start justify-between gap-4">
+                    {logo && (
+                      <div className="w-11 h-11 rounded-xl bg-white p-1.5 flex items-center justify-center shrink-0 overflow-hidden shadow-[0_0_0_0.5px_rgba(255,255,255,0.12)]">
+                        <img
+                          src={logo.src}
+                          alt={`${cert.issuer} logo`}
+                          className="w-full h-full object-contain"
+                          loading="lazy"
+                        />
                       </div>
-                    </div>
-
-                    <p className="text-xs text-zinc-400 font-body leading-relaxed mb-4">
-                      {cert.highlight}
-                    </p>
+                    )}
+                    {cert.date && (
+                      <span className="text-[13px] text-label-tertiary tabular-nums whitespace-nowrap">
+                        {cert.date}
+                      </span>
+                    )}
                   </div>
 
-                  {/* Footer actions: View PDF modal / View credential */}
-                  <div className="pt-3 border-t border-zinc-800/60 flex flex-wrap items-center justify-between gap-2">
-                    <div className="flex items-center gap-2">
+                  <h4 className="mt-5 font-sans text-[17px] font-semibold leading-snug tracking-[-0.016em] text-label">
+                    {cert.name}
+                  </h4>
+                  <p className="mt-0.5 text-sm text-label-secondary">{cert.issuer}</p>
+
+                  <p className="mt-3 flex-1 text-sm leading-relaxed text-label-secondary">
+                    {cert.highlight}
+                  </p>
+
+                  <footer className="mt-6 flex flex-wrap items-center justify-between gap-x-4 gap-y-3">
+                    <div className="flex items-center gap-4">
                       {cert.pdfUrl && (
                         <button
+                          type="button"
                           onClick={() =>
                             setActivePdf({
                               isOpen: true,
@@ -221,10 +209,10 @@ export function EducationCertifications() {
                               subtitle: t.b2Modal.subtitle,
                             })
                           }
-                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-orange-500/15 hover:bg-orange-500/25 text-orange-400 border border-orange-500/30 text-xs font-mono font-medium transition-colors cursor-pointer"
+                          className="glass-pill cursor-pointer"
                         >
-                          <FileText className="w-3.5 h-3.5" />
-                          <span>{language === 'es' ? 'Ver documento' : 'View document'}</span>
+                          <FileText className="w-3.5 h-3.5 text-orange-400" aria-hidden="true" />
+                          {language === 'es' ? 'Ver documento' : 'View document'}
                         </button>
                       )}
 
@@ -233,52 +221,54 @@ export function EducationCertifications() {
                           href={cert.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 text-xs font-mono text-zinc-400 hover:text-zinc-200 transition-colors"
+                          className="inline-flex items-center gap-0.5 text-[13px] font-medium text-label-secondary hover:text-label transition-colors"
                         >
-                          <span>{language === 'es' ? 'Credencial web' : 'Web credential'}</span>
-                          <ExternalLink className="w-3 h-3" />
+                          {language === 'es' ? 'Credencial' : 'Credential'}
+                          <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
                         </a>
+                      )}
+
+                      {!cert.pdfUrl && !cert.url && (
+                        <span className="text-[13px] text-label-tertiary">
+                          {language === 'es' ? 'Validación de fabricante · Brescia, IT' : 'Manufacturer validation · Brescia, IT'}
+                        </span>
                       )}
                     </div>
 
-                    {!cert.pdfUrl && !cert.url && (
-                      <span className="text-[11px] font-mono text-zinc-500">
-                        {language === 'es' ? 'Validación de Fabricante (Brescia, IT)' : 'Manufacturer Validation (Brescia, IT)'}
-                      </span>
-                    )}
-                  </div>
-                </motion.div>
+                    <span className="text-[13px] text-label-tertiary">{cert.badge}</span>
+                  </footer>
+                </motion.article>
               );
             })}
           </div>
 
-          {/* Mini Idiomas Bar with Click to View PDF */}
+          {/* Languages */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={defaultViewport}
-            transition={{ duration: 0.4, delay: 0.15 }}
-            className="mt-4 p-4 rounded-xl border border-zinc-800/60 bg-zinc-950 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-mono"
+            transition={{ duration: 0.5, delay: 0.15, ease: easeOutExpo }}
+            className="surface-card mt-4 px-6 py-5 sm:px-7 flex flex-col sm:flex-row sm:items-center justify-between gap-3"
           >
-            <div className="flex items-center gap-2 text-zinc-400">
-              <Languages className="w-4 h-4 text-orange-400" />
-              <span>{language === 'es' ? 'COMPETENCIA LINGÜÍSTICA:' : 'LANGUAGE PROFICIENCY:'}</span>
+            <div className="flex items-center gap-2.5 text-[15px] font-medium text-label">
+              <Languages className="w-4 h-4 text-label-tertiary" aria-hidden="true" />
+              {language === 'es' ? 'Idiomas' : 'Languages'}
             </div>
-            <div className="flex flex-wrap items-center gap-3 text-zinc-300">
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-[15px] text-label-secondary">
               <span>
-                {language === 'es' ? 'Español:' : 'Spanish:'}{' '}
-                <strong className="text-zinc-100">{language === 'es' ? 'Nativo (C2)' : 'Native (C2)'}</strong>
+                {language === 'es' ? 'Español' : 'Spanish'}{' '}
+                <span className="text-label">{language === 'es' ? 'Nativo (C2)' : 'Native (C2)'}</span>
               </span>
-              <span>•</span>
-              <span className="flex items-center gap-1.5">
-                {language === 'es' ? 'Inglés:' : 'English:'}{' '}
+              <span className="inline-flex items-center gap-1.5">
+                {language === 'es' ? 'Inglés' : 'English'}{' '}
                 <button
+                  type="button"
                   onClick={openB2Pdf}
-                  className="inline-flex items-center gap-1 text-orange-400 hover:text-orange-300 underline font-semibold cursor-pointer"
+                  className="inline-flex items-center gap-1 text-label hover:text-orange-400 transition-colors cursor-pointer"
                   title={language === 'es' ? 'Ver certificado oficial B2 en PDF' : 'View official B2 certificate in PDF'}
                 >
-                  <span>B2 First (Cambridge, Score 162)</span>
-                  <FileText className="w-3 h-3" />
+                  B2 First · Cambridge 162
+                  <FileText className="w-3.5 h-3.5 text-orange-400" aria-hidden="true" />
                 </button>
               </span>
             </div>
