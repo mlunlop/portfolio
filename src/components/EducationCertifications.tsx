@@ -209,7 +209,7 @@ export function EducationCertifications() {
                               subtitle: t.b2Modal.subtitle,
                             })
                           }
-                          className="glass-pill cursor-pointer"
+                          className="glass glass-pill cursor-pointer"
                         >
                           <FileText className="w-3.5 h-3.5 text-orange-400" aria-hidden="true" />
                           {language === 'es' ? 'Ver documento' : 'View document'}
