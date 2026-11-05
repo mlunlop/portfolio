@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Languages, FileText } from 'lucide-react';
+import { ExternalLink, Languages, FileText, ChevronRight } from 'lucide-react';
 import { getPortfolioData } from '../data/portfolioData';
 import { useLanguage } from '../context/useLanguage';
 import { TRANSLATIONS } from '../data/translations';
@@ -81,62 +81,58 @@ export function EducationCertifications() {
           smoothScroll={false}
           className="w-full mb-20"
         >
-          {data.education.map((edu, idx) => (
-            <ScrollStackItem
-              key={edu.id}
-              itemClassName="rounded-2xl sm:rounded-3xl border border-zinc-800/90 bg-zinc-900 hover:border-zinc-700/80 transition-colors duration-300 p-4 sm:p-7 md:p-8 shadow-2xl shadow-black/70 relative overflow-hidden"
-            >
-              {/* Subtle top indicator for degrees currently in progress */}
-              {(edu.isCurrent ?? idx === 0) && (
-                <div className="absolute top-0 right-0 px-4 py-1 rounded-bl-xl bg-orange-500/10 border-b border-l border-orange-500/30 text-orange-400 font-mono text-[11px] font-semibold flex items-center gap-1.5">
-                  <span>{language === 'es' ? 'En curso' : 'In progress'}</span>
-                </div>
-              )}
+          {data.education.map((edu, idx) => {
+            const isCurrent = edu.isCurrent ?? idx === 0;
 
-              <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-4 mb-4">
-                <div className="space-y-1.5 max-w-2xl">
-                  <div className="flex flex-wrap items-center gap-2.5">
-                    <span className="px-2.5 py-0.5 rounded-full bg-zinc-800 text-orange-400 font-mono text-xs font-semibold border border-zinc-700/80">
+            return (
+              <ScrollStackItem key={edu.id} itemClassName="p-6 sm:p-9 md:p-10">
+                <article>
+                  {/* Header: degree — period */}
+                  <header>
+                    <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-x-8 gap-y-1">
+                      <h3 className="font-sans text-[19px] sm:text-[22px] font-semibold leading-snug tracking-[-0.022em] text-label max-w-2xl">
+                        {edu.degree}
+                      </h3>
+                      <span className="text-[13px] sm:text-sm text-label-tertiary tabular-nums whitespace-nowrap shrink-0">
+                        {edu.period}
+                      </span>
+                    </div>
+                    <p className="mt-1.5 text-[15px] text-label-secondary">
+                      {edu.institution}
+                      <span className="text-label-tertiary"> · </span>
                       {edu.badge}
-                    </span>
-                    <span className="text-xs font-mono text-zinc-500">
-                      // {edu.period}
-                    </span>
-                  </div>
+                      {isCurrent && (
+                        <>
+                          <span className="text-label-tertiary"> · </span>
+                          <span className="inline-flex items-center gap-1.5 font-medium text-orange-400">
+                            <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-orange-400" />
+                            {language === 'es' ? 'En curso' : 'In progress'}
+                          </span>
+                        </>
+                      )}
+                    </p>
+                  </header>
 
-                  <h3 className="text-xl sm:text-2xl font-normal text-zinc-100 font-display tracking-tight pt-1">
-                    {edu.degree}
-                  </h3>
+                  {/* Details */}
+                  <p className="mt-5 sm:mt-6 max-w-3xl text-[15px] sm:text-base leading-relaxed text-label-secondary">
+                    {edu.details}
+                  </p>
 
-                  <div className="text-xs font-mono text-zinc-400">
-                    {edu.institution}
-                  </div>
-                </div>
-
-                <div className="self-start px-3 py-1.5 rounded-xl bg-zinc-950/80 border border-zinc-800 text-zinc-300 font-mono text-xs hidden lg:block shrink-0">
-                  {edu.period}
-                </div>
-              </div>
-
-              {/* Details & Action Link */}
-              <div className="pt-3 border-t border-zinc-800/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                <p className="text-sm sm:text-base text-zinc-300 font-body leading-relaxed max-w-3xl">
-                  {edu.details}
-                </p>
-                {edu.url && (
-                  <a
-                    href={edu.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-800/80 hover:bg-zinc-700/80 text-zinc-300 hover:text-orange-400 border border-zinc-700/60 text-xs font-mono transition-all self-start sm:self-end shrink-0"
-                  >
-                    <span>{language === 'es' ? 'Más información' : 'More info'}</span>
-                    <ExternalLink className="w-3.5 h-3.5" />
-                  </a>
-                )}
-              </div>
-            </ScrollStackItem>
-          ))}
+                  {edu.url && (
+                    <a
+                      href={edu.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-5 inline-flex items-center gap-0.5 text-[15px] font-medium text-label hover:text-orange-400 transition-colors"
+                    >
+                      {language === 'es' ? 'Más información' : 'Learn more'}
+                      <ChevronRight className="w-4 h-4" aria-hidden="true" />
+                    </a>
+                  )}
+                </article>
+              </ScrollStackItem>
+            );
+          })}
         </ScrollStack>
 
         {/* 2. CERTIFICACIONES & CREDENCIALES */}
