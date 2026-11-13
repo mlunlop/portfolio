@@ -85,23 +85,22 @@ export function EducationCertifications() {
             const isCurrent = edu.isCurrent ?? idx === 0;
 
             return (
-              <ScrollStackItem key={edu.id} itemClassName="p-6 sm:p-9 md:p-10">
+              <ScrollStackItem key={edu.id} itemClassName="p-6 sm:p-9 md:p-10 overflow-hidden">
                 <article>
+                  {/* Corner tag for degrees in progress */}
+                  {isCurrent && (
+                    <span className="absolute top-0 right-0 inline-flex items-center h-8 pl-4 pr-5 rounded-bl-2xl bg-orange-500/[0.12] text-orange-300 font-mono text-[11px] font-medium tracking-wide shadow-[inset_1px_-1px_0_rgba(251,146,60,0.22)] backdrop-blur-sm">
+                      {language === 'es' ? 'En curso' : 'In progress'}
+                    </span>
+                  )}
+
                   {/* Header: degree — period */}
                   <header>
                     <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-x-8 gap-y-1">
                       <h3 className="font-sans text-[19px] sm:text-[22px] font-semibold leading-snug tracking-[-0.022em] text-label max-w-2xl">
                         {edu.degree}
                       </h3>
-                      <span className="inline-flex items-center gap-2 text-[13px] sm:text-sm text-label-tertiary tabular-nums whitespace-nowrap shrink-0">
-                        {isCurrent && (
-                          <span
-                            className="h-1.5 w-1.5 rounded-full bg-orange-400"
-                            title={language === 'es' ? 'En curso' : 'In progress'}
-                          >
-                            <span className="sr-only">{language === 'es' ? 'En curso' : 'In progress'}</span>
-                          </span>
-                        )}
+                      <span className="text-[13px] sm:text-sm text-label-tertiary tabular-nums whitespace-nowrap shrink-0">
                         {edu.period}
                       </span>
                     </div>
