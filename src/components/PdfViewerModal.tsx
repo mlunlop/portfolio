@@ -57,68 +57,61 @@ export function PdfViewerModal({
     <div
       role="dialog"
       aria-modal="true"
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md animate-in fade-in duration-200"
+      aria-label={title}
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/75 backdrop-blur-xl animate-in fade-in duration-200"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-5xl h-[90vh] flex flex-col rounded-2xl bg-zinc-950 border border-zinc-800 shadow-2xl shadow-black overflow-hidden"
+        className="surface-card relative w-full max-w-5xl h-[90vh] flex flex-col overflow-hidden animate-in zoom-in-95 fade-in duration-200"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Top Control Bar */}
-        <div className="flex items-center justify-between px-4 sm:px-6 py-3.5 bg-zinc-900 border-b border-zinc-800 shrink-0">
+        {/* Top bar */}
+        <div className="flex items-center justify-between gap-4 px-4 sm:px-6 py-3.5 border-b border-hairline shrink-0">
           <div className="flex items-center gap-3 min-w-0">
-            <div className="w-9 h-9 rounded-lg bg-orange-500/10 border border-orange-500/30 flex items-center justify-center shrink-0 text-orange-400">
-              <FileText className="w-4 h-4" />
-            </div>
+            <FileText className="w-4 h-4 shrink-0 text-orange-400" aria-hidden="true" />
             <div className="min-w-0">
-              <h3 className="text-sm font-normal text-zinc-100 truncate font-display tracking-tight">
+              <h3 className="font-sans text-[15px] font-semibold tracking-[-0.01em] text-label truncate">
                 {title}
               </h3>
-              <p className="text-[11px] font-mono text-zinc-500 truncate">
-                {displaySubtitle}
-              </p>
+              <p className="text-[12px] text-label-tertiary truncate">{displaySubtitle}</p>
             </div>
           </div>
 
-          {/* Action buttons */}
-          <div className="flex items-center gap-2">
-            {/* Download Button */}
+          <div className="flex items-center gap-2 shrink-0">
             <a
               href={pdfUrl}
               download={downloadName}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-orange-500 hover:bg-orange-400 text-zinc-950 font-medium text-xs shadow-sm transition-all duration-150 active:scale-95 cursor-pointer"
+              className="btn-primary h-9 px-3.5 text-[13px]"
               title={t.download}
             >
-              <Download className="w-3.5 h-3.5 stroke-[2.5]" />
+              <Download className="w-3.5 h-3.5" aria-hidden="true" />
               <span className="hidden sm:inline">{t.download}</span>
             </a>
 
-            {/* Open in new tab */}
             <a
               href={pdfUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-200 font-medium text-xs border border-zinc-700 transition-colors"
+              className="glass glass-pill h-9 hidden sm:inline-flex"
               title={t.openNewTab}
             >
-              <ExternalLink className="w-3.5 h-3.5" />
-              <span>{t.openNewTab}</span>
+              <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
+              {t.openNewTab}
             </a>
 
-            {/* Close button */}
             <button
+              type="button"
               onClick={onClose}
-              className="p-1.5 rounded-lg bg-zinc-800/80 hover:bg-zinc-700 text-zinc-400 hover:text-zinc-100 border border-zinc-700/80 transition-colors cursor-pointer"
+              className="glass glass-pill h-9 w-9 px-0 cursor-pointer"
               aria-label={t.close}
             >
-              <X className="w-4 h-4" />
+              <X className="w-4 h-4" aria-hidden="true" />
             </button>
           </div>
         </div>
 
-        {/* PDF Frame Viewer with Skeleton Loader */}
-        <div className="relative flex-1 bg-zinc-900 w-full h-full overflow-hidden">
-          {/* Document Skeleton Loader Overlay */}
+        {/* PDF frame with skeleton loader */}
+        <div className="relative flex-1 w-full h-full overflow-hidden bg-[#121214]">
           <div
             className={`absolute inset-0 z-20 transition-opacity duration-500 ease-out ${
               isLoading ? 'opacity-100' : 'opacity-0 pointer-events-none'
@@ -134,15 +127,11 @@ export function PdfViewerModal({
             className="w-full h-full border-0"
           />
 
-          {/* Mobile / Fallback info bar */}
-          <div className="sm:hidden absolute bottom-2 inset-x-2 p-2 rounded-lg bg-zinc-950/90 border border-zinc-800 text-[11px] font-mono text-zinc-400 text-center flex items-center justify-between">
+          {/* Mobile fallback */}
+          <div className="sm:hidden glass-dark absolute bottom-3 inset-x-3 px-4 py-2.5 rounded-2xl text-[12px] text-label-secondary flex items-center justify-between">
             <span>{language === 'es' ? '¿Problemas de vista previa?' : 'Preview issues?'}</span>
-            <a
-              href={pdfUrl}
-              download={downloadName}
-              className="text-orange-400 underline font-semibold ml-2"
-            >
-              {language === 'es' ? 'Descargar archivo' : 'Download file'}
+            <a href={pdfUrl} download={downloadName} className="ml-2 font-medium text-orange-400">
+              {language === 'es' ? 'Descargar' : 'Download'}
             </a>
           </div>
         </div>

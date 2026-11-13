@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import {
   X,
   ExternalLink,
@@ -7,8 +8,8 @@ import {
   Smartphone,
   RotateCw,
   Globe,
-  Maximize2,
 } from 'lucide-react';
+import { layoutSpring } from '../utils/motion';
 import { useLanguage } from '../context/useLanguage';
 import { TRANSLATIONS } from '../data/translations';
 import { WebsiteSkeleton } from './skeletons/WebsiteSkeleton';
@@ -84,133 +85,116 @@ export function WebPreviewModal({
   const getDeviceStyle = () => {
     switch (device) {
       case 'mobile':
-        return 'w-[375px] max-w-full h-full rounded-2xl border-2 border-zinc-700 shadow-2xl overflow-hidden';
+        return 'w-[375px] max-w-full h-full rounded-[28px] shadow-[0_0_0_1px_rgba(255,255,255,0.14),0_30px_60px_-20px_rgba(0,0,0,0.9)] overflow-hidden';
       case 'tablet':
-        return 'w-[768px] max-w-full h-full rounded-2xl border-2 border-zinc-700 shadow-2xl overflow-hidden';
+        return 'w-[768px] max-w-full h-full rounded-[22px] shadow-[0_0_0_1px_rgba(255,255,255,0.14),0_30px_60px_-20px_rgba(0,0,0,0.9)] overflow-hidden';
       case 'desktop':
       default:
         return 'w-full h-full rounded-none';
     }
   };
 
+  const devices: { id: DeviceMode; label: string; title: string; Icon: typeof Monitor }[] = [
+    { id: 'desktop', label: 'Desktop', title: t.desktopView, Icon: Monitor },
+    { id: 'tablet', label: 'Tablet', title: t.tabletView, Icon: Tablet },
+    { id: 'mobile', label: language === 'es' ? 'Móvil' : 'Mobile', title: t.mobileView, Icon: Smartphone },
+  ];
+
   return (
     <div
       role="dialog"
       aria-modal="true"
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md animate-in fade-in duration-200 p-2 sm:p-4"
+      aria-label={project.title}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-xl animate-in fade-in duration-200 p-2 sm:p-4"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-[96vw] h-[94vh] flex flex-col rounded-2xl bg-zinc-950 border border-zinc-800 shadow-2xl shadow-black overflow-hidden"
+        className="surface-card relative w-full max-w-[96vw] h-[94vh] flex flex-col overflow-hidden animate-in zoom-in-95 fade-in duration-200"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Top Control Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-3 px-4 py-3 bg-zinc-900/90 border-b border-zinc-800 shrink-0">
-          {/* Project Info */}
+        {/* Top bar */}
+        <div className="flex flex-wrap items-center justify-between gap-3 px-4 sm:px-5 py-3 border-b border-hairline shrink-0">
+          {/* Project info */}
           <div className="flex items-center gap-3 min-w-0">
-            <div className="w-8 h-8 rounded-lg bg-orange-500/10 border border-orange-500/30 flex items-center justify-center shrink-0 text-orange-400">
-              <Globe className="w-4 h-4" />
-            </div>
+            <Globe className="w-4 h-4 shrink-0 text-orange-400" aria-hidden="true" />
             <div className="min-w-0">
-              <div className="flex items-center gap-2">
-                <h3 className="text-sm font-normal text-zinc-100 truncate font-display tracking-tight">
-                  {project.title}
-                </h3>
-                <span className="hidden sm:inline-block px-2 py-0.5 rounded text-[10px] font-mono bg-zinc-800 text-zinc-400 border border-zinc-700">
-                  {project.category}
-                </span>
-                <span className="hidden md:inline-block px-2 py-0.5 rounded text-[10px] font-mono bg-orange-500/10 text-orange-400 border border-orange-500/30">
-                  {project.date}
-                </span>
-              </div>
-              <p className="text-[11px] font-mono text-zinc-400 truncate">
-                {project.subtitle}
+              <h3 className="font-sans text-[15px] font-semibold tracking-[-0.01em] text-label truncate">
+                {project.title}
+              </h3>
+              <p className="text-[12px] text-label-tertiary truncate">
+                {project.category}
+                <span className="hidden md:inline"> · {project.date}</span>
               </p>
             </div>
           </div>
 
-          {/* Device Switcher (Desktop, Tablet, Mobile) */}
-          <div className="flex items-center bg-zinc-950 p-1 rounded-xl border border-zinc-800 gap-0.5">
-            <button
-              type="button"
-              onClick={() => setDevice('desktop')}
-              title={t.desktopView}
-              className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-mono transition-all ${
-                device === 'desktop'
-                  ? 'bg-orange-500 text-zinc-950 font-semibold shadow-sm'
-                  : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900'
-              }`}
-            >
-              <Monitor className="w-3.5 h-3.5" />
-              <span className="hidden md:inline">Desktop</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => setDevice('tablet')}
-              title={t.tabletView}
-              className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-mono transition-all ${
-                device === 'tablet'
-                  ? 'bg-orange-500 text-zinc-950 font-semibold shadow-sm'
-                  : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900'
-              }`}
-            >
-              <Tablet className="w-3.5 h-3.5" />
-              <span className="hidden md:inline">Tablet</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => setDevice('mobile')}
-              title={t.mobileView}
-              className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-mono transition-all ${
-                device === 'mobile'
-                  ? 'bg-orange-500 text-zinc-950 font-semibold shadow-sm'
-                  : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900'
-              }`}
-            >
-              <Smartphone className="w-3.5 h-3.5" />
-              <span className="hidden md:inline">{language === 'es' ? 'Móvil' : 'Mobile'}</span>
-            </button>
+          {/* Device switcher — iOS segmented control */}
+          <div className="glass p-1 rounded-full flex items-center gap-0.5" role="group" aria-label={language === 'es' ? 'Tamaño de pantalla' : 'Screen size'}>
+            {devices.map(({ id, label, title, Icon }) => {
+              const isActive = device === id;
+              return (
+                <button
+                  key={id}
+                  type="button"
+                  onClick={() => setDevice(id)}
+                  title={title}
+                  aria-pressed={isActive}
+                  className={`relative h-7 px-3 rounded-full inline-flex items-center gap-1.5 text-[12px] font-medium transition-colors cursor-pointer ${
+                    isActive ? 'text-zinc-950' : 'text-label-secondary hover:text-label'
+                  }`}
+                >
+                  {isActive && (
+                    <motion.span
+                      layoutId="webPreviewDevice"
+                      transition={layoutSpring}
+                      className="absolute inset-0 rounded-full bg-[#f5f5f7] shadow-[0_2px_8px_rgba(0,0,0,0.35)]"
+                    />
+                  )}
+                  <Icon className="relative z-10 w-3.5 h-3.5" aria-hidden="true" />
+                  <span className="relative z-10 hidden md:inline">{label}</span>
+                </button>
+              );
+            })}
           </div>
 
-          {/* Action buttons (Reload, Open in New Tab, Close) */}
-          <div className="flex items-center gap-1.5 sm:gap-2">
+          {/* Actions */}
+          <div className="flex items-center gap-2">
             <button
               type="button"
               onClick={handleReload}
-              className="p-1.5 rounded-lg text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors"
+              className="glass glass-pill h-9 w-9 px-0 cursor-pointer"
               title={t.reload}
+              aria-label={t.reload}
             >
-              <RotateCw className="w-4 h-4" />
+              <RotateCw className="w-4 h-4" aria-hidden="true" />
             </button>
             <a
               href={project.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-200 hover:white font-mono text-xs border border-zinc-700 transition-all cursor-pointer"
+              className="btn-primary h-9 px-3.5 text-[13px]"
               title={t.openTab}
             >
-              <Maximize2 className="w-3.5 h-3.5 hidden sm:inline" />
-              <span>{language === 'es' ? 'Abrir fuera' : 'Open external'}</span>
-              <ExternalLink className="w-3 h-3 text-zinc-400" />
+              <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
+              {language === 'es' ? 'Abrir fuera' : 'Open external'}
             </a>
             <button
               type="button"
               onClick={onClose}
-              className="p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors"
+              className="glass glass-pill h-9 w-9 px-0 cursor-pointer"
               title={t.close}
+              aria-label={t.close}
             >
-              <X className="w-5 h-5" />
+              <X className="w-4 h-4" aria-hidden="true" />
             </button>
           </div>
         </div>
 
-        {/* Viewport Frame Container */}
-        <div className="relative flex-1 bg-zinc-950 flex items-center justify-center overflow-auto p-0 sm:p-2">
-          {/* Device Mockup Wrapper */}
+        {/* Viewport */}
+        <div className="relative flex-1 bg-[#121214] flex items-center justify-center overflow-auto p-0 sm:p-3">
           <div
             className={`transition-all duration-300 relative bg-white flex flex-col overflow-hidden ${getDeviceStyle()}`}
           >
-            {/* Elegant Website Skeleton Loader */}
             <div
               className={`absolute inset-0 z-20 transition-opacity duration-500 ease-out ${
                 isLoading ? 'opacity-100' : 'opacity-0 pointer-events-none'
