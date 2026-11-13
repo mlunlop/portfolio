@@ -93,7 +93,15 @@ export function EducationCertifications() {
                       <h3 className="font-sans text-[19px] sm:text-[22px] font-semibold leading-snug tracking-[-0.022em] text-label max-w-2xl">
                         {edu.degree}
                       </h3>
-                      <span className="text-[13px] sm:text-sm text-label-tertiary tabular-nums whitespace-nowrap shrink-0">
+                      <span className="inline-flex items-center gap-2 text-[13px] sm:text-sm text-label-tertiary tabular-nums whitespace-nowrap shrink-0">
+                        {isCurrent && (
+                          <span
+                            className="h-1.5 w-1.5 rounded-full bg-orange-400"
+                            title={language === 'es' ? 'En curso' : 'In progress'}
+                          >
+                            <span className="sr-only">{language === 'es' ? 'En curso' : 'In progress'}</span>
+                          </span>
+                        )}
                         {edu.period}
                       </span>
                     </div>
@@ -101,15 +109,6 @@ export function EducationCertifications() {
                       {edu.institution}
                       <span className="text-label-tertiary"> · </span>
                       {edu.badge}
-                      {isCurrent && (
-                        <>
-                          <span className="text-label-tertiary"> · </span>
-                          <span className="inline-flex items-center gap-1.5 font-medium text-orange-400">
-                            <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-orange-400" />
-                            {language === 'es' ? 'En curso' : 'In progress'}
-                          </span>
-                        </>
-                      )}
                     </p>
                   </header>
 
@@ -123,10 +122,10 @@ export function EducationCertifications() {
                       href={edu.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-5 inline-flex items-center gap-0.5 text-[15px] font-medium text-label hover:text-orange-400 transition-colors"
+                      className="group/link mt-5 inline-flex items-center gap-0.5 text-sm font-medium text-label-secondary hover:text-label transition-colors"
                     >
                       {language === 'es' ? 'Más información' : 'Learn more'}
-                      <ChevronRight className="w-4 h-4" aria-hidden="true" />
+                      <ChevronRight className="w-4 h-4 text-orange-400 transition-transform group-hover/link:translate-x-0.5" aria-hidden="true" />
                     </a>
                   )}
                 </article>
